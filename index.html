@@ -410,6 +410,7 @@
     .btn-danger { background-color: var(--gov-red); }
     .btn-success { background-color: var(--gov-green); }
 
+    /* Most Wanted Poster Cards */
     .most-wanted-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -2836,6 +2837,175 @@
       }
     };
 
+    // MULTI-DEPARTMENT DASHBOARDS
+    window.renderDeptDashboard = function(deptName) {
+      document.getElementById('deptHeaderAgency').textContent = deptName;
+      document.getElementById('deptHeaderTitle').textContent = `${deptName} Command Intranet`;
+
+      // 1. Roster with Termination
+      const tbodyRoster = document.getElementById('deptRosterTableBody');
+      if (tbodyRoster) {
+        tbodyRoster.innerHTML = '';
+        const list = DEPT_ROSTERS[deptName] || [];
+        if (list.length === 0) {
+          tbodyRoster.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No personnel registered. Add staff above.</td></tr>`;
+        } else {
+          list.forEach((m, idx) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${m.user}</strong></td>
+              <td>${m.rank}</td>
+              <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="terminateEmployeePersonnel('${deptName}', ${idx})">🚫 Terminate & Decertify</button></td>
+            `;
+            tbodyRoster.appendChild(row);
+          });
+        }
+      }
+
+      // 2. Shifts
+      const tbodyShifts = document.getElementById('deptShiftTableBody');
+      if (tbodyShifts) {
+        tbodyShifts.innerHTML = '';
+        const shifts = DEPT_SHIFTS[deptName] || [];
+        if (shifts.length === 0) {
+          tbodyShifts.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No active patrol shifts assigned.</td></tr>`;
+        } else {
+          shifts.forEach((s, sIdx) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${s.user}</strong></td>
+              <td>${s.callsign}</td>
+              <td>${s.sector}</td>
+              <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptShift('${deptName}', ${sIdx})">End Shift</button></td>
+            `;
+            tbodyShifts.appendChild(row);
+          });
+        }
+      }
+
+      // 3. SOPs
+      const tbodySOP = document.getElementById('deptSOPTableBody');
+      if (tbodySOP) {
+        tbodySOP.innerHTML = '';
+        const sops = DEPT_SOPS[deptName] || [];
+        if (sops.length === 0) {
+          tbodySOP.innerHTML = `<tr><td colspan="2" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No published department directives.</td></tr>`;
+        } else {
+          sops.forEach((p) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${p.title}</strong><br><span style="font-size:0.75rem; color:var(--gov-gray-dark);">${p.dir}</span></td>
+              <td><button type="button" class="btn btn-secondary" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${p.title}', '${p.dir}')">💾 Word</button></td>
+            `;
+            tbodySOP.appendChild(row);
+          });
+        }
+      }
+
+      // 4. Internal Affairs
+      const tbodyIA = document.getElementById('deptIATableBody');
+      if (tbodyIA) {
+        tbodyIA.innerHTML = '';
+        const iaList = DEPT_IA[deptName] || [];
+        if (iaList.length === 0) {
+          tbodyIA.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">Clean disciplinary record. No IA actions on file.</td></tr>`;
+        } else {
+          iaList.forEach(ia => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${ia.user}</strong></td>
+              <td><span class="badge badge-danger">${ia.sanction}</span><br><span style="font-size:0.75rem; color:var(--gov-gray-dark);">${ia.reason}</span></td>
+              <td><span class="badge badge-navy">AUDITED</span></td>
+            `;
+            tbodyIA.appendChild(row);
+          });
+        }
+      }
+
+      // 5. Assets
+      const tbodyAsset = document.getElementById('deptAssetTableBody');
+      if (tbodyAsset) {
+        tbodyAsset.innerHTML = '';
+        const assets = DEPT_ASSETS[deptName] || [];
+        if (assets.length === 0) {
+          tbodyAsset.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No equipment or impound logs registered.</td></tr>`;
+        } else {
+          assets.forEach((a, aIdx) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${a.tag}</strong></td>
+              <td>${a.cat}</td>
+              <td>${a.ref}</td>
+              <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptAsset('${deptName}', ${aIdx})">Release</button></td>
+            `;
+            tbodyAsset.appendChild(row);
+          });
+        }
+      }
+
+      // 6. Recruitment
+      const tbodyCand = document.getElementById('deptCandTableBody');
+      if (tbodyCand) {
+        tbodyCand.innerHTML = '';
+        const cands = DEPT_CANDIDATES[deptName] || [];
+        if (cands.length === 0) {
+          tbodyCand.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No recruitment applicants in queue.</td></tr>`;
+        } else {
+          cands.forEach((c, cIdx) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${c.user}</strong></td>
+              <td><span class="badge badge-pending">${c.status}</span></td>
+              <td><button type="button" class="btn btn-success" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="promoteCandidate('${deptName}', ${cIdx})">Promote to Roster</button></td>
+            `;
+            tbodyCand.appendChild(row);
+          });
+        }
+      }
+
+      // 7. Mutual Aid
+      const tbodyAid = document.getElementById('deptAidTableBody');
+      if (tbodyAid) {
+        tbodyAid.innerHTML = '';
+        if (DEPT_MUTUAL_AID.length === 0) {
+          tbodyAid.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No active mutual aid broadcasts.</td></tr>`;
+        } else {
+          DEPT_MUTUAL_AID.forEach(aid => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${aid.from}</strong>: ${aid.scope}</td>
+              <td>${aid.target}</td>
+              <td><span class="badge badge-success">${aid.status}</span></td>
+            `;
+            tbodyAid.appendChild(row);
+          });
+        }
+      }
+
+      // 8. Requests & FOIAs
+      const tbodyReq = document.getElementById('deptRequestsTableBody');
+      if (tbodyReq) {
+        tbodyReq.innerHTML = '';
+        const reqs = FOIA_REQUESTS.filter(f => f.dept === deptName);
+        if (reqs.length === 0) {
+          tbodyReq.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No active requests or FOIAs routed to this department.</td></tr>`;
+        } else {
+          reqs.forEach(r => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${r.id}</strong></td>
+              <td>${r.req}</td>
+              <td><span class="badge ${r.status.includes('Fulfilled') ? 'badge-success' : 'badge-pending'}">${r.status}</span></td>
+              <td><button type="button" class="btn btn-success" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="fulfillDeptRequest('${r.id}')">Mark Complete</button></td>
+            `;
+            tbodyReq.appendChild(row);
+          });
+        }
+      }
+
+      renderDeptWantedManageTable();
+    };
+
     const PENAL_DATABASE = [
       { code: "§ 8-101", name: "Verbal Harassment / Disorderly Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Verbal warning; mute or temporary custody" },
       { code: "§ 8-102", name: "Simple Assault / Non-Severe Battery", div: "1", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Civil restraining order; temporary weapon seizure" },
@@ -3000,220 +3170,6 @@
       }
     };
 
-    const STATUTES = {
-      sb100: {
-        name: "Senate_Bill_100_State_Electoral_Act",
-        body: `
-          <h2>SENATE BILL NO. 100</h2>
-          <div class="doc-subtitle">State Electoral Act of 2026 (Title 10 – Elections and Franchise Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
-          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Office of the Secretary of the State<br>
-          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article IV, Section 4; Article X, Sections 1-7; Article I, Section 10<br>
-          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law</p>
-
-          <p><em>AN ACT to establish an independent Electoral Commission, regulate voter registration and anti-alt protections, codify balloting procedures and preferential voting, and govern campaigns, contests, and recall elections.</em></p>
-
-          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:</h3>
-          
-          <h3>TITLE I. GENERAL PROVISIONS AND DEFINITIONS</h3>
-          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "State Electoral Act of 2026" or the "Melview Election Code."</p>
-          <p><strong>§ 102. Authority and Purpose.</strong><br>
-          (a) This Act is drafted under the supervisory authority of Government Oversight and enacted pursuant to Article IV, Section 4 and Article X, Sections 1 through 7 of the Constitution of the State of Melview.<br>
-          (b) The purpose of this Act is to guarantee transparent, fair, orderly, and secure elections for all elected public offices of the State.</p>
-          <p><strong>§ 103. Definitions.</strong> As used in this Act, the following definitions apply:<br>
-          • <strong>"Commission" or "IEC":</strong> The independent Electoral Commission established under Article X of the Constitution.<br>
-          • <strong>"Joint Ticket":</strong> A unified candidacy pairing one candidate for Governor and one candidate for Lieutenant Governor.<br>
-          • <strong>"Alternate Account (Alt)":</strong> Any secondary account created or used to bypass voting restrictions or cast duplicate ballots.<br>
-          • <strong>"Good Standing":</strong> The status of a member not under group blacklisting, platform ban, or active judicial disqualification.</p>
-
-          <h3>TITLE II. THE INDEPENDENT ELECTORAL COMMISSION</h3>
-          <p><strong>§ 201. Structure and Independence.</strong><br>
-          (a) Pursuant to Article X, Section 1 of the Constitution, state elections are administered exclusively by the independent Electoral Commission consisting of one (1) Chief Electoral Commissioner and two (2) Associate Electoral Commissioners appointed by the Governor and confirmed by the Senate.<br>
-          (b) Commissioners must maintain strict neutrality and shall not participate in partisan campaign management during their tenure.</p>
-
-          <h3>TITLE III. VOTER ELIGIBILITY AND BALLOTING</h3>
-          <p><strong>§ 301. Voter Qualifications and Anti-Alt Verification.</strong><br>
-          (a) Pursuant to Article I, Section 10 and Article X, Section 2, a voter must be a verified group member in good standing with at least fourteen (14) days of continuous membership prior to the opening of polls.<br>
-          (b) Ballots must be authenticated to prevent duplicate voting; any alternate accounts detected shall have all associated ballots struck immediately.</p>
-          <p><strong>§ 302. Voting Methods and Chamber Composition.</strong><br>
-          (a) Pursuant to Article X, Section 4, elections for Governor and Lieutenant Governor shall utilize Instant Runoff (Ranked-Choice) Voting on a joint ticket for a term of four (4) months (maximum 2 consecutive terms).<br>
-          (b) Senate elections shall select seven (7) Senators elected at-large for two (2) month terms.</p>
-
-          <h3>TITLE IV. CAMPAIGN RULES, CONTESTS, AND RECALL</h3>
-          <p><strong>§ 401. Prohibited Campaign Practices.</strong> Pursuant to Article X, Section 5, candidates shall not misuse administrative permissions, bribe voters, mass-spam communication channels, or intimidate electors.</p>
-          <p><strong>§ 402. Election Contests and Recall Referenda.</strong><br>
-          (a) Written election challenges must be filed within twenty-four (24) hours of preliminary tally publication, with final legal questions appealable to the Supreme Court under Article IX.<br>
-          (b) Pursuant to Article X, Section 7, elected officers are subject to recall by citizen petition following a 21-day grace period, requiring a sixty percent (60%) supermajority to remove an official from office.</p>
-
-          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1rem; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;">
-            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
-          </div>
-        `
-      },
-      sb101: {
-        name: "Senate_Bill_101_Legislative_Organization_Act",
-        body: `
-          <h2>SENATE BILL NO. 101</h2>
-          <div class="doc-subtitle">Legislative Organization, Senate Procedure, and Public Ethics Act of 2026 (Title 4 & Title 15 - Legislative & Ethics Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
-          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Transitional Legislative Committee<br>
-          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article IV, Sections 1-9; Article V, Section 7; Article XV, Sections 1-4<br>
-          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law</p>
-
-          <p><em>AN ACT to establish internal operating procedures, officer duties, committee structures, legislative calendars, and voting rules for the Senate of the State of Melview; establishing legislative transparency, records standards, and ethics.</em></p>
-
-          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:</h3>
-
-          <h3>TITLE I. SENATE STRUCTURE AND OFFICERS</h3>
-          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "Legislative Organization, Senate Procedure, and Public Ethics Act of 2026."</p>
-          <p><strong>§ 102. Authority and Officers.</strong><br>
-          (a) Enacted pursuant to Article IV, Sections 1 through 9, Article V, Section 7, and Article XV of the Constitution of the State of Melview.<br>
-          (b) Pursuant to Article IV, Section 2 and Article V, Section 7, the Lieutenant Governor shall serve as President of the Senate (voting only to break ties). The Senate shall elect a President pro tempore to preside in their absence.</p>
-
-          <h3>TITLE II. LEGISLATIVE PROCESS, QUORUM, AND VETO OVERRIDE</h3>
-          <p><strong>§ 201. Quorum and Standard Drafting.</strong><br>
-          (a) A majority of seated Senators constitutes a quorum to conduct business. All bills must follow the standardized Senate format.<br>
-          (b) Every bill passed by the Senate is presented to the Governor. Under Article IV, Section 6, bills not signed or vetoed within five (5) days become law. The Senate may override a veto with a two-thirds (2/3) vote.</p>
-          <p><strong>§ 202. Transparency and Ethics.</strong> Senators must disclose conflicts of interest, preserve public voting logs, and are prohibited from misusing administrative permissions under Article IV, Section 9 and Article XV.</p>
-
-          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1rem; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;">
-            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
-          </div>
-        `
-      },
-      sb102: {
-        name: "Senate_Bill_102_Judiciary_Organization_Act",
-        body: `
-          <h2>SENATE BILL NO. 102</h2>
-          <div class="doc-subtitle">Judiciary Organization and Legal Services Act of 2026 (Title 7 & Title 9 - Judicial and Legal Services Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
-          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Office of Judicial Administration<br>
-          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article IX, Sections 1-9; Article VII, Sections 1-5; Article I, Sections 4-12<br>
-          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law</p>
-
-          <p><em>AN ACT to establish the structure, jurisdiction, and procedural rules of the Supreme Court and lower trial courts of the State of Melview; regulating judicial appointments, judicial review, search warrant issuance, the Department of Justice, the Public Defender, and the State Bar.</em></p>
-
-          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:</h3>
-
-          <h3>TITLE I. COURT STRUCTURE AND JURISDICTION</h3>
-          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "Judiciary Organization and Legal Services Act of 2026."</p>
-          <p><strong>§ 102. Supreme Court and Trial Courts.</strong><br>
-          (a) Pursuant to Article IX, Section 1, the Supreme Court of the State of Melview is the highest court, consisting of one (1) Chief Justice and two (2) Associate Justices appointed by the Governor and confirmed by the Senate.<br>
-          (b) The District Court is established as the competent trial forum for criminal trials, civil disputes, and warrant proceedings.</p>
-
-          <h3>TITLE II. JUDICIAL REVIEW, WARRANTS, AND LEGAL SERVICES</h3>
-          <p><strong>§ 201. Judicial Review and Warrants.</strong><br>
-          (a) Under Article IX, Section 6, the Judiciary possesses exclusive authority to invalidate any statute or executive order contrary to the Constitution.<br>
-          (b) Under Article I, Section 6 and Article IX, Section 7, all search and seizure warrants require probable-cause affidavits specifying the exact target and items sought.</p>
-          <p><strong>§ 202. Public Defender and State Bar.</strong><br>
-          (a) Under Article VII, Section 4, the independent Office of the Public Defender provides legal defense to indigent defendants.<br>
-          (b) Under Article VII, Section 5, the State Bar regulates attorney admission, competency testing, and ethics.</p>
-
-          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1rem; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;">
-            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
-          </div>
-        `
-      },
-      sb103: {
-        name: "Senate_Bill_103_State_Penal_Code_Act",
-        body: `
-          <h2>SENATE BILL NO. 103</h2>
-          <div class="doc-subtitle">State Penal Code and Law Enforcement Standards Act of 2026 (Title 8 - Penal Code & Public Safety Standards)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
-          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Public Safety Joint Committee<br>
-          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article I, Sections 1-12; Article VII, Section 6; Article VIII, Sections 1-7<br>
-          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law</p>
-
-          <p><em>AN ACT to codify criminal offenses against persons, property, public order, and official trust in the State of Melview; defining arrest standards, classification tiers, custodial sentencing thresholds, and use-of-force protocols; and establishing the Law Enforcement Training and Standards Commission.</em></p>
-
-          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:</h3>
-
-          <h3>TITLE I. GENERAL PENAL PROVISIONS AND OFFENSE CLASSIFICATION</h3>
-          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "State Penal Code and Law Enforcement Standards Act of 2026."</p>
-          <p><strong>§ 102. Authority and Purpose.</strong><br>
-          (a) This Act is enacted pursuant to Article I, Sections 1 through 12, Article VII, Section 6, and Article VIII, Sections 1 through 7 of the Constitution of the State of Melview.<br>
-          (b) The purpose of this Act is to codify offenses against persons, property, public order, and official trust; establish standardized custodial sentencing and fines; and define statewide law enforcement use-of-force standards.</p>
-          <p><strong>§ 103. Classification of Offenses and Sentence Thresholds.</strong> All offenses under the laws of the State shall be categorized into the following four classes:<br>
-          1. <strong>Infractions:</strong> Non-custodial offenses punishable by monetary citations ($100-$250), verbal warnings, or license points.<br>
-          2. <strong>Misdemeanors:</strong> Moderate offenses punishable by standard fines ($250 - $750) and custodial detention of three (3) to ten (10) minutes in local holding.<br>
-          3. <strong>Felonies (Class A and B):</strong> Serious offenses punishable by heavy fines ($1,000 - $3,500), weapon/asset forfeiture, license revocations, and custodial sentences of ten (10) to twenty-five (25) minutes.<br>
-          4. <strong>Capital Felonies:</strong> Severe offenses against human life or state security punishable by maximum fines ($5,000), maximum custodial detention of thirty (30) minutes, civic disqualification, and developer blacklisting referral.</p>
-
-          <h3>TITLE II. SUBSTANTIVE OFFENSE DIVISIONS</h3>
-          <p><strong>§ 201. Crimes Against Persons and Property.</strong><br>
-          (a) <em>Offenses Against Persons:</em> Simple and aggravated assault, battery, kidnapping, vehicular manslaughter, murder, and mass casualty events are strictly prohibited.<br>
-          (b) <em>Offenses Against Property:</em> Criminal trespass, vandalism, petty larceny, grand larceny, burglary, armed robbery, grand theft auto (GTA), and arson are defined and penalized under the Official Penal Schedule.</p>
-          <p><strong>§ 202. Vehicular, Weapons, and Official Government Offenses.</strong><br>
-          (a) <em>Vehicular Offenses:</em> Reckless driving, major speeding, street racing, operating unregistered vehicles, and hit-and-run are subject to mandatory traffic citations, vehicle impoundment, and license revocation.<br>
-          (b) <em>Weapons & Contraband:</em> Unlawful concealed carry, brandishing, unlawful city discharge, weapons trafficking, and narcotics distribution carry mandatory firearm confiscation and felony charges.<br>
-          (c) <em>Official Government Crimes:</em> Impersonation of officials, official misconduct, misuse of administrative permissions, electoral tampering, civil rights deprivation under color of law, and treason constitute major felonies carrying immediate termination and permanent civic bans.</p>
-
-          <h3>TITLE III. LAW ENFORCEMENT STANDARDS AND USE OF FORCE</h3>
-          <p><strong>§ 301. Statewide Use-of-Force and Pursuit Policy.</strong><br>
-          (a) Pursuant to Article VIII, Section 7, all peace officers of the State Police and Sheriff's Office shall employ only that force which is objectively reasonable and proportional to effect lawful detention.<br>
-          (b) Lethal force is restricted strictly to scenarios involving imminent threat of death or serious bodily harm to officers or civilians.</p>
-          <p><strong>§ 302. Law Enforcement Training and Standards Commission.</strong> Pursuant to Article VII, Section 6, the Law Enforcement Training and Standards Commission is established to certify peace officers, audit departmental use-of-force logs, and decertify officers guilty of abusive conduct.</p>
-
-          <h3>TITLE IV. ENACTMENT AND SEVERABILITY</h3>
-          <p><strong>§ 401. Severability.</strong> If any provision of this Act is held invalid by the Supreme Court, all other valid provisions remain in full force and effect.</p>
-          <p><strong>§ 402. Effective Date.</strong> This Act shall take effect immediately upon final passage.</p>
-
-          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1rem; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;">
-            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
-          </div>
-        `
-      },
-      sb104: {
-        name: "Senate_Bill_104_Executive_Organization_Act",
-        body: `
-          <h2>SENATE BILL NO. 104</h2>
-          <div class="doc-subtitle">Executive Organization and Cabinet Governance Act of 2026 (Title 6 - Executive Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
-          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Office of the Governor<br>
-          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article IV, Section 4; Article V, Section 5; Article VI, Sections 1-6; Article VIII, Sections 1-2<br>
-          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law</p>
-
-          <p><em>AN ACT relating to the organization, appointment, powers, duties, and ethical administration of the Executive Departments and Governor's Cabinet; defining executive command jurisdiction; and establishing the distinct operational boundaries between statewide law enforcement and county law enforcement.</em></p>
-
-          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:</h3>
-
-          <h3>TITLE I. GENERAL PROVISIONS AND DEFINITIONS</h3>
-          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "Executive Organization and Cabinet Governance Act of 2026."</p>
-          <p><strong>§ 102. Authority and Purpose.</strong><br>
-          (a) This Act is enacted pursuant to Article IV, Section 4, Article V, Section 5, Article VI, Sections 1 through 6, and Article VIII, Sections 1 and 2 of the Constitution of the State of Melview.<br>
-          (b) The purpose of this Act is to organize the Governor's Cabinet, regulate executive appointments, and delineate statewide law enforcement command from local county law enforcement.</p>
-
-          <h3>TITLE II. COMPOSITION AND POWERS OF THE CABINET</h3>
-          <p><strong>§ 201. Statutory Cabinet Membership.</strong> Pursuant to Article VI, Section 1 of the Constitution, the Cabinet serves as an advisory council to the Governor, consisting of the Governor (Chair), Lieutenant Governor (Vice Chair), Secretary of the State, Attorney General, Commissioner of the State Police, County Sheriff (Ex-Officio), Director of Transportation, and Chief of Fire/EMS.</p>
-          <p><strong>§ 202. Limitations on Cabinet Authority.</strong> Cabinet membership does not create standalone constitutional powers; no collective action of the Cabinet may supersede statutes or the reserved authority of Community Management under Article III.</p>
-
-          <h3>TITLE III. APPOINTMENTS AND COMMAND JURISDICTIONS</h3>
-          <p><strong>§ 301. Gubernatorial Appointments and Senate Confirmation.</strong> Principal department heads (including the Attorney General and State Police Commissioner) require nomination by the Governor and confirmation by a majority vote of the Senate pursuant to Article V, Section 5.</p>
-          <p><strong>§ 302. State Police vs. Elected County Sheriff.</strong><br>
-          (a) <em>State Police:</em> Pursuant to Article VIII, Section 1, the State Police operates statewide under an appointed Commissioner, with jurisdiction over state highways, government facilities, and inter-jurisdictional matters.<br>
-          (b) <em>County Sheriff:</em> Pursuant to Article VIII, Section 2 and Article XI, Section 2, the County Sheriff is an independently elected constitutional officer with local command autonomy, removable only through impeachment, judicial conviction, or recall under Article X, Section 7.</p>
-
-          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1rem; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;">
-            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
-          </div>
-        `
-      }
-    };
-
-    let activeBillKey = 'sb100';
-    window.loadBill = function(key) {
-      activeBillKey = key;
-      document.querySelectorAll('.subnav-btn').forEach(el => el.classList.remove('active'));
-      const activeBtn = document.getElementById('subnav-' + key);
-      if (activeBtn) activeBtn.classList.add('active');
-      const container = document.getElementById('slipLawDisplay');
-      if (STATUTES[key] && container) {
-        container.innerHTML = STATUTES[key].body;
-        container.dataset.loaded = "true";
-      }
-    };
-
-    window.downloadActiveBillWord = function() {
-      if (STATUTES[activeBillKey]) {
-        downloadAsWord(STATUTES[activeBillKey].name, document.getElementById('slipLawDisplay').innerText);
-      }
-    };
-
     window.downloadAsWord = function(filename, textContent) {
       const htmlContent = `
         <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
@@ -3333,7 +3289,6 @@
       pill.innerHTML = 'PUBLIC ACCESS PORTAL';
     };
 
-    // FORM LISTENERS & INITIALIZATION
     function attachFormListeners() {
       const formBindings = [
         { id: 'foiaSubmitForm', handler: (e) => handleFOIASubmit(e) },
@@ -3415,7 +3370,6 @@
       renderLogs();
     });
 
-    // Immediate Execution
     renderPublicDocket();
     renderPublicMostWanted();
     renderWarrantsTable();
