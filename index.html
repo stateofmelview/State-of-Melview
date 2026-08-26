@@ -6,7 +6,6 @@
   <title>State of Melview | Official Legal Repository & Government Portal</title>
   <style>
     :root {
-      /* Official Federal & White House Design Palette */
       --gov-navy-dark: #111c24;
       --gov-navy: #1b2a38;
       --gov-blue-primary: #005ea2;
@@ -40,7 +39,6 @@
       min-height: 100vh;
     }
 
-    /* Top Federal Trust Banner */
     .usa-banner {
       background-color: #f0f0f0;
       border-bottom: 1px solid var(--gov-gray-mid);
@@ -57,7 +55,6 @@
     }
     .usa-flag-svg { width: 16px; height: 11px; }
 
-    /* Official Government Header */
     header.gov-header {
       background-color: var(--gov-navy);
       border-bottom: 4px solid var(--gov-gold);
@@ -124,7 +121,6 @@
       color: #a8d1ff;
     }
 
-    /* Primary Navigation Bar */
     nav.gov-nav {
       background-color: var(--gov-navy-dark);
       border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -178,7 +174,6 @@
       border-top: 3px solid var(--gov-gold);
     }
 
-    /* Layout & Cards */
     .main-wrapper {
       max-width: 1400px;
       margin: 1.5rem auto;
@@ -257,7 +252,6 @@
       font-weight: 700;
     }
 
-    /* Document Reader */
     .document-reader-box {
       background-color: var(--gov-white);
       border: 1px solid var(--gov-gray-mid);
@@ -322,7 +316,6 @@
       border-color: var(--gov-blue-primary);
     }
 
-    /* Form Fields */
     .form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -352,7 +345,6 @@
     .gov-input:focus, .gov-select:focus { outline: 2px solid var(--gov-blue-primary); }
     textarea.gov-input { min-height: 100px; resize: vertical; }
 
-    /* Tables */
     .table-container {
       overflow-x: auto;
       border: 1px solid var(--gov-gray-mid);
@@ -688,21 +680,21 @@
 
   <nav class="gov-nav">
     <div class="nav-inner">
-      <button class="nav-tab-btn active" onclick="switchNav('dashboard')" id="nav-dashboard">Executive Dashboard</button>
-      <button class="nav-tab-btn" onclick="switchNav('constitution')" id="nav-constitution">State Constitution</button>
-      <button class="nav-tab-btn" onclick="switchNav('statutes')" id="nav-statutes">Statutory Slip Laws</button>
-      <button class="nav-tab-btn" onclick="switchNav('penal-code')" id="nav-penal-code">Title 8 Penal Code</button>
-      <button class="nav-tab-btn" onclick="switchNav('public-docket')" id="nav-public-docket">Supreme Court Docket</button>
-      <button class="nav-tab-btn wanted-tab-btn" onclick="switchNav('most-wanted')" id="nav-most-wanted">🚨 Most Wanted</button>
-      <button class="nav-tab-btn" onclick="switchNav('warrants-registry')" id="nav-warrants-registry">Warrants Registry</button>
-      <button class="nav-tab-btn" onclick="switchNav('exec-orders')" id="nav-exec-orders">Executive Orders</button>
-      <button class="nav-tab-btn" onclick="switchNav('foia-portal')" id="nav-foia-portal">FOIA / Open Records</button>
-      <button class="nav-tab-btn" onclick="switchNav('public-registry')" id="nav-public-registry">Bar & CCW Registry</button>
-      <button class="nav-tab-btn" onclick="switchNav('custody-calc')" id="nav-custody-calc">Custody Calculator</button>
-      <button class="nav-tab-btn" onclick="switchNav('elections')" id="nav-elections">Elections Gateway</button>
-      <button class="nav-tab-btn" onclick="switchNav('judicial-sop')" id="nav-judicial-sop">Court Rules (MCR-2026-01)</button>
-      <button class="nav-tab-btn" onclick="switchNav('bar-exam')" id="nav-bar-exam">Bar Examination</button>
-      <button class="nav-tab-btn secure-tab-btn" onclick="switchNav('secure-terminal')" id="nav-secure-terminal">🔐 Restricted Workstation</button>
+      <button type="button" class="nav-tab-btn active" onclick="switchNav('dashboard')" id="nav-dashboard">Executive Dashboard</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('constitution')" id="nav-constitution">State Constitution</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('statutes')" id="nav-statutes">Statutory Slip Laws</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('penal-code')" id="nav-penal-code">Title 8 Penal Code</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('public-docket')" id="nav-public-docket">Supreme Court Docket</button>
+      <button type="button" class="nav-tab-btn wanted-tab-btn" onclick="switchNav('most-wanted')" id="nav-most-wanted">🚨 Most Wanted</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('warrants-registry')" id="nav-warrants-registry">Warrants Registry</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('exec-orders')" id="nav-exec-orders">Executive Orders</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('foia-portal')" id="nav-foia-portal">FOIA / Open Records</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('public-registry')" id="nav-public-registry">Bar & CCW Registry</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('custody-calc')" id="nav-custody-calc">Custody Calculator</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('elections')" id="nav-elections">Elections Gateway</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('judicial-sop')" id="nav-judicial-sop">Court Rules (MCR-2026-01)</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('bar-exam')" id="nav-bar-exam">Bar Examination</button>
+      <button type="button" class="nav-tab-btn secure-tab-btn" onclick="switchNav('secure-terminal')" id="nav-secure-terminal">🔐 Restricted Workstation</button>
     </div>
   </nav>
 
@@ -756,7 +748,7 @@
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Constitution of the State of Melview (Full Verbatim Text)</h2>
-          <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Constitution</button>
+          <button type="button" class="btn btn-secondary" onclick="window.print()">🖨️ Print Constitution</button>
         </div>
 
         <div class="document-reader-box" id="constitutionFullText">
@@ -887,20 +879,20 @@
       </div>
     </section>
 
-    <!-- 3. VERBATIM STATUTORY SLIP LAWS (SB 100 - SB 104) -->
+    <!-- 3. STATUTORY SLIP LAWS -->
     <section id="pane-statutes" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Enacted Statutory Slip Laws of the General Assembly</h2>
-          <button class="btn btn-secondary" onclick="downloadActiveBillWord()">💾 Export Active Bill (.doc)</button>
+          <button type="button" class="btn btn-secondary" onclick="downloadActiveBillWord()">💾 Export Active Bill (.doc)</button>
         </div>
 
         <div class="subnav-cluster">
-          <button class="subnav-btn active" onclick="loadBill('sb100')" id="subnav-sb100">SB 100 • Electoral Act (T.10)</button>
-          <button class="subnav-btn" onclick="loadBill('sb101')" id="subnav-sb101">SB 101 • Senate Procedure (T.4/15)</button>
-          <button class="subnav-btn" onclick="loadBill('sb102')" id="subnav-sb102">SB 102 • Judiciary Org (T.7/9)</button>
-          <button class="subnav-btn" onclick="loadBill('sb103')" id="subnav-sb103">SB 103 • Penal Code & POST (T.8)</button>
-          <button class="subnav-btn" onclick="loadBill('sb104')" id="subnav-sb104">SB 104 • Executive Cabinet (T.6)</button>
+          <button type="button" class="subnav-btn active" onclick="loadBill('sb100')" id="subnav-sb100">SB 100 • Electoral Act (T.10)</button>
+          <button type="button" class="subnav-btn" onclick="loadBill('sb101')" id="subnav-sb101">SB 101 • Senate Procedure (T.4/15)</button>
+          <button type="button" class="subnav-btn" onclick="loadBill('sb102')" id="subnav-sb102">SB 102 • Judiciary Org (T.7/9)</button>
+          <button type="button" class="subnav-btn" onclick="loadBill('sb103')" id="subnav-sb103">SB 103 • Penal Code & POST (T.8)</button>
+          <button type="button" class="subnav-btn" onclick="loadBill('sb104')" id="subnav-sb104">SB 104 • Executive Cabinet (T.6)</button>
         </div>
 
         <div id="slipLawDisplay" class="document-reader-box"></div>
@@ -969,8 +961,8 @@
         <div class="gov-card-header">
           <h2 class="gov-card-title">Supreme & District Court Public Case Docket</h2>
           <div style="display: flex; gap: 0.5rem;">
-            <button class="btn btn-secondary" onclick="renderPublicDocket()">🔄 Refresh Docket</button>
-            <button class="btn" onclick="switchNav('submit-appeal')">📝 File Appeal</button>
+            <button type="button" class="btn btn-secondary" onclick="renderPublicDocket()">🔄 Refresh Docket</button>
+            <button type="button" class="btn" onclick="switchNav('submit-appeal')">📝 File Appeal</button>
           </div>
         </div>
         
@@ -1001,7 +993,7 @@
       </div>
     </section>
 
-    <!-- 6. FBI-STYLE MOST WANTED & FUGITIVE BOARD -->
+    <!-- 6. MOST WANTED & FUGITIVE BOARD -->
     <section id="pane-most-wanted" class="tab-pane">
       <div class="gov-card" style="border-top: 4px solid var(--gov-red);">
         <div class="gov-card-header" style="border-bottom-color: var(--gov-red);">
@@ -1022,7 +1014,7 @@
       </div>
     </section>
 
-    <!-- 7. PUBLIC WARRANTS REGISTRY -->
+    <!-- 7. WARRANTS REGISTRY -->
     <section id="pane-warrants-registry" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -1054,7 +1046,7 @@
       </div>
     </section>
 
-    <!-- 8. GUBERNATORIAL EXECUTIVE ORDERS LEDGER -->
+    <!-- 8. EXECUTIVE ORDERS LEDGER -->
     <section id="pane-exec-orders" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -1198,7 +1190,7 @@
               <p style="font-size: 0.9rem; margin-top: 0.5rem;">Calculated Sentence: <strong id="calcTotalTime" style="color: var(--gov-blue-dark); font-size: 1.2rem;">0 Mins</strong></p>
               <div id="calcCapNotice" style="margin-top: 1rem; padding: 0.5rem; background: #fff1d2; border: 1px solid #fad980; font-size: 0.8rem; display: none;"></div>
             </div>
-            <button class="btn btn-secondary" style="width: 100%;" onclick="resetCalculator()">Reset Calculator</button>
+            <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="resetCalculator()">Reset Calculator</button>
           </div>
         </div>
       </div>
@@ -1243,7 +1235,7 @@
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Document MCR-2026-01: Court Rules & Standards Manual</h2>
-          <button class="btn btn-secondary" onclick="downloadAsWord('Document_MCR_2026_01_Judicial_SOP', document.getElementById('sopManualDoc').innerText)">💾 Export Word (.doc)</button>
+          <button type="button" class="btn btn-secondary" onclick="downloadAsWord('Document_MCR_2026_01_Judicial_SOP', document.getElementById('sopManualDoc').innerText)">💾 Export Word (.doc)</button>
         </div>
 
         <div class="document-reader-box" id="sopManualDoc">
@@ -1284,7 +1276,7 @@
           (a) Vehicular pursuits require active emergency equipment (Code 3) and must be terminated if civilian traffic density creates an imminent life-threatening hazard.<br>
           (b) Precision Immobilization Techniques (PIT) are authorized only under 35 MPH unless deadly force is justified.</p>
 
-          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1.25rem; margin-top: 2rem; font-family: var(--font-mono); font-size: 0.85rem;">
+          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1rem; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;">
             [OFFICIAL DIRECTIVE: Office of Judicial Administration & Government Oversight • State of Melview • Document MCR-2026-01]
           </div>
         </div>
@@ -1361,8 +1353,8 @@
             <h3 style="font-family: var(--font-serif); font-size: 1.2rem; color: #ffffff;">Supreme Court Judicial Chamber</h3>
           </div>
           <div style="display: flex; gap: 0.5rem;">
-            <button class="btn btn-secondary" style="font-size: 0.75rem;" onclick="exportDocketToExcel()">📊 Export Master Docket (.csv)</button>
-            <button class="btn btn-danger" style="font-size: 0.75rem;" onclick="logoutTerminal()">Sign Out</button>
+            <button type="button" class="btn btn-secondary" style="font-size: 0.75rem;" onclick="exportDocketToExcel()">📊 Export Master Docket (.csv)</button>
+            <button type="button" class="btn btn-danger" style="font-size: 0.75rem;" onclick="logoutTerminal()">Sign Out</button>
           </div>
         </div>
 
@@ -1370,7 +1362,7 @@
         <div class="judiciary-panel-card" style="border-left-color: var(--gov-red);">
           <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-red); margin-bottom: 0.5rem;">🚨 Publish Fugitive to Most Wanted & Bounty Board</h4>
           <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">
-            Enter a Roblox Profile URL, User ID, or Username. Avatar headshot and names are automatically resolved from Roblox.
+            Enter a Roblox Profile URL, User ID, or Username. Avatar headshots are automatically generated.
           </p>
           <form onsubmit="handlePublishWanted(event, 'Supreme Court Judicial Order')">
             <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr; margin-bottom: 0.75rem;">
@@ -1527,7 +1519,7 @@
         <div class="judiciary-panel-card">
           <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: #2b6cb0; margin-bottom: 0.75rem;">Issue Judicial Subpoena & Witness Summons (MCR-2026-01)</h4>
           <form id="judgeSubpoenaForm" onsubmit="handleJudgeSubpoenaIssue(event)">
-            <div class="form-grid">
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr;">
               <div class="form-group">
                 <label style="font-size: 0.75rem;">Summoned Party / Witness</label>
                 <input type="text" id="subpParty" class="gov-input" placeholder="e.g. Witness_David" required />
@@ -1579,8 +1571,8 @@
             <h3 style="font-family: var(--font-serif); font-size: 1.2rem; color: #ffffff;">Executive Chamber & Senate Assembly Workstation</h3>
           </div>
           <div style="display: flex; gap: 0.5rem;">
-            <button class="btn btn-secondary" style="font-size: 0.75rem;" onclick="exportDocketToExcel()">📊 Export State Registry (.csv)</button>
-            <button class="btn btn-danger" style="font-size: 0.75rem;" onclick="logoutTerminal()">Sign Out</button>
+            <button type="button" class="btn btn-secondary" style="font-size: 0.75rem;" onclick="exportDocketToExcel()">📊 Export State Registry (.csv)</button>
+            <button type="button" class="btn btn-danger" style="font-size: 0.75rem;" onclick="logoutTerminal()">Sign Out</button>
           </div>
         </div>
 
@@ -1706,7 +1698,7 @@
             <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gov-blue-light);" id="deptHeaderAgency">Executive Agency Intranet</span>
             <h3 style="font-family: var(--font-serif); font-size: 1.2rem; color: #ffffff;" id="deptHeaderTitle">Departmental Command Portal</h3>
           </div>
-          <button class="btn btn-danger" style="font-size: 0.75rem;" onclick="logoutTerminal()">Sign Out</button>
+          <button type="button" class="btn btn-danger" style="font-size: 0.75rem;" onclick="logoutTerminal()">Sign Out</button>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
@@ -2059,8 +2051,8 @@
       </div>
 
       <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
-        <button class="btn btn-secondary" onclick="closeDeletionModal()">Cancel</button>
-        <button class="btn btn-danger" onclick="executeConfirmedDeletion()">Authorize & Expunge</button>
+        <button type="button" class="btn btn-secondary" onclick="closeDeletionModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" onclick="executeConfirmedDeletion()">Authorize & Expunge</button>
       </div>
     </div>
   </div>
@@ -2078,26 +2070,34 @@
   </footer>
 
   <script>
+    // =========================================================================
+    // GLOBAL STATE & DATA STORAGE (SAFE LOCALSTORAGE BACKED)
+    // =========================================================================
     const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbynIMouFbor3yW33M12O3bH8xPtm5zElOZgGiPBFKyaEDmvqhV8REdGxhUj9QN-fk0B/exec";
 
     function syncToGoogleSheet(payload) {
       if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL === "") return;
-      fetch(GOOGLE_SHEET_WEBAPP_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }).then(() => console.log("Google Sheet sync completed.")).catch(err => console.error("Sync error:", err));
+      try {
+        fetch(GOOGLE_SHEET_WEBAPP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).then(() => console.log("Google Sheet sync completed.")).catch(err => console.error("Sync error:", err));
+      } catch(e) { console.error("Sheet sync dispatch error:", e); }
     }
 
     function updateClock() {
       const now = new Date();
-      document.getElementById('liveClock').textContent = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      const clockEl = document.getElementById('liveClock');
+      if (clockEl) {
+        clockEl.textContent = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      }
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    function switchNav(tabId) {
+    window.switchNav = function(tabId) {
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
 
@@ -2110,9 +2110,8 @@
       if (tabId === 'statutes' && !document.getElementById('slipLawDisplay').dataset.loaded) {
         loadBill('sb100');
       }
-    }
+    };
 
-    // MASTER LOCAL DOCKET, MOST WANTED, REGISTRIES, DEPARTMENT MANAGEMENT & AUDIT LOGS
     let MASTER_DOCKET = JSON.parse(localStorage.getItem('melview_docket')) || [
       {
         id: "AP-2026-1042",
@@ -2154,7 +2153,7 @@
         id: "WANTED-2026-01",
         name: "Marcus_Vance",
         robloxId: "1",
-        avatarUrl: "https://images.rbxcdn.com/981a8b5dfd4f6c4491950e181c0c6c06.png",
+        avatarUrl: "https://www.roblox.com/headshot-thumbnail/image?userId=1&width=420&height=420&format=png",
         bounty: "$25,000",
         charges: "§ 8-109 First-Degree Murder, § 8-106 Hostage Taking, § 8-412 Jailbreak",
         caution: "ARMED & EXTREMELY DANGEROUS",
@@ -2166,7 +2165,7 @@
         id: "WANTED-2026-02",
         name: "Shadow_Operative",
         robloxId: "2",
-        avatarUrl: "https://images.rbxcdn.com/981a8b5dfd4f6c4491950e181c0c6c06.png",
+        avatarUrl: "https://www.roblox.com/headshot-thumbnail/image?userId=2&width=420&height=420&format=png",
         bounty: "$10,000",
         charges: "§ 8-508 Weapons Trafficking, § 8-209 Arson",
         caution: "EXTREME FLIGHT RISK",
@@ -2233,7 +2232,7 @@
       "2026-08-25 12:30 UTC | SENATE ASSEMBLY | Registered Enactment Senate Bill SB 104"
     ];
 
-    function saveState() {
+    window.saveState = function() {
       localStorage.setItem('melview_docket', JSON.stringify(MASTER_DOCKET));
       localStorage.setItem('melview_wanted', JSON.stringify(MOST_WANTED_LIST));
       localStorage.setItem('melview_registry', JSON.stringify(PUBLIC_REGISTRY));
@@ -2263,9 +2262,11 @@
         renderDeptDashboard(CURRENT_DEPT_NAME);
       }
       renderLogs();
-    }
+    };
 
-    async function autoFetchRobloxAvatar(inputEl) {
+    // Auto-resolve avatar from User ID, username, or profile link
+    window.autoFetchRobloxAvatar = function(inputEl) {
+      if (!inputEl) return;
       const form = inputEl.closest('form');
       const val = inputEl.value.trim();
       const nameInput = form.querySelector('.wanted-input-name');
@@ -2284,55 +2285,20 @@
       }
 
       if (userId) {
-        try {
-          const uResp = await fetch(`https://users.roblox.com/v1/users/${userId}`);
-          if (uResp.ok) {
-            const uData = await uResp.json();
-            if (nameInput && !nameInput.value) nameInput.value = uData.name || uData.displayName;
-          }
-        } catch(e) {}
-
-        try {
-          const tResp = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=420x420&format=Png&isCircular=false`);
-          if (tResp.ok) {
-            const tData = await tResp.json();
-            if (tData.data && tData.data[0] && tData.data[0].imageUrl) {
-              avatarInput.value = tData.data[0].imageUrl;
-              return;
-            }
-          }
-        } catch(e) {}
-
-        avatarInput.value = `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=420&height=420&format=png`;
+        if (nameInput && !nameInput.value) nameInput.value = `Player_${userId}`;
+        if (avatarInput) {
+          avatarInput.value = `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=420&height=420&format=png`;
+        }
       } else if (username) {
         if (nameInput && !nameInput.value) nameInput.value = username;
-        try {
-          const uResp = await fetch(`https://users.roblox.com/v1/usernames/users`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ usernames: [username], excludeBannedUsers: false })
-          });
-          if (uResp.ok) {
-            const uData = await uResp.json();
-            if (uData.data && uData.data[0]) {
-              const uId = uData.data[0].id;
-              const tResp = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${uId}&size=420x420&format=Png&isCircular=false`);
-              if (tResp.ok) {
-                const tData = await tResp.json();
-                if (tData.data && tData.data[0]) {
-                  avatarInput.value = tData.data[0].imageUrl;
-                  return;
-                }
-              }
-            }
-          }
-        } catch(e) {}
-        avatarInput.value = `https://images.rbxcdn.com/981a8b5dfd4f6c4491950e181c0c6c06.png`;
+        if (avatarInput) {
+          avatarInput.value = `https://www.roblox.com/headshot-thumbnail/image?userId=1&width=420&height=420&format=png`;
+        }
       }
-    }
+    };
 
-    function handlePublishWanted(e, defaultAgency) {
-      e.preventDefault();
+    window.handlePublishWanted = function(e, defaultAgency) {
+      if (e) e.preventDefault();
       const form = e.target;
       const targetVal = form.querySelector('.wanted-input-target').value.trim();
       const bounty = form.querySelector('.wanted-input-bounty').value.trim();
@@ -2343,7 +2309,9 @@
       let avatar = form.querySelector('.wanted-input-avatar').value.trim();
 
       if (!avatar) {
-        avatar = "https://images.rbxcdn.com/981a8b5dfd4f6c4491950e181c0c6c06.png";
+        const urlMatch = targetVal.match(/roblox\.com\/users\/(\d+)/i);
+        const uId = urlMatch ? urlMatch[1] : (/^\d+$/.test(targetVal) ? targetVal : '1');
+        avatar = `https://www.roblox.com/headshot-thumbnail/image?userId=${uId}&width=420&height=420&format=png`;
       }
 
       const newId = `WANTED-2026-${Math.floor(10 + Math.random() * 90)}`;
@@ -2384,9 +2352,9 @@
 
       alert(`Fugitive ${name} officially posted to the State Most Wanted Board with ${wantedItem.bounty} reward!`);
       form.reset();
-    }
+    };
 
-    function renderPublicMostWanted() {
+    window.renderPublicMostWanted = function() {
       const grid = document.getElementById('publicMostWantedGrid');
       if (!grid) return;
       grid.innerHTML = '';
@@ -2403,7 +2371,7 @@
           <div class="wanted-poster-header">WANTED BY LAW ENFORCEMENT</div>
           <div class="wanted-poster-body">
             <div class="wanted-mugshot-frame">
-              <img src="${w.avatarUrl}" alt="${w.name}" class="wanted-mugshot-img" onerror="this.src='https://images.rbxcdn.com/981a8b5dfd4f6c4491950e181c0c6c06.png';" />
+              <img src="${w.avatarUrl}" alt="${w.name}" class="wanted-mugshot-img" onerror="this.src='https://www.roblox.com/headshot-thumbnail/image?userId=1&width=420&height=420&format=png';" />
             </div>
             <div class="wanted-name">${w.name}</div>
             <div class="wanted-alias">ROBLOX ID: ${w.robloxId} • BULLETIN: ${w.id}</div>
@@ -2427,22 +2395,25 @@
               ISSUING AUTHORITY: ${w.agency} (${w.date})
             </div>
 
-            <button class="btn btn-danger" style="width: 100%; font-size: 0.8rem;" onclick="prefillTip('${w.name}', '${w.id}')">📢 Submit Anonymous Tip</button>
+            <button type="button" class="btn btn-danger" style="width: 100%; font-size: 0.8rem;" onclick="prefillTip('${w.name}', '${w.id}')">📢 Submit Anonymous Tip</button>
           </div>
         `;
         grid.appendChild(card);
       });
-    }
+    };
 
-    function prefillTip(name, id) {
+    window.prefillTip = function(name, id) {
       switchNav('foia-portal');
-      document.getElementById('foiaDetails').value = `ANONYMOUS TIP regarding Most Wanted Fugitive ${name} (Bulletin ${id}): [State your sighting location, vehicle, or details here...]`;
-      document.getElementById('foiaName').value = "Anonymous Citizen Tipster";
+      const details = document.getElementById('foiaDetails');
+      const nameInp = document.getElementById('foiaName');
+      if (details) details.value = `ANONYMOUS TIP regarding Most Wanted Fugitive ${name} (Bulletin ${id}): [State your sighting location, vehicle, or details here...]`;
+      if (nameInp) nameInp.value = "Anonymous Citizen Tipster";
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    };
 
-    function renderPublicDocket() {
+    window.renderPublicDocket = function() {
       const tbody = document.getElementById('publicDocketTableBody');
+      if (!tbody) return;
       tbody.innerHTML = '';
 
       MASTER_DOCKET.forEach(item => {
@@ -2461,9 +2432,9 @@
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function renderWarrantsTable() {
+    window.renderWarrantsTable = function() {
       const tbody = document.getElementById('warrantsTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -2486,13 +2457,14 @@
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function filterWarrantsTable() {
-      const q = document.getElementById('warrantSearch').value.toLowerCase();
+    window.filterWarrantsTable = function() {
+      const q = (document.getElementById('warrantSearch')?.value || '').toLowerCase();
       const warrants = MASTER_DOCKET.filter(i => (i.type === 'Warrant' || i.type === 'Subpoena') && (i.appellant.toLowerCase().includes(q) || i.id.toLowerCase().includes(q) || i.category.toLowerCase().includes(q)));
       
       const tbody = document.getElementById('warrantsTableBody');
+      if (!tbody) return;
       tbody.innerHTML = '';
       warrants.forEach(w => {
         const row = document.createElement('tr');
@@ -2506,9 +2478,9 @@
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function renderExecOrdersTable() {
+    window.renderExecOrdersTable = function() {
       const tbody = document.getElementById('execOrdersTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -2521,13 +2493,13 @@
           <td>${eo.dept}</td>
           <td style="font-family:var(--font-mono);">${eo.date}</td>
           <td><span class="badge badge-success">${eo.status}</span></td>
-          <td><button class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${eo.num}', '${eo.title}\\n\\n${eo.dir}')">💾 Word</button></td>
+          <td><button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${eo.num}', '${eo.title}\\n\\n${eo.dir}')">💾 Word</button></td>
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function renderExecOrdersManageTable() {
+    window.renderExecOrdersManageTable = function() {
       const tbody = document.getElementById('execOrdersManageTable');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -2538,14 +2510,14 @@
           <td><strong>${eo.num}</strong></td>
           <td>${eo.title}</td>
           <td>
-            <button class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeExecOrder(${index})">Rescind / Remove</button>
+            <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeExecOrder(${index})">Rescind / Remove</button>
           </td>
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function removeExecOrder(index) {
+    window.removeExecOrder = function(index) {
       const eo = EXEC_ORDERS[index];
       if (!confirm(`Are you sure you want to rescind and expunge ${eo.num} (${eo.title})?`)) return;
       EXEC_ORDERS.splice(index, 1);
@@ -2566,9 +2538,9 @@
       });
 
       alert(`Executive Order ${eo.num} rescinded and removed.`);
-    }
+    };
 
-    function renderFOIATable() {
+    window.renderFOIATable = function() {
       const tbody = document.getElementById('foiaTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -2586,10 +2558,10 @@
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function handleFOIASubmit(e) {
-      e.preventDefault();
+    window.handleFOIASubmit = function(e) {
+      if (e) e.preventDefault();
       const name = document.getElementById('foiaName').value.trim();
       const dept = document.getElementById('foiaDept').value;
       const details = document.getElementById('foiaDetails').value.trim();
@@ -2624,9 +2596,9 @@
 
       alert(`Official FOIA Request ${newId} submitted under Article XV. 72-Hour statutory agency response clock initiated.`);
       document.getElementById('foiaSubmitForm').reset();
-    }
+    };
 
-    function renderRegistryTable(items) {
+    window.renderRegistryTable = function(items) {
       const tbody = document.getElementById('registryTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -2649,20 +2621,20 @@
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function filterRegistryTable() {
-      const q = document.getElementById('registrySearch').value.toLowerCase();
-      const type = document.getElementById('registryTypeFilter').value;
+    window.filterRegistryTable = function() {
+      const q = (document.getElementById('registrySearch')?.value || '').toLowerCase();
+      const type = document.getElementById('registryTypeFilter')?.value || 'ALL';
       const filtered = PUBLIC_REGISTRY.filter(item => {
         const matchesQ = item.name.toLowerCase().includes(q) || item.id.toLowerCase().includes(q);
         const matchesType = (type === 'ALL' || item.cat.includes(type));
         return matchesQ && matchesType;
       });
       renderRegistryTable(filtered);
-    }
+    };
 
-    function renderLogs() {
+    window.renderLogs = function() {
       const jViewer = document.getElementById('judiciaryAuditLogs');
       if (jViewer) {
         jViewer.innerHTML = JUDICIAL_LOGS.map(l => `<div class="audit-entry">🏛️ ${l}</div>`).join('');
@@ -2671,14 +2643,14 @@
       if (gViewer) {
         gViewer.innerHTML = GOV_LOGS.map(l => `<div class="audit-entry">📜 ${l}</div>`).join('');
       }
-    }
+    };
 
     // MULTI-DEPARTMENT AUTHENTICATION
     let CURRENT_AUTH_ROLE = null;
     let CURRENT_DEPT_NAME = "";
 
-    function handleStateLogin(e) {
-      e.preventDefault();
+    window.handleStateLogin = function(e) {
+      if (e) e.preventDefault();
       const u = document.getElementById('loginUsername').value.trim();
       const p = document.getElementById('loginPassword').value.trim();
       const err = document.getElementById('loginErrorMsg');
@@ -2719,9 +2691,9 @@
       } else {
         err.style.display = 'block';
       }
-    }
+    };
 
-    function showAuthenticatedView(role) {
+    window.showAuthenticatedView = function(role) {
       document.getElementById('secureAuthGate').style.display = 'none';
       const pill = document.getElementById('authStatusPill');
 
@@ -2749,9 +2721,9 @@
         renderDeptDashboard(CURRENT_DEPT_NAME);
       }
       renderLogs();
-    }
+    };
 
-    function renderDeptDashboard(deptName) {
+    window.renderDeptDashboard = function(deptName) {
       document.getElementById('deptHeaderAgency').textContent = deptName;
       document.getElementById('deptHeaderTitle').textContent = `${deptName} Command Intranet`;
 
@@ -2767,7 +2739,7 @@
           row.innerHTML = `
             <td><strong>${m.user}</strong></td>
             <td>${m.rank}</td>
-            <td><button class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptPersonnel('${deptName}', ${idx})">Remove</button></td>
+            <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptPersonnel('${deptName}', ${idx})">Remove</button></td>
           `;
           tbodyRoster.appendChild(row);
         });
@@ -2786,7 +2758,7 @@
             <td><strong>${s.user}</strong></td>
             <td>${s.callsign}</td>
             <td>${s.sector}</td>
-            <td><button class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptShift('${deptName}', ${sIdx})">End Shift</button></td>
+            <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptShift('${deptName}', ${sIdx})">End Shift</button></td>
           `;
           tbodyShifts.appendChild(row);
         });
@@ -2803,7 +2775,7 @@
           const row = document.createElement('tr');
           row.innerHTML = `
             <td><strong>${p.title}</strong><br><span style="font-size:0.75rem; color:var(--gov-gray-dark);">${p.dir}</span></td>
-            <td><button class="btn btn-secondary" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${p.title}', '${p.dir}')">💾 Word</button></td>
+            <td><button type="button" class="btn btn-secondary" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${p.title}', '${p.dir}')">💾 Word</button></td>
           `;
           tbodySOP.appendChild(row);
         });
@@ -2840,7 +2812,7 @@
             <td><strong>${a.tag}</strong></td>
             <td>${a.cat}</td>
             <td>${a.ref}</td>
-            <td><button class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptAsset('${deptName}', ${aIdx})">Release</button></td>
+            <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptAsset('${deptName}', ${aIdx})">Release</button></td>
           `;
           tbodyAsset.appendChild(row);
         });
@@ -2858,7 +2830,7 @@
           row.innerHTML = `
             <td><strong>${c.user}</strong></td>
             <td><span class="badge badge-pending">${c.status}</span></td>
-            <td><button class="btn btn-success" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="promoteCandidate('${deptName}', ${cIdx})">Promote to Roster</button></td>
+            <td><button type="button" class="btn btn-success" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="promoteCandidate('${deptName}', ${cIdx})">Promote to Roster</button></td>
           `;
           tbodyCand.appendChild(row);
         });
@@ -2894,15 +2866,15 @@
             <td><strong>${r.id}</strong></td>
             <td>${r.req}</td>
             <td><span class="badge ${r.status.includes('Fulfilled') ? 'badge-success' : 'badge-pending'}">${r.status}</span></td>
-            <td><button class="btn btn-success" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="fulfillDeptRequest('${r.id}')">Mark Complete</button></td>
+            <td><button type="button" class="btn btn-success" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="fulfillDeptRequest('${r.id}')">Mark Complete</button></td>
           `;
           tbodyReq.appendChild(row);
         });
       }
-    }
+    };
 
-    function handleAddPersonnel(e) {
-      e.preventDefault();
+    window.handleAddPersonnel = function(e) {
+      if (e) e.preventDefault();
       const user = document.getElementById('rosterUser').value.trim();
       const rank = document.getElementById('rosterRank').value.trim();
 
@@ -2911,15 +2883,15 @@
       saveState();
       alert(`Personnel ${user} added to ${CURRENT_DEPT_NAME} roster.`);
       document.getElementById('addPersonnelForm').reset();
-    }
+    };
 
-    function removeDeptPersonnel(deptName, idx) {
+    window.removeDeptPersonnel = function(deptName, idx) {
       DEPT_ROSTERS[deptName].splice(idx, 1);
       saveState();
-    }
+    };
 
-    function handleAddShift(e) {
-      e.preventDefault();
+    window.handleAddShift = function(e) {
+      if (e) e.preventDefault();
       const user = document.getElementById('shiftUser').value.trim();
       const callsign = document.getElementById('shiftCallsign').value.trim();
       const sector = document.getElementById('shiftSector').value.trim();
@@ -2929,15 +2901,15 @@
       saveState();
       alert(`Shift assignment logged for ${user} (${callsign}).`);
       document.getElementById('addShiftForm').reset();
-    }
+    };
 
-    function removeDeptShift(deptName, idx) {
+    window.removeDeptShift = function(deptName, idx) {
       DEPT_SHIFTS[deptName].splice(idx, 1);
       saveState();
-    }
+    };
 
-    function handleAddDeptSOP(e) {
-      e.preventDefault();
+    window.handleAddDeptSOP = function(e) {
+      if (e) e.preventDefault();
       const title = document.getElementById('sopTitle').value.trim();
       const text = document.getElementById('sopText').value.trim();
 
@@ -2959,10 +2931,10 @@
 
       alert(`Directive ${title} promulgated and saved.`);
       document.getElementById('addSOPForm').reset();
-    }
+    };
 
-    function handleAddDiscipline(e) {
-      e.preventDefault();
+    window.handleAddDiscipline = function(e) {
+      if (e) e.preventDefault();
       const user = document.getElementById('iaUser').value.trim();
       const sanction = document.getElementById('iaSanction').value;
       const reason = document.getElementById('iaReason').value.trim();
@@ -2985,10 +2957,10 @@
 
       alert(`Disciplinary action recorded for ${user} (${sanction}).`);
       document.getElementById('addDisciplineForm').reset();
-    }
+    };
 
-    function handleAddAsset(e) {
-      e.preventDefault();
+    window.handleAddAsset = function(e) {
+      if (e) e.preventDefault();
       const tag = document.getElementById('assetTag').value.trim();
       const cat = document.getElementById('assetCat').value;
       const ref = document.getElementById('assetRef').value.trim();
@@ -2998,15 +2970,15 @@
       saveState();
       alert(`Asset / Impound ${tag} recorded.`);
       document.getElementById('addAssetForm').reset();
-    }
+    };
 
-    function removeDeptAsset(deptName, idx) {
+    window.removeDeptAsset = function(deptName, idx) {
       DEPT_ASSETS[deptName].splice(idx, 1);
       saveState();
-    }
+    };
 
-    function handleAddCandidate(e) {
-      e.preventDefault();
+    window.handleAddCandidate = function(e) {
+      if (e) e.preventDefault();
       const user = document.getElementById('candUser').value.trim();
       const status = document.getElementById('candStatus').value;
 
@@ -3015,19 +2987,19 @@
       saveState();
       alert(`Candidate ${user} enrolled into queue.`);
       document.getElementById('addCandidateForm').reset();
-    }
+    };
 
-    function promoteCandidate(deptName, idx) {
+    window.promoteCandidate = function(deptName, idx) {
       const cand = DEPT_CANDIDATES[deptName][idx];
       if (!DEPT_ROSTERS[deptName]) DEPT_ROSTERS[deptName] = [];
       DEPT_ROSTERS[deptName].push({ user: cand.user, rank: "Junior Member / Cadet" });
       DEPT_CANDIDATES[deptName].splice(idx, 1);
       saveState();
       alert(`Candidate ${cand.user} successfully promoted to active personnel roster!`);
-    }
+    };
 
-    function handleAddMutualAid(e) {
-      e.preventDefault();
+    window.handleAddMutualAid = function(e) {
+      if (e) e.preventDefault();
       const target = document.getElementById('aidTargetDept').value;
       const scope = document.getElementById('aidScope').value.trim();
 
@@ -3053,18 +3025,18 @@
 
       alert(`Mutual aid broadcast dispatched to ${target}.`);
       document.getElementById('addMutualAidForm').reset();
-    }
+    };
 
-    function fulfillDeptRequest(foiaId) {
+    window.fulfillDeptRequest = function(foiaId) {
       const req = FOIA_REQUESTS.find(f => f.id === foiaId);
       if (req) {
         req.status = "Fulfilled / Published";
         saveState();
         alert(`Request ${foiaId} marked fulfilled and published under Article XV.`);
       }
-    }
+    };
 
-    function logoutTerminal() {
+    window.logoutTerminal = function() {
       CURRENT_AUTH_ROLE = null;
       document.getElementById('secureAuthGate').style.display = 'block';
       document.getElementById('judiciaryPanel').style.display = 'none';
@@ -3075,11 +3047,11 @@
       const pill = document.getElementById('authStatusPill');
       pill.className = 'badge badge-navy';
       pill.innerHTML = 'PUBLIC ACCESS PORTAL';
-    }
+    };
 
     // JUDICIAL BAR ADMISSIONS HANDLERS
-    function handleAdmitBarCandidate(e) {
-      e.preventDefault();
+    window.handleAdmitBarCandidate = function(e) {
+      if (e) e.preventDefault();
       const name = document.getElementById('barName').value.trim();
       const score = parseInt(document.getElementById('barScore').value, 10);
       const status = document.getElementById('barStatus').value;
@@ -3118,9 +3090,9 @@
 
       alert(`Attorney ${name} recorded in the official State Bar Registry.`);
       document.getElementById('admitBarForm').reset();
-    }
+    };
 
-    function renderJudgeBarManageTable() {
+    window.renderJudgeBarManageTable = function() {
       const tbody = document.getElementById('judgeBarManageTable');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -3140,14 +3112,14 @@
           <td>${item.score}</td>
           <td><span class="badge ${badgeClass}">${item.status}</span></td>
           <td>
-            <button class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBarMember('${item.id}', '${item.name}')">Revoke / Disbar</button>
+            <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBarMember('${item.id}', '${item.name}')">Revoke / Disbar</button>
           </td>
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function removeBarMember(id, name) {
+    window.removeBarMember = function(id, name) {
       if (!confirm(`Are you sure you want to revoke the license and disbar ${name} (${id})?`)) return;
       const idx = PUBLIC_REGISTRY.findIndex(i => i.id === id);
       if (idx !== -1) {
@@ -3170,11 +3142,11 @@
 
         alert(`License ${id} revoked and expunged.`);
       }
-    }
+    };
 
     // CITIZEN APPEAL SUBMISSION
-    function handleCitizenAppealSubmit(e) {
-      e.preventDefault();
+    window.handleCitizenAppealSubmit = function(e) {
+      if (e) e.preventDefault();
       const appellant = document.getElementById('appealAppellant').value.trim();
       const cat = document.getElementById('appealCategory').value;
       const ref = document.getElementById('appealRef').value.trim();
@@ -3215,10 +3187,10 @@
       succ.innerHTML = `<strong>Docket Registered: ${newId}</strong><br>Your appeal has been queued into the Supreme Court Adjudication Terminal. Track status on the Supreme Court Docket.`;
 
       document.getElementById('publicAppealForm').reset();
-    }
+    };
 
     // JUDICIAL WORKSTATION QUEUE
-    function renderJudiciaryQueue() {
+    window.renderJudiciaryQueue = function() {
       const container = document.getElementById('judiciaryAppealsQueue');
       if (!container) return;
       container.innerHTML = '';
@@ -3247,15 +3219,15 @@
             <input type="text" id="notes_${item.id}" class="gov-input" placeholder="Enter formal findings for grant or dismissal..." />
           </div>
           <div style="display:flex; gap:0.5rem;">
-            <button class="btn btn-success" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Accepted')">Accept & Grant Relief</button>
-            <button class="btn btn-danger" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Denied')">Deny & Dismiss</button>
+            <button type="button" class="btn btn-success" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Accepted')">Accept & Grant Relief</button>
+            <button type="button" class="btn btn-danger" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Denied')">Deny & Dismiss</button>
           </div>
         `;
         container.appendChild(div);
       });
-    }
+    };
 
-    function adjudicateAppeal(docketId, decision) {
+    window.adjudicateAppeal = function(docketId, decision) {
       const notesInput = document.getElementById(`notes_${docketId}`);
       const notes = notesInput ? notesInput.value.trim() : "";
 
@@ -3283,10 +3255,10 @@
 
         alert(`Docket ${docketId} marked as ${decision.toUpperCase()} and synchronized.`);
       }
-    }
+    };
 
-    function handleScheduleTrial(e) {
-      e.preventDefault();
+    window.handleScheduleTrial = function(e) {
+      if (e) e.preventDefault();
       const def = document.getElementById('trialDefendant').value.trim();
       const charge = document.getElementById('trialCharge').value.trim();
       const defender = document.getElementById('trialDefender').value.trim();
@@ -3325,9 +3297,9 @@
 
       alert(`Trial docket ${newId} scheduled and posted.`);
       document.getElementById('scheduleTrialForm').reset();
-    }
+    };
 
-    function renderJudgeDocketManageTable() {
+    window.renderJudgeDocketManageTable = function() {
       const tbody = document.getElementById('judgeDocketManageTable');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -3344,29 +3316,29 @@
           <td>${item.category}</td>
           <td><span class="badge ${badgeClass}">${item.status.toUpperCase()}</span></td>
           <td>
-            <button class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openDeletionModal('${item.id}', '${item.appellant}')">Expunge Record</button>
+            <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openDeletionModal('${item.id}', '${item.appellant}')">Expunge Record</button>
           </td>
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
     let DELETION_TARGET_ID = null;
 
-    function openDeletionModal(docketId, appellantName) {
+    window.openDeletionModal = function(docketId, appellantName) {
       DELETION_TARGET_ID = docketId;
       document.getElementById('modalTargetText').innerHTML = `You are about to expunge Docket <strong>${docketId}</strong> (${appellantName}) from the official judicial register.`;
       document.getElementById('modalAuthUsername').value = '';
       document.getElementById('modalAuthReason').value = '';
       document.getElementById('deletionModal').style.display = 'flex';
-    }
+    };
 
-    function closeDeletionModal() {
+    window.closeDeletionModal = function() {
       DELETION_TARGET_ID = null;
       document.getElementById('deletionModal').style.display = 'none';
-    }
+    };
 
-    function executeConfirmedDeletion() {
+    window.executeConfirmedDeletion = function() {
       const user = document.getElementById('modalAuthUsername').value.trim();
       const reason = document.getElementById('modalAuthReason').value.trim();
 
@@ -3398,10 +3370,10 @@
         alert(`Docket ${DELETION_TARGET_ID} expunged and recorded.`);
         closeDeletionModal();
       }
-    }
+    };
 
-    function handleJudgeWarrantIssue(e) {
-      e.preventDefault();
+    window.handleJudgeWarrantIssue = function(e) {
+      if (e) e.preventDefault();
       const type = document.getElementById('jwType').value;
       const target = document.getElementById('jwTarget').value;
       const affiant = document.getElementById('jwAffiant').value;
@@ -3441,10 +3413,10 @@
 
       alert(`Judicial Warrant ${newId} issued and logged to public docket.`);
       document.getElementById('judgeWarrantForm').reset();
-    }
+    };
 
-    function handleJudgeSubpoenaIssue(e) {
-      e.preventDefault();
+    window.handleJudgeSubpoenaIssue = function(e) {
+      if (e) e.preventDefault();
       const party = document.getElementById('subpParty').value.trim();
       const docket = document.getElementById('subpDocket').value.trim();
       const scope = document.getElementById('subpScope').value.trim();
@@ -3482,11 +3454,11 @@
 
       alert(`Judicial Subpoena ${newId} issued against ${party}.`);
       document.getElementById('judgeSubpoenaForm').reset();
-    }
+    };
 
     // EXECUTIVE / LEGISLATIVE HANDLERS
-    function handleSenateRollCall(e) {
-      e.preventDefault();
+    window.handleSenateRollCall = function(e) {
+      if (e) e.preventDefault();
       const bill = document.getElementById('svBill').value.trim();
       const yeas = parseInt(document.getElementById('svYeas').value, 10);
       const nays = parseInt(document.getElementById('svNays').value, 10);
@@ -3511,10 +3483,10 @@
 
       alert(`Senate Roll Call on ${bill} recorded: ${passed ? 'PASSED' : 'FAILED'} (${yeas}-${nays}).`);
       document.getElementById('senateVoteForm').reset();
-    }
+    };
 
-    function handleExecutivePardon(e) {
-      e.preventDefault();
+    window.handleExecutivePardon = function(e) {
+      if (e) e.preventDefault();
       const citizen = document.getElementById('pardonCitizen').value.trim();
       const pType = document.getElementById('pardonType').value;
       const newId = `EX-PARDON-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -3550,10 +3522,10 @@
 
       alert(`Official ${pType} issued to ${citizen} and posted.`);
       document.getElementById('execPardonForm').reset();
-    }
+    };
 
-    function handleQuickEO(e) {
-      e.preventDefault();
+    window.handleQuickEO = function(e) {
+      if (e) e.preventDefault();
       const num = document.getElementById('qEONum').value;
       const dir = document.getElementById('qEODirective').value;
       const now = new Date().toISOString().replace('T', ' ').substring(0, 10);
@@ -3584,10 +3556,10 @@
 
       alert(`Executive Order ${num} promulgated and published to Executive Orders Ledger.`);
       document.getElementById('quickEOForm').reset();
-    }
+    };
 
-    function generateBillDraft(e) {
-      e.preventDefault();
+    window.generateBillDraft = function(e) {
+      if (e) e.preventDefault();
       const num = document.getElementById('billNum').value;
       const sponsor = document.getElementById('billSponsor').value;
       const actName = document.getElementById('billActName').value;
@@ -3619,9 +3591,8 @@ TITLE III. ENACTMENT
 
       downloadAsWord(num.replace(/\s+/g, '_'), doc);
       alert(`Senate Bill ${num} generated and downloaded.`);
-    }
+    };
 
-    // 100% UNABRIDGED STATUTORY SLIP LAWS (SB 100 - SB 104)
     const STATUTES = {
       sb100: {
         name: "Senate_Bill_100_State_Electoral_Act",
@@ -3818,23 +3789,23 @@ TITLE III. ENACTMENT
     };
 
     let activeBillKey = 'sb100';
-    function loadBill(key) {
+    window.loadBill = function(key) {
       activeBillKey = key;
       document.querySelectorAll('.subnav-btn').forEach(el => el.classList.remove('active'));
       const activeBtn = document.getElementById('subnav-' + key);
       if (activeBtn) activeBtn.classList.add('active');
       const container = document.getElementById('slipLawDisplay');
-      if (STATUTES[key]) {
+      if (STATUTES[key] && container) {
         container.innerHTML = STATUTES[key].body;
         container.dataset.loaded = "true";
       }
-    }
+    };
 
-    function downloadActiveBillWord() {
+    window.downloadActiveBillWord = function() {
       if (STATUTES[activeBillKey]) {
         downloadAsWord(STATUTES[activeBillKey].name, document.getElementById('slipLawDisplay').innerText);
       }
-    }
+    };
 
     const PENAL_DATABASE = [
       { code: "§ 8-101", name: "Verbal Harassment / Disorderly Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Verbal warning; mute or temporary custody" },
@@ -3905,8 +3876,9 @@ TITLE III. ENACTMENT
       { code: "§ 8-610", name: "High Treason / Armed Insurrection", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Impeachment; total civic ban" }
     ];
 
-    function renderPenalTable(items) {
+    window.renderPenalTable = function(items) {
       const tbody = document.getElementById('penalTableBody');
+      if (!tbody) return;
       tbody.innerHTML = '';
       if (items.length === 0) {
         tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--gov-gray-dark);">No matching offenses found in the State of Melview Penal Schedule.</td></tr>`;
@@ -3929,12 +3901,12 @@ TITLE III. ENACTMENT
         `;
         tbody.appendChild(row);
       });
-    }
+    };
 
-    function filterPenalTable() {
-      const q = document.getElementById('penalSearch').value.toLowerCase();
-      const c = document.getElementById('penalClassFilter').value;
-      const d = document.getElementById('penalDivisionFilter').value;
+    window.filterPenalTable = function() {
+      const q = (document.getElementById('penalSearch')?.value || '').toLowerCase();
+      const c = document.getElementById('penalClassFilter')?.value || 'ALL';
+      const d = document.getElementById('penalDivisionFilter')?.value || 'ALL';
 
       const filtered = PENAL_DATABASE.filter(item => {
         const matchesQuery = item.code.toLowerCase().includes(q) || item.name.toLowerCase().includes(q) || item.sanction.toLowerCase().includes(q);
@@ -3944,11 +3916,11 @@ TITLE III. ENACTMENT
       });
 
       renderPenalTable(filtered);
-    }
-    renderPenalTable(PENAL_DATABASE);
+    };
 
-    function initCalculator() {
+    window.initCalculator = function() {
       const select = document.getElementById('calcOffenseSelect');
+      if (!select) return;
       select.innerHTML = '';
       PENAL_DATABASE.forEach((item, index) => {
         const opt = document.createElement('option');
@@ -3956,11 +3928,11 @@ TITLE III. ENACTMENT
         opt.textContent = `${item.code} - ${item.name} ($${item.fine} | ${item.custody})`;
         select.appendChild(opt);
       });
-    }
-    initCalculator();
+    };
 
-    function calculateCharges() {
+    window.calculateCharges = function() {
       const select = document.getElementById('calcOffenseSelect');
+      if (!select) return;
       const selectedOpts = Array.from(select.selectedOptions);
       let totalFine = 0;
       let totalCustody = 0;
@@ -3983,16 +3955,18 @@ TITLE III. ENACTMENT
         document.getElementById('calcTotalTime').textContent = `${totalCustody} Mins`;
         capNotice.style.display = "none";
       }
-    }
+    };
 
-    function resetCalculator() {
+    window.resetCalculator = function() {
       const select = document.getElementById('calcOffenseSelect');
-      Array.from(select.options).forEach(opt => opt.selected = false);
-      calculateCharges();
-    }
+      if (select) {
+        Array.from(select.options).forEach(opt => opt.selected = false);
+        calculateCharges();
+      }
+    };
 
-    function gradeBarExam(e) {
-      e.preventDefault();
+    window.gradeBarExam = function(e) {
+      if (e) e.preventDefault();
       const form = document.getElementById('barExamForm');
       const answers = { q1: 'c', q2: 'b', q3: 'c' };
       let correct = 0;
@@ -4018,9 +3992,9 @@ TITLE III. ENACTMENT
         resultBox.style.color = "#b50909";
         resultBox.innerHTML = `<strong>EXAMINATION FAILED: ${scorePercent}% (${correct}/${total})</strong><br>You did not meet the mandatory 80% threshold. Review constitutional and court standards before re-testing.`;
       }
-    }
+    };
 
-    function downloadAsWord(filename, textContent) {
+    window.downloadAsWord = function(filename, textContent) {
       const htmlContent = `
         <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
         <head><meta charset='utf-8'><title>${filename}</title>
@@ -4041,8 +4015,23 @@ TITLE III. ENACTMENT
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
-    }
+    };
 
+    // Initialize all tables on document ready
+    document.addEventListener("DOMContentLoaded", function() {
+      renderPublicDocket();
+      renderPublicMostWanted();
+      renderWarrantsTable();
+      renderExecOrdersTable();
+      renderExecOrdersManageTable();
+      renderFOIATable();
+      renderRegistryTable(PUBLIC_REGISTRY);
+      renderPenalTable(PENAL_DATABASE);
+      initCalculator();
+      renderLogs();
+    });
+
+    // Fallback immediate initialization
     renderPublicDocket();
     renderPublicMostWanted();
     renderWarrantsTable();
@@ -4050,6 +4039,8 @@ TITLE III. ENACTMENT
     renderExecOrdersManageTable();
     renderFOIATable();
     renderRegistryTable(PUBLIC_REGISTRY);
+    renderPenalTable(PENAL_DATABASE);
+    initCalculator();
     renderLogs();
   </script>
 </body>
