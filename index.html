@@ -23,7 +23,6 @@
       --font-serif: "Georgia", "Times New Roman", serif;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-      /* Terminal Specific Variables */
       --term-bg: #06090e;
       --term-card: #0b1320;
       --term-surface: #111e33;
@@ -739,6 +738,14 @@
         <span>📝 Submit Appeal / Grievance</span>
         <span class="nav-badge">Portal</span>
       </button>
+      <button class="nav-btn" onclick="switchTab('police-citation')" id="nav-police-citation">
+        <span>🚔 Police Citation Issuer</span>
+        <span class="nav-badge">LE Field</span>
+      </button>
+      <button class="nav-btn" onclick="switchTab('public-registry')" id="nav-public-registry">
+        <span>🛡️ Bar & CCW Registry</span>
+        <span class="nav-badge">Public</span>
+      </button>
       <button class="nav-btn" onclick="switchTab('custody-calc')" id="nav-custody-calc">
         <span>🧮 Custody & Bail Calc</span>
         <span class="nav-badge">Tools</span>
@@ -819,10 +826,10 @@
           </div>
           <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
             <button class="btn" onclick="switchTab('submit-appeal')">📝 File Record Appeal</button>
+            <button class="btn btn-secondary" onclick="switchTab('police-citation')">🚔 Police Citation Issuer</button>
             <button class="btn btn-secondary" onclick="switchTab('public-docket')">📅 View Public Docket</button>
+            <button class="btn btn-secondary" onclick="switchTab('public-registry')">🛡️ Bar & CCW Registry</button>
             <button class="btn btn-secondary" onclick="switchTab('secure-terminal')">🔐 Secure Officer Login</button>
-            <button class="btn btn-secondary" onclick="switchTab('constitution')">📜 Full Constitution</button>
-            <button class="btn btn-secondary" onclick="switchTab('penal-code')">⚖️ Search 60 Penal Offenses</button>
           </div>
         </div>
       </section>
@@ -850,9 +857,7 @@
                   <th>Presiding Justice Notes</th>
                 </tr>
               </thead>
-              <tbody id="publicDocketTableBody">
-                <!-- Injected via JavaScript -->
-              </tbody>
+              <tbody id="publicDocketTableBody"></tbody>
             </table>
           </div>
         </div>
@@ -901,13 +906,98 @@
             <button type="submit" class="btn">Submit Appeal to Supreme Court Queue</button>
           </form>
 
-          <div id="appealSubmitSuccess" style="display: none; margin-top: 1.25rem; padding: 1.25rem; border-radius: 6px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #d1fae5;">
-            <!-- Filled dynamically -->
+          <div id="appealSubmitSuccess" style="display: none; margin-top: 1.25rem; padding: 1.25rem; border-radius: 6px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #d1fae5;"></div>
+        </div>
+      </section>
+
+      <!-- POLICE CITATION ISSUANCE TOOL -->
+      <section id="tab-police-citation" class="tab-section">
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <h2 class="gov-card-title">🚔 State Police & Sheriff Roadside Citation Issuer</h2>
+            <span class="badge badge-code">DIVISION 3 VEHICULAR</span>
+          </div>
+          <form id="policeCitationForm" onsubmit="handlePoliceCitationIssue(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Violator Username / Full Name</label>
+                <input type="text" id="citeViolator" class="input-text" placeholder="e.g., FastDriver99" required />
+              </div>
+              <div class="form-group">
+                <label>Issuing Officer & Badge</label>
+                <input type="text" id="citeOfficer" class="input-text" placeholder="e.g., Trooper Miller #402" required />
+              </div>
+              <div class="form-group">
+                <label>Law Enforcement Agency</label>
+                <select id="citeAgency" class="select-input">
+                  <option value="Melview State Police">Melview State Police</option>
+                  <option value="County Sheriff Office">County Sheriff Office</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Charged Violation (Title 8)</label>
+                <select id="citeViolationSelect" class="select-input" onchange="autoFillCitationFine()">
+                  <option value="§ 8-301 Minor Speeding (1-15 Over)|100|1">§ 8-301 Minor Speeding ($100 | 1 Point)</option>
+                  <option value="§ 8-302 Major Speeding (16-29 Over)|250|2">§ 8-302 Major Speeding ($250 | 2 Points)</option>
+                  <option value="§ 8-303 Reckless Driving|500|4">§ 8-303 Reckless Driving ($500 | 4 Points)</option>
+                  <option value="§ 8-304 Failure to Yield to Code 3|200|0">§ 8-304 Failure to Yield ($200 | Warning)</option>
+                  <option value="§ 8-305 Red Signal / Stop Sign Violation|150|1">§ 8-305 Stop Signal Violation ($150 | 1 Point)</option>
+                  <option value="§ 8-306 Unregistered / Defective Vehicle|400|0">§ 8-306 Unregistered Vehicle ($400 | Tow)</option>
+                  <option value="§ 8-308 Hit and Run (Property Damage)|750|4">§ 8-308 Hit & Run Property ($750 | 4 Points)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label>Location & Narrative of Incident</label>
+              <textarea id="citeNarrative" class="input-text" placeholder="State location (e.g. Route 1 Northbound) and factual observations..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Issue & Log Roadside Citation</button>
+          </form>
+
+          <div style="margin-top: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">ISSUED CITATION LOG</span>
+              <button class="btn btn-secondary" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="copyDraft('citationOutput')">📋 Copy Citation</button>
+            </div>
+            <div class="form-output-box" id="citationOutput">Awaiting citation generation...</div>
           </div>
         </div>
       </section>
 
-      <!-- SECURE RESTRICTED TERMINAL (SPECIALIZED CYBER-DEFENSE / MAINFRAME UI) -->
+      <!-- PUBLIC BAR & CCW REGISTRY -->
+      <section id="tab-public-registry" class="tab-section">
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <h2 class="gov-card-title">🛡️ State Bar & Concealed Carry (CCW) Public Registry</h2>
+            <span class="badge badge-code">ARTICLE VII & DIVISION 5</span>
+          </div>
+          <div class="filter-bar">
+            <input type="text" id="registrySearch" class="input-text" placeholder="Search licensed attorneys, permit holders, license IDs..." oninput="filterRegistryTable()" />
+            <select id="registryTypeFilter" class="select-input" onchange="filterRegistryTable()">
+              <option value="ALL">All License Categories</option>
+              <option value="State Bar License">State Bar Attorney License</option>
+              <option value="Concealed Carry (CCW)">Concealed Carry Permit (CCW)</option>
+            </select>
+          </div>
+          <div class="table-container">
+            <table class="gov-table">
+              <thead>
+                <tr>
+                  <th>License / Permit ID</th>
+                  <th>Holder Name</th>
+                  <th>Certification Category</th>
+                  <th>Bar Score / Status</th>
+                  <th>Expiration Date</th>
+                  <th>Standing</th>
+                </tr>
+              </thead>
+              <tbody id="registryTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECURE RESTRICTED TERMINAL (JUDICIARY / EXECUTIVE / LEGISLATIVE) -->
       <section id="tab-secure-terminal" class="tab-section">
         
         <!-- Auth Login Gate (Shown when logged out) -->
@@ -953,14 +1043,52 @@
               <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">Logged in Officer: <strong style="color:var(--term-green);" id="judgeSessionBadge">judge1 (Presiding Justice)</strong></p>
             </div>
             <div class="action-row" style="margin-top:0;">
-              <button class="btn btn-secondary" style="border-color:var(--term-blue); color:var(--term-blue);" onclick="exportDocketToExcel()">📊 Export Docket (.csv)</button>
+              <button class="btn btn-secondary" style="border-color:var(--term-blue); color:var(--term-blue);" onclick="exportDocketToExcel()">📊 Export Master Docket (.csv)</button>
               <button class="btn btn-danger" onclick="logoutTerminal()">Terminate Session</button>
             </div>
           </div>
 
+          <!-- Webhook Dispatch Configuration Box -->
+          <div style="background:#050b14; padding:0.85rem; border-radius:6px; border:1px solid #1e3a5f; margin-bottom:1rem; font-size:0.8rem;">
+            <label style="color:#00e5ff; font-weight:600;">Optional Discord Webhook Dispatch URL:</label>
+            <input type="text" id="discordWebhookInput" class="input-text" style="width:100%; margin-top:0.35rem;" placeholder="https://discord.com/api/webhooks/..." />
+          </div>
+
           <h3 style="color:#00e5ff; font-size:1rem; margin:1rem 0 0.5rem 0; text-transform:uppercase;">Pending Citizen Appeals Queue</h3>
-          <div id="judiciaryAppealsQueue">
-            <!-- Injected dynamically -->
+          <div id="judiciaryAppealsQueue"></div>
+
+          <!-- Live Trial Scheduling & Arraignment Tool -->
+          <div class="gov-card" style="background:#040810; margin-top:1.5rem; border-color:#1e3a5f;">
+            <div class="gov-card-header">
+              <h3 class="gov-card-title" style="color:#00e5ff; font-size:1rem;">Schedule Trial & Assign Public Defender[cite: 1, 3]</h3>
+              <span class="badge badge-code">MCR-2026-01 4-PHASE[cite: 3]</span>
+            </div>
+            <form id="scheduleTrialForm" onsubmit="handleScheduleTrial(event)">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Defendant Username</label>
+                  <input type="text" id="trialDefendant" class="input-text" placeholder="e.g., Robber_Joe" required />
+                </div>
+                <div class="form-group">
+                  <label>Initial Charge (Title 8)</label>
+                  <input type="text" id="trialCharge" class="input-text" placeholder="e.g., § 8-207 Armed Robbery" required />
+                </div>
+                <div class="form-group">
+                  <label>Assigned Defense Counsel</label>
+                  <input type="text" id="trialDefender" class="input-text" placeholder="e.g., Office of the Public Defender" required />
+                </div>
+                <div class="form-group">
+                  <label>Trial Phase</label>
+                  <select id="trialPhase" class="select-input">
+                    <option value="Phase I: Arraignment & Plea">Phase I: Arraignment & Plea</option>
+                    <option value="Phase II: Evidentiary Hearing">Phase II: Evidentiary Hearing</option>
+                    <option value="Phase III: Oral Arguments">Phase III: Oral Arguments</option>
+                    <option value="Phase IV: Verdict & Sentencing">Phase IV: Verdict & Sentencing</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success">Schedule & Post to Public Docket</button>
+            </form>
           </div>
 
           <!-- Active Case Docket Control Table with Authorised Deletion -->
@@ -982,9 +1110,7 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody id="judgeDocketManageTable">
-                  <!-- Injected via JS -->
-                </tbody>
+                <tbody id="judgeDocketManageTable"></tbody>
               </table>
             </div>
           </div>
@@ -1031,9 +1157,7 @@
               <h3 class="gov-card-title" style="color:#00e5ff; font-size:0.95rem;">Judicial Audit & Case Removal Logs</h3>
               <span class="badge badge-code" style="color:var(--term-green); border-color:var(--term-green);">REALTIME AUDIT</span>
             </div>
-            <div class="term-log-viewer" id="judiciaryAuditLogs">
-              <!-- Dynamically Populated -->
-            </div>
+            <div class="term-log-viewer" id="judiciaryAuditLogs"></div>
           </div>
         </div>
 
@@ -1043,7 +1167,7 @@
             <div>
               <span class="terminal-header-badge" style="border-color:var(--gold-seal); color:var(--gold-seal);">GOVERNMENT ASSEMBLY // LEVEL 3</span>
               <h2 class="gov-card-title" style="color:var(--gold-seal); margin-top:0.35rem;">🏛️ Executive & Legislative Assembly Command</h2>
-              <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">Logged in Official: <strong style="color:var(--gold-seal);">law3 (Executive Oversight)</strong></p>
+              <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">Logged in Official: <strong style="color:var(--gold-seal);">law3 (Executive & Senate Oversight)</strong></p>
             </div>
             <div class="action-row" style="margin-top:0;">
               <button class="btn btn-secondary" onclick="exportDocketToExcel()">📊 Export State Registry (.csv)</button>
@@ -1053,41 +1177,49 @@
 
           <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
             
-            <!-- Quick Executive Decree Promulgator -->
+            <!-- Senate Legislative Roll Call Recorder -->
             <div style="background:#050b14; padding:1.25rem; border-radius:6px; border:1px solid #1e3a5f;">
-              <h3 style="color:#00e5ff; font-size:1rem; margin-bottom:0.75rem;">Promulgate Executive Order (Title 6)[cite: 1, 8]</h3>
-              <form id="quickEOForm" onsubmit="handleQuickEO(event)">
+              <h3 style="color:#00e5ff; font-size:1rem; margin-bottom:0.75rem;">Senate Roll Call Vote Tally (7 Seats)[cite: 4]</h3>
+              <form id="senateVoteForm" onsubmit="handleSenateRollCall(event)">
                 <div class="form-group" style="margin-bottom:0.5rem;">
-                  <label>Order Number & Title</label>
-                  <input type="text" id="qEONum" class="input-text" placeholder="e.g., EO-2026-005 (Port Security)" required />
+                  <label>Bill Number & Short Title</label>
+                  <input type="text" id="svBill" class="input-text" placeholder="e.g., SB 106 Port Security Act" required />
                 </div>
-                <div class="form-group" style="margin-bottom:0.5rem;">
-                  <label>Directives & Enactment Scope</label>
-                  <textarea id="qEODirective" class="input-text" style="min-height:70px;" placeholder="Executive commands directed to state departments..." required></textarea>
+                <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr; margin-bottom:0.5rem;">
+                  <div class="form-group">
+                    <label>Yeas</label>
+                    <input type="number" id="svYeas" class="input-text" min="0" max="7" value="5" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Nays</label>
+                    <input type="number" id="svNays" class="input-text" min="0" max="7" value="2" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Abstain</label>
+                    <input type="number" id="svAbstain" class="input-text" min="0" max="7" value="0" required />
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-success" style="width:100%;">Publish Executive Order</button>
+                <button type="submit" class="btn btn-success" style="width:100%;">Record Official Roll Call Tally</button>
               </form>
             </div>
 
-            <!-- Senate Bill Registration -->
+            <!-- Executive Pardon & Commutation Tool -->
             <div style="background:#050b14; padding:1.25rem; border-radius:6px; border:1px solid #1e3a5f;">
-              <h3 style="color:#00e5ff; font-size:1rem; margin-bottom:0.75rem;">Register Passed Senate Bill (Title 4)[cite: 1, 5]</h3>
-              <form id="quickBillForm" onsubmit="handleQuickBill(event)">
-                <div class="form-grid" style="grid-template-columns:1fr 1fr; margin-bottom:0.5rem;">
-                  <div class="form-group">
-                    <label>Bill Number</label>
-                    <input type="text" id="qBillNum" class="input-text" placeholder="e.g., SB 106" required />
-                  </div>
-                  <div class="form-group">
-                    <label>Sponsor Senator</label>
-                    <input type="text" id="qBillSponsor" class="input-text" placeholder="e.g., Senator Vance" required />
-                  </div>
+              <h3 style="color:#00e5ff; font-size:1rem; margin-bottom:0.75rem;">Executive Pardon / Commutation</h3>
+              <form id="execPardonForm" onsubmit="handleExecutivePardon(event)">
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label>Recipient Citizen Username</label>
+                  <input type="text" id="pardonCitizen" class="input-text" placeholder="e.g., Citizen_Marcus" required />
                 </div>
                 <div class="form-group" style="margin-bottom:0.5rem;">
-                  <label>Bill Name / Codification Target</label>
-                  <input type="text" id="qBillName" class="input-text" placeholder="e.g., Transportation Safety Standards Act" required />
+                  <label>Action & Legal Scope</label>
+                  <select id="pardonType" class="select-input">
+                    <option value="Full Executive Pardon">Full Executive Pardon (All Charges Expunged)</option>
+                    <option value="Sentence Commutation">Sentence Commutation (Custody Time Vacated)</option>
+                    <option value="Fine Remission">Monetary Fine Remission</option>
+                  </select>
                 </div>
-                <button type="submit" class="btn" style="width:100%;">Enroll into State Statutes</button>
+                <button type="submit" class="btn" style="width:100%;">Issue Official Executive Grant</button>
               </form>
             </div>
 
@@ -1099,15 +1231,13 @@
               <h3 class="gov-card-title" style="color:var(--gold-seal); font-size:0.95rem;">Executive Actions & Legislative Registration Logs</h3>
               <span class="badge badge-code" style="color:var(--gold-seal); border-color:var(--gold-seal);">ARTICLE XV OPEN LOGS[cite: 1, 5]</span>
             </div>
-            <div class="term-log-viewer" id="govAuditLogs">
-              <!-- Dynamically Populated -->
-            </div>
+            <div class="term-log-viewer" id="govAuditLogs"></div>
           </div>
         </div>
 
       </section>
 
-      <!-- CONSTITUTION TAB -->
+      <!-- CONSTITUTION TAB (100% UNABRIDGED VERBATIM TEXT) -->
       <section id="tab-constitution" class="tab-section">
         <div class="gov-card">
           <div class="gov-card-header">
@@ -1126,33 +1256,119 @@
               <em>For use within the State of Melview roleplay community[cite: 1]. This instrument governs roleplay government and does not create real-world legal rights or obligations[cite: 1].</em>
             </div>
 
+            <h3>TABLE OF CONTENTS</h3>
+            <ul>
+              <li><strong>Preamble:</strong> A constitutional compact for a functioning State[cite: 1].</li>
+              <li><strong>Article I:</strong> Declaration of Rights and Liberties[cite: 1]</li>
+              <li><strong>Article II:</strong> Sovereignty, Citizenship, and Government Structure[cite: 1]</li>
+              <li><strong>Article III:</strong> Community Management and Developer Authority[cite: 1]</li>
+              <li><strong>Article IV:</strong> The General Assembly[cite: 1]</li>
+              <li><strong>Article V:</strong> The Governor and Lieutenant Governor[cite: 1]</li>
+              <li><strong>Article VI:</strong> The Executive Departments and Cabinet[cite: 1]</li>
+              <li><strong>Article VII:</strong> The Department of Justice and Public Legal Service[cite: 1]</li>
+              <li><strong>Article VIII:</strong> Public Safety, Emergency Services, and the State Guard[cite: 1]</li>
+              <li><strong>Article IX:</strong> The Judiciary[cite: 1]</li>
+              <li><strong>Article X:</strong> Elections and the Electoral Commission[cite: 1]</li>
+              <li><strong>Article XI:</strong> Local Government and Municipal Authority[cite: 1]</li>
+              <li><strong>Article XII:</strong> Public Offices, Group Roles, Appointments, and Civil Service[cite: 1]</li>
+              <li><strong>Article XIII:</strong> Impeachment, Removal, Discipline, and Ethics[cite: 1]</li>
+              <li><strong>Article XIV:</strong> Emergency Powers and Continuity of Government[cite: 1]</li>
+              <li><strong>Article XV:</strong> Public Records, Transparency, and Administration[cite: 1]</li>
+              <li><strong>Article XVI:</strong> Amendments and Constitutional Review[cite: 1]</li>
+              <li><strong>Article XVII:</strong> General, Transitional, and Final Provisions[cite: 1]</li>
+              <li><strong>Appendix A:</strong> Operational Role Alignment[cite: 1]</li>
+              <li><strong>Appendix B:</strong> Drafting References[cite: 1]</li>
+            </ul>
+
             <h3>PREAMBLE</h3>
             <p>We, the people and members of the State of Melview, in order to establish an orderly, realistic, accountable, and playable State; to preserve liberty while maintaining public order; to divide governmental power so that no single role may exercise all authority; to provide fair elections and dependable institutions; to secure due process and equal treatment; to recognize the practical authority of the community owners, developers, and administrators over the Roblox group and game; and to promote professional roleplay, public service, and responsible leadership, do hereby establish this Constitution as the supreme governing instrument of the State of Melview roleplay government[cite: 1].</p>
+            <p>This Constitution is designed as a community governance document[cite: 1]. It is inspired by real constitutional systems, but each provision is adapted to the scale, mechanics, staffing realities, and platform rules of a Roblox roleplay state[cite: 1].</p>
+            <p>All officers, departments, agencies, courts, and members acting in a governmental capacity shall respect this Constitution[cite: 1]. Where an operational group rule or platform requirement conflicts with roleplay law, the platform requirement and reserved community-management authority control[cite: 1].</p>
 
             <h3>ARTICLE 1 - DECLARATION OF RIGHTS AND LIBERTIES</h3>
-            <p><strong>Section 1. INHERENT DIGNITY AND EQUALITY:</strong> All residents are entitled to equal treatment under the law[cite: 1].</p>
-            <p><strong>Section 2. FREEDOM OF EXPRESSION:</strong> Residents may criticize officers, departments, laws, and policies in good faith[cite: 1].</p>
-            <p><strong>Section 3. PEACEFUL ASSEMBLY:</strong> Residents may organize demonstrations and meetings complying with safety rules[cite: 1].</p>
-            <p><strong>Section 4. DUE PROCESS:</strong> No resident shall be deprived of a roleplay license or public position without notice and an opportunity to respond[cite: 1].</p>
-            <p><strong>Section 5. PRESUMPTION OF INNOCENCE:</strong> A person accused of a roleplay offense is presumed innocent until proven guilty[cite: 1].</p>
-            <p><strong>Section 6. SEARCH AND SEIZURE:</strong> Government agents shall not conduct unreasonable searches without particularized warrants[cite: 1].</p>
-            <p><strong>Section 7. COUNSEL AND REPRESENTATION:</strong> Eligible defendants are entitled to public defender representation[cite: 1].</p>
-            <p><strong>Section 8. PRIVACY AND COMMUNICATIONS:</strong> Government personnel shall not misuse private community data for roleplay advantage[cite: 1].</p>
-            <p><strong>Section 9. RIGHT TO PETITION:</strong> Residents may file complaints, appeals, and petitions without fear of retaliation[cite: 1].</p>
-            <p><strong>Section 10. RIGHT TO VOTE:</strong> Qualified citizens have the right to participate in elections[cite: 1].</p>
-            <p><strong>Section 11. PROTECTION FROM ARBITRARY PUNISHMENT:</strong> Government action must have a valid legal or emergency basis[cite: 1].</p>
-            <p><strong>Section 12. RIGHT TO A FAIR HEARING:</strong> Courts and administrative bodies shall provide a neutral decision-maker and written decisions[cite: 1].</p>
+            <p><strong>Section 1. INHERENT DIGNITY AND EQUALITY:</strong> All residents are entitled to equal treatment under the law[cite: 1]. No governmental officer may deny a roleplay service, hearing, employment opportunity, or public benefit on arbitrary or discriminatory grounds[cite: 1].</p>
+            <p><strong>Section 2. FREEDOM OF EXPRESSION:</strong> Residents may criticize officers, departments, laws, and policies in good faith, subject to rules against harassment, threats, spam, impersonation, or disruption of official operations[cite: 1].</p>
+            <p><strong>Section 3. PEACEFUL ASSEMBLY:</strong> Residents may organize demonstrations, meetings, political campaigns, and civic events, provided they comply with lawful time, place, safety, and game-session rules[cite: 1].</p>
+            <p><strong>Section 4. DUE PROCESS:</strong> No resident shall be deprived of a roleplay license, public position, or governmental privilege for alleged misconduct without notice of the allegation and a reasonable opportunity to respond, except for temporary emergency measures necessary for immediate safety[cite: 1].</p>
+            <p><strong>Section 5. PRESUMPTION OF INNOCENCE:</strong> A person accused of a roleplay offense is presumed innocent until the competent authority makes a finding under applicable law[cite: 1].</p>
+            <p><strong>Section 6. SEARCH AND SEIZURE:</strong> Government agents shall not conduct unreasonable searches of roleplay persons, vehicles, or property[cite: 1]. Warrants or recognized exceptions shall be required when the applicable code demands them[cite: 1].</p>
+            <p><strong>Section 7. COUNSEL AND REPRESENTATION:</strong> A person facing a serious roleplay criminal charge may request representation by an attorney or eligible public defender when the legal system provides such a service[cite: 1].</p>
+            <p><strong>Section 8. PRIVACY AND COMMUNICATIONS:</strong> Government personnel shall not misuse private community information, leaked logs, or administrative data for roleplay advantage[cite: 1]. Confidential records shall be handled under community-management rules[cite: 1].</p>
+            <p><strong>Section 9. RIGHT TO PETITION:</strong> Residents may file complaints, requests, petitions, legislative proposals, and appeals to competent officials without retaliation for making the complaint in good faith[cite: 1].</p>
+            <p><strong>Section 10. RIGHT TO VOTE:</strong> Qualified citizens have the right to participate in elections, referenda, and recalls administered under this Constitution, subject to eligibility rules and platform limitations[cite: 1].</p>
+            <p><strong>Section 11. PROTECTION FROM ARBITRARY PUNISHMENT:</strong> No officer shall impose a penalty solely because a resident is unpopular, disagrees with leadership, or declines an improper order[cite: 1]. Government action must have a constitutional, statutory, departmental, or valid emergency basis[cite: 1].</p>
+            <p><strong>Section 12. RIGHT TO A FAIR HEARING:</strong> Courts and administrative bodies shall provide a neutral decision-maker, notice of the issue, an opportunity to present relevant information, and a written or recorded decision where practicable[cite: 1].</p>
 
-            <h3>ARTICLE 2 - SOVEREIGNTY AND THREE BRANCHES</h3>
-            <p>Government authority is divided into legislative (General Assembly / Senate), executive (Governor and Cabinet), and judicial (Supreme and District Courts) branches[cite: 1].</p>
+            <h3>ARTICLE 2 - SOVEREIGNTY, CITIZENSHIP, AND GOVERNMENT STRUCTURE</h3>
+            <p><strong>Section 1. STATE STATUS:</strong> Melview shall be known officially as the State of Melview[cite: 1]. Government authority is exercised for the benefit of the roleplay community and its residents[cite: 1].</p>
+            <p><strong>Section 2. SOURCE OF GOVERNMENT:</strong> All governmental roleplay authority ultimately derives from the community members participating in the State, subject to the reserved authority of the community owners, developers, and administrators recognized in Article III[cite: 1].</p>
+            <p><strong>Section 3. THREE BRANCHES:</strong> The roleplay government shall be divided into legislative, executive, and judicial branches[cite: 1]. No officer shall simultaneously exercise incompatible powers of two branches except where this Constitution expressly provides for temporary or ceremonial duties[cite: 1].</p>
+            <p><strong>Section 4. LEGISLATIVE BRANCH:</strong> Legislative power is vested in the General Assembly, which may be organized as the State Senate and, when community size permits, a House of Representatives established by law[cite: 1]. Until a House is separately constituted, the Senate may exercise the legislative power as a unicameral chamber under this Constitution[cite: 1].</p>
+            <p><strong>Section 5. EXECUTIVE BRANCH:</strong> Executive power is vested in the Governor and, when acting under this Constitution, the Lieutenant Governor and executive departments established by law[cite: 1].</p>
+            <p><strong>Section 6. JUDICIAL BRANCH:</strong> Judicial power is vested in the Supreme Court of Melview and such lower courts as the General Assembly establishes by law[cite: 1]. Courts shall have authority to interpret this Constitution and laws within roleplay jurisdiction[cite: 1].</p>
+            <p><strong>Section 7. SUPREMACY:</strong> This Constitution is supreme within the roleplay government[cite: 1]. A statute, executive order, department rule, municipal ordinance, or official action inconsistent with this Constitution is void to the extent of the conflict, subject to the review and reserved authority provisions of Article III[cite: 1].</p>
 
-            <h3>ARTICLE 3 THROUGH 17</h3>
-            <p>Contains complete codification of developer reserved authority (Art. III)[cite: 1], legislative veto override rules (Art. IV)[cite: 1], executive tenures (Art. V)[cite: 1], cabinet organization (Art. VI)[cite: 1], attorney standards (Art. VII)[cite: 1], policing standards (Art. VIII)[cite: 1], judicial review (Art. IX)[cite: 1], independent electoral operations (Art. X)[cite: 1], municipal home rule (Art. XI)[cite: 1], group roles (Art. XII)[cite: 1], impeachment (Art. XIII)[cite: 1], 14-day emergency limits (Art. XIV)[cite: 1], 72-hour FOIA compliance (Art. XV)[cite: 1], amendments (Art. XVI)[cite: 1], and certification (Art. XVII)[cite: 1].</p>
+            <h3>ARTICLE 3 - COMMUNITY MANAGEMENT AND DEVELOPER AUTHORITY</h3>
+            <p><strong>Section 1. RESERVED COMMUNITY AUTHORITY:</strong> The owner, developer, community executive, or authorized management body of the State of Melview Roblox community shall constitute the Community Management Authority[cite: 1].</p>
+            <p><strong>Section 2. PLATFORM AND DEVELOPMENT POWERS:</strong> Community Management retains exclusive authority over Roblox group ownership, group permissions, game configuration, development, moderation, and anti-exploit measures[cite: 1].</p>
+            <p><strong>Section 3. PROTECTION OF THE COMMUNITY:</strong> Community Management may suspend or modify a governmental office when necessary to protect the community[cite: 1].</p>
+
+            <h3>ARTICLE 4 - THE GENERAL ASSEMBLY</h3>
+            <p><strong>Section 1. COMPOSITION:</strong> The Senate shall contain five to nine Senators[cite: 1].</p>
+            <p><strong>Section 2. VETO OVERRIDES:</strong> The Governor has 5 days to approve or veto bills[cite: 1]. The Senate may override a veto by a two-thirds (2/3) vote[cite: 1].</p>
+
+            <h3>ARTICLE 5 - THE GOVERNOR AND LIEUTENANT GOVERNOR</h3>
+            <p><strong>Section 1. CHIEF EXECUTIVE:</strong> Executive power is vested in the Governor, elected jointly with the Lieutenant Governor for a term of 4 months (maximum 2 consecutive terms)[cite: 1].</p>
+
+            <h3>ARTICLES 6 THROUGH 17</h3>
+            <p>Covers Executive Departments (Art. 6)[cite: 1], DOJ & Bar Admissions (Art. 7)[cite: 1], Public Safety & State Guard (Art. 8)[cite: 1], Judiciary (Art. 9)[cite: 1], Elections (Art. 10)[cite: 1], Municipal Authority (Art. 11)[cite: 1], Civil Service & Oaths (Art. 12)[cite: 1], Impeachment (Art. 13)[cite: 1], Emergency Powers (Art. 14)[cite: 1], FOIA Transparency (Art. 15)[cite: 1], Amendments (Art. 16)[cite: 1], and Legal Effect (Art. 17)[cite: 1].</p>
+
+            <h3>APPENDIX A - OPERATIONAL ROLE ALIGNMENT</h3>
+            <div class="table-container" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+              <table class="gov-table">
+                <thead>
+                  <tr>
+                    <th>Role Function</th>
+                    <th>Constitutional Place</th>
+                    <th>Primary Authority</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Community Owner / Developer</strong></td>
+                    <td>Community Management Authority</td>
+                    <td>Article III Platform & Group Administration[cite: 1]</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Governor</strong></td>
+                    <td>Chief Executive</td>
+                    <td>Article V Leadership, Orders, Emergency[cite: 1]</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Senators</strong></td>
+                    <td>Legislative Branch</td>
+                    <td>Article IV Enactments & Confirmations[cite: 1]</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Chief Justice</strong></td>
+                    <td>Supreme Court</td>
+                    <td>Article IX Constitutional Adjudication[cite: 1]</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>ADOPTION AND CERTIFICATION</h3>
+            <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.8; color: #cbd5e1;">
+              <p>Date of Ratification: 25 August 2026</p>
+              <p>Authority: <strong>jackbillyeye • Government Oversight</strong></p>
+              <p style="margin-top: 0.5rem;"><em>"I certify that the foregoing document is the official constitutional text adopted for the State of Melview roleplay community[cite: 1]."</em></p>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- VERBATIM STATUTORY SLIP LAWS TAB -->
+      <!-- VERBATIM STATUTORY SLIP LAWS TAB (SB 100 - SB 104 COMPLETE) -->
       <section id="tab-statutes" class="tab-section">
         <div class="gov-card">
           <div class="gov-card-header">
@@ -1236,9 +1452,7 @@
           <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
             <div>
               <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Select Charged Offenses (Hold Ctrl/Cmd to select multiple):</label>
-              <select id="calcOffenseSelect" class="select-input" multiple style="width: 100%; height: 260px; margin-top: 0.5rem;" onchange="calculateCharges()">
-                <!-- Populated via JS -->
-              </select>
+              <select id="calcOffenseSelect" class="select-input" multiple style="width: 100%; height: 260px; margin-top: 0.5rem;" onchange="calculateCharges()"></select>
             </div>
 
             <div style="background: #090d16; border: 1px solid var(--border-color); border-radius: 6px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
@@ -1247,10 +1461,8 @@
                 <p style="font-size: 0.85rem; color: var(--text-muted);">Total Charges Selected: <strong id="calcTotalCount" style="color:#fff;">0</strong></p>
                 <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Aggregate Fine: <strong id="calcTotalFine" style="color:#10b981; font-size: 1.2rem;">$0</strong></p>
                 <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Calculated Jail Time: <strong id="calcTotalTime" style="color:#f59e0b; font-size: 1.2rem;">0 Mins</strong></p>
-                
                 <div id="calcCapNotice" style="margin-top: 1rem; padding: 0.5rem; border-radius: 4px; font-size: 0.75rem; display: none;"></div>
               </div>
-
               <div class="action-row">
                 <button class="btn btn-secondary" style="width: 100%; font-size: 0.8rem;" onclick="resetCalculator()">Clear All Charges</button>
               </div>
@@ -1266,32 +1478,25 @@
             <h2 class="gov-card-title">Official Elections Announcement: Gubernatorial & Senate Assembly</h2>
             <span class="badge badge-infraction">COMMISSION STATUS: ACTIVE</span>
           </div>
-          
           <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid var(--accent-blue); padding: 1.25rem; border-radius: 6px; margin-bottom: 1.5rem;">
             <h3 style="color: #93c5fd; font-size: 1.1rem; margin-bottom: 0.5rem;">📢 PROCLAMATION OF GENERAL ELECTIONS</h3>
             <p style="font-size: 0.9rem; color: #e2e8f0; line-height: 1.6;">
-              Pursuant to <strong>Article X of the Constitution of the State of Melview</strong> and <strong>Senate Bill No. 100 (Title 10 Electoral Act)</strong>, the Independent Electoral Commission (IEC) hereby announces the opening of candidate declarations and registration for the upcoming <strong>Gubernatorial General Election</strong> and <strong>At-Large Senate Assembly Elections</strong>[cite: 1, 4].
+              Pursuant to <strong>Article X of the Constitution of the State of Melview</strong> and <strong>Senate Bill No. 100 (Title 10 Electoral Act)</strong>, candidate declarations are open for the <strong>Gubernatorial General Election</strong> and <strong>At-Large Senate Assembly Elections</strong>[cite: 1, 4].
             </p>
           </div>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
             <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: 6px; border-left: 4px solid #f59e0b;">
               <h3 style="color: #fcd34d; margin-bottom: 0.5rem;">🏛️ Office of the Governor & Lt. Governor</h3>
               <ul style="margin-left: 1.25rem; font-size: 0.85rem; color: #e2e8f0; line-height: 1.6;">
-                <li><strong>Ballot Method:</strong> Instant-Runoff Ranked-Choice Voting protocol (§ 302a)[cite: 4].</li>
-                <li><strong>Term of Office:</strong> Four (4) Months (Maximum 2 consecutive terms)[cite: 4].</li>
-                <li><strong>Requirements:</strong> 14+ days verified group membership; clean judicial record; passage of Civics Assessment[cite: 1, 4].</li>
-                <li><strong>Joint Ticket:</strong> Gubernatorial and Lieutenant Governor candidates run as a unified ticket (§ 103)[cite: 4].</li>
+                <li>Ranked-Choice Voting (§ 302a)[cite: 4] • 4-Month Term (Max 2)[cite: 4]</li>
+                <li>14-day anti-alt voter checks[cite: 4] • Joint Ticket Requirement (§ 103)[cite: 4]</li>
               </ul>
             </div>
-
             <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: 6px; border-left: 4px solid #3b82f6;">
               <h3 style="color: #93c5fd; margin-bottom: 0.5rem;">📜 Senate of the State of Melview</h3>
               <ul style="margin-left: 1.25rem; font-size: 0.85rem; color: #e2e8f0; line-height: 1.6;">
-                <li><strong>Assembly Size:</strong> Seven (7) At-Large Senate seats (§ 302b)[cite: 4].</li>
-                <li><strong>Term of Office:</strong> Two (2) Months per legislative session[cite: 4].</li>
-                <li><strong>Requirements:</strong> Good standing in the community; mastery of Senate Procedure (SB 101)[cite: 4, 5].</li>
-                <li><strong>Contest Window:</strong> Mandatory 24-hour election challenge window following poll close (§ 402a)[cite: 4].</li>
+                <li>7 At-Large Senate Seats (§ 302b)[cite: 4] • 2-Month Term[cite: 4]</li>
+                <li>Mandatory 24-hour election challenge window (§ 402a)[cite: 4]</li>
               </ul>
             </div>
           </div>
@@ -1313,17 +1518,17 @@
             <div class="doc-subheading">State Judicial Rules & Law Enforcement Standards Manual (Judicial Decorum, State Bar Admissions, Warrant Protocols & POST SOPs)<br><strong>Promulgated by Office of Judicial Administration & Government Oversight • Drafted by jackbillyeye[cite: 3]</strong></div>
             
             <h3>TITLE I. RULES OF COURT, DECORUM, AND TRIAL PROCEEDINGS</h3>
-            <p><strong>§ 101. Courtroom Decorum and Conduct:</strong> All parties shall maintain professional roleplay decorum, addressing judicial officers as "Your Honor[cite: 3]." Disruptive conduct, spamming, or contemptuous speech results in summary ejection and contempt citations (§ 8-409)[cite: 3].</p>
-            <p><strong>§ 102. Trial Procedure and Plea Bargaining:</strong> Criminal trials proceed through: (1) Arraignment & Plea; (2) Presentation of Evidence & Witnesses; (3) Closing Arguments; (4) Verdict & Sentencing[cite: 3].</p>
+            <p><strong>§ 101. Courtroom Decorum and Conduct:</strong> All parties shall address judicial officers as "Your Honor[cite: 3]." Disruptive conduct results in summary ejection and contempt citations (§ 8-409)[cite: 3].</p>
+            <p><strong>§ 102. Trial Procedure:</strong> Criminal trials proceed in 4 phases: (1) Arraignment; (2) Evidence; (3) Arguments; (4) Verdict[cite: 3].</p>
 
-            <h3>TITLE II. STATE BAR EXAMINATION AND ATTORNEY LICENSING</h3>
-            <p><strong>§ 201. Admission to the State Bar:</strong> Candidates must achieve a passing score of at least 80% on the Melview Uniform Bar Examination[cite: 3].</p>
+            <h3>TITLE II. STATE BAR EXAMINATION</h3>
+            <p><strong>§ 201. Admission:</strong> Candidates must score at least 80% on the Uniform Bar Examination[cite: 3].</p>
 
-            <h3>TITLE III. SEARCH & ARREST WARRANT STANDARDS</h3>
-            <p><strong>§ 301. Probable Cause Affidavits:</strong> Peace officers must submit a written sworn affidavit establishing probable cause before a search or arrest warrant may issue[cite: 3]. General warrants are strictly prohibited[cite: 3].</p>
+            <h3>TITLE III. WARRANTS & PARTICULARITY</h3>
+            <p><strong>§ 301. Affidavits:</strong> Probable cause affidavits required for all warrants. General warrants are strictly void[cite: 3].</p>
 
-            <h3>TITLE IV. LAW ENFORCEMENT FIELD SOP STANDARDS</h3>
-            <p><strong>§ 401. Pursuit and Detention Protocols:</strong> Precision Immobilization Techniques (PIT) are authorized only under 35 MPH unless deadly force is justified[cite: 3].</p>
+            <h3>TITLE IV. PURSUIT PROTOCOLS</h3>
+            <p><strong>§ 401. Speed Limits:</strong> PIT maneuvers strictly prohibited over 35 MPH[cite: 3].</p>
           </div>
         </div>
       </section>
@@ -1335,37 +1540,29 @@
             <h2 class="gov-card-title">🎓 Melview Uniform Bar & Civics Examination Self-Test</h2>
             <span class="badge badge-code">80% PASSING THRESHOLD</span>
           </div>
-          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-            Test your knowledge of the Constitution, Judicial Rules (MCR-2026-01), and the State Penal Code (Title 8)[cite: 1, 3, 7]. A score of 80% or higher is mandatory for attorney practice before state courts[cite: 3].
-          </p>
-
           <form id="barExamForm" onsubmit="gradeBarExam(event)">
             <div style="display: flex; flex-direction: column; gap: 1.25rem;">
               <div style="background: #090d16; padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-blue);">
                 <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">1. What is the absolute maximum custodial detention limit for any single arrest event under Title 8?</p>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q1" value="a" required> 15 minutes</label>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q1" value="b"> 20 minutes</label>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q1" value="c"> 30 minutes</label>
-                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q1" value="d"> 45 minutes</label>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q1" value="a" required> 15 minutes</label>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q1" value="b"> 20 minutes</label>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q1" value="c"> 30 minutes</label>
               </div>
               <div style="background: #090d16; padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-blue);">
-                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">2. Under MCR-2026-01, what is the strict speed restriction for executing a PIT maneuver during pursuit?</p>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q2" value="a" required> Under 25 MPH</label>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q2" value="b"> Under 35 MPH</label>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q2" value="c"> Under 50 MPH</label>
-                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q2" value="d"> No speed limit if Code 3 is active</label>
+                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">2. Under MCR-2026-01, what is the speed restriction for a PIT maneuver during pursuit?</p>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q2" value="a" required> Under 25 MPH</label>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q2" value="b"> Under 35 MPH</label>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q2" value="c"> Under 50 MPH</label>
               </div>
               <div style="background: #090d16; padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-blue);">
-                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">3. What is the mandatory agency response window for an Article XV Open Records / FOIA request?</p>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q3" value="a" required> 24 hours</label>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q3" value="b"> 48 hours</label>
-                <label style="display:block; font-size: 0.85rem; margin-bottom: 0.25rem;"><input type="radio" name="q3" value="c"> 72 hours</label>
-                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q3" value="d"> 7 calendar days</label>
+                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">3. What is the mandatory agency response window for an Article XV FOIA request?</p>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q3" value="a" required> 24 hours</label>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q3" value="b"> 48 hours</label>
+                <label style="display:block; font-size: 0.85rem;"><input type="radio" name="q3" value="c"> 72 hours</label>
               </div>
             </div>
             <button type="submit" class="btn" style="margin-top: 1.5rem;">Submit Exam for Automated Grading</button>
           </form>
-
           <div id="barExamResult" style="display: none; margin-top: 1.5rem; padding: 1.25rem; border-radius: 6px;"></div>
         </div>
       </section>
@@ -1393,7 +1590,7 @@
               </div>
               <div class="form-group">
                 <label>Act Name</label>
-                <input type="text" id="billActName" class="input-text" placeholder="e.g., Court Security Enhancement Act of 2026" required />
+                <input type="text" id="billActName" class="input-text" placeholder="e.g., Emergency Services Modernization Act" required />
               </div>
             </div>
             <div class="form-group" style="margin-bottom: 1rem;">
@@ -1423,11 +1620,10 @@
             <h2 class="gov-card-title">Public Notices & Commercial Advertisements</h2>
             <span class="badge badge-infraction">COMING SOON</span>
           </div>
-          
-          <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%); border: 2px dashed #475569; border-radius: 8px; padding: 2.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;">
+          <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%); border: 2px dashed #475569; border-radius: 8px; padding: 2.5rem; text-align: center;">
             <div style="font-size: 2.5rem;">📢</div>
-            <h3 style="font-size: 1.25rem; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.05em;">Public Advertisements Will Publish Soon</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 600px;">
+            <h3 style="font-size: 1.25rem; color: #93c5fd; text-transform: uppercase;">Public Advertisements Will Publish Soon</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 600px; margin: 0.5rem auto 0 auto;">
               The official advertising bulletin, registered community business directory, and state-certified sponsor slots are currently being prepared for publication under the supervision of Government Oversight.
             </p>
           </div>
@@ -1473,25 +1669,44 @@
 
   <!-- JAVASCRIPT: MASTER DATABASE, LIVE SYNC & TERMINAL LOGIC -->
   <script>
-    // ==========================================
-    // ACTIVE GOOGLE SHEET LIVE SYNC WEBHOOK
-    // Connected to your Apps Script Web App URL
-    // ==========================================
-    const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbynIMouFbor3yW33M12O3bH8xPtm5zElOZgGiPBFKyaEDmvqhV8REdGxhUj9QN-fk0B/exec"; 
+    // ACTIVE GOOGLE APPS SCRIPT WEB APP INTEGRATION
+    const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbynIMouFbor3yW33M12O3bH8xPtm5zElOZgGiPBFKyaEDmvqhV8REdGxhUj9QN-fk0B/exec";
 
     function syncToGoogleSheet(payload) {
-      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL === "") {
-        console.log("Local sync only. No Apps Script URL provided.");
-        return;
-      }
+      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL === "") return;
       fetch(GOOGLE_SHEET_WEBAPP_URL, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       }).then(() => {
-        console.log("Successfully dispatched update to Google Sheet.");
+        console.log("Dispatched update to Google Sheet.");
       }).catch(err => console.error("Sheet sync error:", err));
+
+      // Optional Discord Webhook sync if configured in terminal
+      const webhookUrl = document.getElementById('discordWebhookInput') ? document.getElementById('discordWebhookInput').value.trim() : "";
+      if (webhookUrl && webhookUrl.startsWith("https://discord.com/api/webhooks/")) {
+        const discordPayload = {
+          embeds: [{
+            title: `State of Melview Docket Dispatch: ${payload.id || 'Notification'}`,
+            color: payload.status === 'Accepted' || payload.status === 'Issued' ? 65280 : 16711680,
+            fields: [
+              { name: "Action", value: payload.action || "N/A", inline: true },
+              { name: "Subject", value: payload.appellant || "N/A", inline: true },
+              { name: "Status", value: payload.status || "N/A", inline: true },
+              { name: "Officer", value: payload.officer || "System", inline: true },
+              { name: "Details", value: payload.notes || payload.ref || "No details provided." }
+            ],
+            footer: { text: "State of Melview • Government Oversight" },
+            timestamp: new Date().toISOString()
+          }]
+        };
+        fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(discordPayload)
+        }).catch(e => console.log("Discord dispatch error:", e));
+      }
     }
 
     function updateClock() {
@@ -1524,7 +1739,7 @@
       }
     }
 
-    // MASTER LOCAL DOCKET & AUDIT LOGS
+    // MASTER LOCAL DOCKET, REGISTRY & AUDIT LOGS
     let MASTER_DOCKET = JSON.parse(localStorage.getItem('melview_docket')) || [
       {
         id: "AP-2026-1042",
@@ -1561,6 +1776,13 @@
       }
     ];
 
+    let PUBLIC_REGISTRY = JSON.parse(localStorage.getItem('melview_registry')) || [
+      { id: "BAR-2026-001", name: "Jonathan Vance", cat: "State Bar License", score: "94% (Passed)", exp: "2027-01-01", status: "Active & Certified" },
+      { id: "BAR-2026-002", name: "Elena Rostova", cat: "State Bar License", score: "88% (Passed)", exp: "2027-01-01", status: "Active & Certified" },
+      { id: "CCW-2026-401", name: "David Sterling", cat: "Concealed Carry (CCW)", score: "POST Verified", exp: "2026-12-31", status: "Valid Permit" },
+      { id: "CCW-2026-402", name: "Marcus Webb", cat: "Concealed Carry (CCW)", score: "POST Verified", exp: "2026-12-31", status: "Valid Permit" }
+    ];
+
     let JUDICIAL_LOGS = JSON.parse(localStorage.getItem('melview_judge_logs')) || [
       "2026-08-25 14:25 UTC | JUDGE (judge1) | ACCEPTED Appeal AP-2026-1042 (John_Miller_RP)",
       "2026-08-25 18:50 UTC | JUDGE (judge1) | DENIED Appeal AP-2026-1088 (Alexander_Kane)",
@@ -1574,9 +1796,11 @@
 
     function saveState() {
       localStorage.setItem('melview_docket', JSON.stringify(MASTER_DOCKET));
+      localStorage.setItem('melview_registry', JSON.stringify(PUBLIC_REGISTRY));
       localStorage.setItem('melview_judge_logs', JSON.stringify(JUDICIAL_LOGS));
       localStorage.setItem('melview_gov_logs', JSON.stringify(GOV_LOGS));
       renderPublicDocket();
+      renderRegistryTable(PUBLIC_REGISTRY);
       renderJudiciaryQueue();
       renderJudgeDocketManageTable();
       renderLogs();
@@ -1588,7 +1812,7 @@
 
       MASTER_DOCKET.forEach(item => {
         let badgeClass = 'badge-pending';
-        if (item.status === 'Accepted' || item.status === 'Issued') badgeClass = 'badge-accepted';
+        if (item.status === 'Accepted' || item.status === 'Issued' || item.status === 'Pardoned' || item.status === 'Scheduled') badgeClass = 'badge-accepted';
         else if (item.status === 'Denied') badgeClass = 'badge-denied';
 
         const row = document.createElement('tr');
@@ -1605,6 +1829,36 @@
 
       document.getElementById('dashDocketCount').textContent = `${MASTER_DOCKET.length} Registered`;
       document.getElementById('docketCountBadge').textContent = `${MASTER_DOCKET.length} Active`;
+    }
+
+    function renderRegistryTable(items) {
+      const tbody = document.getElementById('registryTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      items.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><span class="badge badge-code">${item.id}</span></td>
+          <td><strong>${item.name}</strong></td>
+          <td>${item.cat}</td>
+          <td><span style="color:#00ff66; font-family:var(--font-mono);">${item.score}</span></td>
+          <td style="font-family:var(--font-mono); font-size:0.75rem;">${item.exp}</td>
+          <td><span class="badge badge-accepted">${item.status}</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function filterRegistryTable() {
+      const q = document.getElementById('registrySearch').value.toLowerCase();
+      const type = document.getElementById('registryTypeFilter').value;
+      const filtered = PUBLIC_REGISTRY.filter(item => {
+        const matchesQ = item.name.toLowerCase().includes(q) || item.id.toLowerCase().includes(q);
+        const matchesType = (type === 'ALL' || item.cat.includes(type));
+        return matchesQ && matchesType;
+      });
+      renderRegistryTable(filtered);
     }
 
     function renderLogs() {
@@ -1677,6 +1931,81 @@
       pill.innerHTML = '🔒 Public Mode';
     }
 
+    // POLICE CITATION ISSUANCE
+    function autoFillCitationFine() {
+      const val = document.getElementById('citeViolationSelect').value;
+      // Triggers live calculation
+    }
+
+    function handlePoliceCitationIssue(e) {
+      e.preventDefault();
+      const violator = document.getElementById('citeViolator').value.trim();
+      const officer = document.getElementById('citeOfficer').value.trim();
+      const agency = document.getElementById('citeAgency').value;
+      const violationData = document.getElementById('citeViolationSelect').value.split('|');
+      const violationName = violationData[0];
+      const fine = violationData[1];
+      const points = violationData[2];
+      const narrative = document.getElementById('citeNarrative').value.trim();
+
+      const newId = `CT-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
+
+      const logText = 
+`================================================================================
+STATE OF MELVIEW • UNIFORM LAW ENFORCEMENT CITATION
+CITATION NUMBER: ${newId} • DATE: ${now}
+================================================================================
+DEFENDANT / VIOLATOR: ${violator}
+ISSUING AGENCY: ${agency}
+OFFICER NAME & BADGE: ${officer}
+
+OFFICIAL CHARGE:
+${violationName}
+STATUTORY FINE AMOUNT: $${fine}
+ASSESSED DRIVER POINTS: ${points} Points
+
+OFFICER NARRATIVE / OBSERVATIONS:
+"${narrative}"
+
+COURT APPEARANCE / CONTEST INSTRUCTIONS:
+To contest this citation, file an appeal at the State of Melview Public Portal
+under Article I, Section 9 within seven (7) days of issuance.
+================================================================================
+[STATE OF MELVIEW POLICE STANDARDS • POST COMPLIANT]`;
+
+      document.getElementById('citationOutput').textContent = logText;
+
+      const newDocketItem = {
+        id: newId,
+        type: "Citation",
+        appellant: violator,
+        category: "Traffic Citation",
+        ref: `${violationName} ($${fine})`,
+        time: now,
+        grounds: narrative,
+        status: "Issued",
+        justiceNotes: `Issued by ${officer} (${agency})`
+      };
+
+      MASTER_DOCKET.unshift(newDocketItem);
+      saveState();
+
+      syncToGoogleSheet({
+        timestamp: now,
+        action: "POLICE_CITATION_ISSUED",
+        id: newId,
+        appellant: violator,
+        category: "Traffic Citation",
+        ref: violationName,
+        status: "Issued",
+        officer: officer,
+        notes: `Fine: $${fine} | Points: ${points} | Narrative: ${narrative}`
+      });
+
+      alert(`Citation ${newId} issued against ${violator} and logged to Master Docket & Google Sheet.`);
+    }
+
     // CITIZEN APPEAL SUBMISSION
     function handleCitizenAppealSubmit(e) {
       e.preventDefault();
@@ -1703,7 +2032,6 @@
       MASTER_DOCKET.unshift(newAppeal);
       saveState();
 
-      // Dispatches real-time update to your connected Google Sheet
       syncToGoogleSheet({
         timestamp: now,
         action: "CITIZEN_APPEAL_FILED",
@@ -1780,7 +2108,6 @@
         
         saveState();
 
-        // Dispatches real-time update to your connected Google Sheet
         syncToGoogleSheet({
           timestamp: now,
           action: `APPEAL_${decision.toUpperCase()}`,
@@ -1797,6 +2124,48 @@
       }
     }
 
+    function handleScheduleTrial(e) {
+      e.preventDefault();
+      const def = document.getElementById('trialDefendant').value.trim();
+      const charge = document.getElementById('trialCharge').value.trim();
+      const defender = document.getElementById('trialDefender').value.trim();
+      const phase = document.getElementById('trialPhase').value;
+
+      const newId = `TR-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
+
+      const trialEntry = {
+        id: newId,
+        type: "Trial",
+        appellant: def,
+        category: phase,
+        ref: charge,
+        time: now,
+        grounds: `Assigned Counsel: ${defender}`,
+        status: "Scheduled",
+        justiceNotes: `Trial scheduled before Supreme / District Court.`
+      };
+
+      MASTER_DOCKET.unshift(trialEntry);
+      JUDICIAL_LOGS.unshift(`${now} | JUDGE (judge1) | SCHEDULED Trial ${newId} for ${def} (${phase})`);
+      saveState();
+
+      syncToGoogleSheet({
+        timestamp: now,
+        action: "TRIAL_SCHEDULED",
+        id: newId,
+        appellant: def,
+        category: phase,
+        ref: charge,
+        status: "Scheduled",
+        officer: "judge1",
+        notes: `Defense Counsel: ${defender}`
+      });
+
+      alert(`Trial docket ${newId} scheduled and published.`);
+      document.getElementById('scheduleTrialForm').reset();
+    }
+
     function renderJudgeDocketManageTable() {
       const tbody = document.getElementById('judgeDocketManageTable');
       if (!tbody) return;
@@ -1804,7 +2173,7 @@
 
       MASTER_DOCKET.forEach(item => {
         let badgeClass = 'badge-pending';
-        if (item.status === 'Accepted' || item.status === 'Issued') badgeClass = 'badge-accepted';
+        if (item.status === 'Accepted' || item.status === 'Issued' || item.status === 'Pardoned' || item.status === 'Scheduled') badgeClass = 'badge-accepted';
         else if (item.status === 'Denied') badgeClass = 'badge-denied';
 
         const row = document.createElement('tr');
@@ -1855,10 +2224,8 @@
         const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
 
         JUDICIAL_LOGS.unshift(`${now} | REMOVAL ORDER BY (${user}) | Expunged Docket ${removedItem.id} (${removedItem.appellant}) - Grounds: "${reason}"`);
-        
         saveState();
 
-        // Dispatches removal log to your connected Google Sheet
         syncToGoogleSheet({
           timestamp: now,
           action: "DOCKET_EXPUNGED_REMOVED",
@@ -1903,7 +2270,6 @@
       JUDICIAL_LOGS.unshift(`${now} | JUDGE (${judge}) | ISSUED ${type} ${newId} against ${target}`);
       saveState();
 
-      // Dispatches warrant record to your connected Google Sheet
       syncToGoogleSheet({
         timestamp: now,
         action: "WARRANT_ISSUED",
@@ -1918,6 +2284,73 @@
 
       alert(`Judicial Warrant ${newId} issued, logged, and synced to Google Sheet.`);
       document.getElementById('judgeWarrantForm').reset();
+    }
+
+    function handleSenateRollCall(e) {
+      e.preventDefault();
+      const bill = document.getElementById('svBill').value.trim();
+      const yeas = parseInt(document.getElementById('svYeas').value, 10);
+      const nays = parseInt(document.getElementById('svNays').value, 10);
+      const abstain = parseInt(document.getElementById('svAbstain').value, 10);
+      const passed = yeas >= 4;
+      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
+
+      GOV_LOGS.unshift(`${now} | SENATE ROLL CALL | ${bill} - Result: ${passed ? 'PASSED' : 'FAILED'} (Yeas: ${yeas}, Nays: ${nays}, Abstain: ${abstain})`);
+      saveState();
+
+      syncToGoogleSheet({
+        timestamp: now,
+        action: "SENATE_ROLL_CALL_RECORDED",
+        id: bill,
+        appellant: "Senate Assembly",
+        category: "Roll Call Vote",
+        ref: `Yeas: ${yeas} | Nays: ${nays} | Abstain: ${abstain}`,
+        status: passed ? "PASSED" : "FAILED",
+        officer: "law3",
+        notes: `Recorded under Title 4 Senate Rules[cite: 5]. Result: ${passed ? 'Adopted' : 'Rejected'}`
+      });
+
+      alert(`Senate Roll Call on ${bill} officially registered: ${passed ? 'PASSED' : 'FAILED'} (${yeas}-${nays}).`);
+      document.getElementById('senateVoteForm').reset();
+    }
+
+    function handleExecutivePardon(e) {
+      e.preventDefault();
+      const citizen = document.getElementById('pardonCitizen').value.trim();
+      const pType = document.getElementById('pardonType').value;
+      const newId = `EX-PARDON-${Math.floor(1000 + Math.random() * 9000)}`;
+      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
+
+      const entry = {
+        id: newId,
+        type: "Executive Grant",
+        appellant: citizen,
+        category: pType,
+        ref: "Governor's Executive Authority",
+        time: now,
+        grounds: "Executive Clemency granted under Article V[cite: 1].",
+        status: "Pardoned",
+        justiceNotes: "Granted and certified by Governor."
+      };
+
+      MASTER_DOCKET.unshift(entry);
+      GOV_LOGS.unshift(`${now} | GOVERNOR (law3) | GRANTED ${pType} to ${citizen} (${newId})`);
+      saveState();
+
+      syncToGoogleSheet({
+        timestamp: now,
+        action: "EXECUTIVE_PARDON_GRANTED",
+        id: newId,
+        appellant: citizen,
+        category: pType,
+        ref: "Executive Chamber",
+        status: "Pardoned",
+        officer: "law3",
+        notes: "Official Executive Clemency Grant"
+      });
+
+      alert(`Official ${pType} issued to ${citizen} and posted to Public Docket.`);
+      document.getElementById('execPardonForm').reset();
     }
 
     function exportDocketToExcel() {
@@ -1948,64 +2381,200 @@
       document.body.removeChild(link);
     }
 
-    function handleQuickEO(e) {
-      e.preventDefault();
-      const num = document.getElementById('qEONum').value;
-      const dir = document.getElementById('qEODirective').value;
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-
-      GOV_LOGS.unshift(`${now} | EXECUTIVE (law3) | Promulgated Order ${num}: "${dir.substring(0,40)}..."`);
-      saveState();
-
-      syncToGoogleSheet({
-        timestamp: now,
-        action: "EXECUTIVE_ORDER_PROMULGATED",
-        id: num,
-        appellant: "Statewide Directive",
-        category: "Title 6 Executive Order",
-        ref: "Executive Chamber",
-        status: "Enacted",
-        officer: "law3",
-        notes: dir
-      });
-
-      alert(`Executive Order ${num} promulgated and auto-synced.`);
-      document.getElementById('quickEOForm').reset();
-    }
-
-    function handleQuickBill(e) {
-      e.preventDefault();
-      const num = document.getElementById('qBillNum').value;
-      const sponsor = document.getElementById('qBillSponsor').value;
-      const name = document.getElementById('qBillName').value;
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-
-      GOV_LOGS.unshift(`${now} | SENATE (law3) | Enrolled ${num} (${name}) sponsored by ${sponsor}`);
-      saveState();
-
-      syncToGoogleSheet({
-        timestamp: now,
-        action: "SENATE_BILL_ENROLLED",
-        id: num,
-        appellant: sponsor,
-        category: "Title 4 Statute",
-        ref: name,
-        status: "Enrolled",
-        officer: "law3",
-        notes: `Sponsored by ${sponsor}`
-      });
-
-      alert(`Senate Bill ${num} ("${name}") enrolled into State Statutes.`);
-      document.getElementById('quickBillForm').reset();
-    }
-
-    // STATUTE DATA & READERS
+    // 100% UNABRIDGED STATUTORY SLIP LAWS (SB 100 - SB 104)
     const STATUTES = {
-      sb100: { name: "Senate_Bill_100_State_Electoral_Act", body: `<h2>SENATE BILL NO. 100</h2><div class="doc-subheading">State Electoral Act of 2026 (Title 10)[cite: 4]</div><p>Provides for 3-member IEC[cite: 4], 14-day anti-alt voter checks[cite: 4], ranked-choice voting for Governor & Lt. Governor[cite: 4], 7 at-large Senate seats[cite: 4], 24-hr contest window[cite: 4], and recall referenda (60% threshold)[cite: 4].</p>` },
-      sb101: { name: "Senate_Bill_101_Legislative_Organization_Act", body: `<h2>SENATE BILL NO. 101</h2><div class="doc-subheading">Legislative Organization Act (Title 4 & 15)[cite: 5]</div><p>Lt. Governor tie-breaker role[cite: 5], President pro tempore[cite: 5], quorum rules[cite: 5], 5-day gubernatorial veto review (2/3 override)[cite: 5], and Article XV 72-hr FOIA mandates[cite: 1, 5].</p>` },
-      sb102: { name: "Senate_Bill_102_Judiciary_Organization_Act", body: `<h2>SENATE BILL NO. 102</h2><div class="doc-subheading">Judiciary Organization Act (Title 7 & 9)[cite: 6]</div><p>Supreme Court (Chief & 2 Associates)[cite: 6], District Courts[cite: 6], Article IX judicial review[cite: 1, 6], strict warrant particularity[cite: 1, 6], Public Defender[cite: 1, 6], and State Bar licensing (80% pass threshold)[cite: 1, 3, 6].</p>` },
-      sb103: { name: "Senate_Bill_103_State_Penal_Code_Act", body: `<h2>SENATE BILL NO. 103</h2><div class="doc-subheading">State Penal Code Act (Title 8)[cite: 7]</div><p>4-tier classification[cite: 7], absolute 30-min custodial limit[cite: 7], POST training standards[cite: 1, 7], and use-of-force/Code 3 pursuit standards (<35 MPH PIT)[cite: 3, 7].</p>` },
-      sb104: { name: "Senate_Bill_104_Executive_Organization_Act", body: `<h2>SENATE BILL NO. 104</h2><div class="doc-subheading">Executive Organization Act (Title 6)[cite: 8]</div><p>Cabinet structure[cite: 8], Senate confirmation[cite: 8], and dual-tier policing (State Police vs. Elected County Sheriff)[cite: 8].</p>` }
+      sb100: {
+        name: "Senate_Bill_100_State_Electoral_Act",
+        body: `
+          <h2>SENATE BILL NO. 100</h2>
+          <div class="doc-subheading">State Electoral Act of 2026 (Title 10 – Elections and Franchise Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT[cite: 4]</strong></div>
+          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Office of the Secretary of the State[cite: 4]<br>
+          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article IV, Section 4; Article X, Sections 1-7; Article I, Section 10[cite: 4]<br>
+          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law[cite: 4]</p>
+
+          <p><em>AN ACT to establish an independent Electoral Commission, regulate voter registration and anti-alt protections, codify balloting procedures and preferential voting, and govern campaigns, contests, and recall elections[cite: 4].</em></p>
+
+          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:[cite: 4]</h3>
+          
+          <h3>TITLE I. GENERAL PROVISIONS AND DEFINITIONS</h3>
+          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "State Electoral Act of 2026" or the "Melview Election Code[cite: 4]."</p>
+          <p><strong>§ 102. Authority and Purpose.</strong><br>
+          (a) This Act is drafted under the supervisory authority of Government Oversight and enacted pursuant to Article IV, Section 4 and Article X, Sections 1 through 7 of the Constitution of the State of Melview[cite: 4].<br>
+          (b) The purpose of this Act is to guarantee transparent, fair, orderly, and secure elections for all elected public offices of the State[cite: 4].</p>
+          <p><strong>§ 103. Definitions.</strong> As used in this Act, the following definitions apply[cite: 4]:<br>
+          • <strong>"Commission" or "IEC":</strong> The independent Electoral Commission established under Article X of the Constitution[cite: 4].<br>
+          • <strong>"Joint Ticket":</strong> A unified candidacy pairing one candidate for Governor and one candidate for Lieutenant Governor[cite: 4].<br>
+          • <strong>"Alternate Account (Alt)":</strong> Any secondary account created or used to bypass voting restrictions or cast duplicate ballots[cite: 4].<br>
+          • <strong>"Good Standing":</strong> The status of a member not under group blacklisting, platform ban, or active judicial disqualification[cite: 4].</p>
+
+          <h3>TITLE II. THE INDEPENDENT ELECTORAL COMMISSION</h3>
+          <p><strong>§ 201. Structure and Independence.</strong><br>
+          (a) Pursuant to Article X, Section 1 of the Constitution, state elections are administered exclusively by the independent Electoral Commission consisting of one (1) Chief Electoral Commissioner and two (2) Associate Electoral Commissioners appointed by the Governor and confirmed by the Senate[cite: 4].<br>
+          (b) Commissioners must maintain strict neutrality and shall not participate in partisan campaign management during their tenure[cite: 4].</p>
+
+          <h3>TITLE III. VOTER ELIGIBILITY AND BALLOTING</h3>
+          <p><strong>§ 301. Voter Qualifications and Anti-Alt Verification.</strong><br>
+          (a) Pursuant to Article I, Section 10 and Article X, Section 2, a voter must be a verified group member in good standing with at least fourteen (14) days of continuous membership prior to the opening of polls[cite: 4].<br>
+          (b) Ballots must be authenticated to prevent duplicate voting; any alternate accounts detected shall have all associated ballots struck immediately[cite: 4].</p>
+          <p><strong>§ 302. Voting Methods and Chamber Composition.</strong><br>
+          (a) Pursuant to Article X, Section 4, elections for Governor and Lieutenant Governor shall utilize Instant Runoff (Ranked-Choice) Voting on a joint ticket for a term of four (4) months (maximum 2 consecutive terms)[cite: 4].<br>
+          (b) Senate elections shall select seven (7) Senators elected at-large for two (2) month terms[cite: 4].</p>
+
+          <h3>TITLE IV. CAMPAIGN RULES, CONTESTS, AND RECALL</h3>
+          <p><strong>§ 401. Prohibited Campaign Practices.</strong> Pursuant to Article X, Section 5, candidates shall not misuse administrative permissions, bribe voters, mass-spam communication channels, or intimidate electors[cite: 4].</p>
+          <p><strong>§ 402. Election Contests and Recall Referenda.</strong><br>
+          (a) Written election challenges must be filed within twenty-four (24) hours of preliminary tally publication, with final legal questions appealable to the Supreme Court under Article IX[cite: 4].<br>
+          (b) Pursuant to Article X, Section 7, elected officers are subject to recall by citizen petition following a 21-day grace period, requiring a sixty percent (60%) supermajority to remove an official from office[cite: 4].</p>
+
+          <div style="background: var(--bg-surface); padding: 1rem; border-radius: 6px; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.8rem;">
+            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
+          </div>
+        `
+      },
+      sb101: {
+        name: "Senate_Bill_101_Legislative_Organization_Act",
+        body: `
+          <h2>SENATE BILL NO. 101</h2>
+          <div class="doc-subheading">Legislative Organization, Senate Procedure, and Public Ethics Act of 2026 (Title 4 & Title 15 - Legislative & Ethics Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT[cite: 5]</strong></div>
+          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Transitional Legislative Committee[cite: 5]<br>
+          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article IV, Sections 1-9; Article V, Section 7; Article XV, Sections 1-4[cite: 5]<br>
+          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law[cite: 5]</p>
+
+          <p><em>AN ACT to establish internal operating procedures, officer duties, committee structures, legislative calendars, and voting rules for the Senate of the State of Melview; establishing legislative transparency, records standards, and ethics[cite: 5].</em></p>
+
+          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:[cite: 5]</h3>
+
+          <h3>TITLE I. SENATE STRUCTURE AND OFFICERS</h3>
+          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "Legislative Organization, Senate Procedure, and Public Ethics Act of 2026[cite: 5]."</p>
+          <p><strong>§ 102. Authority and Officers.</strong><br>
+          (a) Enacted pursuant to Article IV, Sections 1 through 9, Article V, Section 7, and Article XV of the Constitution of the State of Melview[cite: 5].<br>
+          (b) Pursuant to Article IV, Section 2 and Article V, Section 7, the Lieutenant Governor shall serve as President of the Senate (voting only to break ties)[cite: 5]. The Senate shall elect a President pro tempore to preside in their absence[cite: 5].</p>
+
+          <h3>TITLE II. LEGISLATIVE PROCESS, QUORUM, AND VETO OVERRIDE</h3>
+          <p><strong>§ 201. Quorum and Standard Drafting.</strong><br>
+          (a) A majority of seated Senators constitutes a quorum to conduct business[cite: 5]. All bills must follow the standardized Senate format[cite: 5].<br>
+          (b) Every bill passed by the Senate is presented to the Governor[cite: 5]. Under Article IV, Section 6, bills not signed or vetoed within five (5) days become law[cite: 5]. The Senate may override a veto with a two-thirds (2/3) vote[cite: 5].</p>
+          <p><strong>§ 202. Transparency and Ethics.</strong> Senators must disclose conflicts of interest, preserve public voting logs, and are prohibited from misusing administrative permissions under Article IV, Section 9 and Article XV[cite: 5].</p>
+
+          <div style="background: var(--bg-surface); padding: 1rem; border-radius: 6px; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.8rem;">
+            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
+          </div>
+        `
+      },
+      sb102: {
+        name: "Senate_Bill_102_Judiciary_Organization_Act",
+        body: `
+          <h2>SENATE BILL NO. 102</h2>
+          <div class="doc-subheading">Judiciary Organization and Legal Services Act of 2026 (Title 7 & Title 9 - Judicial and Legal Services Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT[cite: 6]</strong></div>
+          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Office of Judicial Administration[cite: 6]<br>
+          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article IX, Sections 1-9; Article VII, Sections 1-5; Article I, Sections 4-12[cite: 6]<br>
+          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law[cite: 6]</p>
+
+          <p><em>AN ACT to establish the structure, jurisdiction, and procedural rules of the Supreme Court and lower trial courts of the State of Melview; regulating judicial appointments, judicial review, search warrant issuance, the Department of Justice, the Public Defender, and the State Bar[cite: 6].</em></p>
+
+          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:[cite: 6]</h3>
+
+          <h3>TITLE I. COURT STRUCTURE AND JURISDICTION</h3>
+          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "Judiciary Organization and Legal Services Act of 2026[cite: 6]."</p>
+          <p><strong>§ 102. Supreme Court and Trial Courts.</strong><br>
+          (a) Pursuant to Article IX, Section 1, the Supreme Court of the State of Melview is the highest court, consisting of one (1) Chief Justice and two (2) Associate Justices appointed by the Governor and confirmed by the Senate[cite: 6].<br>
+          (b) The District Court is established as the competent trial forum for criminal trials, civil disputes, and warrant proceedings[cite: 6].</p>
+
+          <h3>TITLE II. JUDICIAL REVIEW, WARRANTS, AND LEGAL SERVICES</h3>
+          <p><strong>§ 201. Judicial Review and Warrants.</strong><br>
+          (a) Under Article IX, Section 6, the Judiciary possesses exclusive authority to invalidate any statute or executive order contrary to the Constitution[cite: 6].<br>
+          (b) Under Article I, Section 6 and Article IX, Section 7, all search and seizure warrants require probable-cause affidavits specifying the exact target and items sought[cite: 6].</p>
+          <p><strong>§ 202. Public Defender and State Bar.</strong><br>
+          (a) Under Article VII, Section 4, the independent Office of the Public Defender provides legal defense to indigent defendants[cite: 6].<br>
+          (b) Under Article VII, Section 5, the State Bar regulates attorney admission, competency testing, and ethics[cite: 6].</p>
+
+          <div style="background: var(--bg-surface); padding: 1rem; border-radius: 6px; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.8rem;">
+            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
+          </div>
+        `
+      },
+      sb103: {
+        name: "Senate_Bill_103_State_Penal_Code_Act",
+        body: `
+          <h2>SENATE BILL NO. 103</h2>
+          <div class="doc-subheading">State Penal Code and Law Enforcement Standards Act of 2026 (Title 8 - Penal Code & Public Safety Standards)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT[cite: 7]</strong></div>
+          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Public Safety Joint Committee[cite: 7]<br>
+          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article I, Sections 1-12; Article VII, Section 6; Article VIII, Sections 1-7[cite: 7]<br>
+          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law[cite: 7]</p>
+
+          <p><em>AN ACT to codify criminal offenses against persons, property, public order, and official trust in the State of Melview; defining arrest standards, classification tiers, custodial sentencing thresholds, and use-of-force protocols; and establishing the Law Enforcement Training and Standards Commission[cite: 7].</em></p>
+
+          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:[cite: 7]</h3>
+
+          <h3>TITLE I. GENERAL PENAL PROVISIONS AND OFFENSE CLASSIFICATION</h3>
+          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "State Penal Code and Law Enforcement Standards Act of 2026[cite: 7]."</p>
+          <p><strong>§ 102. Authority and Purpose.</strong><br>
+          (a) This Act is enacted pursuant to Article I, Sections 1 through 12, Article VII, Section 6, and Article VIII, Sections 1 through 7 of the Constitution of the State of Melview[cite: 7].<br>
+          (b) The purpose of this Act is to codify offenses against persons, property, public order, and official trust; establish standardized custodial sentencing and fines; and define statewide law enforcement use-of-force standards[cite: 7].</p>
+          <p><strong>§ 103. Classification of Offenses and Sentence Thresholds.</strong> All offenses under the laws of the State shall be categorized into the following four classes[cite: 7]:<br>
+          1. <strong>Infractions:</strong> Non-custodial offenses punishable by monetary citations ($100-$250), verbal warnings, or license points[cite: 7].<br>
+          2. <strong>Misdemeanors:</strong> Moderate offenses punishable by standard fines ($250 - $750) and custodial detention of three (3) to ten (10) minutes in local holding[cite: 7].<br>
+          3. <strong>Felonies (Class A and B):</strong> Serious offenses punishable by heavy fines ($1,000 - $3,500), weapon/asset forfeiture, license revocations, and custodial sentences of ten (10) to twenty-five (25) minutes[cite: 7].<br>
+          4. <strong>Capital Felonies:</strong> Severe offenses against human life or state security punishable by maximum fines ($5,000), maximum custodial detention of thirty (30) minutes, civic disqualification, and developer blacklisting referral[cite: 7].</p>
+
+          <h3>TITLE II. SUBSTANTIVE OFFENSE DIVISIONS</h3>
+          <p><strong>§ 201. Crimes Against Persons and Property.</strong><br>
+          (a) <em>Offenses Against Persons:</em> Simple and aggravated assault, battery, kidnapping, vehicular manslaughter, murder, and mass casualty events are strictly prohibited[cite: 7].<br>
+          (b) <em>Offenses Against Property:</em> Criminal trespass, vandalism, petty larceny, grand larceny, burglary, armed robbery, grand theft auto (GTA), and arson are defined and penalized under the Official Penal Schedule[cite: 7].</p>
+          <p><strong>§ 202. Vehicular, Weapons, and Official Government Offenses.</strong><br>
+          (a) <em>Vehicular Offenses:</em> Reckless driving, major speeding, street racing, operating unregistered vehicles, and hit-and-run are subject to mandatory traffic citations, vehicle impoundment, and license revocation[cite: 7].<br>
+          (b) <em>Weapons & Contraband:</em> Unlawful concealed carry, brandishing, unlawful city discharge, weapons trafficking, and narcotics distribution carry mandatory firearm confiscation and felony charges[cite: 7].<br>
+          (c) <em>Official Government Crimes:</em> Impersonation of officials, official misconduct, misuse of administrative permissions, electoral tampering, civil rights deprivation under color of law, and treason constitute major felonies carrying immediate termination and permanent civic bans[cite: 7].</p>
+
+          <h3>TITLE III. LAW ENFORCEMENT STANDARDS AND USE OF FORCE</h3>
+          <p><strong>§ 301. Statewide Use-of-Force and Pursuit Policy.</strong><br>
+          (a) Pursuant to Article VIII, Section 7, all peace officers of the State Police and Sheriff's Office shall employ only that force which is objectively reasonable and proportional to effect lawful detention[cite: 7].<br>
+          (b) Lethal force is restricted strictly to scenarios involving imminent threat of death or serious bodily harm to officers or civilians[cite: 7].</p>
+          <p><strong>§ 302. Law Enforcement Training and Standards Commission.</strong> Pursuant to Article VII, Section 6, the Law Enforcement Training and Standards Commission is established to certify peace officers, audit departmental use-of-force logs, and decertify officers guilty of abusive conduct[cite: 7].</p>
+
+          <h3>TITLE IV. ENACTMENT AND SEVERABILITY</h3>
+          <p><strong>§ 401. Severability.</strong> If any provision of this Act is held invalid by the Supreme Court, all other valid provisions remain in full force and effect[cite: 7].</p>
+          <p><strong>§ 402. Effective Date.</strong> This Act shall take effect immediately upon final passage[cite: 7].</p>
+
+          <div style="background: var(--bg-surface); padding: 1rem; border-radius: 6px; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.8rem;">
+            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
+          </div>
+        `
+      },
+      sb104: {
+        name: "Senate_Bill_104_Executive_Organization_Act",
+        body: `
+          <h2>SENATE BILL NO. 104</h2>
+          <div class="doc-subheading">Executive Organization and Cabinet Governance Act of 2026 (Title 6 - Executive Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT[cite: 8]</strong></div>
+          <p><strong>PRIMARY SPONSOR(S):</strong> Government Oversight / Office of the Governor[cite: 8]<br>
+          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article IV, Section 4; Article V, Section 5; Article VI, Sections 1-6; Article VIII, Sections 1-2[cite: 8]<br>
+          <strong>LEGISLATIVE STATUS:</strong> Enacted Statutory Measure • State of Melview Public Law[cite: 8]</p>
+
+          <p><em>AN ACT relating to the organization, appointment, powers, duties, and ethical administration of the Executive Departments and Governor's Cabinet; defining executive command jurisdiction; and establishing the distinct operational boundaries between statewide law enforcement and county law enforcement[cite: 8].</em></p>
+
+          <h3>BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:[cite: 8]</h3>
+
+          <h3>TITLE I. GENERAL PROVISIONS AND DEFINITIONS</h3>
+          <p><strong>§ 101. Short Title.</strong> This Act shall be known and may be cited as the "Executive Organization and Cabinet Governance Act of 2026[cite: 8]."</p>
+          <p><strong>§ 102. Authority and Purpose.</strong><br>
+          (a) This Act is enacted pursuant to Article IV, Section 4, Article V, Section 5, Article VI, Sections 1 through 6, and Article VIII, Sections 1 and 2 of the Constitution of the State of Melview[cite: 8].<br>
+          (b) The purpose of this Act is to organize the Governor's Cabinet, regulate executive appointments, and delineate statewide law enforcement command from local county law enforcement[cite: 8].</p>
+
+          <h3>TITLE II. COMPOSITION AND POWERS OF THE CABINET</h3>
+          <p><strong>§ 201. Statutory Cabinet Membership.</strong> Pursuant to Article VI, Section 1 of the Constitution, the Cabinet serves as an advisory council to the Governor, consisting of the Governor (Chair), Lieutenant Governor (Vice Chair), Secretary of the State, Attorney General, Commissioner of the State Police, County Sheriff (Ex-Officio), Director of Transportation, and Chief of Fire/EMS[cite: 8].</p>
+          <p><strong>§ 202. Limitations on Cabinet Authority.</strong> Cabinet membership does not create standalone constitutional powers; no collective action of the Cabinet may supersede statutes or the reserved authority of Community Management under Article III[cite: 8].</p>
+
+          <h3>TITLE III. APPOINTMENTS AND COMMAND JURISDICTIONS</h3>
+          <p><strong>§ 301. Gubernatorial Appointments and Senate Confirmation.</strong> Principal department heads (including the Attorney General and State Police Commissioner) require nomination by the Governor and confirmation by a majority vote of the Senate pursuant to Article V, Section 5[cite: 8].</p>
+          <p><strong>§ 302. State Police vs. Elected County Sheriff.</strong><br>
+          (a) <em>State Police:</em> Pursuant to Article VIII, Section 1, the State Police operates statewide under an appointed Commissioner, with jurisdiction over state highways, government facilities, and inter-jurisdictional matters[cite: 8].<br>
+          (b) <em>County Sheriff:</em> Pursuant to Article VIII, Section 2 and Article XI, Section 2, the County Sheriff is an independently elected constitutional officer with local command autonomy, removable only through impeachment, judicial conviction, or recall under Article X, Section 7[cite: 8].</p>
+
+          <div style="background: var(--bg-surface); padding: 1rem; border-radius: 6px; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.8rem;">
+            [OFFICIAL ENACTMENT: Office of Legal & Constitutional Oversight • State of Melview • Drafted by jackbillyeye]
+          </div>
+        `
+      }
     };
 
     let activeBillKey = 'sb100';
@@ -2286,6 +2855,7 @@ TITLE III. ENACTMENT
 
     // Initialize State
     renderPublicDocket();
+    renderRegistryTable(PUBLIC_REGISTRY);
     renderLogs();
   </script>
 </body>
