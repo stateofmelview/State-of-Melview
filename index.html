@@ -1082,7 +1082,7 @@
           <h2 class="gov-card-title">Article XV Open Public Records / FOIA Portal</h2>
           <span class="badge badge-navy">72-HOUR STATUTORY CLOCK</span>
         </div>
-        <form id="foiaSubmitForm" onsubmit="handleFOIASubmit(event)">
+        <form id="foiaSubmitForm">
           <div class="form-grid">
             <div class="form-group">
               <label>Requesting Party Full Name</label>
@@ -1211,7 +1211,7 @@
             <label style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Select Charged Offenses (Hold Ctrl/Cmd for multiple):</label>
             <select id="calcOffenseSelect" class="gov-select" multiple style="width: 100%; height: 260px; margin-top: 0.5rem;" onchange="calculateCharges()"></select>
           </div>
-          <div style="background-color: var(--gov-gray-light); border: 1px solid var(--gov-gray-mid); border-radius: 4px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div style="background-color: var(--gov-gray-light); border-left: 1px solid var(--gov-gray-mid); border-radius: 4px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <h3 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--gov-navy); margin-bottom: 0.75rem; border-bottom: 1px solid var(--gov-gray-mid); padding-bottom: 0.5rem;">Calculation Output</h3>
               <p style="font-size: 0.9rem;">Charges Selected: <strong id="calcTotalCount">0</strong></p>
@@ -1319,7 +1319,7 @@
           <h2 class="gov-card-title">Melview Uniform Bar & Civics Examination Self-Test</h2>
           <span class="badge badge-navy">80% PASSING THRESHOLD</span>
         </div>
-        <form id="barExamForm" onsubmit="gradeBarExam(event)">
+        <form id="barExamForm">
           <div style="display: flex; flex-direction: column; gap: 1.25rem;">
             <div style="background-color: #f8fafc; border-left: 4px solid var(--gov-blue-primary); padding: 1rem;">
               <p style="font-weight: 700; margin-bottom: 0.5rem;">1. What is the maximum statutory custodial limit for any arrest event under Title 8?</p>
@@ -1358,7 +1358,7 @@
           </div>
         </div>
 
-        <form id="stateLoginForm" onsubmit="handleStateLogin(event)">
+        <form id="stateLoginForm">
           <div class="form-group" style="margin-bottom: 1rem;">
             <label>Government Username</label>
             <input type="text" id="loginUsername" class="gov-input" placeholder="e.g. judge1, law3, police1, sheriff1, records1..." required />
@@ -1393,7 +1393,7 @@
           <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">
             Pursuant to Article IX, the Supreme Court possesses exclusive authority to issue official statewide Most Wanted Fugitive Warrants.
           </p>
-          <form onsubmit="handlePublishWanted(event, 'Supreme Court Judicial Order', 'MOST_WANTED')" style="margin-bottom: 1.25rem;">
+          <form id="judgeWantedForm" style="margin-bottom: 1.25rem;">
             <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr; margin-bottom: 0.75rem;">
               <div class="form-group">
                 <label style="font-size: 0.75rem;">Roblox Profile Link / User ID / Username</label>
@@ -1458,7 +1458,7 @@
           <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: #704700; margin-bottom: 0.5rem;">State Bar Attorney Admissions & Disbarment Management</h4>
           <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Judges maintain the public attorney roster under Article VII. Add passing candidates or disbar attorneys.</p>
           
-          <form id="admitBarForm" onsubmit="handleAdmitBarCandidate(event)" style="margin-bottom: 1rem;">
+          <form id="admitBarForm" style="margin-bottom: 1rem;">
             <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr auto; align-items: flex-end;">
               <div class="form-group">
                 <label style="font-size: 0.75rem;">Attorney Candidate Full Name</label>
@@ -1499,7 +1499,7 @@
         <!-- Schedule Trial Proceeding -->
         <div class="judiciary-panel-card">
           <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: #2b6cb0; margin-bottom: 0.75rem;">Schedule Court Trial & Assign Public Defender</h4>
-          <form id="scheduleTrialForm" onsubmit="handleScheduleTrial(event)">
+          <form id="scheduleTrialForm">
             <div class="form-grid">
               <div class="form-group">
                 <label style="font-size: 0.75rem;">Defendant Username</label>
@@ -1530,7 +1530,7 @@
         <!-- Issue Judicial Warrant -->
         <div class="judiciary-panel-card">
           <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: #2b6cb0; margin-bottom: 0.75rem;">Issue Signed Supreme Court Judicial Warrant</h4>
-          <form id="judgeWarrantForm" onsubmit="handleJudgeWarrantIssue(event)">
+          <form id="judgeWarrantForm">
             <div class="form-grid">
               <div class="form-group">
                 <label style="font-size: 0.75rem;">Warrant Classification</label>
@@ -1563,7 +1563,7 @@
         <!-- Issue Judicial Subpoena / Witness Summons -->
         <div class="judiciary-panel-card">
           <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: #2b6cb0; margin-bottom: 0.75rem;">Issue Judicial Subpoena & Witness Summons (MCR-2026-01)</h4>
-          <form id="judgeSubpoenaForm" onsubmit="handleJudgeSubpoenaIssue(event)">
+          <form id="judgeSubpoenaForm">
             <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr;">
               <div class="form-group">
                 <label style="font-size: 0.75rem;">Summoned Party / Witness</label>
@@ -1626,7 +1626,7 @@
           <!-- Senate Roll Call Tally Recorder -->
           <div class="executive-panel-card">
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.75rem;">Senate Roll Call Vote Tally (7 Seats)</h4>
-            <form id="senateVoteForm" onsubmit="handleSenateRollCall(event)">
+            <form id="senateVoteForm">
               <div class="form-group" style="margin-bottom: 0.75rem;">
                 <label style="font-size: 0.75rem;">Bill Reference & Title</label>
                 <input type="text" id="svBill" class="gov-input" placeholder="e.g., SB 106 Emergency Services Modernization Act" required />
@@ -1652,7 +1652,7 @@
           <!-- Executive Clemency & Pardon Grant -->
           <div class="executive-panel-card">
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.75rem;">Executive Pardon & Clemency Grant</h4>
-            <form id="execPardonForm" onsubmit="handleExecutivePardon(event)">
+            <form id="execPardonForm">
               <div class="form-group" style="margin-bottom: 0.75rem;">
                 <label style="font-size: 0.75rem;">Recipient Citizen Username</label>
                 <input type="text" id="pardonCitizen" class="gov-input" placeholder="e.g., Citizen_Marcus" required />
@@ -1672,7 +1672,7 @@
           <!-- Promulgate Executive Order -->
           <div class="executive-panel-card">
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.75rem;">Promulgate Executive Order (Title 6)</h4>
-            <form id="quickEOForm" onsubmit="handleQuickEO(event)">
+            <form id="quickEOForm">
               <div class="form-group" style="margin-bottom: 0.5rem;">
                 <label style="font-size: 0.75rem;">Order Number & Title</label>
                 <input type="text" id="qEONum" class="gov-input" placeholder="e.g., EO-2026-005 (Port Security Directive)" required />
@@ -1705,7 +1705,7 @@
           <!-- Senate Standard Bill Generator -->
           <div class="executive-panel-card">
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.75rem;">Standard Senate Bill Generator</h4>
-            <form id="billDraftForm" onsubmit="generateBillDraft(event)">
+            <form id="billDraftForm">
               <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 0.5rem;">
                 <div class="form-group">
                   <label style="font-size: 0.75rem;">Bill Number</label>
@@ -1754,7 +1754,7 @@
             <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">
               Law enforcement departments can post active investigative notices, unsolved crime leads, and public intelligence solicitations with reward incentives.
             </p>
-            <form onsubmit="handlePublishWanted(event, CURRENT_DEPT_NAME, 'VALUE_FOR_INFO')">
+            <form id="deptValueInfoForm">
               <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr; margin-bottom: 0.75rem;">
                 <div class="form-group">
                   <label style="font-size: 0.75rem;">Subject Roblox Profile Link / User ID / Case Target</label>
@@ -1813,7 +1813,7 @@
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Department Personnel Roster & Terminations</h4>
             <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Manage active duty personnel, appointments, and formal dismissal under Article XII and Article XIII.</p>
             
-            <form id="addPersonnelForm" onsubmit="handleAddPersonnel(event)" style="margin-bottom: 1rem;">
+            <form id="addPersonnelForm" style="margin-bottom: 1rem;">
               <div class="form-grid" style="grid-template-columns: 2fr 1fr auto; align-items: flex-end;">
                 <div class="form-group">
                   <label style="font-size: 0.75rem;">Officer / Employee Username</label>
@@ -1846,7 +1846,7 @@
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Shift & Patrol Assignment Board</h4>
             <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Assign personnel to operational sectors and patrol units.</p>
             
-            <form id="addShiftForm" onsubmit="handleAddShift(event)" style="margin-bottom: 1rem;">
+            <form id="addShiftForm" style="margin-bottom: 1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr auto; align-items: flex-end;">
                 <div class="form-group">
                   <label style="font-size: 0.75rem;">Assigned Member</label>
@@ -1884,7 +1884,7 @@
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Department SOP & Policy Editor</h4>
             <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Promulgate binding departmental standard operating procedures under Article VI.</p>
             
-            <form id="addSOPForm" onsubmit="handleAddDeptSOP(event)" style="margin-bottom: 1rem;">
+            <form id="addSOPForm" style="margin-bottom: 1rem;">
               <div class="form-group" style="margin-bottom: 0.5rem;">
                 <label style="font-size: 0.75rem;">Policy Code & Title</label>
                 <input type="text" id="sopTitle" class="gov-input" placeholder="e.g., SOP-04 Pursuit Guidelines" required />
@@ -1914,7 +1914,7 @@
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-red); margin-bottom: 0.5rem;">Internal Affairs (IA) & Disciplinary Registry</h4>
             <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Log administrative reprimands, demotions, and POST decertification reporting under Article XIII.</p>
             
-            <form id="addDisciplineForm" onsubmit="handleAddDiscipline(event)" style="margin-bottom: 1rem;">
+            <form id="addDisciplineForm" style="margin-bottom: 1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 0.5rem;">
                 <div class="form-group">
                   <label style="font-size: 0.75rem;">Subject Personnel</label>
@@ -1956,7 +1956,7 @@
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Fleet Assets & Impound Log</h4>
             <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Track fleet vehicle checkout, seized property, and impounded vehicles.</p>
             
-            <form id="addAssetForm" onsubmit="handleAddAsset(event)" style="margin-bottom: 1rem;">
+            <form id="addAssetForm" style="margin-bottom: 1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr auto; align-items: flex-end;">
                 <div class="form-group">
                   <label style="font-size: 0.75rem;">Asset / Plate ID</label>
@@ -1998,7 +1998,7 @@
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Recruitment & Candidate Review Queue</h4>
             <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Process incoming applicant candidates for academy testing and enrollment.</p>
             
-            <form id="addCandidateForm" onsubmit="handleAddCandidate(event)" style="margin-bottom: 1rem;">
+            <form id="addCandidateForm" style="margin-bottom: 1rem;">
               <div class="form-grid" style="grid-template-columns: 2fr 1fr auto; align-items: flex-end;">
                 <div class="form-group">
                   <label style="font-size: 0.75rem;">Applicant Candidate</label>
@@ -2035,7 +2035,7 @@
             <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Inter-Agency Mutual Aid Requests</h4>
             <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Broadcast and fulfill intergovernmental assistance pacts under Article XI.</p>
             
-            <form id="addMutualAidForm" onsubmit="handleAddMutualAid(event)" style="margin-bottom: 1rem;">
+            <form id="addMutualAidForm" style="margin-bottom: 1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr; margin-bottom: 0.5rem;">
                 <div class="form-group">
                   <label style="font-size: 0.75rem;">Target Agency</label>
@@ -2131,6 +2131,9 @@
   </footer>
 
   <script>
+    // =========================================================================
+    // GLOBAL STATE & DATASETS
+    // =========================================================================
     const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbynIMouFbor3yW33M12O3bH8xPtm5zElOZgGiPBFKyaEDmvqhV8REdGxhUj9QN-fk0B/exec";
 
     function syncToGoogleSheet(payload) {
@@ -2333,8 +2336,7 @@
       renderLogs();
     };
 
-    // Auto-resolve avatar from User ID, username, or profile link
-    window.autoFetchRobloxAvatar = async function(inputEl) {
+    window.autoFetchRobloxAvatar = function(inputEl) {
       if (!inputEl) return;
       const form = inputEl.closest('form');
       const val = inputEl.value.trim();
@@ -2358,15 +2360,6 @@
         if (avatarInput) {
           avatarInput.value = `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=420&height=420&format=png`;
         }
-        try {
-          const tResp = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=420x420&format=Png&isCircular=false`);
-          if (tResp.ok) {
-            const tData = await tResp.json();
-            if (tData.data && tData.data[0] && tData.data[0].imageUrl) {
-              avatarInput.value = tData.data[0].imageUrl;
-            }
-          }
-        } catch(e) {}
       } else if (username) {
         if (nameInput && !nameInput.value) nameInput.value = username;
         if (avatarInput) {
@@ -2790,44 +2783,6 @@
       });
     };
 
-    window.handleFOIASubmit = function(e) {
-      if (e) e.preventDefault();
-      const name = document.getElementById('foiaName').value.trim();
-      const dept = document.getElementById('foiaDept').value;
-      const details = document.getElementById('foiaDetails').value.trim();
-
-      const now = new Date();
-      const deadline = new Date(now.getTime() + (72 * 60 * 60 * 1000));
-      const newId = `FOIA-2026-${Math.floor(10 + Math.random() * 90)}`;
-
-      const newFOIA = {
-        id: newId,
-        req: name,
-        dept: dept,
-        date: now.toISOString().replace('T', ' ').substring(0, 16) + ' UTC',
-        deadline: deadline.toISOString().replace('T', ' ').substring(0, 16) + ' UTC',
-        status: "Active (72h Clock Initiated)"
-      };
-
-      FOIA_REQUESTS.unshift(newFOIA);
-      saveState();
-
-      syncToGoogleSheet({
-        timestamp: newFOIA.date,
-        action: "FOIA_REQUEST_FILED",
-        id: newId,
-        appellant: name,
-        category: "FOIA Open Records",
-        ref: dept,
-        status: "Active 72-Hour Timer",
-        officer: "Public Portal Filing",
-        notes: details
-      });
-
-      alert(`Official FOIA Request ${newId} submitted under Article XV. 72-Hour statutory agency response clock initiated.`);
-      document.getElementById('foiaSubmitForm').reset();
-    };
-
     window.renderRegistryTable = function(items) {
       const tbody = document.getElementById('registryTableBody');
       if (!tbody) return;
@@ -3044,6 +2999,75 @@
       renderDeptWantedManageTable();
     };
 
+    const PENAL_DATABASE = [
+      { code: "§ 8-101", name: "Verbal Harassment / Disorderly Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Verbal warning; mute or temporary custody" },
+      { code: "§ 8-102", name: "Simple Assault / Non-Severe Battery", div: "1", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Civil restraining order; temporary weapon seizure" },
+      { code: "§ 8-103", name: "Aggravated Assault / Battery with Dangerous Weapon", div: "1", class: "Class B Felony", fine: 1000, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Weapon confiscation; CCW suspension" },
+      { code: "§ 8-104", name: "Assault / Battery on a Peace Officer", div: "1", class: "Class A Felony", fine: 2000, custody: "15 - 20 Mins", custodyNum: 20, sanction: "Firearm license revocation; mandatory felony indictment" },
+      { code: "§ 8-105", name: "Unlawful Imprisonment / Kidnapping", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 22 Mins", custodyNum: 22, sanction: "SWAT intervention; weapon seizure" },
+      { code: "§ 8-106", name: "Hostage Taking / Armed Extortion", div: "1", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Permanent firearm revocation; felony indictment" },
+      { code: "§ 8-107", name: "Vehicular Manslaughter (Reckless Driving)", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Driver license revocation; vehicle impoundment" },
+      { code: "§ 8-108", name: "Attempted Involuntary Manslaughter", div: "1", class: "Class A Felony", fine: 2500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Firearm confiscation; district court trial" },
+      { code: "§ 8-109", name: "First-Degree Premeditated Murder", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent civic disqualification; max custody" },
+      { code: "§ 8-110", name: "Mass Casualty Event / Armed Rampage", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent weapon blacklisting; max custody" },
+
+      { code: "§ 8-201", name: "Criminal Trespass on Private Land", div: "2", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Order to vacate premises immediately" },
+      { code: "§ 8-202", name: "Trespass into Restricted Government Area", div: "2", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Physical escort; search of person/property" },
+      { code: "§ 8-203", name: "Vandalism / Criminal Mischief", div: "2", class: "Misdemeanor", fine: 300, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Restitution order to property owner" },
+      { code: "§ 8-204", name: "Petty Larceny (< $500)", div: "2", class: "Misdemeanor", fine: 350, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Return of stolen assets / restitution" },
+      { code: "§ 8-205", name: "Grand Larceny (≥ $500)", div: "2", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Asset forfeiture; restitution to victim" },
+      { code: "§ 8-206", name: "Burglary / Breaking & Entering", div: "2", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Confiscation of lockpicks / tools" },
+      { code: "§ 8-207", name: "Armed Robbery (Store, Bank, Citizen)", div: "2", class: "Class A Felony", fine: 2500, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Firearm revocation; full asset seizure" },
+      { code: "§ 8-208", name: "Grand Theft Auto (GTA)", div: "2", class: "Class B Felony", fine: 1000, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Vehicle recovery; 4 driver points" },
+      { code: "§ 8-209", name: "Arson / Unlawful Incendiary Ignition", div: "2", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Restitution; felony record" },
+      { code: "§ 8-210", name: "Extortion / Blackmail of Property", div: "2", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Restitution; judicial protection order" },
+
+      { code: "§ 8-301", name: "Minor Speeding (1 - 15 MPH Over)", div: "3", class: "Infraction", fine: 100, custody: "None", custodyNum: 0, sanction: "Traffic citation; 1 license point" },
+      { code: "§ 8-302", name: "Major Speeding (16 - 29 MPH Over)", div: "3", class: "Infraction", fine: 250, custody: "None", custodyNum: 0, sanction: "Traffic citation; 2 license points" },
+      { code: "§ 8-303", name: "Reckless / Careless Driving", div: "3", class: "Misdemeanor", fine: 500, custody: "5 Mins", custodyNum: 5, sanction: "Vehicle impoundment; 4 license points" },
+      { code: "§ 8-304", name: "Failure to Yield to Emergency Vehicle", div: "3", class: "Infraction", fine: 200, custody: "None", custodyNum: 0, sanction: "Traffic citation; driver warning" },
+      { code: "§ 8-305", name: "Failure to Stop at Red Signal / Sign", div: "3", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Traffic citation; 1 license point" },
+      { code: "§ 8-306", name: "Operating Unregistered/Stolen Vehicle", div: "3", class: "Misdemeanor", fine: 400, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Immediate vehicle towing & impound" },
+      { code: "§ 8-307", name: "Illegal Street Racing / Speed Exhibition", div: "3", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "30-day vehicle impound; suspension" },
+      { code: "§ 8-308", name: "Hit and Run (Property Damage)", div: "3", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Driver license suspension; restitution" },
+      { code: "§ 8-309", name: "Hit and Run (Bodily Injury / Death)", div: "3", class: "Class A Felony", fine: 2500, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Permanent driver revocation; felony indictment" },
+      { code: "§ 8-310", name: "Driving on Suspended License", div: "3", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Extended suspension; vehicle impound" },
+
+      { code: "§ 8-401", name: "Disorderly Conduct / Loitering", div: "4", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Order to disperse; citation" },
+      { code: "§ 8-402", name: "Failure to Disperse / Unlawful Assembly", div: "4", class: "Misdemeanor", fine: 350, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Physical detention; crowd dispersal" },
+      { code: "§ 8-403", name: "Failure to Comply with Peace Officer", div: "4", class: "Misdemeanor", fine: 300, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Physical detention; pat-down search" },
+      { code: "§ 8-404", name: "Fleeing / Eluding (Foot Pursuit)", div: "4", class: "Misdemeanor", fine: 600, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Search of person; tool confiscation" },
+      { code: "§ 8-405", name: "Fleeing / Eluding (Vehicular Pursuit)", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Mandatory vehicle impound; suspension" },
+      { code: "§ 8-406", name: "Resisting Arrest / Obstructing Police", div: "4", class: "Misdemeanor", fine: 500, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Physical restraint; weapon search" },
+      { code: "§ 8-407", name: "Resisting Arrest with Deadly Violence", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Weapon confiscation; felony record" },
+      { code: "§ 8-408", name: "False Reporting of Emergency / Fake 911", div: "4", class: "Misdemeanor", fine: 500, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Emergency service restitution fine" },
+      { code: "§ 8-409", name: "Contempt of Court / Disruption", div: "4", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Summary detention by Court Bailiff" },
+      { code: "§ 8-410", name: "Perjury / False Testimony Under Oath", div: "4", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "State Bar revocation; witness bar" },
+      { code: "§ 8-411", name: "Bribery of a Public Servant", div: "4", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Asset forfeiture; civic disqualification" },
+      { code: "§ 8-412", name: "Jailbreak / Assisting Escape", div: "4", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Lockdown order; high-security custody" },
+
+      { code: "§ 8-501", name: "Open Carry Without Valid Permit", div: "5", class: "Infraction", fine: 200, custody: "None", custodyNum: 0, sanction: "Temporary seizure until verification" },
+      { code: "§ 8-502", name: "Unlawful Concealed Carry (No CCW)", div: "5", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Firearm confiscation; CCW ban" },
+      { code: "§ 8-503", name: "Brandishing a Deadly Weapon", div: "5", class: "Misdemeanor", fine: 600, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Firearm seizure; CCW revocation" },
+      { code: "§ 8-504", name: "Unlawful Discharge in City Limits", div: "5", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Firearm confiscation; noise fine" },
+      { code: "§ 8-505", name: "Possession of Military-Grade Weapon", div: "5", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Permanent weapon destruction; felony" },
+      { code: "§ 8-506", name: "Possession of Controlled Contraband", div: "5", class: "Misdemeanor", fine: 400, custody: "5 Mins", custodyNum: 5, sanction: "Contraband seizure & destruction" },
+      { code: "§ 8-507", name: "Trafficking of Controlled Contraband", div: "5", class: "Class B Felony", fine: 1800, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Asset seizure; vehicle impoundment" },
+      { code: "§ 8-508", name: "Illegal Weapons Trafficking", div: "5", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Total inventory seizure; firearms ban" },
+      { code: "§ 8-509", name: "Possession of Explosive Devices", div: "5", class: "Class A Felony", fine: 4000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "EOD bomb squad seizure; indictment" },
+
+      { code: "§ 8-601", name: "Impersonation of Public Official / Officer", div: "6", class: "Class A Felony", fine: 2500, custody: "15 - 20 Mins", custodyNum: 20, sanction: "Immediate rank removal; blacklisting" },
+      { code: "§ 8-602", name: "Official Misconduct / Abuse of Power", div: "6", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Removal from office; disciplinary trial" },
+      { code: "§ 8-603", name: "Misuse of Admin Permissions", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent rank removal; Owner referral" },
+      { code: "§ 8-604", name: "Unauthorized Voter Log Access", div: "6", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Removal from post; civic ban" },
+      { code: "§ 8-605", name: "Deprivation of Rights Under Color of Law", div: "6", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Permanent law enforcement termination" },
+      { code: "§ 8-606", name: "Official Extortion / Shakedown", div: "6", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Asset forfeiture; termination & disbarment" },
+      { code: "§ 8-607", name: "Falsification of Official Audit Logs", div: "6", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Permanent civil service ban; indictment" },
+      { code: "§ 8-608", name: "Electoral Fraud / Alt Exploitation", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Voiding of election; permanent ban" },
+      { code: "§ 8-609", name: "Leak of Confidential Records", div: "6", class: "Class B Felony", fine: 2000, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Clearance revocation; termination" },
+      { code: "§ 8-610", name: "High Treason / Armed Insurrection", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Impeachment; total civic ban" }
+    ];
+
     window.renderPenalTable = function(items) {
       const tbody = document.getElementById('penalTableBody');
       if (!tbody) return;
@@ -3139,7 +3163,66 @@
       }
     };
 
-    window.gradeBarExam = function(e) {
+    window.downloadAsWord = function(filename, textContent) {
+      const htmlContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><meta charset='utf-8'><title>${filename}</title>
+        <style>body { font-family: 'Times New Roman', serif; font-size: 11pt; line-height: 1.5; color: #000; } pre { font-family: 'Courier New', monospace; font-size: 10pt; white-space: pre-wrap; }</style>
+        </head>
+        <body>
+          <div style="text-align: center; border-bottom: 2px solid #1e3a8a; padding-bottom: 8px; margin-bottom: 16px;">
+            <h2 style="margin:0;">STATE OF MELVIEW • OFFICIAL LEGAL REPOSITORY</h2>
+            <p style="font-size: 9pt; color: #555; margin: 4px 0 0 0;">Drafted by jackbillyeye • Government Oversight</p>
+          </div>
+          <pre>${textContent}</pre>
+        </body>
+        </html>`;
+      const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = `${filename}.doc`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    };
+
+    // Master Form Event Listeners Binding (Prevents Default Page Reloads)
+    function attachFormListeners() {
+      const formBindings = [
+        { id: 'foiaSubmitForm', handler: (e) => handleFOIASubmit(e) },
+        { id: 'stateLoginForm', handler: (e) => handleStateLogin(e) },
+        { id: 'judgeWantedForm', handler: (e) => handlePublishWanted(e, 'Supreme Court Judicial Order', 'MOST_WANTED') },
+        { id: 'deptValueInfoForm', handler: (e) => handlePublishWanted(e, CURRENT_DEPT_NAME, 'VALUE_FOR_INFO') },
+        { id: 'admitBarForm', handler: (e) => handleAdmitBarCandidate(e) },
+        { id: 'scheduleTrialForm', handler: (e) => handleScheduleTrial(e) },
+        { id: 'judgeWarrantForm', handler: (e) => handleJudgeWarrantIssue(e) },
+        { id: 'judgeSubpoenaForm', handler: (e) => handleJudgeSubpoenaIssue(e) },
+        { id: 'senateVoteForm', handler: (e) => handleSenateRollCall(e) },
+        { id: 'execPardonForm', handler: (e) => handleExecutivePardon(e) },
+        { id: 'quickEOForm', handler: (e) => handleQuickEO(e) },
+        { id: 'billDraftForm', handler: (e) => generateBillDraft(e) },
+        { id: 'addPersonnelForm', handler: (e) => handleAddPersonnel(e) },
+        { id: 'addShiftForm', handler: (e) => handleAddShift(e) },
+        { id: 'addSOPForm', handler: (e) => handleAddDeptSOP(e) },
+        { id: 'addDisciplineForm', handler: (e) => handleAddDiscipline(e) },
+        { id: 'addAssetForm', handler: (e) => handleAddAsset(e) },
+        { id: 'addCandidateForm', handler: (e) => handleAddCandidate(e) },
+        { id: 'addMutualAidForm', handler: (e) => handleAddMutualAid(e) },
+        { id: 'barExamForm', handler: (e) => gradeBarExam(e) }
+      ];
+
+      formBindings.forEach(fb => {
+        const el = document.getElementById(fb.id);
+        if (el) {
+          el.addEventListener('submit', function(e) {
+            e.preventDefault();
+            fb.handler(e);
+          });
+        }
+      });
+    }
+
+    function gradeBarExam(e) {
       if (e) e.preventDefault();
       const form = document.getElementById('barExamForm');
       const answers = { q1: 'c', q2: 'b', q3: 'c' };
@@ -3167,33 +3250,10 @@
         resultBox.style.color = "#b50909";
         resultBox.innerHTML = `<strong>EXAMINATION FAILED: ${scorePercent}% (${correct}/${total})</strong><br>You did not meet the mandatory 80% threshold. Review constitutional and court standards before re-testing.`;
       }
-    };
+    }
 
-    window.downloadAsWord = function(filename, textContent) {
-      const htmlContent = `
-        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-        <head><meta charset='utf-8'><title>${filename}</title>
-        <style>body { font-family: 'Times New Roman', serif; font-size: 11pt; line-height: 1.5; color: #000; } pre { font-family: 'Courier New', monospace; font-size: 10pt; white-space: pre-wrap; }</style>
-        </head>
-        <body>
-          <div style="text-align: center; border-bottom: 2px solid #1e3a8a; padding-bottom: 8px; margin-bottom: 16px;">
-            <h2 style="margin:0;">STATE OF MELVIEW • OFFICIAL LEGAL REPOSITORY</h2>
-            <p style="font-size: 9pt; color: #555; margin: 4px 0 0 0;">Drafted by jackbillyeye • Government Oversight</p>
-          </div>
-          <pre>${textContent}</pre>
-        </body>
-        </html>`;
-      const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = `${filename}.doc`;
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    };
-
-    // Master Initialization Lifecycle
     document.addEventListener("DOMContentLoaded", function() {
+      attachFormListeners();
       renderPublicDocket();
       renderPublicMostWanted();
       renderWarrantsTable();
@@ -3208,7 +3268,7 @@
       renderLogs();
     });
 
-    // Immediate Fallback Initializer
+    // Immediate Initial Execution
     renderPublicDocket();
     renderPublicMostWanted();
     renderWarrantsTable();
