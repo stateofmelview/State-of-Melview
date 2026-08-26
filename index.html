@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Official Legal Repository | State of Melview</title>
+  <title>Official Legal Repository & Portal | State of Melview</title>
   <style>
     :root {
       --bg-main: #0f172a;
@@ -16,7 +16,6 @@
       --accent-blue: #3b82f6;
       --accent-cyan: #0284c7;
       --gold-seal: #d97706;
-      --gold-bg: rgba(217, 119, 6, 0.15);
       --danger-red: #ef4444;
       --success-green: #10b981;
       --warning-amber: #f59e0b;
@@ -25,11 +24,7 @@
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-main);
@@ -41,6 +36,32 @@
       min-height: 100vh;
     }
 
+    /* Top Notice Banner / Ad Teaser */
+    .ad-notice-banner {
+      background: linear-gradient(90deg, #1e3a8a 0%, #0369a1 50%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .ad-tag {
+      background: rgba(0,0,0,0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* Official Government Header */
     header.gov-header {
       background: linear-gradient(180deg, #0b1120 0%, #1e293b 100%);
       border-bottom: 2px solid var(--accent-navy);
@@ -67,6 +88,7 @@
       gap: 0.85rem;
       text-decoration: none;
       color: inherit;
+      cursor: pointer;
     }
 
     .seal-icon {
@@ -107,6 +129,7 @@
       border: 1px solid rgba(2, 132, 199, 0.3);
     }
 
+    /* Layout Containers */
     .app-container {
       max-width: 1400px;
       margin: 0 auto;
@@ -118,22 +141,22 @@
     }
 
     aside.sidebar {
-      width: 260px;
+      width: 270px;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.45rem;
     }
 
     .nav-btn {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 0.85rem 1rem;
+      padding: 0.8rem 1rem;
       border-radius: 6px;
       cursor: pointer;
       text-align: left;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -156,7 +179,7 @@
     .nav-badge {
       font-size: 0.7rem;
       background: rgba(255, 255, 255, 0.15);
-      padding: 0.15rem 0.4rem;
+      padding: 0.15rem 0.45rem;
       border-radius: 4px;
     }
 
@@ -176,11 +199,11 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      animation: fadeIn 0.25s ease-in-out;
+      animation: fadeIn 0.2s ease-in-out;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
+      from { opacity: 0; transform: translateY(3px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -199,6 +222,8 @@
       margin-bottom: 1rem;
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .gov-card-title {
@@ -225,7 +250,7 @@
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
     }
 
@@ -238,23 +263,24 @@
     }
 
     .stat-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 600;
     }
 
     .stat-value {
-      font-size: 1.75rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: #ffffff;
       margin-top: 0.25rem;
     }
 
+    /* Sub Navigation Tabs */
     .subnav-tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.4rem;
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 0.75rem;
     }
@@ -263,16 +289,14 @@
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 0.5rem 0.85rem;
+      padding: 0.45rem 0.8rem;
       border-radius: 4px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .subnav-btn:hover {
-      background: #475569;
-    }
+    .subnav-btn:hover { background: #475569; }
 
     .subnav-btn.active {
       background: var(--accent-navy);
@@ -281,7 +305,8 @@
       font-weight: 600;
     }
 
-    .slip-law-body {
+    /* Longform Readers (Constitution, Statutes, SOPs) */
+    .legal-doc-body {
       background: #090d16;
       border: 1px solid var(--border-color);
       border-radius: 6px;
@@ -290,11 +315,11 @@
       font-size: 0.95rem;
       line-height: 1.8;
       color: #e2e8f0;
-      max-height: 600px;
+      max-height: 650px;
       overflow-y: auto;
     }
 
-    .slip-law-body h2 {
+    .legal-doc-body h2 {
       font-family: var(--font-sans);
       font-size: 1.35rem;
       color: #ffffff;
@@ -304,7 +329,7 @@
       letter-spacing: 0.05em;
     }
 
-    .slip-law-body .doc-subheading {
+    .legal-doc-body .doc-subheading {
       font-family: var(--font-sans);
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -312,7 +337,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .slip-law-body h3 {
+    .legal-doc-body h3 {
       font-family: var(--font-sans);
       font-size: 1.05rem;
       color: #93c5fd;
@@ -321,15 +346,16 @@
       padding-bottom: 0.25rem;
     }
 
-    .slip-law-body ul {
+    .legal-doc-body ul, .legal-doc-body ol {
       margin-left: 1.5rem;
       margin-bottom: 1rem;
     }
 
-    .slip-law-body li {
+    .legal-doc-body li {
       margin-bottom: 0.5rem;
     }
 
+    /* Filter & Table Controls */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
@@ -351,10 +377,7 @@
       border-color: var(--accent-blue);
     }
 
-    .input-text {
-      flex: 1;
-      min-width: 200px;
-    }
+    .input-text { flex: 1; min-width: 220px; }
 
     .table-container {
       overflow-x: auto;
@@ -375,13 +398,13 @@
       font-weight: 600;
       padding: 0.75rem 1rem;
       text-transform: uppercase;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       border-bottom: 1px solid var(--border-color);
       letter-spacing: 0.04em;
     }
 
     table.gov-table td {
-      padding: 0.85rem 1rem;
+      padding: 0.8rem 1rem;
       border-bottom: 1px solid #1e293b;
       vertical-align: middle;
     }
@@ -422,9 +445,7 @@
       transition: opacity 0.2s;
     }
 
-    .btn:hover {
-      opacity: 0.9;
-    }
+    .btn:hover { opacity: 0.9; }
 
     .btn-secondary {
       background: var(--bg-surface);
@@ -433,7 +454,7 @@
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1rem;
       margin-bottom: 1rem;
     }
@@ -445,7 +466,7 @@
     }
 
     .form-group label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -463,11 +484,38 @@
       border-radius: 6px;
       padding: 1.25rem;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       white-space: pre-wrap;
       color: #94a3b8;
       max-height: 350px;
       overflow-y: auto;
+    }
+
+    /* Commercial Ad Placeholder Box */
+    .ad-card-placeholder {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 2px dashed #475569;
+      border-radius: 8px;
+      padding: 2.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .ad-card-placeholder h3 {
+      font-size: 1.25rem;
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ad-card-placeholder p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 600px;
     }
 
     footer.gov-footer {
@@ -481,151 +529,331 @@
     }
 
     @media print {
-      body {
-        background: #ffffff !important;
-        color: #000000 !important;
-      }
-      header.gov-header, aside.sidebar, .filter-bar, .subnav-tabs, button, footer.gov-footer {
+      body { background: #ffffff !important; color: #000000 !important; }
+      .ad-notice-banner, header.gov-header, aside.sidebar, .filter-bar, .subnav-tabs, button, footer.gov-footer {
         display: none !important;
       }
-      .app-container {
-        padding: 0 !important;
-        margin: 0 !important;
-        width: 100% !important;
-      }
-      .gov-card {
-        border: none !important;
-        background: transparent !important;
-        padding: 0 !important;
-      }
-      .slip-law-body {
-        background: transparent !important;
-        color: #000000 !important;
-        border: none !important;
-        max-height: none !important;
-        overflow: visible !important;
-      }
-      .gov-stamp-banner {
-        border: 1px solid #000 !important;
-        color: #000 !important;
-      }
+      .app-container { padding: 0 !important; margin: 0 !important; width: 100% !important; }
+      .gov-card { border: none !important; background: transparent !important; padding: 0 !important; }
+      .legal-doc-body { background: transparent !important; color: #000000 !important; border: none !important; max-height: none !important; }
+      .gov-stamp-banner { border: 1px solid #000 !important; color: #000 !important; }
     }
 
-    @media (max-width: 860px) {
-      .app-container {
-        flex-direction: column;
-      }
-      aside.sidebar {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      }
+    @media (max-width: 900px) {
+      .app-container { flex-direction: column; }
+      aside.sidebar { width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
     }
   </style>
 </head>
 <body>
 
+  <!-- Official Advertising & Announcement Notice Banner -->
+  <div class="ad-notice-banner">
+    <span class="ad-tag">OFFICIAL GAZETTE NOTICE</span>
+    <span>📢 State Announcements & Commercial Sponsorship Advertisements Will Publish Soon</span>
+    <span class="ad-tag">COMMUNITY ADS COMING SOON</span>
+  </div>
+
+  <!-- Government Header -->
   <header class="gov-header">
     <div class="header-content">
-      <a href="#" class="brand" onclick="switchTab('dashboard')">
+      <div class="brand" onclick="switchTab('dashboard')">
         <div class="seal-icon">M</div>
         <div class="brand-text">
           <h1>State of Melview</h1>
-          <p>Official Statutory Repository & Administrative Gateway</p>
+          <p>Official Statutory Repository, Constitution & Electoral Gateway</p>
         </div>
-      </a>
+      </div>
       <div class="header-meta">
-        <div class="live-clock" id="liveClock">2026-08-25 00:00:00 UTC</div>
+        <div class="live-clock" id="liveClock">2026-08-26 00:00:00 UTC</div>
       </div>
     </div>
   </header>
 
+  <!-- Main Portal Layout -->
   <div class="app-container">
+
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <button class="nav-btn active" onclick="switchTab('dashboard')" id="nav-dashboard">
-        <span>🏛️ Dashboard</span>
+        <span>🏛️ Portal Dashboard</span>
       </button>
-      <button class="nav-btn" onclick="switchTab('statutes')" id="nav-statutes">
-        <span>📜 Statutory Slip Laws</span>
-        <span class="nav-badge">SB 100-104</span>
+      <button class="nav-btn" onclick="switchTab('elections')" id="nav-elections">
+        <span>🗳️ Elections Gateway</span>
+        <span class="nav-badge">ANNOUNCED</span>
+      </button>
+      <button class="nav-btn" onclick="switchTab('constitution')" id="nav-constitution">
+        <span>📜 State Constitution</span>
+        <span class="nav-badge">Art. I–XVII</span>
       </button>
       <button class="nav-btn" onclick="switchTab('penal-code')" id="nav-penal-code">
-        <span>⚖️ State Penal Code</span>
-        <span class="nav-badge">Div 1–6</span>
+        <span>⚖️ Full Penal Code</span>
+        <span class="nav-badge">60 Sections</span>
+      </button>
+      <button class="nav-btn" onclick="switchTab('statutes')" id="nav-statutes">
+        <span>📑 Statutory Slip Laws</span>
+        <span class="nav-badge">SB 100-104</span>
       </button>
       <button class="nav-btn" onclick="switchTab('judicial-sop')" id="nav-judicial-sop">
-        <span>📑 Judicial & Police SOPs</span>
-        <span class="nav-badge">MCR-2026</span>
+        <span>⚖️ Judicial SOPs & Court</span>
+        <span class="nav-badge">MCR-2026-01</span>
       </button>
       <button class="nav-btn" onclick="switchTab('admin-foia')" id="nav-admin-foia">
-        <span>📂 Administrative & FOIA</span>
-        <span class="nav-badge">ADM-2026</span>
+        <span>📂 Legislative & FOIA</span>
+        <span class="nav-badge">Drafting</span>
+      </button>
+      <button class="nav-btn" onclick="switchTab('ad-portal')" id="nav-ad-portal">
+        <span>📢 Public Advertisements</span>
+        <span class="nav-badge">Soon</span>
       </button>
     </aside>
 
+    <!-- Main Content Pane -->
     <main class="content-pane">
+
       <div class="gov-stamp-banner">
         Official Repository • State of Melview • Government Oversight • Drafted by jackbillyeye
       </div>
 
-      <!-- DASHBOARD -->
+      <!-- ========================================================================= -->
+      <!-- TAB 1: DASHBOARD                                                          -->
+      <!-- ========================================================================= -->
       <section id="tab-dashboard" class="tab-section active">
         <div class="stats-grid">
           <div class="stat-box">
-            <div class="stat-label">Codified Slip Laws</div>
-            <div class="stat-value">5 Acts</div>
+            <div class="stat-label">Codified Penal Schedule</div>
+            <div class="stat-value">60 Offenses</div>
           </div>
           <div class="stat-box">
-            <div class="stat-label">Penal Code Divisions</div>
-            <div class="stat-value">6 Divisions</div>
+            <div class="stat-label">Upcoming Elections</div>
+            <div class="stat-value">Gov & Senate</div>
           </div>
           <div class="stat-box">
-            <div class="stat-label">Judicial Rules & SOPS</div>
-            <div class="stat-value">MCR-2026-01</div>
+            <div class="stat-label">Constitutional Articles</div>
+            <div class="stat-value">17 Articles</div>
           </div>
           <div class="stat-box">
-            <div class="stat-label">Open Records Compliance</div>
-            <div class="stat-value">72 Hours</div>
+            <div class="stat-label">Custodial Detention Limit</div>
+            <div class="stat-value">30 Min Max</div>
           </div>
         </div>
 
         <div class="gov-card">
           <div class="gov-card-header">
-            <h2 class="gov-card-title">About the Legal Framework</h2>
-            <span class="badge badge-code">JURISDICTION: STATE OF MELVIEW</span>
+            <h2 class="gov-card-title">Official Oversight & Constitutional Repository</h2>
+            <span class="badge badge-code">DRAFTED BY JACKBILLYEYE</span>
           </div>
           <p style="color: var(--text-muted); margin-bottom: 1rem;">
-            Welcome to the centralized legal repository for the <strong>State of Melview</strong>. All statutory enactments, court standards, penal schedules, and administrative directives are codified under the continuous authority of <em>Drafted by jackbillyeye • Government Oversight</em>.
+            Welcome to the centralized portal of the <strong>State of Melview</strong>. All governing instruments, statutory slip laws, penal classifications, trial court rules, and electoral decrees are codified and certified under the authority of <em>Drafted by jackbillyeye • Government Oversight</em>.
           </p>
           <div style="background: var(--bg-surface); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-cyan); font-size: 0.9rem;">
-            <strong>Constitutional Supremacy & Rule of Law:</strong>
+            <strong>Constitutional Supremacy Doctrine:</strong>
             <p style="margin-top: 0.35rem; color: #cbd5e1;">
-              In accordance with Melview constitutional doctrine, all law enforcement agencies (Melview State Police and County Sheriff Offices), judicial officers, and administrative officials are bound by strict adherence to Title 10 (Electoral integrity), Title 8 (Penal limits and 30-min custodial caps), Title 7 (Warrant particularity), and Article XV (Public transparency).
+              Under Article II and Article IX of the Melview Constitution, no administrative rule, municipal ordinance, or law enforcement action may contradict the Declaration of Rights, warrant particularity requirements, or the codified 30-minute maximum custodial limit.
             </p>
           </div>
         </div>
 
         <div class="gov-card">
           <div class="gov-card-header">
-            <h2 class="gov-card-title">Quick Actions & Direct Jump</h2>
+            <h2 class="gov-card-title">Quick Portal Actions</h2>
           </div>
           <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-            <button class="btn" onclick="switchTab('penal-code')">Search Penal Code (§ 8)</button>
-            <button class="btn btn-secondary" onclick="openBill('sb100')">View State Electoral Act</button>
-            <button class="btn btn-secondary" onclick="openBill('sb103')">View Penal Code Slip Law</button>
-            <button class="btn btn-secondary" onclick="switchTab('admin-foia')">Open FOIA & Petitions Portal</button>
+            <button class="btn" onclick="switchTab('elections')">🗳️ View Elections Announcement</button>
+            <button class="btn btn-secondary" onclick="switchTab('constitution')">📜 Read Constitution</button>
+            <button class="btn btn-secondary" onclick="switchTab('penal-code')">⚖️ Search 60 Penal Offenses</button>
+            <button class="btn btn-secondary" onclick="switchTab('judicial-sop')">📑 MCR-2026-01 SOP Manual</button>
           </div>
         </div>
       </section>
 
-      <!-- STATUTORY SLIP LAWS -->
+      <!-- ========================================================================= -->
+      <!-- TAB 2: ELECTIONS GATEWAY & ANNOUNCEMENTS                                  -->
+      <!-- ========================================================================= -->
+      <section id="tab-elections" class="tab-section">
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <h2 class="gov-card-title">Official Elections Announcement: Gubernatorial & Senate Assembly</h2>
+            <span class="badge badge-infraction">COMMISSION STATUS: ACTIVE</span>
+          </div>
+          
+          <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid var(--accent-blue); padding: 1.25rem; border-radius: 6px; margin-bottom: 1.5rem;">
+            <h3 style="color: #93c5fd; font-size: 1.1rem; margin-bottom: 0.5rem;">📢 PROCLAMATION OF GENERAL ELECTIONS</h3>
+            <p style="font-size: 0.9rem; color: #e2e8f0; line-height: 1.6;">
+              Pursuant to <strong>Article X of the Constitution of the State of Melview</strong> and <strong>Senate Bill No. 100 (Title 10 Electoral Act)</strong>, the Independent Electoral Commission (IEC) hereby announces the opening of candidate declarations and registration for the upcoming <strong>Gubernatorial General Election</strong> and <strong>At-Large Senate Assembly Elections</strong>.
+            </p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+            
+            <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: 6px; border-left: 4px solid #f59e0b;">
+              <h3 style="color: #fcd34d; margin-bottom: 0.5rem;">🏛️ Office of the Governor & Lt. Governor</h3>
+              <ul style="margin-left: 1.25rem; font-size: 0.85rem; color: #e2e8f0; line-height: 1.6;">
+                <li><strong>Ballot Method:</strong> Instant-Runoff Ranked-Choice Voting protocol.</li>
+                <li><strong>Term of Office:</strong> Four (4) Months (Maximum 2 consecutive terms).</li>
+                <li><strong>Requirements:</strong> 14+ days verified community residency; clean judicial record; passage of Civics Assessment.</li>
+                <li><strong>Joint Ticket:</strong> Gubernatorial and Lieutenant Governor candidates run as a joint ticket.</li>
+              </ul>
+            </div>
+
+            <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: 6px; border-left: 4px solid #3b82f6;">
+              <h3 style="color: #93c5fd; margin-bottom: 0.5rem;">📜 Senate of the State of Melview</h3>
+              <ul style="margin-left: 1.25rem; font-size: 0.85rem; color: #e2e8f0; line-height: 1.6;">
+                <li><strong>Assembly Size:</strong> Seven (7) At-Large Senate seats.</li>
+                <li><strong>Term of Office:</strong> Two (2) Months per legislative session.</li>
+                <li><strong>Requirements:</strong> Good standing in the community; mastery of Senate Procedure (SB 101).</li>
+                <li><strong>Contest Window:</strong> Mandatory 24-hour election challenge window following poll close.</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="gov-card" style="background: #090d16; border-color: #334155;">
+            <h3 style="color: #fff; font-size: 1rem; margin-bottom: 0.75rem;">🛡️ Electoral Integrity & Anti-Alt Protections (Title 10 / § 8-608)</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+              All ballots are subject to strict anti-alt and authentication verification. Ballot stuffing, proxy voting, or using secondary accounts is codified as a <strong>Capital Felony (§ 8-608)</strong> resulting in immediate permanent disqualification and group referral.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 3: CONSTITUTION OF THE STATE OF MELVIEW                               -->
+      <!-- ========================================================================= -->
+      <section id="tab-constitution" class="tab-section">
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <h2 class="gov-card-title">Constitution of the State of Melview</h2>
+            <button class="btn" onclick="window.print()">🖨️ Print / Export Constitution</button>
+          </div>
+
+          <div class="legal-doc-body" id="constitutionContent">
+            <h2>CONSTITUTION OF THE STATE OF MELVIEW</h2>
+            <div class="doc-subheading">Adopted 25 August 2026 • Supreme Governing Instrument<br><strong>Drafted by jackbillyeye • Government Oversight</strong></div>
+
+            <h3>PREAMBLE</h3>
+            <p>We, the people and members of the State of Melview, in order to establish an orderly, realistic, accountable, and playable State; to preserve liberty while maintaining public order; to divide governmental power so that no single role may exercise all authority; to provide fair elections and dependable institutions; to secure due process and equal treatment; to recognize the practical authority of the community owners, developers, and administrators over the Roblox group and game; and to promote professional roleplay, public service, and responsible leadership, do hereby establish this Constitution as the supreme governing instrument of the State of Melview roleplay government.</p>
+
+            <h3>ARTICLE 1 - DECLARATION OF RIGHTS AND LIBERTIES</h3>
+            <p><strong>Section 1. Inherent Dignity and Equality:</strong> All residents are entitled to equal treatment under the law. No governmental officer may deny a roleplay service, hearing, employment opportunity, or public benefit on arbitrary or discriminatory grounds.</p>
+            <p><strong>Section 2. Freedom of Expression:</strong> Residents may criticize officers, departments, laws, and policies in good faith, subject to rules against harassment, threats, spam, impersonation, or disruption of official operations.</p>
+            <p><strong>Section 3. Peaceful Assembly:</strong> Residents may organize demonstrations, meetings, political campaigns, and civic events, provided they comply with lawful time, place, safety, and game-session rules.</p>
+            <p><strong>Section 4. Due Process:</strong> No resident shall be deprived of a roleplay license, public position, or governmental privilege for alleged misconduct without notice of the allegation and a reasonable opportunity to respond, except for temporary emergency measures necessary for immediate safety.</p>
+            <p><strong>Section 5. Presumption of Innocence:</strong> A person accused of a roleplay offense is presumed innocent until the competent authority makes a finding under applicable law.</p>
+            <p><strong>Section 6. Search and Seizure:</strong> Government agents shall not conduct unreasonable searches of roleplay persons, vehicles, or property. Warrants or recognized exceptions shall be required when the applicable code demands them.</p>
+            <p><strong>Section 7. Counsel and Representation:</strong> A person facing a serious roleplay criminal charge may request representation by an attorney or eligible public defender when the legal system provides such a service.</p>
+            <p><strong>Section 8. Privacy and Communications:</strong> Government personnel shall not misuse private community information, leaked logs, or administrative data for roleplay advantage. Confidential records shall be handled under community-management rules.</p>
+            <p><strong>Section 9. Right to Petition:</strong> Residents may file complaints, requests, petitions, legislative proposals, and appeals to competent officials without retaliation for making the complaint in good faith.</p>
+            <p><strong>Section 10. Right to Vote:</strong> Qualified citizens have the right to participate in elections, referenda, and recalls administered under this Constitution, subject to eligibility rules and platform limitations.</p>
+            <p><strong>Section 11. Protection from Arbitrary Punishment:</strong> No officer shall impose a penalty solely because a resident is unpopular, disagrees with leadership, or declines an improper order. Government action must have a constitutional, statutory, departmental, or valid emergency basis.</p>
+            <p><strong>Section 12. Right to a Fair Hearing:</strong> Courts and administrative bodies shall provide a neutral decision-maker, notice of the issue, an opportunity to present relevant information, and a written or recorded decision where practicable.</p>
+
+            <h3>ARTICLE 2 - SOVEREIGNTY, CITIZENSHIP, AND GOVERNMENT STRUCTURE</h3>
+            <p><strong>Section 1. State Status:</strong> Melview shall be known officially as the State of Melview. Government authority is exercised for the benefit of the roleplay community and its residents.</p>
+            <p><strong>Section 2. Source of Government:</strong> All governmental roleplay authority ultimately derives from the community members participating in the State, subject to the reserved authority of the community owners, developers, and administrators recognized in Article III.</p>
+            <p><strong>Section 3. Three Branches:</strong> The roleplay government shall be divided into legislative, executive, and judicial branches. No officer shall simultaneously exercise incompatible powers of two branches.</p>
+            <p><strong>Section 4. Legislative Branch:</strong> Legislative power is vested in the General Assembly, operating primarily through the State Senate.</p>
+            <p><strong>Section 5. Executive Branch:</strong> Executive power is vested in the Governor, Lieutenant Governor, and executive departments established by law.</p>
+            <p><strong>Section 6. Judicial Branch:</strong> Judicial power is vested in the Supreme Court of Melview and competent lower courts.</p>
+            <p><strong>Section 7. Supremacy:</strong> This Constitution is supreme within the roleplay government. Any conflicting statute or executive order is void.</p>
+
+            <h3>ARTICLE 3 - COMMUNITY MANAGEMENT AND DEVELOPER AUTHORITY</h3>
+            <p><strong>Section 1. Reserved Community Authority:</strong> The owner, developer, and management body constitute the Community Management Authority.</p>
+            <p><strong>Section 2. Platform Powers:</strong> Community Management retains exclusive authority over group permissions, server infrastructure, assets, anti-exploit measures, and Roblox platform compliance.</p>
+            <p><strong>Section 3. Autonomy:</strong> Ordinary roleplay governance is carried out independently by state officials within constitutional limits.</p>
+
+            <h3>ARTICLE 4 - THE GENERAL ASSEMBLY</h3>
+            <p><strong>Section 1. Composition:</strong> The General Assembly operates through a Senate composed of 5 to 9 Senators.</p>
+            <p><strong>Section 2. Veto & Review:</strong> The Governor has 5 days to sign or veto bills. The Senate may override a veto by a two-thirds (2/3) vote.</p>
+
+            <h3>ARTICLE 5 - THE GOVERNOR AND LIEUTENANT GOVERNOR</h3>
+            <p><strong>Section 1. Chief Executive:</strong> The Governor executes laws, commands the State Guard, and issues lawful administrative orders.</p>
+            <p><strong>Section 2. Election & Term:</strong> Elected jointly for a 4-month term, with a maximum of two consecutive terms.</p>
+
+            <h3>ARTICLE 6 - EXECUTIVE DEPARTMENTS AND CABINET</h3>
+            <p>Provides for the Cabinet, Secretary of the State, principal department heads, and administrative rulemaking.</p>
+
+            <h3>ARTICLE 7 - DEPARTMENT OF JUSTICE & PUBLIC LEGAL SERVICE</h3>
+            <p>Establishes the Attorney General, State Bar (80% score threshold), Public Defender's Office, and law enforcement training standards.</p>
+
+            <h3>ARTICLE 8 - PUBLIC SAFETY, EMERGENCY SERVICES, & STATE GUARD</h3>
+            <p>Establishes the Melview State Police, local Sheriff offices, fire-rescue services, and State Guard activation limits.</p>
+
+            <h3>ARTICLE 9 - THE JUDICIARY</h3>
+            <p>Establishes the Supreme Court (Chief Justice and Associate Justices), District Courts, judicial review, and strict warrant particularity.</p>
+
+            <h3>ARTICLE 10 - ELECTIONS & ELECTORAL COMMISSION</h3>
+            <p>Independent 3-member commission, 14-day anti-alt voter checks, ranked-choice voting, and recall referenda (60% threshold).</p>
+
+            <h3>ARTICLES 11 THROUGH 17 - LOCAL GOVERNANCE, ETHICS, EMERGENCY POWERS & AMENDMENTS</h3>
+            <p>Covers municipal authority (Art. 11), civil service & oaths (Art. 12), impeachment by 2/3 vote (Art. 13), 14-day emergency declarations (Art. 14), 72-hr FOIA transparency (Art. 15), amendment referenda (Art. 16), and transitional rules (Art. 17).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 4: COMPLETE 60-SECTION PENAL CODE                                     -->
+      <!-- ========================================================================= -->
+      <section id="tab-penal-code" class="tab-section">
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <h2 class="gov-card-title">Title 8: State Penal Code Master Schedule (All 60 Codified Sections)</h2>
+            <span class="badge badge-code">MAX CUSTODY: 30 MINS</span>
+          </div>
+
+          <!-- Live Search & Filter Bar -->
+          <div class="filter-bar">
+            <input type="text" id="penalSearch" class="input-text" placeholder="Search by § code, crime name, fine, or sanction..." oninput="filterPenalTable()" />
+            <select id="penalClassFilter" class="select-input" onchange="filterPenalTable()">
+              <option value="ALL">All Classifications</option>
+              <option value="Capital Felony">Capital Felony</option>
+              <option value="Class A Felony">Class A Felony</option>
+              <option value="Class B Felony">Class B Felony</option>
+              <option value="Misdemeanor">Misdemeanor</option>
+              <option value="Infraction">Infraction</option>
+            </select>
+            <select id="penalDivisionFilter" class="select-input" onchange="filterPenalTable()">
+              <option value="ALL">All Divisions (1 to 6)</option>
+              <option value="1">Div 1: Offenses Against Persons</option>
+              <option value="2">Div 2: Offenses Against Property</option>
+              <option value="3">Div 3: Vehicular & Traffic Violations</option>
+              <option value="4">Div 4: Public Order & Administration</option>
+              <option value="5">Div 5: Weapons & Contraband</option>
+              <option value="6">Div 6: Official Government Crimes & Corruption</option>
+            </select>
+          </div>
+
+          <!-- Offense Table -->
+          <div class="table-container">
+            <table class="gov-table">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Offense Name & Statutory Description</th>
+                  <th>Classification</th>
+                  <th>Standard Fine</th>
+                  <th>Custody Time</th>
+                  <th>Administrative / Licensure Sanctions</th>
+                </tr>
+              </thead>
+              <tbody id="penalTableBody">
+                <!-- Dynamically populated with all 60 items -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 5: STATUTORY SLIP LAWS (SB 100 - SB 104)                              -->
+      <!-- ========================================================================= -->
       <section id="tab-statutes" class="tab-section">
         <div class="gov-card">
           <div class="gov-card-header">
-            <h2 class="gov-card-title">Enacted Slip Laws of the State of Melview</h2>
-            <button class="btn" onclick="window.print()">🖨️ Print / Export Active Slip Law</button>
+            <h2 class="gov-card-title">Codified Slip Laws of the State of Melview</h2>
+            <button class="btn" onclick="window.print()">🖨️ Print Slip Law</button>
           </div>
-          
+
           <div class="subnav-tabs">
             <button class="subnav-btn active" onclick="loadBill('sb100')" id="subnav-sb100">SB 100 • Electoral Act (T.10)</button>
             <button class="subnav-btn" onclick="loadBill('sb101')" id="subnav-sb101">SB 101 • Senate Procedure (T.4/15)</button>
@@ -634,175 +862,126 @@
             <button class="subnav-btn" onclick="loadBill('sb104')" id="subnav-sb104">SB 104 • Executive Cabinet (T.6)</button>
           </div>
 
-          <div id="slipLawDisplay" class="slip-law-body" style="margin-top: 1rem;"></div>
+          <div id="slipLawDisplay" class="legal-doc-body" style="margin-top: 1rem;"></div>
         </div>
       </section>
 
-      <!-- PENAL CODE -->
-      <section id="tab-penal-code" class="tab-section">
-        <div class="gov-card">
-          <div class="gov-card-header">
-            <h2 class="gov-card-title">Title 8: State Penal Code Master Schedule</h2>
-            <span class="badge badge-code">CUSTODY LIMIT: 30 MIN MAX</span>
-          </div>
-
-          <div class="filter-bar">
-            <input type="text" id="penalSearch" class="input-text" placeholder="Search by section code, offense name, or keyword..." oninput="filterPenalCode()" />
-            <select id="penalClassFilter" class="select-input" onchange="filterPenalCode()">
-              <option value="ALL">All Classifications</option>
-              <option value="Capital Felony">Capital Felony</option>
-              <option value="Class A Felony">Class A Felony</option>
-              <option value="Class B Felony">Class B Felony</option>
-              <option value="Misdemeanor">Misdemeanor</option>
-              <option value="Infraction">Infraction</option>
-            </select>
-            <select id="penalDivisionFilter" class="select-input" onchange="filterPenalCode()">
-              <option value="ALL">All Divisions (1 through 6)</option>
-              <option value="1">Div 1: Crimes Against Persons</option>
-              <option value="2">Div 2: Crimes Against Property</option>
-              <option value="3">Div 3: Traffic & Vehicular</option>
-              <option value="4">Div 4: Public Order & Administration</option>
-              <option value="5">Div 5: Weapons & Contraband</option>
-              <option value="6">Div 6: Official Corruption & Government</option>
-            </select>
-          </div>
-
-          <div class="table-container">
-            <table class="gov-table" id="penalTable">
-              <thead>
-                <tr>
-                  <th>Code</th>
-                  <th>Offense Name & Statutory Definition</th>
-                  <th>Classification</th>
-                  <th>Standard Fine</th>
-                  <th>Custody Time</th>
-                  <th>Secondary / Admin Sanctions</th>
-                </tr>
-              </thead>
-              <tbody id="penalTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- JUDICIAL RULES & POLICE SOPS -->
+      <!-- ========================================================================= -->
+      <!-- TAB 6: JUDICIAL RULES & POLICE SOPS (MCR-2026-01)                         -->
+      <!-- ========================================================================= -->
       <section id="tab-judicial-sop" class="tab-section">
         <div class="gov-card">
           <div class="gov-card-header">
-            <h2 class="gov-card-title">Melview Court Rules & Law Enforcement Standards (MCR-2026-01)</h2>
+            <h2 class="gov-card-title">Document MCR-2026-01: Court Rules & Law Enforcement Standards</h2>
           </div>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
-            <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: 6px;">
-              <h3 style="color: #93c5fd; margin-bottom: 0.5rem;">⚖️ 4-Phase Trial Sequence & Standards</h3>
-              <ol style="margin-left: 1.25rem; font-size: 0.85rem; color: #e2e8f0; line-height: 1.6;">
-                <li><strong>Phase I: Arraignment & Plea:</strong> Formal reading of charges; defendant enters plea.</li>
-                <li><strong>Phase II: Evidentiary Submission:</strong> Probative evidence and witness records registered.</li>
-                <li><strong>Phase III: Oral Arguments:</strong> State and Defense present closing statements.</li>
-                <li><strong>Phase IV: Verdict & Sentencing:</strong> Judge issues binding written verdict and sentence.</li>
-              </ol>
-              <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.75rem;">
-                * State Bar certification requires a verified 80% passing threshold. Courtroom contempt is subject to ejection under § 8-405.
-              </p>
-            </div>
+          <div class="legal-doc-body" style="margin-bottom: 1.5rem; max-height: 400px;">
+            <h2>DOCUMENT NO. MCR-2026-01</h2>
+            <div class="doc-subheading">Promulgated by Office of Judicial Administration & Government Oversight<br><strong>Drafted by jackbillyeye</strong></div>
+            
+            <h3>TITLE I. RULES OF COURT, DECORUM, AND TRIAL PROCEEDINGS</h3>
+            <p><strong>§ 101. Courtroom Decorum:</strong> All parties shall address judicial officers as "Your Honor." Disruptive conduct, spamming, weapon brandishing, or contemptuous speech results in summary ejection and contempt citations (§ 8-409).</p>
+            <p><strong>§ 102. 4-Phase Trial Procedure:</strong> Criminal trials proceed through: (1) Arraignment & Plea; (2) Presentation of Evidence & Witnesses; (3) Closing Arguments; (4) Verdict & Sentencing.</p>
 
-            <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: 6px;">
-              <h3 style="color: #93c5fd; margin-bottom: 0.5rem;">🚔 Police Pursuit & PIT Guidelines</h3>
-              <ul style="margin-left: 1.25rem; font-size: 0.85rem; color: #e2e8f0; line-height: 1.6;">
-                <li><strong>Code 3 Authorization:</strong> Emergency lights and sirens required during active vehicular pursuit.</li>
-                <li><strong>Strict PIT Restriction:</strong> Precision Immobilization Technique (PIT) is strictly prohibited at speeds exceeding <strong>35 MPH</strong>.</li>
-                <li><strong>Custodial Transfer:</strong> Suspect must be formally processed within 15 minutes of scene clearance.</li>
-                <li><strong>Maximum Confinement:</strong> Absolute 30-minute custodial cap per § 8-103.</li>
-              </ul>
-            </div>
+            <h3>TITLE II. STATE BAR EXAMINATION & LICENSING</h3>
+            <p><strong>§ 201. Licensing:</strong> Attorneys must maintain an active Bar license. Candidates must score at least <strong>80%</strong> on the Melview Uniform Bar Examination.</p>
+
+            <h3>TITLE III. SEARCH & ARREST WARRANT STANDARDS</h3>
+            <p><strong>§ 301. Particularity:</strong> Affidavits must state specific factual probable cause. General exploratory warrants are unconstitutional.</p>
+
+            <h3>TITLE IV. POLICE PURSUIT & PIT STANDARDS</h3>
+            <p><strong>§ 401. Pursuit Protocols:</strong> Active Code 3 emergency equipment is mandatory. PIT maneuvers are strictly prohibited at speeds exceeding <strong>35 MPH</strong>.</p>
           </div>
-        </div>
 
-        <div class="gov-card">
-          <div class="gov-card-header">
-            <h2 class="gov-card-title">Supreme Court Judicial Warrant Generator</h2>
-            <span class="badge badge-code">TITLE 7 PARTICULARITY COMPLIANT</span>
-          </div>
-          <form id="warrantForm" onsubmit="generateWarrant(event)">
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Warrant Type</label>
-                <select id="warrantType" class="select-input">
-                  <option value="ARREST WARRANT">Judicial Arrest Warrant</option>
-                  <option value="SEARCH WARRANT">Probable Cause Search Warrant</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Target Subject / Property Address</label>
-                <input type="text" id="warrantTarget" class="input-text" placeholder="e.g., John Doe or 104 Main Street, Melview" required />
-              </div>
-              <div class="form-group">
-                <label>Affiant Officer Name & Badge</label>
-                <input type="text" id="warrantAffiant" class="input-text" placeholder="e.g., Trooper J. Miller #402" required />
-              </div>
-              <div class="form-group">
-                <label>Issuing Judicial Officer</label>
-                <input type="text" id="warrantJudge" class="input-text" placeholder="e.g., Associate Justice A. Vance" required />
-              </div>
+          <!-- Judicial Warrant Generator -->
+          <div class="gov-card" style="background: #090d16;">
+            <div class="gov-card-header">
+              <h3 class="gov-card-title">Supreme Court Judicial Warrant Form Generator</h3>
+              <span class="badge badge-code">TITLE 7 COMPLIANT</span>
             </div>
-            <div class="form-group" style="margin-bottom: 1rem;">
-              <label>Sworn Probable Cause Affidavit</label>
-              <textarea id="warrantAffidavit" class="input-text" placeholder="Articulate specific factual evidence justifying this warrant..." required></textarea>
-            </div>
-            <button type="submit" class="btn">Generate Formatted Warrant</button>
-          </form>
+            <form id="warrantForm" onsubmit="generateWarrant(event)">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Warrant Classification</label>
+                  <select id="warrantType" class="select-input">
+                    <option value="ARREST WARRANT">Judicial Arrest Warrant</option>
+                    <option value="SEARCH WARRANT">Probable Cause Search Warrant</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Target Person / Property / Vehicle</label>
+                  <input type="text" id="warrantTarget" class="input-text" placeholder="e.g., John Doe / 104 Industrial Way" required />
+                </div>
+                <div class="form-group">
+                  <label>Affiant Officer & Badge</label>
+                  <input type="text" id="warrantAffiant" class="input-text" placeholder="e.g., Sergeant M. Cole #204, State Police" required />
+                </div>
+                <div class="form-group">
+                  <label>Presiding Judge / Justice</label>
+                  <input type="text" id="warrantJudge" class="input-text" placeholder="e.g., Chief Justice E. Bradley" required />
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label>Factual Probable Cause Affidavit</label>
+                <textarea id="warrantAffidavit" class="input-text" placeholder="Articulate sworn factual evidence..." required></textarea>
+              </div>
+              <button type="submit" class="btn">Generate Court Warrant Form</button>
+            </form>
 
-          <div style="margin-top: 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">GENERATED WARRANT DRAFT</span>
-              <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyDraft('warrantOutput')">Copy Output</button>
+            <div style="margin-top: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">GENERATED WARRANT DRAFT</span>
+                <button class="btn btn-secondary" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" onclick="copyDraft('warrantOutput')">Copy Warrant</button>
+              </div>
+              <div class="form-output-box" id="warrantOutput">Awaiting warrant parameter entry...</div>
             </div>
-            <div class="form-output-box" id="warrantOutput">Awaiting warrant parameter entry...</div>
           </div>
         </div>
       </section>
 
-      <!-- ADMINISTRATIVE TEMPLATES & FOIA PORTAL -->
+      <!-- ========================================================================= -->
+      <!-- TAB 7: ADMINISTRATIVE & FOIA TOOLS                                        -->
+      <!-- ========================================================================= -->
       <section id="tab-admin-foia" class="tab-section">
         
-        <!-- Executive Order Generator -->
+        <!-- Standard Bill Drafter -->
         <div class="gov-card">
           <div class="gov-card-header">
-            <h2 class="gov-card-title">Executive Order Drafter (EO-2026-###)</h2>
-            <span class="badge badge-code">TITLE 6 COMPLIANT</span>
+            <h2 class="gov-card-title">Senate Standard Bill Format Generator (Senate Bill No. ###)</h2>
+            <span class="badge badge-code">TITLE 4 / ARTICLE IV</span>
           </div>
-          <form id="eoForm" onsubmit="generateEO(event)">
+          <form id="billDraftForm" onsubmit="generateBillDraft(event)">
             <div class="form-grid">
               <div class="form-group">
-                <label>Executive Order Number</label>
-                <input type="text" id="eoNumber" class="input-text" placeholder="e.g., EO-2026-004" required />
+                <label>Bill Number</label>
+                <input type="text" id="billNum" class="input-text" placeholder="e.g., Senate Bill No. 105" required />
               </div>
               <div class="form-group">
-                <label>Governor / Acting Executive</label>
-                <input type="text" id="eoGovName" class="input-text" placeholder="e.g., Governor R. Sterling" required />
+                <label>Primary Sponsor</label>
+                <input type="text" id="billSponsor" class="input-text" placeholder="e.g., Senator J. Doe" required />
               </div>
               <div class="form-group">
-                <label>Directive Subject / Title</label>
-                <input type="text" id="eoTitle" class="input-text" placeholder="e.g., Mobilization of Highway Patrol Safety Protocols" required />
+                <label>Target Code Title</label>
+                <input type="text" id="billTitleRef" class="input-text" placeholder="e.g., Title 8 (Public Safety)" required />
               </div>
               <div class="form-group">
-                <label>Target Agency / Department</label>
-                <input type="text" id="eoAgency" class="input-text" placeholder="e.g., Department of State Police" required />
+                <label>Act Name</label>
+                <input type="text" id="billActName" class="input-text" placeholder="e.g., Court Security Enhancement Act of 2026" required />
               </div>
             </div>
             <div class="form-group" style="margin-bottom: 1rem;">
-              <label>Executive Mandates & Directives</label>
-              <textarea id="eoDirectives" class="input-text" placeholder="By the executive power vested in me as Governor of the State of Melview..." required></textarea>
+              <label>Substantive Provisions</label>
+              <textarea id="billText" class="input-text" placeholder="Section 101. Be it enacted by the General Assembly..." required></textarea>
             </div>
-            <button type="submit" class="btn">Generate Executive Order</button>
+            <button type="submit" class="btn">Generate Formatted Senate Bill</button>
           </form>
 
-          <div style="margin-top: 1.5rem;">
+          <div style="margin-top: 1.25rem;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">EXECUTIVE ORDER OUTPUT</span>
-              <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyDraft('eoOutput')">Copy Order</button>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">SENATE SLIP BILL DOCKET</span>
+              <button class="btn btn-secondary" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" onclick="copyDraft('billOutput')">Copy Bill</button>
             </div>
-            <div class="form-output-box" id="eoOutput">Awaiting Executive Order parameters...</div>
+            <div class="form-output-box" id="billOutput">Awaiting legislative parameters...</div>
           </div>
         </div>
 
@@ -815,146 +994,95 @@
           <form id="foiaForm" onsubmit="generateFOIA(event)">
             <div class="form-grid">
               <div class="form-group">
-                <label>Requesting Citizen / Entity</label>
-                <input type="text" id="foiaCitizen" class="input-text" placeholder="e.g., Jane Smith / Daily Melview Press" required />
+                <label>Requesting Party</label>
+                <input type="text" id="foiaCitizen" class="input-text" placeholder="e.g., Jane Smith / Press Corps" required />
               </div>
               <div class="form-group">
-                <label>Target Government Agency</label>
+                <label>Target Agency</label>
                 <select id="foiaAgency" class="select-input">
                   <option value="State Police Department">State Police Department</option>
                   <option value="County Sheriff Office">County Sheriff Office</option>
                   <option value="Office of the Governor">Office of the Governor</option>
                   <option value="Independent Electoral Commission">Independent Electoral Commission</option>
-                  <option value="Department of Public Justice">Department of Public Justice</option>
                 </select>
               </div>
             </div>
             <div class="form-group" style="margin-bottom: 1rem;">
-              <label>Records Requested & Scope</label>
-              <textarea id="foiaScope" class="input-text" placeholder="Describe the records, dispatch logs, or correspondence sought..." required></textarea>
+              <label>Scope of Request</label>
+              <textarea id="foiaScope" class="input-text" placeholder="Describe public records, logs, or policies requested..." required></textarea>
             </div>
-            <button type="submit" class="btn">Generate FOIA Filing Docket</button>
+            <button type="submit" class="btn">Generate FOIA Request Docket</button>
           </form>
 
-          <div style="margin-top: 1.5rem;">
+          <div style="margin-top: 1.25rem;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">OFFICIAL FOIA DOCKET</span>
-              <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyDraft('foiaOutput')">Copy Docket</button>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">FOIA DOCKET</span>
+              <button class="btn btn-secondary" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" onclick="copyDraft('foiaOutput')">Copy FOIA</button>
             </div>
             <div class="form-output-box" id="foiaOutput">Awaiting FOIA parameter submission...</div>
           </div>
         </div>
 
-        <!-- Citizen Grievance & Legislative Petition -->
-        <div class="gov-card">
-          <div class="gov-card-header">
-            <h2 class="gov-card-title">Citizen Grievance & Legislative Petition</h2>
-            <span class="badge badge-code">ARTICLE I, SECTION 9</span>
-          </div>
-          <form id="petitionForm" onsubmit="generatePetition(event)">
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Lead Petitioner Name</label>
-                <input type="text" id="petitionerName" class="input-text" placeholder="e.g., Citizen Marcus Webb" required />
-              </div>
-              <div class="form-group">
-                <label>Target Body / Committee</label>
-                <select id="petitionTarget" class="select-input">
-                  <option value="The Senate Judiciary Committee">The Senate Judiciary Committee</option>
-                  <option value="The Senate Oversight Committee">The Senate Oversight Committee</option>
-                  <option value="The Office of the Governor">The Office of the Governor</option>
-                  <option value="The Independent Electoral Commission">The Independent Electoral Commission</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group" style="margin-bottom: 1rem;">
-              <label>Statement of Redress & Grievance</label>
-              <textarea id="petitionStatement" class="input-text" placeholder="State the redress sought or policy challenge under constitutional petition rights..." required></textarea>
-            </div>
-            <button type="submit" class="btn">Generate Official Petition</button>
-          </form>
-
-          <div style="margin-top: 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">CITIZEN PETITION DOCKET</span>
-              <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyDraft('petitionOutput')">Copy Petition</button>
-            </div>
-            <div class="form-output-box" id="petitionOutput">Awaiting petition statement...</div>
-          </div>
-        </div>
-
-        <!-- Legislative Bill Generator -->
-        <div class="gov-card">
-          <div class="gov-card-header">
-            <h2 class="gov-card-title">Senate Standard Legislative Bill Drafter</h2>
-            <span class="badge badge-code">TITLE 4 COMPLIANT</span>
-          </div>
-          <form id="billDraftForm" onsubmit="generateBillDraft(event)">
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Bill Number</label>
-                <input type="text" id="billNum" class="input-text" placeholder="e.g., Senate Bill No. 105" required />
-              </div>
-              <div class="form-group">
-                <label>Primary Sponsor (Senator)</label>
-                <input type="text" id="billSponsor" class="input-text" placeholder="e.g., Senator J. Doe" required />
-              </div>
-              <div class="form-group">
-                <label>Target Title / Code</label>
-                <input type="text" id="billTitleRef" class="input-text" placeholder="e.g., Title 8 (Public Safety)" required />
-              </div>
-              <div class="form-group">
-                <label>Enactment Short Title</label>
-                <input type="text" id="billActName" class="input-text" placeholder="e.g., Emergency Services Modernization Act" required />
-              </div>
-            </div>
-            <div class="form-group" style="margin-bottom: 1rem;">
-              <label>Statutory Text / Provisions</label>
-              <textarea id="billText" class="input-text" placeholder="Section 1. Be it enacted by the Senate of the State of Melview..." required></textarea>
-            </div>
-            <button type="submit" class="btn">Generate Senate Bill Slip</button>
-          </form>
-
-          <div style="margin-top: 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">SENATE LEGISLATIVE DRAFT</span>
-              <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyDraft('billOutput')">Copy Senate Draft</button>
-            </div>
-            <div class="form-output-box" id="billOutput">Awaiting legislative parameters...</div>
-          </div>
-        </div>
-
       </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 8: ADVERTISEMENT / SPONSORSHIP PORTAL                                -->
+      <!-- ========================================================================= -->
+      <section id="tab-ad-portal" class="tab-section">
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <h2 class="gov-card-title">Public Notices & Commercial Advertisements</h2>
+            <span class="badge badge-infraction">COMING SOON</span>
+          </div>
+          
+          <div class="ad-card-placeholder">
+            <div style="font-size: 2.5rem;">📢</div>
+            <h3>Public Advertisements Will Publish Soon</h3>
+            <p>
+              The official advertising bulletin, registered community business directory, and state-certified sponsor slots are currently being prepared for publication under the supervision of Government Oversight.
+            </p>
+            <div style="margin-top: 0.5rem;">
+              <span class="badge badge-code">RESERVED AD SLOTS 2026</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
 
+  <!-- Government Footer -->
   <footer class="gov-footer">
     <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
       <div>
         <strong>STATE OF MELVIEW LEGAL PORTAL</strong> • Drafted by jackbillyeye • Government Oversight
       </div>
       <div>
-        All enactments codified under the sovereignty of the State of Melview.
+        All statutory laws & court standards codified under the sovereignty of the State of Melview.
       </div>
     </div>
   </footer>
 
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT LOGIC & COMPLETE 60-SECTION DATASET                            -->
+  <!-- ========================================================================= -->
   <script>
+    // Live Clock
     function updateClock() {
       const now = new Date();
-      const str = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-      document.getElementById('liveClock').textContent = str;
+      document.getElementById('liveClock').textContent = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
     }
     setInterval(updateClock, 1000);
     updateClock();
 
+    // Tab Navigation
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
 
       const targetTab = document.getElementById('tab-' + tabId);
       const targetNav = document.getElementById('nav-' + tabId);
-      
+
       if (targetTab) targetTab.classList.add('active');
       if (targetNav) targetNav.classList.add('active');
 
@@ -963,164 +1091,154 @@
       }
     }
 
-    function openBill(billId) {
-      switchTab('statutes');
-      loadBill(billId);
-    }
-
-    const STATUTE_DATA = {
+    // Slip Laws Content
+    const STATUTES = {
       sb100: {
-        title: "Senate Bill No. 100",
-        body: `
-          <h2>SENATE BILL NO. 100</h2>
-          <div class="doc-subheading">An Act to Establish Electoral Standards, Voter Integrity, and Governance Tenures<br><strong>Title 10 • State of Melview</strong></div>
-          <p><strong>Section 1. Independent Electoral Commission (IEC):</strong> There is hereby created the Independent Electoral Commission of the State of Melview, composed of three (3) neutral commissioners appointed by bipartisan consent, tasked with certifying voter rolls, maintaining election safety, and adjudicating procedural challenges.</p>
-          <h3>Section 2. Anti-Alt & Voter Eligibility Standards</h3>
-          <ul>
-            <li>All voters must possess a verified residential registration in the State of Melview for at least fourteen (14) consecutive days prior to balloting.</li>
-            <li>Alternative accounts and unauthorized proxies are strictly prohibited and subject to immediate disqualification and prosecution under § 8-605.</li>
-          </ul>
-          <h3>Section 3. Gubernatorial & Executive Election Method</h3>
-          <ul>
-            <li>Elections for Governor and Lieutenant Governor shall be conducted via an instant-runoff ranked-choice voting protocol.</li>
-            <li>Executive tenure is established at four (4) months per term, with an absolute limit of two (2) consecutive terms.</li>
-          </ul>
-          <h3>Section 4. Legislative Assembly Structure</h3>
-          <ul>
-            <li>The Senate shall consist of seven (7) at-large members elected for a term of two (2) months.</li>
-            <li>A mandatory twenty-four (24) hour election contest window shall follow the closing of the polls prior to final certification.</li>
-          </ul>
-          <h3>Section 5. Citizen Recall Referenda</h3>
-          <p>Elected officials are subject to recall upon petition of thirty percent (30%) of active registered voters, following a twenty-one (21) day grace period after taking office. Certification of recall requires a sixty percent (60%) supermajority.</p>
-        `
+        body: `<h2>SENATE BILL NO. 100</h2>
+               <div class="doc-subheading">State Electoral Act of 2026 • Title 10<br>Drafted by jackbillyeye • Government Oversight</div>
+               <p><strong>Section 1. Independent Electoral Commission (IEC):</strong> 3-member neutral body tasked with certifying voter rolls, maintaining election safety, and adjudicating procedural challenges.</p>
+               <h3>Section 2. Anti-Alt & Voter Eligibility Standards</h3>
+               <ul>
+                 <li>14-day verified residency in the State of Melview prior to balloting.</li>
+                 <li>Alternative accounts and proxy balloting strictly prohibited under § 8-608.</li>
+               </ul>
+               <h3>Section 3. Election Methods & Tenures</h3>
+               <ul>
+                 <li>Instant-runoff ranked-choice voting protocol for Governor & Lt. Governor.</li>
+                 <li>Executive tenure is 4 months (2 consecutive term limit). Senate at-large tenure is 2 months.</li>
+                 <li>Mandatory 24-hour election challenge window following poll close.</li>
+               </ul>`
       },
       sb101: {
-        title: "Senate Bill No. 101",
-        body: `
-          <h2>SENATE BILL NO. 101</h2>
-          <div class="doc-subheading">An Act Governing Legislative Procedures, Quorum Requirements, and Open Government Mandates<br><strong>Title 4 & Title 15 • State of Melview</strong></div>
-          <p><strong>Section 1. Presiding Officers:</strong> The Lieutenant Governor shall serve as President of the Senate, possessing no vote except in instances of an equal tie. The Senate shall elect from among its members a President pro tempore to preside in the Lieutenant Governor's absence.</p>
-          <h3>Section 2. Legislative Floor Rules & Quorum</h3>
-          <ul>
-            <li>A quorum to conduct binding legislative business shall consist of a majority of sitting Senators (4 of 7).</li>
-            <li>All introduced bills must undergo a mandatory minimum twenty-four (24) hour public floor debate prior to a final roll call vote.</li>
-          </ul>
-          <h3>Section 3. Executive Presentation & Veto Overrides</h3>
-          <ul>
-            <li>Every bill passed by the Senate shall be presented to the Governor, who shall have five (5) days to approve or veto the enactment.</li>
-            <li>A vetoed bill may be overridden and enacted into law by a two-thirds (2/3) affirmative vote of the Senate.</li>
-          </ul>
-          <h3>Section 4. Article XV Open Records & Government Transparency</h3>
-          <p>All state agencies, commissions, and law enforcement bureaus must maintain public transparency. Official agency records, dispatch logs, and regulatory rules must be furnished upon citizen request within seventy-two (72) hours under Article XV FOIA provisions.</p>
-        `
+        body: `<h2>SENATE BILL NO. 101</h2>
+               <div class="doc-subheading">Legislative Organization & Public Ethics Act • Title 4 & Title 15<br>Drafted by jackbillyeye • Government Oversight</div>
+               <p><strong>Section 1. Presiding Officer:</strong> The Lt. Governor presides over the Senate (tie-breaker only). The Senate elects a President pro tempore.</p>
+               <h3>Section 2. Debate & Veto Rules</h3>
+               <ul>
+                 <li>Mandatory 24-hour floor debate prior to final vote on any bill.</li>
+                 <li>Governor has 5 days to sign or veto. 2/3 Senate vote required for veto override.</li>
+                 <li>Article XV FOIA mandates 72-hour compliance for public records requests.</li>
+               </ul>`
       },
       sb102: {
-        title: "Senate Bill No. 102",
-        body: `
-          <h2>SENATE BILL NO. 102</h2>
-          <div class="doc-subheading">An Act Establishing the Judicial Branch, Warrant Particularity, and State Bar Standards<br><strong>Title 7 & Title 9 • State of Melview</strong></div>
-          <p><strong>Section 1. Judicial Structure:</strong> The judicial power of the State of Melview is vested in one Supreme Court (comprising one Chief Justice and two Associate Justices) and such District Courts as established by law.</p>
-          <h3>Section 2. Constitutional Judicial Review (Article IX)</h3>
-          <p>The Supreme Court maintains exclusive original jurisdiction to interpret constitutional disputes and nullify any executive order, police standard, or municipal directive found contrary to the laws of the State of Melview.</p>
-          <h3>Section 3. Strict Warrant Particularity</h3>
-          <ul>
-            <li>No search or arrest warrant shall issue except upon sworn probable-cause affidavit submitted by a sworn law enforcement officer.</li>
-            <li>Warrants must describe with particularity the exact place to be searched, and the specific persons or things to be seized. General exploratory warrants are null, void, and unconstitutional.</li>
-          </ul>
-          <h3>Section 4. Legal Counsel & State Bar Standards</h3>
-          <p>All defendants facing custodial confinement are entitled to representation by the independent Public Defender's Office. No individual may practice law in any state court without passing the State Bar Examination with a verified minimum score of 80%.</p>
-        `
+        body: `<h2>SENATE BILL NO. 102</h2>
+               <div class="doc-subheading">Judiciary Organization & Legal Services Act • Title 7 & Title 9<br>Drafted by jackbillyeye • Government Oversight</div>
+               <p><strong>Section 1. Supreme Court:</strong> One Chief Justice and Associate Justices exercising Article IX judicial review.</p>
+               <h3>Section 2. Warrant Particularity & State Bar</h3>
+               <ul>
+                 <li>Probable cause affidavits required for all warrants. General warrants strictly void.</li>
+                 <li>State Bar admission requires an 80% passing grade on the Uniform Bar Exam.</li>
+                 <li>Independent Public Defender's Office established for criminal defense.</li>
+               </ul>`
       },
       sb103: {
-        title: "Senate Bill No. 103",
-        body: `
-          <h2>SENATE BILL NO. 103</h2>
-          <div class="doc-subheading">An Act Codifying Offense Classifications, Custodial Restraints, and POST Protocols<br><strong>Title 8 • State of Melview</strong></div>
-          <p><strong>Section 1. Four-Tier Classification Schedule:</strong> Criminal violations within the State of Melview are categorized as: Infractions, Misdemeanors, Class B Felonies, Class A Felonies, and Capital Felonies.</p>
-          <h3>Section 2. Statutory Custody Limitations</h3>
-          <ul>
-            <li>No individual in custodial detention for any single arrest event or aggregate charges shall be detained for a period exceeding thirty (30) minutes.</li>
-            <li>Failure to process, arraign, or release a detainee prior to the 30-minute threshold constitutes unlawful imprisonment under § 8-604.</li>
-          </ul>
-          <h3>Section 3. Police Officer Standards & Training (POST)</h3>
-          <ul>
-            <li>All state and county law enforcement officers must complete certified POST training.</li>
-            <li>Vehicular pursuits must utilize Code 3 warning systems. Precision Immobilization Techniques (PIT) are prohibited at speeds exceeding 35 MPH.</li>
-          </ul>
-        `
+        body: `<h2>SENATE BILL NO. 103</h2>
+               <div class="doc-subheading">State Penal Code & POST Standards Act • Title 8<br>Drafted by jackbillyeye • Government Oversight</div>
+               <p><strong>Section 1. Classifications:</strong> Infractions, Misdemeanors, Class B Felonies, Class A Felonies, Capital Felonies.</p>
+               <h3>Section 2. Custodial Restraint</h3>
+               <ul>
+                 <li>Absolute maximum custody limit of 30 minutes for any single booking/arrest.</li>
+                 <li>PIT maneuvers strictly prohibited over 35 MPH. Code 3 mandatory during pursuit.</li>
+               </ul>`
       },
       sb104: {
-        title: "Senate Bill No. 104",
-        body: `
-          <h2>SENATE BILL NO. 104</h2>
-          <div class="doc-subheading">An Act Structuring the Executive Departments, Cabinet Nominations, and Dual-Tier Policing<br><strong>Title 6 • State of Melview</strong></div>
-          <p><strong>Section 1. Cabinet Structure:</strong> The executive branch consists of the Governor, Lieutenant Governor, Attorney General, Director of State Police, and Secretary of Transportation.</p>
-          <h3>Section 2. Senate Advice & Consent</h3>
-          <p>All appointments of department heads and judicial officers made by the Governor require formal confirmation by a majority vote of the Senate.</p>
-          <h3>Section 3. Dual-Tier Law Enforcement Jurisdiction</h3>
-          <ul>
-            <li><strong>State Police:</strong> A statewide executive agency maintaining primary jurisdiction over state routes, government properties, and high-level investigations.</li>
-            <li><strong>County Sheriff:</strong> An autonomous county-level law enforcement agency led by an elected or appointed Sheriff, maintaining localized patrol and municipal order.</li>
-          </ul>
-        `
+        body: `<h2>SENATE BILL NO. 104</h2>
+               <div class="doc-subheading">Executive Organization & Cabinet Governance Act • Title 6<br>Drafted by jackbillyeye • Government Oversight</div>
+               <p><strong>Section 1. Cabinet:</strong> Governor, Lt. Governor, Attorney General, and Department heads.</p>
+               <h3>Section 2. Dual-Tier Policing</h3>
+               <ul>
+                 <li>State Police: Statewide executive jurisdiction over state routes and investigations.</li>
+                 <li>County Sheriff: Autonomous local county agency maintaining municipal order.</li>
+               </ul>`
       }
     };
 
-    function loadBill(billKey) {
-      document.querySelectorAll('.subnav-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.getElementById('subnav-' + billKey);
+    function loadBill(key) {
+      document.querySelectorAll('.subnav-btn').forEach(el => el.classList.remove('active'));
+      const activeBtn = document.getElementById('subnav-' + key);
       if (activeBtn) activeBtn.classList.add('active');
 
-      const data = STATUTE_DATA[billKey];
-      if (data) {
-        const container = document.getElementById('slipLawDisplay');
-        container.innerHTML = data.body;
+      const container = document.getElementById('slipLawDisplay');
+      if (STATUTES[key]) {
+        container.innerHTML = STATUTES[key].body;
         container.dataset.loaded = "true";
       }
     }
 
+    // COMPLETE 60-SECTION DATASET (FROM CSV)
     const PENAL_DATABASE = [
-      { code: "§ 8-101", name: "Simple Assault", div: "1", class: "Misdemeanor", fine: 250, custody: "5 mins", sanction: "Citation / Warning" },
-      { code: "§ 8-102", name: "Aggravated Assault & Battery", div: "1", class: "Class B Felony", fine: 500, custody: "10 mins", sanction: "Restitution" },
-      { code: "§ 8-103", name: "Assault on a Peace Officer", div: "1", class: "Class A Felony", fine: 1000, custody: "15 mins", sanction: "Weapon Forfeiture" },
-      { code: "§ 8-104", name: "Unlawful Restraint & Kidnapping", div: "1", class: "Class A Felony", fine: 1500, custody: "20 mins", sanction: "Protective Order" },
-      { code: "§ 8-105", name: "Manslaughter", div: "1", class: "Class A Felony", fine: 2000, custody: "20 mins", sanction: "Mandatory Court Appearance" },
-      { code: "§ 8-106", name: "First-Degree Murder", div: "1", class: "Capital Felony", fine: 5000, custody: "30 mins", sanction: "Maximum Custody / No Bail" },
-      { code: "§ 8-107", name: "Mass Casualty & Terrorism", div: "1", class: "Capital Felony", fine: 7500, custody: "30 mins", sanction: "Permanent Weapon Bar" },
+      // Division 1
+      { code: "§ 8-101", name: "Verbal Harassment / Disorderly Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", sanction: "Verbal warning; mute or temporary protective custody" },
+      { code: "§ 8-102", name: "Simple Assault / Non-Severe Battery", div: "1", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", sanction: "Civil restraining order; temporary weapon seizure" },
+      { code: "§ 8-103", name: "Aggravated Assault / Battery with Dangerous Weapon", div: "1", class: "Class B Felony", fine: 1000, custody: "10 - 15 Mins", sanction: "Mandatory weapon confiscation; CCW license suspension" },
+      { code: "§ 8-104", name: "Assault / Battery on a Sworn Peace Officer or First Responder", div: "1", class: "Class A Felony", fine: 2000, custody: "15 - 20 Mins", sanction: "Firearm license revocation; mandatory felony indictment" },
+      { code: "§ 8-105", name: "Unlawful Imprisonment / Kidnapping", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 22 Mins", sanction: "SWAT tactical intervention; weapon seizure" },
+      { code: "§ 8-106", name: "Hostage Taking / Armed Extortion", div: "1", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", sanction: "Permanent firearm license revocation; felony indictment" },
+      { code: "§ 8-107", name: "Vehicular Manslaughter (Reckless Driving)", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", sanction: "Driver license revocation; vehicle impoundment" },
+      { code: "§ 8-108", name: "Attempted Involuntary Manslaughter / Homicide", div: "1", class: "Class A Felony", fine: 2500, custody: "20 - 25 Mins", sanction: "Firearm confiscation; mandatory district court trial" },
+      { code: "§ 8-109", name: "First-Degree Premeditated Murder", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", sanction: "Permanent civic disqualification; state maximum custody" },
+      { code: "§ 8-110", name: "Mass Casualty Event / Armed Rampage", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", sanction: "Permanent weapon blacklisting; state maximum custody" },
 
-      { code: "§ 8-201", name: "Criminal Trespass", div: "2", class: "Infraction", fine: 150, custody: "None", sanction: "Ejection from property" },
-      { code: "§ 8-202", name: "Petty Larceny (< $500)", div: "2", class: "Misdemeanor", fine: 300, custody: "5 mins", sanction: "Full Restitution" },
-      { code: "§ 8-203", name: "Grand Larceny (≥ $500)", div: "2", class: "Class B Felony", fine: 750, custody: "10 mins", sanction: "Asset Seizure" },
-      { code: "§ 8-204", name: "Robbery & Armed Robbery", div: "2", class: "Class A Felony", fine: 1200, custody: "15 mins", sanction: "Weapon Forfeiture" },
-      { code: "§ 8-205", name: "Grand Theft Auto (GTA)", div: "2", class: "Class B Felony", fine: 850, custody: "10 mins", sanction: "Vehicle Impound" },
-      { code: "§ 8-206", name: "Arson & Destruction of Property", div: "2", class: "Class A Felony", fine: 1500, custody: "15 mins", sanction: "Civil Liability" },
+      // Division 2
+      { code: "§ 8-201", name: "Criminal Trespass on Private Land / Residence", div: "2", class: "Infraction", fine: 150, custody: "None", sanction: "Order to vacate premises immediately; warning log" },
+      { code: "§ 8-202", name: "Trespass into Restricted Government / Law Enforcement Area", div: "2", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", sanction: "Physical escort; search of person and property" },
+      { code: "§ 8-203", name: "Vandalism / Criminal Mischief / Property Defacement", div: "2", class: "Misdemeanor", fine: 300, custody: "3 - 5 Mins", sanction: "Restitution order to property owner" },
+      { code: "§ 8-204", name: "Petty Larceny / Shoplifting (< $500 Valuation)", div: "2", class: "Misdemeanor", fine: 350, custody: "5 - 7 Mins", sanction: "Return of stolen assets / restitution" },
+      { code: "§ 8-205", name: "Grand Larceny / Asset Theft (> $500 Valuation)", div: "2", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", sanction: "Asset forfeiture; restitution to victim" },
+      { code: "§ 8-206", name: "Burglary / Breaking and Entering Commercial / Residential", div: "2", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", sanction: "Confiscation of lockpicks / burglary tools" },
+      { code: "§ 8-207", name: "Armed Robbery (Store, Bank, or Citizen)", div: "2", class: "Class A Felony", fine: 2500, custody: "18 - 25 Mins", sanction: "Firearm license revocation; full asset seizure" },
+      { code: "§ 8-208", name: "Grand Theft Auto (GTA) / Vehicle Carjacking", div: "2", class: "Class B Felony", fine: 1000, custody: "10 - 15 Mins", sanction: "Vehicle recovery; 4 driver license points" },
+      { code: "§ 8-209", name: "Arson / Unlawful Incendiary Ignition", div: "2", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", sanction: "Restitution for property damage; felony record" },
+      { code: "§ 8-210", name: "Extortion / Blackmail of Property", div: "2", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", sanction: "Restitution; judicial protection order" },
 
-      { code: "§ 8-301", name: "Speeding (1-15 MPH Over)", div: "3", class: "Infraction", fine: 100, custody: "None", sanction: "Point Assessment" },
-      { code: "§ 8-302", name: "Excessive Speeding (16+ MPH Over)", div: "3", class: "Infraction", fine: 250, custody: "None", sanction: "Citation Issued" },
-      { code: "§ 8-303", name: "Reckless Driving", div: "3", class: "Misdemeanor", fine: 400, custody: "5 mins", sanction: "License Suspension Review" },
-      { code: "§ 8-304", name: "Illegal Street Racing", div: "3", class: "Class B Felony", fine: 1000, custody: "10 mins", sanction: "3-Day Vehicle Impound" },
-      { code: "§ 8-305", name: "Hit & Run / Leaving Scene", div: "3", class: "Misdemeanor", fine: 600, custody: "10 mins", sanction: "Mandatory Appearance" },
-      { code: "§ 8-306", name: "Failure to Yield to Emergency Vehicle", div: "3", class: "Infraction", fine: 200, custody: "None", sanction: "Traffic Citation" },
+      // Division 3
+      { code: "§ 8-301", name: "Minor Speeding (1 - 15 MPH Over Limit)", div: "3", class: "Infraction", fine: 100, custody: "None", sanction: "Traffic citation; 1 license point" },
+      { code: "§ 8-302", name: "Major Speeding (16 - 29 MPH Over Limit)", div: "3", class: "Infraction", fine: 250, custody: "None", sanction: "Traffic citation; 2 license points" },
+      { code: "§ 8-303", name: "Reckless / Careless Driving (> 30 MPH Over or Endangerment)", div: "3", class: "Misdemeanor", fine: 500, custody: "5 Mins", sanction: "Vehicle impoundment; 4 license points" },
+      { code: "§ 8-304", name: "Failure to Yield to Emergency Vehicles (Code 3 Operations)", div: "3", class: "Infraction", fine: 200, custody: "None", sanction: "Traffic citation; driver warning" },
+      { code: "§ 8-305", name: "Failure to Stop at Red Signal / Stop Sign / Yield Notice", div: "3", class: "Infraction", fine: 150, custody: "None", sanction: "Traffic citation; 1 license point" },
+      { code: "§ 8-306", name: "Operating an Unregistered, Defective, or Stolen Vehicle", div: "3", class: "Misdemeanor", fine: 400, custody: "3 - 5 Mins", sanction: "Immediate vehicle towing and impoundment" },
+      { code: "§ 8-307", name: "Illegal Street Racing / Speed Exhibition", div: "3", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", sanction: "30-day vehicle impound; license suspension" },
+      { code: "§ 8-308", name: "Hit and Run (Leaving Scene - Property Damage)", div: "3", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", sanction: "Driver license suspension; restitution" },
+      { code: "§ 8-309", name: "Hit and Run (Leaving Scene - Bodily Injury or Fatality)", div: "3", class: "Class A Felony", fine: 2500, custody: "18 - 25 Mins", sanction: "Permanent driver license revocation; felony indictment" },
+      { code: "§ 8-310", name: "Driving on a Suspended or Revoked License", div: "3", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", sanction: "Extended license suspension; vehicle impound" },
 
-      { code: "§ 8-401", name: "Unlawful Assembly & Riot", div: "4", class: "Misdemeanor", fine: 350, custody: "5 mins", sanction: "Dispersal Order" },
-      { code: "§ 8-402", name: "Fleeing & Eluding Law Enforcement", div: "4", class: "Class B Felony", fine: 900, custody: "15 mins", sanction: "Vehicle Impound" },
-      { code: "§ 8-403", name: "Resisting Lawful Arrest", div: "4", class: "Misdemeanor", fine: 450, custody: "10 mins", sanction: "Immediate Restraint" },
-      { code: "§ 8-404", name: "Obstruction of Justice", div: "4", class: "Misdemeanor", fine: 350, custody: "5 mins", sanction: "Administrative Warning" },
-      { code: "§ 8-405", name: "Direct Contempt of Court", div: "4", class: "Misdemeanor", fine: 500, custody: "10 mins", sanction: "Courtroom Ejection" },
-      { code: "§ 8-406", name: "Prison Breach & Facilitating Jailbreak", div: "4", class: "Class A Felony", fine: 2500, custody: "25 mins", sanction: "Maximum Confinement" },
+      // Division 4
+      { code: "§ 8-401", name: "Disorderly Conduct / Public Nuisance / Unlawful Loitering", div: "4", class: "Infraction", fine: 150, custody: "None", sanction: "Order to disperse; citation" },
+      { code: "§ 8-402", name: "Failure to Disperse / Unlawful Assembly after Official Order", div: "4", class: "Misdemeanor", fine: 350, custody: "3 - 5 Mins", sanction: "Physical detention; crowd control dispersal" },
+      { code: "§ 8-403", name: "Failure to Comply with a Lawful Order of a Peace Officer", div: "4", class: "Misdemeanor", fine: 300, custody: "3 - 5 Mins", sanction: "Physical detention and pat-down search" },
+      { code: "§ 8-404", name: "Fleeing / Eluding Law Enforcement (Foot Pursuit)", div: "4", class: "Misdemeanor", fine: 600, custody: "7 - 10 Mins", sanction: "Search of person; confiscation of tools" },
+      { code: "§ 8-405", name: "Fleeing / Eluding Law Enforcement (Vehicular Pursuit)", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", sanction: "Mandatory vehicle impoundment; license suspension" },
+      { code: "§ 8-406", name: "Resisting Arrest / Obstructing Official Police Duty", div: "4", class: "Misdemeanor", fine: 500, custody: "5 - 8 Mins", sanction: "Physical restraint; weapon search" },
+      { code: "§ 8-407", name: "Resisting Arrest with Active Violence / Deadly Threat", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", sanction: "Weapon confiscation; felony record" },
+      { code: "§ 8-408", name: "False Reporting of an Emergency / Fake 911 Dispatch", div: "4", class: "Misdemeanor", fine: 500, custody: "5 - 8 Mins", sanction: "Emergency service restitution fine" },
+      { code: "§ 8-409", name: "Contempt of Court / Disruption of Supreme or Trial Courts", div: "4", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", sanction: "Immediate summary detention by Court Bailiff" },
+      { code: "§ 8-410", name: "Perjury / Providing False Testimony Under Oath", div: "4", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", sanction: "State Bar license revocation; witness disqualification" },
+      { code: "§ 8-411", name: "Bribery of a Public Servant / Attempted Judicial Tampering", div: "4", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", sanction: "Asset forfeiture; permanent civic disqualification" },
+      { code: "§ 8-412", name: "Jailbreak / Assisting Escape from Lawful Custody", div: "4", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", sanction: "Lockdown order; high-security custody" },
 
-      { code: "§ 8-501", name: "Unlicensed Concealed Carry", div: "5", class: "Misdemeanor", fine: 350, custody: "5 mins", sanction: "Firearm Confiscation" },
-      { code: "§ 8-502", name: "Unlawful Brandishing of a Firearm", div: "5", class: "Misdemeanor", fine: 500, custody: "10 mins", sanction: "Firearm Seizure" },
-      { code: "§ 8-503", name: "Possession of Prohibited Class-3 Firearm", div: "5", class: "Class B Felony", fine: 1000, custody: "15 mins", sanction: "Permanent Forfeiture" },
-      { code: "§ 8-504", name: "Unlawful Weapons Trafficking", div: "5", class: "Class A Felony", fine: 2000, custody: "20 mins", sanction: "Commercial License Revoked" },
-      { code: "§ 8-505", name: "Possession of Explosive Devices", div: "5", class: "Class A Felony", fine: 3000, custody: "25 mins", sanction: "Immediate Bomb Squad Seizure" },
+      // Division 5
+      { code: "§ 8-501", name: "Open Carry of Firearm Without Valid CCW Permit", div: "5", class: "Infraction", fine: 200, custody: "None", sanction: "Temporary firearm seizure until permit verification" },
+      { code: "§ 8-502", name: "Unlawful Concealed Carry of Firearm (No Permit)", div: "5", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", sanction: "Firearm confiscation; CCW eligibility ban" },
+      { code: "§ 8-503", name: "Brandishing a Deadly Weapon / Threatening Behavior", div: "5", class: "Misdemeanor", fine: 600, custody: "5 - 8 Mins", sanction: "Firearm seizure; CCW revocation" },
+      { code: "§ 8-504", name: "Unlawful Discharge of Firearm within Municipal / City Limits", div: "5", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", sanction: "Firearm confiscation; noise disturbance citation" },
+      { code: "§ 8-505", name: "Possession of Illegal / Unregistered Military-Grade Firearm", div: "5", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", sanction: "Permanent weapon destruction; felony record" },
+      { code: "§ 8-506", name: "Possession of Controlled Narcotics / Contraband (Personal)", div: "5", class: "Misdemeanor", fine: 400, custody: "5 Mins", sanction: "Contraband seizure and destruction" },
+      { code: "§ 8-507", name: "Trafficking / Distribution of Controlled Contraband", div: "5", class: "Class B Felony", fine: 1800, custody: "12 - 15 Mins", sanction: "Asset seizure; vehicle impoundment" },
+      { code: "§ 8-508", name: "Illegal Weapons Trafficking / Black Market Armament Dealing", div: "5", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", sanction: "Total inventory seizure; permanent firearms ban" },
+      { code: "§ 8-509", name: "Possession / Deployment of Explosives / Destructive Devices", div: "5", class: "Class A Felony", fine: 4000, custody: "20 - 25 Mins", sanction: "EOD bomb squad seizure; capital felony indictment" },
 
-      { code: "§ 8-601", name: "Impersonation of Public Official / Officer", div: "6", class: "Class B Felony", fine: 800, custody: "10 mins", sanction: "Uniform/Gear Confiscation" },
-      { code: "§ 8-602", name: "Official Misconduct & Malfeasance", div: "6", class: "Class B Felony", fine: 1200, custody: "15 mins", sanction: "Immediate Post Removal" },
-      { code: "§ 8-603", name: "Abuse of Administrative Permissions", div: "6", class: "Class A Felony", fine: 2000, custody: "20 mins", sanction: "Blacklist / Role Stripping" },
-      { code: "§ 8-604", name: "Deprivation of Rights Under Color of Law", div: "6", class: "Class A Felony", fine: 2500, custody: "20 mins", sanction: "Permanent Bar from Office" },
-      { code: "§ 8-605", name: "Electoral Fraud & Ballot Tampering", div: "6", class: "Class A Felony", fine: 3000, custody: "25 mins", sanction: "Voter Disqualification" },
-      { code: "§ 8-606", name: "High Treason & Subversion Against the State", div: "6", class: "Capital Felony", fine: 10000, custody: "30 mins", sanction: "Perpetual Exile / Bar" }
+      // Division 6
+      { code: "§ 8-601", name: "Impersonation of a Peace Officer, Judge, or State Official", div: "6", class: "Class A Felony", fine: 2500, custody: "15 - 20 Mins", sanction: "Immediate group rank removal; blacklisting review" },
+      { code: "§ 8-602", name: "Official Misconduct / Abuse of Public Power", div: "6", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", sanction: "Mandatory removal from public office; disciplinary trial" },
+      { code: "§ 8-603", name: "Misuse of Administrative Group / Server Permissions", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", sanction: "Permanent rank removal; referral to Developer / Owner" },
+      { code: "§ 8-604", name: "Administrative Surveillance / Unauthorized Voter Log Access", div: "6", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", sanction: "Removal from Electoral / Admin post; civic ban" },
+      { code: "§ 8-605", name: "Deprivation of Constitutional Civil Rights under Color of Law", div: "6", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", sanction: "Permanent termination from law enforcement; civil suit" },
+      { code: "§ 8-606", name: "Extortion / Shakedown by Public Official or Peace Officer", div: "6", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", sanction: "Asset forfeiture; immediate termination and disbarment" },
+      { code: "§ 8-607", name: "Falsification of Official Records / Audit Log Alteration", div: "6", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", sanction: "Permanent state civil service ban; felony indictment" },
+      { code: "§ 8-608", name: "Electoral Fraud / Ballot Stuffing / Alt Account Exploitation", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", sanction: "Voiding of election; permanent ban from public office" },
+      { code: "§ 8-609", name: "Unlawful Leak of Confidential State / Moderation Records", div: "6", class: "Class B Felony", fine: 2000, custody: "12 - 15 Mins", sanction: "Security clearance revocation; termination" },
+      { code: "§ 8-610", name: "High Treason / Armed Insurrection / Overthrow of State", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", sanction: "Impeachment; total civic ban; Developer referral" }
     ];
 
     function renderPenalTable(items) {
@@ -1128,7 +1246,7 @@
       tbody.innerHTML = '';
 
       if (items.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 2rem;">No matching offenses found in the State of Melview Penal Schedule.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">No matching offenses found in the State of Melview Penal Schedule.</td></tr>`;
         return;
       }
 
@@ -1146,21 +1264,21 @@
           <td><span class="badge ${badgeClass}">${item.class}</span></td>
           <td>$${item.fine.toLocaleString()}</td>
           <td>${item.custody}</td>
-          <td style="color: var(--text-muted);">${item.sanction}</td>
+          <td style="color:var(--text-muted); font-size:0.8rem;">${item.sanction}</td>
         `;
         tbody.appendChild(row);
       });
     }
 
-    function filterPenalCode() {
-      const query = document.getElementById('penalSearch').value.toLowerCase();
-      const classVal = document.getElementById('penalClassFilter').value;
-      const divVal = document.getElementById('penalDivisionFilter').value;
+    function filterPenalTable() {
+      const q = document.getElementById('penalSearch').value.toLowerCase();
+      const c = document.getElementById('penalClassFilter').value;
+      const d = document.getElementById('penalDivisionFilter').value;
 
       const filtered = PENAL_DATABASE.filter(item => {
-        const matchesQuery = item.code.toLowerCase().includes(query) || item.name.toLowerCase().includes(query) || item.sanction.toLowerCase().includes(query);
-        const matchesClass = (classVal === 'ALL' || item.class === classVal);
-        const matchesDiv = (divVal === 'ALL' || item.div === divVal);
+        const matchesQuery = item.code.toLowerCase().includes(q) || item.name.toLowerCase().includes(q) || item.sanction.toLowerCase().includes(q);
+        const matchesClass = (c === 'ALL' || item.class === c);
+        const matchesDiv = (d === 'ALL' || item.div === d);
         return matchesQuery && matchesClass && matchesDiv;
       });
 
@@ -1169,6 +1287,7 @@
 
     renderPenalTable(PENAL_DATABASE);
 
+    // Form Generator Handlers
     function generateWarrant(e) {
       e.preventDefault();
       const type = document.getElementById('warrantType').value;
@@ -1177,128 +1296,31 @@
       const judge = document.getElementById('warrantJudge').value;
       const affidavit = document.getElementById('warrantAffidavit').value;
 
-      const warrantText = 
+      const doc = 
 `================================================================================
 IN THE SUPREME COURT OF THE STATE OF MELVIEW
-JUDICIAL DISTRICT COURT • JUDICIAL ORDERS DIVISION
+JUDICIAL DISTRICT COURT • DOCUMENT NO. MCR-2026-01
 ================================================================================
 ORDER OF THE COURT: ${type}
 DOCKET NO. WR-2026-${Math.floor(1000 + Math.random() * 9000)}
 
 TO ANY SWORN LAW ENFORCEMENT OFFICER OF THE STATE OF MELVIEW:
 
-WHEREAS, a formal sworn complaint and affidavit of probable cause has been presented 
-under Title 7, Section 3 of the State of Melview Laws by:
 AFFIANT: ${affiant}
+TARGET SPECIFICATION: ${target}
 
-TARGET IDENTIFIER / LOCATION:
-${target}
-
-AFFIDAVIT OF PROBABLE CAUSE CITED:
+PROBABLE CAUSE STATEMENT:
 "${affidavit}"
 
-THE COURT HEREBY FINDS sufficient probable cause exists under Article VII standards.
-YOU ARE HEREBY COMMANDED to execute this ${type} with all lawful speed, observing
-constitutional rights and the statutory 30-minute maximum custodial limit.
+The Court finds probable cause exists under Article I, Section 6 and Article IX, Section 7.
+You are commanded to execute this warrant observing the 30-minute maximum custody rule.
 
-GIVEN UNDER MY HAND AND SEAL OF THE COURT:
 JUDICIAL OFFICER: ${judge}
-STATUS: ISSUED & LEGALLY ACTIVE • STATE OF MELVIEW
-================================================================================
-[VERIFIED BY GOVERNMENT OVERSIGHT • DRAFTED BY JACKBILLYEYE]`;
-
-      document.getElementById('warrantOutput').textContent = warrantText;
-    }
-
-    function generateEO(e) {
-      e.preventDefault();
-      const eoNumber = document.getElementById('eoNumber').value;
-      const govName = document.getElementById('eoGovName').value;
-      const title = document.getElementById('eoTitle').value;
-      const agency = document.getElementById('eoAgency').value;
-      const directives = document.getElementById('eoDirectives').value;
-
-      const eoDoc = 
-`================================================================================
-EXECUTIVE CHAMBER • STATE OF MELVIEW
-EXECUTIVE ORDER ${eoNumber.toUpperCase()}
-================================================================================
-SUBJECT: ${title.toUpperCase()}
-DIRECTED TO: ${agency}
-
-By the executive authority vested in me as Governor of the State of Melview, 
-it is hereby ordered:
-
-${directives}
-
-COMPLIANCE & ENFORCEMENT:
-All departments, commissions, and officers of the State of Melview shall take all 
-necessary steps to execute the provisions of this Order immediately.
-
-GIVEN under my hand and the Great Seal of the State of Melview.
-EXECUTIVE: ${govName}, Governor of the State of Melview
+STATUS: ACTIVE & ISSUED • STATE OF MELVIEW
 ================================================================================
 [STATE OF MELVIEW • GOVERNMENT OVERSIGHT • DRAFTED BY JACKBILLYEYE]`;
 
-      document.getElementById('eoOutput').textContent = eoDoc;
-    }
-
-    function generateFOIA(e) {
-      e.preventDefault();
-      const citizen = document.getElementById('foiaCitizen').value;
-      const agency = document.getElementById('foiaAgency').value;
-      const scope = document.getElementById('foiaScope').value;
-
-      const foiaText =
-`================================================================================
-STATE OF MELVIEW • ARTICLE XV PUBLIC RECORDS REQUEST (FOIA)
-DOCKET NO. FOIA-2026-${Math.floor(1000 + Math.random() * 9000)}
-================================================================================
-TO: Custodian of Public Records, ${agency}
-FROM: ${citizen}
-
-STATUTORY COMPLIANCE MANDATE:
-Pursuant to Article XV and Senate Bill No. 101 of the State of Melview, this formal 
-request for public records is registered. You are legally required to comply within 
-seventy-two (72) hours of receipt.
-
-SCOPE OF INQUIRY & RECORDS SOUGHT:
-"${scope}"
-
-SUBMITTED UNDER PENALTY OF LAW.
-STATUS: PENDING AGENCY COMPLIANCE (72-HR CLOCK ACTIVE)
-================================================================================
-[STATE OF MELVIEW • GOVERNMENT OVERSIGHT • DRAFTED BY JACKBILLYEYE]`;
-
-      document.getElementById('foiaOutput').textContent = foiaText;
-    }
-
-    function generatePetition(e) {
-      e.preventDefault();
-      const petitioner = document.getElementById('petitionerName').value;
-      const target = document.getElementById('petitionTarget').value;
-      const statement = document.getElementById('petitionStatement').value;
-
-      const petitionDoc =
-`================================================================================
-STATE OF MELVIEW • CITIZEN GRIEVANCE & LEGISLATIVE PETITION
-FILED PURSUANT TO ARTICLE I, SECTION 9 (RIGHT OF PETITION & REDRESS)
-DOCKET NO. PET-2026-${Math.floor(1000 + Math.random() * 9000)}
-================================================================================
-TO: ${target}
-FROM: ${petitioner}
-
-GRIEVANCE STATEMENT & PETITION FOR REDRESS:
-"${statement}"
-
-RECORD OF SUBMISSION:
-- Protection: Protected under Article I, Section 9 of the State of Melview
-- Review Authority: Formal Registry of the General Assembly
-- Mandatory Docketing: Within 48 Hours of receipt
-================================================================================
-[STATE OF MELVIEW • GOVERNMENT OVERSIGHT • DRAFTED BY JACKBILLYEYE]`;
-
-      document.getElementById('petitionOutput').textContent = petitionDoc;
+      document.getElementById('warrantOutput').textContent = doc;
     }
 
     function generateBillDraft(e) {
@@ -1309,37 +1331,62 @@ RECORD OF SUBMISSION:
       const actName = document.getElementById('billActName').value;
       const text = document.getElementById('billText').value;
 
-      const billDoc =
+      const doc = 
 `================================================================================
-IN THE SENATE OF THE STATE OF MELVIEW
-REGULAR LEGISLATIVE SESSION OF 2026
+IN THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW
+SENATE BILL NO. ${num.toUpperCase().replace('SENATE BILL NO.', '').trim()}
+[${actName}] (${titleRef})
 ================================================================================
-${num.toUpperCase()}
+PRIMARY SPONSOR: ${sponsor}
+CONSTITUTIONAL AUTHORITY: Article IV, Section 4
 
-Introduced by: ${sponsor}
-Target Codification: ${titleRef}
+AN ACT relating to ${actName}.
 
-AN ACT
-Entitled the "${actName}"
+BE IT ENACTED BY THE GENERAL ASSEMBLY OF THE STATE OF MELVIEW:
 
-Be it enacted by the Senate of the State of Melview in Assembly convened:
+TITLE I. GENERAL PROVISIONS
+§ 101. Short Title. This Act shall be cited as the "${actName} of 2026."
 
+TITLE II. SUBSTANTIVE PROVISIONS
 ${text}
 
-LEGISLATIVE RECORD:
-- Floor Debate Window: 24 Hours Required (Title 4, § 2)
-- Gubernatorial Review: 5 Days for Approval or Veto
-- Enactment Authority: State of Melview
+TITLE III. ENACTMENT
+§ 301. Effective Date. Immediate upon passage and Gubernatorial presentation.
+================================================================================
+[STATE OF MELVIEW STANDARD BILL FORMAT • DRAFTED BY JACKBILLYEYE]`;
+
+      document.getElementById('billOutput').textContent = doc;
+    }
+
+    function generateFOIA(e) {
+      e.preventDefault();
+      const citizen = document.getElementById('foiaCitizen').value;
+      const agency = document.getElementById('foiaAgency').value;
+      const scope = document.getElementById('foiaScope').value;
+
+      const doc = 
+`================================================================================
+STATE OF MELVIEW • ARTICLE XV OPEN RECORDS REQUEST (FOIA)
+DOCKET NO. FOIA-2026-${Math.floor(1000 + Math.random() * 9000)}
+================================================================================
+TO: Public Records Custodian, ${agency}
+FROM: ${citizen}
+
+PURSUANT TO ARTICLE XV OF THE STATE OF MELVIEW CONSTITUTION:
+Request is registered for the following public records:
+"${scope}"
+
+72-HOUR MANDATORY AGENCY RESPONSE CLOCK INITIATED.
 ================================================================================
 [STATE OF MELVIEW • GOVERNMENT OVERSIGHT • DRAFTED BY JACKBILLYEYE]`;
 
-      document.getElementById('billOutput').textContent = billDoc;
+      document.getElementById('foiaOutput').textContent = doc;
     }
 
-    function copyDraft(elemId) {
-      const text = document.getElementById(elemId).textContent;
+    function copyDraft(id) {
+      const text = document.getElementById(id).textContent;
       navigator.clipboard.writeText(text).then(() => {
-        alert("Draft successfully copied to clipboard.");
+        alert("Draft successfully copied to clipboard!");
       });
     }
   </script>
