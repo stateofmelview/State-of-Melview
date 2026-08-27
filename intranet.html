@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State of Melview | Restricted Government Intranet</title>
+  <style>
+    :root {
+      --gov-navy-dark: #0b1319;
+      --gov-navy: #15222e;
+      --gov-blue-primary: #005ea2;
+      --gov-blue-dark: #1a4480;
+      --gov-gold: #c09853;
+      --gov-gold-light: #fdf8e2;
+      --gov-red: #d54339;
+      --gov-green: #00a91c;
+      --gov-gray-light: #f0f0f0;
+      --gov-gray-mid: #dfe1e2;
+      --gov-gray-dark: #565c65;
+      --gov-text: #1b1b1b;
+      --gov-white: #ffffff;
+      --font-serif: "Merriweather", "Georgia", "Times New Roman", serif;
+      --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "Roboto Mono", Consolas, Monaco, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header.gov-header {
+      background-color: var(--gov-navy);
+      border-bottom: 4px solid var(--gov-gold);
+      color: var(--gov-white);
+      padding: 1.25rem 2rem;
+    }
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .brand-block { display: flex; align-items: center; gap: 1.25rem; text-decoration: none; color: #fff; }
+    .state-seal {
+      width: 58px; height: 58px; border-radius: 50%;
+      background: radial-gradient(circle, #2a4359 0%, #111c24 100%);
+      border: 2px solid var(--gov-gold);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gov-gold); font-family: var(--font-serif);
+      font-weight: 700; font-size: 1.6rem;
+    }
+    .brand-title h1 {
+      font-family: var(--font-serif); font-size: 1.45rem;
+      font-weight: 700; text-transform: uppercase; line-height: 1.2;
+    }
+    .brand-title p { font-size: 0.8rem; color: #b0c4de; }
+    .main-wrapper { max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem; flex: 1; width: 100%; }
+    .gov-card {
+      background: #1e293b; border: 1px solid #334155;
+      border-radius: 6px; padding: 2rem; margin-bottom: 1.5rem;
+    }
+    .gov-input, .gov-select {
+      background-color: #0f172a; border: 1px solid #475569;
+      color: #f8fafc; padding: 0.65rem 0.85rem; border-radius: 3px; font-size: 0.9rem; width: 100%;
+    }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+    .btn {
+      background-color: var(--gov-blue-primary); color: #ffffff; border: none;
+      padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      border-radius: 3px; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    }
+    .btn-danger { background-color: var(--gov-red); }
+    .btn-success { background-color: var(--gov-green); }
+    .btn-secondary { background-color: #475569; }
+    .table-container { overflow-x: auto; border: 1px solid #334155; border-radius: 3px; margin: 1rem 0; }
+    table.gov-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; background: #1e293b; }
+    table.gov-table th { background-color: #0f172a; color: #38bdf8; font-weight: 700; padding: 0.85rem 1rem; text-transform: uppercase; font-size: 0.75rem; border-bottom: 2px solid #334155; }
+    table.gov-table td { padding: 0.85rem 1rem; border-bottom: 1px solid #334155; vertical-align: middle; }
+    .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+    .badge-success { background: #064e3b; color: #6ee7b7; }
+    .badge-danger { background: #7f1d1d; color: #fca5a5; }
+    .badge-navy { background: #1e3a8a; color: #93c5fd; }
+    .audit-terminal-viewer { background: #020617; color: #94a3b8; font-family: var(--font-mono); font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 200px; overflow-y: auto; }
+    .audit-entry { margin-bottom: 0.35rem; border-bottom: 1px dotted #1e293b; padding-bottom: 0.35rem; }
+    
+    /* WORKSTATION CARD CONTAINERS */
+    .card-panel { background: #111827; border: 1px solid #1e293b; border-left: 4px solid #38bdf8; padding: 1.5rem; border-radius: 4px; margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body>
+
+  <header class="gov-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-block">
+        <div class="state-seal">M</div>
+        <div class="brand-title">
+          <h1>State of Melview</h1>
+          <p>Restricted Criminal Justice & Multi-Agency Intranet (CJIS/JDIS)</p>
+        </div>
+      </a>
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <a href="index.html" class="btn btn-secondary">⬅️ Public Portal</a>
+        <div id="authPill" class="badge badge-navy">RESTRICTED ACCESS</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- LOGIN GATE -->
+    <div id="loginGateCard" class="gov-card" style="max-width:480px; margin:3rem auto; border-top:4px solid var(--gov-gold);">
+      <h2 style="font-family:var(--font-serif); font-size:1.3rem; margin-bottom:0.5rem; text-align:center;">Agency Workstation Login</h2>
+      <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem; text-align:center;">OFFICIAL IDENTIFICATION REQUIRED (TITLE 8 § 603)</p>
+      
+      <form id="intranetLoginForm">
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label>Government Username</label>
+          <input type="text" id="intUser" class="gov-input" placeholder="e.g. police1, sheriff1, judge1, law3, doj1, transport1, records1..." required />
+        </div>
+        <div class="form-group" style="margin-bottom:1.5rem;">
+          <label>Security Password</label>
+          <input type="password" id="intPass" class="gov-input" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn" style="width:100%; justify-content:center;">Authenticate Session</button>
+      </form>
+      <div id="intError" style="display:none; color:#f87171; font-size:0.8rem; text-align:center; margin-top:1rem; font-weight:700;">
+        ❌ ACCESS DENIED: Invalid Security Credentials.
+      </div>
+    </div>
+
+    <!-- AUTHENTICATED WORKSTATION VIEW -->
+    <div id="workstationView" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <div>
+          <span id="deptRoleLabel" style="font-size:0.8rem; text-transform:uppercase; color:#38bdf8; font-weight:700;">Agency Intranet</span>
+          <h2 id="deptTitleLabel" style="font-family:var(--font-serif); font-size:1.5rem;">Command Workstation</h2>
+        </div>
+        <button type="button" class="btn btn-danger" onclick="logoutIntranet()">Sign Out</button>
+      </div>
+
+      <!-- SEOC Emergency Broadcast Module (law3 & police1) -->
+      <div id="easModule" class="card-panel" style="border-left-color:#ef4444; display:none;">
+        <h3 style="color:#f87171; font-size:1.1rem; margin-bottom:0.5rem;">🚨 State Emergency Alert System (SEOC Broadcast)</h3>
+        <form id="easForm">
+          <div class="form-group" style="margin-bottom:0.75rem;">
+            <input type="text" id="easInput" class="gov-input" placeholder="Enter statewide emergency text to display on public portal..." required />
+          </div>
+          <button type="submit" class="btn btn-danger">Broadcast Live Emergency Alert</button>
+        </form>
+      </div>
+
+      <!-- CCW & Firearm Permit Revocation Module (police1 & sheriff1) -->
+      <div id="ccwModule" class="card-panel" style="border-left-color:#ef4444; display:none;">
+        <h3 style="color:#f87171; font-size:1.1rem; margin-bottom:0.5rem;">🔫 Concealed Carry (CCW) Permit Revocation Portal</h3>
+        <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Revoke or reinstate citizen concealed carry permits following Title 8 Division 5 infractions.</p>
+        <div class="table-container">
+          <table class="gov-table">
+            <thead><tr><th>Permit ID</th><th>Licensee Name</th><th>Status</th><th>Expiry</th><th>Action</th></tr></thead>
+            <tbody id="ccwTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Master Personnel Archive Database Editor (records1 Exclusive) -->
+      <div id="masterRecordsModule" class="card-panel" style="border-left-color:#38bdf8; display:none;">
+        <h3 style="color:#38bdf8; font-size:1.1rem; margin-bottom:0.5rem;">📂 Master Personnel Database Editor (OPM Archive)</h3>
+        <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Edit and manage master state personnel files, clearance levels, and active status.</p>
+        <div class="table-container">
+          <table class="gov-table">
+            <thead><tr><th>File ID</th><th>Username</th><th>Department</th><th>Role</th><th>Clearance</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="masterRecordsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Agency Roster & Termination System (All Agencies) -->
+      <div class="card-panel">
+        <h3 style="color:#f8fafc; font-size:1.1rem; margin-bottom:0.5rem;">Department Personnel Roster & Terminations</h3>
+        <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Add active personnel or execute formal terminations with statutory cause under Article XIII, § 5.</p>
+        
+        <form id="addRosterForm" style="margin-bottom:1rem;">
+          <div class="form-grid" style="grid-template-columns: 2fr 1fr auto; align-items:flex-end;">
+            <div class="form-group"><label>Username</label><input type="text" id="rUser" class="gov-input" required /></div>
+            <div class="form-group"><label>Rank / Role</label><input type="text" id="rRank" class="gov-input" required /></div>
+            <button type="submit" class="btn btn-success" style="height:38px;">Add Member</button>
+          </div>
+        </form>
+
+        <div class="table-container">
+          <table class="gov-table">
+            <thead><tr><th>Username</th><th>Rank / Role</th><th>Termination Action</th></tr></thead>
+            <tbody id="rosterTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Shifts & Patrol Grid -->
+      <div class="card-panel">
+        <h3 style="color:#f8fafc; font-size:1.1rem; margin-bottom:0.5rem;">Shift & Sector Assignments</h3>
+        <form id="addShiftForm" style="margin-bottom:1rem;">
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr auto; align-items:flex-end;">
+            <div class="form-group"><label>Member</label><input type="text" id="sUser" class="gov-input" required /></div>
+            <div class="form-group"><label>Callsign</label><input type="text" id="sCall" class="gov-input" required /></div>
+            <div class="form-group"><label>Sector</label><input type="text" id="sSect" class="gov-input" required /></div>
+            <button type="submit" class="btn btn-success" style="height:38px;">Assign Shift</button>
+          </div>
+        </form>
+        <div class="table-container">
+          <table class="gov-table">
+            <thead><tr><th>Member</th><th>Callsign</th><th>Sector</th><th>Action</th></tr></thead>
+            <tbody id="shiftTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Internal Affairs Registry -->
+      <div class="card-panel">
+        <h3 style="color:#f87171; font-size:1.1rem; margin-bottom:0.5rem;">Internal Affairs (IA) Disciplinary Registry</h3>
+        <form id="addIAForm" style="margin-bottom:1rem;">
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:0.5rem;">
+            <div class="form-group"><label>Subject</label><input type="text" id="iaUser" class="gov-input" required /></div>
+            <div class="form-group"><label>Sanction</label><select id="iaSanction" class="gov-select"><option value="Written Reprimand">Written Reprimand</option><option value="Suspension">Suspension</option><option value="Rank Demotion">Rank Demotion</option><option value="Termination">Termination</option></select></div>
+          </div>
+          <div class="form-group" style="margin-bottom:0.75rem;"><label>Violation Summary</label><input type="text" id="iaReason" class="gov-input" required /></div>
+          <button type="submit" class="btn btn-danger">Log IA Action</button>
+        </form>
+        <div class="table-container">
+          <table class="gov-table">
+            <thead><tr><th>Personnel</th><th>Sanction</th><th>Reason</th></tr></thead>
+            <tbody id="iaTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Workstation Audit Log -->
+      <div style="margin-top:2rem;">
+        <h4 style="font-size:0.9rem; color:#94a3b8; margin-bottom:0.5rem;">Workstation Audit Activity Log</h4>
+        <div id="intAuditLogs" class="audit-terminal-viewer"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbynIMouFbor3yW33M12O3bH8xPtm5zElOZgGiPBFKyaEDmvqhV8REdGxhUj9QN-fk0B/exec";
+
+    function syncToGoogleSheet(payload) {
+      if (!GOOGLE_SHEET_WEBAPP_URL) return;
+      try {
+        fetch(GOOGLE_SHEET_WEBAPP_URL, {
+          method: "POST", mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).catch(err => console.error("Sync error:", err));
+      } catch(e) {}
+    }
+
+    let CURRENT_ROLE = null;
+    let CURRENT_DEPT = "";
+
+    let PUBLIC_REGISTRY = JSON.parse(localStorage.getItem('melview_registry')) || [
+      { id: "CCW-2026-001", name: "State Resident Permit", cat: "Concealed Carry (CCW)", score: "State Verified", exp: "2026-12-31", status: "Active & Certified" },
+      { id: "CCW-2026-002", name: "John_Miller_RP", cat: "Concealed Carry (CCW)", score: "State Verified", exp: "2026-12-31", status: "Active & Certified" }
+    ];
+
+    let PRIVATE_PERSONNEL = JSON.parse(localStorage.getItem('melview_master_personnel')) || [
+      { id: "EMP-2026-001", user: "judge1", dept: "Judiciary (Supreme Court)", role: "Chief Justice / Presiding Officer", clearance: "Level 5 Executive Authority", status: "Active" },
+      { id: "EMP-2026-002", user: "law3", dept: "Executive / Senate", role: "Governor / Legislative Oversight", clearance: "Level 5 Executive Authority", status: "Active" },
+      { id: "EMP-2026-003", user: "Colonel_Davis", dept: "Melview State Police", role: "State Police Commissioner", clearance: "Level 4 Constitutional Officer", status: "Active" },
+      { id: "EMP-2026-004", user: "Sheriff_Hopkins", dept: "County Sheriff Office", role: "Elected County Sheriff", clearance: "Level 4 Constitutional Officer", status: "Active" },
+      { id: "EMP-2026-005", user: "Attorney_General_Vance", dept: "Department of Justice", role: "Attorney General", clearance: "Level 5 Executive Authority", status: "Active" }
+    ];
+
+    let DEPT_ROSTERS = JSON.parse(localStorage.getItem('melview_dept_rosters')) || {
+      "Melview State Police": [{ user: "Colonel_Davis", rank: "State Police Commissioner" }],
+      "County Sheriff Office": [{ user: "Sheriff_Hopkins", rank: "Elected County Sheriff" }],
+      "Independent Electoral Commission": [{ user: "Chief_Commissioner_Lee", rank: "Chief Electoral Commissioner" }],
+      "Department of Transportation": [{ user: "Director_Miller", rank: "Director of Transportation" }],
+      "Department of Justice": [{ user: "Attorney_General_Vance", rank: "Attorney General" }],
+      "Judiciary (Supreme Court)": [{ user: "judge1", rank: "Chief Justice" }],
+      "Executive / Senate": [{ user: "law3", rank: "Governor" }]
+    };
+
+    let DEPT_SHIFTS = JSON.parse(localStorage.getItem('melview_dept_shifts')) || {
+      "Melview State Police": [{ user: "Trooper_Cole", callsign: "1-ADAM-12", sector: "Highway Corridor 1" }]
+    };
+
+    let DEPT_IA = JSON.parse(localStorage.getItem('melview_dept_ia')) || {
+      "Melview State Police": [{ user: "Cadet_Marks", sanction: "Written Reprimand", reason: "Radio infraction." }]
+    };
+
+    let GOV_LOGS = JSON.parse(localStorage.getItem('melview_gov_logs')) || [
+      "2026-08-27 12:00 UTC | INTRANET SESSION | Master CJIS Workstation initialized."
+    ];
+
+    function saveIntranetState() {
+      localStorage.setItem('melview_registry', JSON.stringify(PUBLIC_REGISTRY));
+      localStorage.setItem('melview_master_personnel', JSON.stringify(PRIVATE_PERSONNEL));
+      localStorage.setItem('melview_dept_rosters', JSON.stringify(DEPT_ROSTERS));
+      localStorage.setItem('melview_dept_shifts', JSON.stringify(DEPT_SHIFTS));
+      localStorage.setItem('melview_dept_ia', JSON.stringify(DEPT_IA));
+      localStorage.setItem('melview_gov_logs', JSON.stringify(GOV_LOGS));
+      renderRoster();
+      renderShifts();
+      renderIA();
+      if (CURRENT_ROLE === 'police1' || CURRENT_ROLE === 'sheriff1') renderCCW();
+      if (CURRENT_ROLE === 'records1') renderMasterRecords();
+      renderLogs();
+    }
+
+    // LOGIN DISPATCH
+    document.getElementById('intranetLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const u = document.getElementById('intUser').value.trim().toLowerCase();
+      const p = document.getElementById('intPass').value.trim();
+      const err = document.getElementById('intError');
+
+      let dept = "";
+      if (u === 'judge1' && p === 'admin5') dept = "Judiciary (Supreme Court)";
+      else if (u === 'law3' && p === 'admin2') dept = "Executive / Senate";
+      else if (u === 'police1' && p === 'admin3') dept = "Melview State Police";
+      else if (u === 'sheriff1' && p === 'admin4') dept = "County Sheriff Office";
+      else if (u === 'elections1' && p === 'admin6') dept = "Independent Electoral Commission";
+      else if (u === 'transport1' && p === 'admin7') dept = "Department of Transportation";
+      else if (u === 'doj1' && p === 'admin8') dept = "Department of Justice";
+      else if (u === 'records1' && p === 'admin9') dept = "Master Private Personnel Archive";
+
+      if (dept) {
+        CURRENT_ROLE = u;
+        CURRENT_DEPT = dept;
+        err.style.display = 'none';
+        document.getElementById('loginGateCard').style.display = 'none';
+        document.getElementById('workstationView').style.display = 'block';
+        document.getElementById('deptRoleLabel').textContent = `${u.toUpperCase()} • INTRANET SESSION`;
+        document.getElementById('deptTitleLabel').textContent = `${dept} Command Workstation`;
+        document.getElementById('authPill').textContent = `AUTH: ${u.toUpperCase()}`;
+
+        // Role-Specific Modules
+        document.getElementById('easModule').style.display = (u === 'law3' || u === 'police1') ? 'block' : 'none';
+        document.getElementById('ccwModule').style.display = (u === 'police1' || u === 'sheriff1') ? 'block' : 'none';
+        document.getElementById('masterRecordsModule').style.display = (u === 'records1') ? 'block' : 'none';
+
+        saveIntranetState();
+      } else {
+        err.style.display = 'block';
+      }
+    });
+
+    window.logoutIntranet = function() {
+      CURRENT_ROLE = null;
+      CURRENT_DEPT = "";
+      document.getElementById('loginGateCard').style.display = 'block';
+      document.getElementById('workstationView').style.display = 'none';
+      document.getElementById('intUser').value = '';
+      document.getElementById('intPass').value = '';
+      document.getElementById('authPill').textContent = 'RESTRICTED ACCESS';
+    };
+
+    // ROSTER & TERMINATION HANDLERS
+    document.getElementById('addRosterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const user = document.getElementById('rUser').value.trim();
+      const rank = document.getElementById('rRank').value.trim();
+      if (!DEPT_ROSTERS[CURRENT_DEPT]) DEPT_ROSTERS[CURRENT_DEPT] = [];
+      DEPT_ROSTERS[CURRENT_DEPT].push({ user, rank });
+
+      if (!PRIVATE_PERSONNEL.find(p => p.user.toLowerCase() === user.toLowerCase())) {
+        PRIVATE_PERSONNEL.push({
+          id: `EMP-2026-${Math.floor(100 + Math.random() * 900)}`,
+          user: user, dept: CURRENT_DEPT, role: rank,
+          clearance: "Level 2 Department Staff", status: "Active"
+        });
+      }
+
+      GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | ROSTER ADD | Added ${user} (${rank}) to ${CURRENT_DEPT}`);
+      saveIntranetState();
+      alert(`Member ${user} added to ${CURRENT_DEPT}.`);
+      document.getElementById('addRosterForm').reset();
+    });
+
+    window.terminateMember = function(idx) {
+      const emp = DEPT_ROSTERS[CURRENT_DEPT][idx];
+      const reason = prompt(`Enter formal statutory grounds for TERMINATING ${emp.user} from ${CURRENT_DEPT} (Article XIII, § 5):`);
+      if (!reason) return;
+
+      DEPT_ROSTERS[CURRENT_DEPT].splice(idx, 1);
+      if (!DEPT_IA[CURRENT_DEPT]) DEPT_IA[CURRENT_DEPT] = [];
+      DEPT_IA[CURRENT_DEPT].push({ user: emp.user, sanction: "Termination / Discharged", reason: reason });
+
+      const master = PRIVATE_PERSONNEL.find(p => p.user.toLowerCase() === emp.user.toLowerCase());
+      if (master) master.status = "Terminated";
+
+      const now = new Date().toISOString().substring(0,16) + ' UTC';
+      GOV_LOGS.unshift(`${now} | TERMINATION | ${emp.user} terminated from ${CURRENT_DEPT} - Reason: "${reason}"`);
+      saveIntranetState();
+
+      syncToGoogleSheet({
+        timestamp: now, action: "EMPLOYEE_TERMINATED", id: `TERM-${Math.floor(100+Math.random()*900)}`,
+        appellant: emp.user, category: "Termination", ref: CURRENT_DEPT, status: "TERMINATED", officer: CURRENT_ROLE, notes: reason
+      });
+
+      alert(`Official Termination executed for ${emp.user}.`);
+    };
+
+    function renderRoster() {
+      const tbody = document.getElementById('rosterTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const list = DEPT_ROSTERS[CURRENT_DEPT] || [];
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:1rem; color:#94a3b8;">No active personnel in this department roster.</td></tr>`;
+        return;
+      }
+      list.forEach((m, idx) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${m.user}</strong></td>
+          <td>${m.rank}</td>
+          <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="terminateMember(${idx})">🚫 Terminate & Decertify</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // SHIFTS
+    document.getElementById('addShiftForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const user = document.getElementById('sUser').value.trim();
+      const callsign = document.getElementById('sCall').value.trim();
+      const sector = document.getElementById('sSect').value.trim();
+      if (!DEPT_SHIFTS[CURRENT_DEPT]) DEPT_SHIFTS[CURRENT_DEPT] = [];
+      DEPT_SHIFTS[CURRENT_DEPT].push({ user, callsign, sector });
+      saveIntranetState();
+      alert(`Shift assigned for ${user}.`);
+      document.getElementById('addShiftForm').reset();
+    });
+
+    window.removeShift = function(idx) {
+      DEPT_SHIFTS[CURRENT_DEPT].splice(idx, 1);
+      saveIntranetState();
+    };
+
+    function renderShifts() {
+      const tbody = document.getElementById('shiftTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const list = DEPT_SHIFTS[CURRENT_DEPT] || [];
+      list.forEach((s, idx) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${s.user}</strong></td><td>${s.callsign}</td><td>${s.sector}</td>
+          <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeShift(${idx})">End Shift</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // IA
+    document.getElementById('addIAForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const user = document.getElementById('iaUser').value.trim();
+      const sanction = document.getElementById('iaSanction').value;
+      const reason = document.getElementById('iaReason').value.trim();
+      if (!DEPT_IA[CURRENT_DEPT]) DEPT_IA[CURRENT_DEPT] = [];
+      DEPT_IA[CURRENT_DEPT].push({ user, sanction, reason });
+      saveIntranetState();
+      alert(`Disciplinary action recorded for ${user}.`);
+      document.getElementById('addIAForm').reset();
+    });
+
+    function renderIA() {
+      const tbody = document.getElementById('iaTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const list = DEPT_IA[CURRENT_DEPT] || [];
+      list.forEach(ia => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${ia.user}</strong></td><td><span class="badge badge-danger">${ia.sanction}</span></td><td>${ia.reason}</td>`;
+        tbody.appendChild(row);
+      });
+    }
+
+    // CCW CONTROLS
+    function renderCCW() {
+      const tbody = document.getElementById('ccwTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const list = PUBLIC_REGISTRY.filter(r => r.cat.includes('Concealed Carry') || r.cat.includes('CCW'));
+      list.forEach(c => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${c.id}</strong></td><td>${c.name}</td>
+          <td><span class="badge ${c.status === 'Active & Certified' ? 'badge-success' : 'badge-danger'}">${c.status}</span></td>
+          <td>${c.exp}</td>
+          <td>
+            ${c.status === 'Active & Certified' ? `
+              <button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="toggleCCW('${c.id}', 'Revoked / Seized')">🚫 Revoke CCW</button>
+            ` : `
+              <button type="button" class="btn btn-success" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="toggleCCW('${c.id}', 'Active & Certified')">Reinstate</button>
+            `}
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    window.toggleCCW = function(id, newStatus) {
+      const item = PUBLIC_REGISTRY.find(r => r.id === id);
+      if (item) {
+        item.status = newStatus;
+        GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CCW STATUS | Set ${item.name} (${id}) to ${newStatus}`);
+        saveIntranetState();
+        alert(`CCW Permit ${id} updated to ${newStatus}.`);
+      }
+    };
+
+    // MASTER OPM RECORDS
+    function renderMasterRecords() {
+      const tbody = document.getElementById('masterRecordsTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      PRIVATE_PERSONNEL.forEach((emp, idx) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${emp.id}</strong></td><td>${emp.user}</td><td>${emp.dept}</td><td>${emp.role}</td>
+          <td><span class="badge badge-navy">${emp.clearance}</span></td>
+          <td><span class="badge ${emp.status === 'Active' ? 'badge-success' : 'badge-danger'}">${emp.status}</span></td>
+          <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="deleteMasterFile(${idx})">Purge</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    window.deleteMasterFile = function(idx) {
+      const emp = PRIVATE_PERSONNEL[idx];
+      if (!confirm(`Delete ${emp.user} (${emp.id}) from state master archive?`)) return;
+      PRIVATE_PERSONNEL.splice(idx, 1);
+      saveIntranetState();
+      alert(`Record ${emp.id} purged.`);
+    };
+
+    // EAS BROADCAST
+    document.getElementById('easForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const text = document.getElementById('easInput').value.trim();
+      const now = new Date().toISOString().substring(0,16) + ' UTC';
+      GOV_LOGS.unshift(`${now} | SEOC EAS ALERT | "${text}"`);
+      saveIntranetState();
+      syncToGoogleSheet({
+        timestamp: now, action: "EAS_EMERGENCY_BROADCAST", id: `EAS-${Math.floor(100+Math.random()*900)}`,
+        appellant: "Statewide Alert", category: "Emergency Alert", ref: CURRENT_DEPT, status: "ACTIVE", officer: CURRENT_ROLE, notes: text
+      });
+      alert(`Emergency Broadcast "${text}" sent to public portal.`);
+      document.getElementById('easForm').reset();
+    });
+
+    function renderLogs() {
+      const container = document.getElementById('intAuditLogs');
+      if (container) container.innerHTML = GOV_LOGS.map(l => `<div class="audit-entry">${l}</div>`).join('');
+    }
+  </script>
+</body>
+</html>
