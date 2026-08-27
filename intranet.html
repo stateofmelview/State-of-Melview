@@ -238,7 +238,7 @@
   </div>
 
   <script>
-    // HARDCODED FIREBASE INITIALIZATION WITH YOUR EXACT PROJECT DATA
+    // HARDCODED FIREBASE INITIALIZATION
     const firebaseConfig = {
       apiKey: "AIzaSyBW1Rti6BxPaKZttJKlNNp35GgmVaIoqns",
       authDomain: "melview-state.firebaseapp.com",
@@ -453,7 +453,11 @@
     // REAL-TIME CLOUD LISTENER FOR INTRANET CANDIDATES
     db.ref('elections/candidates').on('value', (snapshot) => {
       if (snapshot.exists()) {
-        ELECTION_CANDIDATES = snapshot.val();
+        const val = snapshot.val();
+        ELECTION_CANDIDATES = {
+          governor: Array.isArray(val.governor) ? val.governor : (val.governor ? Object.values(val.governor) : []),
+          senate: Array.isArray(val.senate) ? val.senate : (val.senate ? Object.values(val.senate) : [])
+        };
       } else {
         ELECTION_CANDIDATES = {
           governor: [
@@ -851,7 +855,7 @@
         `;
       }
 
-      // INDEPENDENT ELECTORAL COMMISSION (IEC) WORKSTATION (REALTIME FIREBASE SYNC)
+      // INDEPENDENT ELECTORAL COMMISSION (IEC) WORKSTATION
       if (roleKey === 'dept_iec' || roleKey === 'root') {
         const govList = ELECTION_CANDIDATES.governor || [];
         const senList = ELECTION_CANDIDATES.senate || [];
@@ -1098,7 +1102,7 @@
     }
 
     function attachWorkstationListeners(roleKey) {
-      // CLOUD CANDIDATE ADDITION
+      // CLOUD CANDIDATE ADDITION (SANITIZED ARRAY FIX)
       const candForm = document.getElementById('addCandidateForm');
       if (candForm) {
         candForm.addEventListener('submit', function(e) {
@@ -1108,12 +1112,23 @@
           const office = document.getElementById('candOffice').value;
 
           db.ref(`elections/candidates/${office}`).once('value', (snapshot) => {
-            let currentList = snapshot.val() || [];
+            let rawData = snapshot.val();
+            let currentList = Array.isArray(rawData) ? rawData : (rawData ? Object.values(rawData) : []);
+            
             currentList.push({ name, party, status: "Certified Ballot" });
+            
             db.ref(`elections/candidates/${office}`).set(currentList).then(() => {
               GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CLOUD CANDIDATE CERTIFIED | ${name} for ${office.toUpperCase()}`);
               saveIntranet();
+              
+              if (!ELECTION_CANDIDATES) ELECTION_CANDIDATES = {};
+              ELECTION_CANDIDATES[office] = currentList;
+              if (CURRENT_ROLE) renderWorkstation(CURRENT_ROLE);
+              
               alert(`Candidate ${name} (${party}) certified to Firebase cloud!`);
+            }).catch((err) => {
+              console.error("Firebase addition error:", err);
+              alert("Database error: Could not add candidate.");
             });
           });
         });
@@ -1334,17 +1349,34 @@
       }
     }
 
-    // CLOUD CANDIDATE REMOVAL
+    // CLOUD CANDIDATE REMOVAL (FIXED & SANITIZED)
     window.removeCandidateFromCloud = function(office, idx) {
       db.ref(`elections/candidates/${office}`).once('value', (snapshot) => {
-        let currentList = snapshot.val() || [];
+        let rawData = snapshot.val();
+        let currentList = Array.isArray(rawData) ? rawData : (rawData ? Object.values(rawData) : []);
+        
+        if (!currentList || !currentList[idx]) {
+          alert("Candidate record not found or already removed.");
+          return;
+        }
+        
         const target = currentList[idx];
-        if (!confirm(`Disqualify and remove ${target.name} from the global cloud ballot?`)) return;
+        if (!confirm(`Disqualify and permanently remove '${target.name}' from the ${office.toUpperCase()} ballot?`)) return;
         
         currentList.splice(idx, 1);
+        
         db.ref(`elections/candidates/${office}`).set(currentList).then(() => {
-          GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CANDIDATE DISQUALIFIED | Removed ${target.name}`);
+          GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CANDIDATE DISQUALIFIED | Removed ${target.name} (${office.toUpperCase()})`);
           saveIntranet();
+          
+          if (!ELECTION_CANDIDATES) ELECTION_CANDIDATES = {};
+          ELECTION_CANDIDATES[office] = currentList;
+          if (CURRENT_ROLE) renderWorkstation(CURRENT_ROLE);
+          
+          alert(`Candidate '${target.name}' has been successfully removed from the global ballot.`);
+        }).catch((err) => {
+          console.error("Firebase removal error:", err);
+          alert("Database error: Could not remove candidate. Check console for details.");
         });
       });
     };
