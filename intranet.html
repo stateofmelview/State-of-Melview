@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>State of Melview | Restricted Government Intranet (CJIS/JDIS)</title>
+  <title>State of Melview | Restricted Government Intranet</title>
   <style>
     :root {
       --gov-navy-dark: #0b1319;
@@ -96,53 +96,43 @@
     .audit-terminal-viewer { background: #020617; color: #94a3b8; font-family: var(--font-mono); font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 180px; overflow-y: auto; }
     .audit-entry { margin-bottom: 0.35rem; border-bottom: 1px dotted #1e293b; padding-bottom: 0.35rem; }
     
-    /* WORKSTATION DIVERGENT CONTAINER STYLES */
     .workstation-container { border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.4); margin-bottom: 2rem; }
     .workstation-topbar { padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
     .workstation-body { padding: 2rem; }
     .card-panel { background: #111827; border: 1px solid #1e293b; border-left: 4px solid #38bdf8; padding: 1.5rem; border-radius: 4px; margin-bottom: 1.5rem; }
 
-    /* Judiciary */
     .theme-judiciary { background-color: #090e17; border: 2px solid #334155; }
     .theme-judiciary .workstation-topbar { background: linear-gradient(135deg, #020617 0%, #1e293b 100%); border-bottom: 3px solid var(--gov-gold); color: #f8fafc; }
     .theme-judiciary .card-panel { border-left-color: #3b82f6; }
 
-    /* Executive */
     .theme-executive { background-color: #120e09; border: 2px solid #854d0e; }
     .theme-executive .workstation-topbar { background: linear-gradient(135deg, #1c1917 0%, #292524 100%); border-bottom: 3px solid #eab308; color: #fef08a; }
     .theme-executive .card-panel { border-left-color: #ca8a04; background: #1a1612; }
 
-    /* State Police */
     .theme-msp { background-color: #050b14; border: 2px solid #1e3a8a; }
     .theme-msp .workstation-topbar { background: #1e3a8a; border-bottom: 3px solid #38bdf8; color: #ffffff; }
     .theme-msp .card-panel { border-left-color: #38bdf8; background: #0b1324; }
 
-    /* Sheriff */
     .theme-mcso { background-color: #120b05; border: 2px solid #78350f; }
     .theme-mcso .workstation-topbar { background: #451a03; border-bottom: 3px solid #d97706; color: #fef3c7; }
     .theme-mcso .card-panel { border-left-color: #d97706; background: #1a1109; }
 
-    /* IEC */
     .theme-iec { background-color: #05140b; border: 2px solid #166534; }
     .theme-iec .workstation-topbar { background: #14532d; border-bottom: 3px solid #22c55e; color: #dcfce7; }
     .theme-iec .card-panel { border-left-color: #22c55e; background: #091c10; }
 
-    /* DOT */
     .theme-dot { background-color: #140d04; border: 2px solid #92400e; }
     .theme-dot .workstation-topbar { background: #78350f; border-bottom: 3px solid #f59e0b; color: #fef3c7; }
     .theme-dot .card-panel { border-left-color: #f59e0b; background: #1c1307; }
 
-    /* DOJ */
     .theme-doj { background-color: #14050d; border: 2px solid #831843; }
     .theme-doj .workstation-topbar { background: #500724; border-bottom: 3px solid #db2777; color: #fce7f3; }
     .theme-doj .card-panel { border-left-color: #db2777; background: #1c0813; }
 
-    /* Records */
     .theme-records { background-color: #060b13; border: 2px solid #3b82f6; }
     .theme-records .workstation-topbar { background: #020617; border-bottom: 3px solid #60a5fa; color: #93c5fd; }
     .theme-records .card-panel { border-left-color: #60a5fa; background: #0c1424; }
 
-    /* Modal */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; }
     .modal-dialog { background: #1e293b; border: 2px solid #38bdf8; border-radius: 6px; padding: 1.5rem; max-width: 500px; width: 100%; color: #f8fafc; }
     footer.gov-footer { background-color: var(--gov-navy-dark); color: #94a3b8; border-top: 4px solid var(--gov-navy); padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: auto; }
@@ -160,7 +150,8 @@
         </div>
       </a>
       <div style="display:flex; align-items:center; gap:1rem;">
-        <a href="index.html" class="btn btn-secondary">⬅️ Public Portal</a>
+        <a href="index.html" class="btn btn-secondary">Public Portal</a>
+        <a href="leadership.html" class="btn btn-secondary" style="border:1px solid var(--gov-gold); color:var(--gov-gold);">Leadership Terminal</a>
         <div id="authPill" class="badge badge-navy">RESTRICTED ACCESS</div>
       </div>
     </div>
@@ -176,7 +167,7 @@
       <form id="intranetLoginForm">
         <div class="form-group" style="margin-bottom:1rem;">
           <label>Government Username</label>
-          <input type="text" id="intUser" class="gov-input" placeholder="e.g. police1, sheriff1, judge1, law3, doj1, transport1, records1..." required />
+          <input type="text" id="intUser" class="gov-input" placeholder="e.g. police1, sheriff1, judge1, law3, judge2..." required />
         </div>
         <div class="form-group" style="margin-bottom:1.5rem;">
           <label>Security Password</label>
@@ -194,55 +185,9 @@
 
   </main>
 
-  <!-- MODAL FOR EDITING MASTER PERSONNEL -->
-  <div id="editPersonnelModal" class="modal-overlay">
-    <div class="modal-dialog">
-      <h3 style="font-family:var(--font-serif); color:#38bdf8; margin-bottom:0.5rem;">✏️ Edit State Personnel Record</h3>
-      <form id="editPersonnelForm">
-        <input type="hidden" id="editEmpId" />
-        <div class="form-group" style="margin-bottom:0.75rem;"><label>Username</label><input type="text" id="editEmpUser" class="gov-input" required /></div>
-        <div class="form-group" style="margin-bottom:0.75rem;">
-          <label>Department</label>
-          <select id="editEmpDept" class="gov-select">
-            <option value="Judiciary (Supreme Court)">Judiciary (Supreme Court)</option>
-            <option value="Executive / Senate">Executive / Senate</option>
-            <option value="Melview State Police">Melview State Police</option>
-            <option value="County Sheriff Office">County Sheriff Office</option>
-            <option value="Independent Electoral Commission">Independent Electoral Commission</option>
-            <option value="Department of Transportation">Department of Transportation</option>
-            <option value="Department of Justice">Department of Justice</option>
-          </select>
-        </div>
-        <div class="form-group" style="margin-bottom:0.75rem;"><label>Role / Title</label><input type="text" id="editEmpRole" class="gov-input" required /></div>
-        <div class="form-group" style="margin-bottom:0.75rem;">
-          <label>Clearance Tier</label>
-          <select id="editEmpClearance" class="gov-select">
-            <option value="Level 1 General Public Trust">Level 1 General Public Trust</option>
-            <option value="Level 2 Department Staff">Level 2 Department Staff</option>
-            <option value="Level 3 Operational Command">Level 3 Operational Command</option>
-            <option value="Level 4 Constitutional Officer">Level 4 Constitutional Officer</option>
-            <option value="Level 5 Executive Authority">Level 5 Executive Authority</option>
-          </select>
-        </div>
-        <div class="form-group" style="margin-bottom:1.25rem;">
-          <label>Standing</label>
-          <select id="editEmpStatus" class="gov-select">
-            <option value="Active">Active</option>
-            <option value="Suspended">Suspended</option>
-            <option value="Terminated">Terminated</option>
-          </select>
-        </div>
-        <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
-          <button type="button" class="btn btn-secondary" onclick="closeEditPersonnelModal()">Cancel</button>
-          <button type="submit" class="btn btn-success">Save Record</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <footer class="gov-footer">
     <div style="max-width:1400px; margin:0 auto; text-align:center;">
-      STATE OF MELVIEW RESTRICTED INTRANET & CJIS/JDIS GATEWAY • AUTHORIZED OFFICIALS ONLY
+      STATE OF MELVIEW RESTRICTED INTRANET & CJIS/JDIS GATEWAY
     </div>
   </footer>
 
@@ -263,11 +208,20 @@
     let CURRENT_ROLE = null;
     let CURRENT_DEPT = "";
 
-    // LOCAL STORAGE SYNCHRONIZED REPOSITORIES
+    const DEFAULT_CREDENTIALS = [
+      { user: "judge1", pass: "admin5", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
+      { user: "law3", pass: "admin2", dept: "Executive / Senate", roleKey: "government" },
+      { user: "police1", pass: "admin3", dept: "Melview State Police", roleKey: "dept_msp" },
+      { user: "sheriff1", pass: "admin4", dept: "County Sheriff Office", roleKey: "dept_mcso" },
+      { user: "elections1", pass: "admin6", dept: "Independent Electoral Commission", roleKey: "dept_iec" },
+      { user: "transport1", pass: "admin7", dept: "Department of Transportation", roleKey: "dept_dot" },
+      { user: "doj1", pass: "admin8", dept: "Department of Justice", roleKey: "dept_doj" },
+      { user: "records1", pass: "admin9", dept: "Master Private Personnel Archive", roleKey: "dept_records" }
+    ];
+
     let PUBLIC_REGISTRY = JSON.parse(localStorage.getItem('melview_registry')) || [
       { id: "CCW-2026-001", name: "State Resident Permit", cat: "Concealed Carry (CCW)", score: "State Verified", exp: "2026-12-31", status: "Active & Certified" },
-      { id: "CCW-2026-002", name: "John_Miller_RP", cat: "Concealed Carry (CCW)", score: "State Verified", exp: "2026-12-31", status: "Active & Certified" },
-      { id: "BAR-2026-101", name: "Rachel Sterling", cat: "State Bar License", score: "88% (Passed)", exp: "2027-01-01", status: "Active & Certified" }
+      { id: "CCW-2026-002", name: "John_Miller_RP", cat: "Concealed Carry (CCW)", score: "State Verified", exp: "2026-12-31", status: "Active & Certified" }
     ];
 
     let PRIVATE_PERSONNEL = JSON.parse(localStorage.getItem('melview_master_personnel')) || [
@@ -320,10 +274,6 @@
       { id: "COMM-2026-01", appointee: "Colonel_Davis", office: "Commissioner of State Police", date: "2026-08-25", status: "Commissioned" }
     ];
 
-    let GS_PAYROLL = JSON.parse(localStorage.getItem('melview_gs_payroll')) || [
-      { user: "Colonel_Davis", grade: "GS-15 (Executive)", longevity: "1 Year Active" }
-    ];
-
     let GOV_LOGS = JSON.parse(localStorage.getItem('melview_gov_logs')) || [
       "2026-08-27 12:00 UTC | INTRANET SESSION | Master CJIS Workstation initialized."
     ];
@@ -340,36 +290,28 @@
       localStorage.setItem('melview_dot_logistics', JSON.stringify(DOT_LOGISTICS));
       localStorage.setItem('melview_evidence_vault', JSON.stringify(EVIDENCE_LOCKER));
       localStorage.setItem('melview_exec_commissions', JSON.stringify(EXEC_COMMISSIONS));
-      localStorage.setItem('melview_gs_payroll', JSON.stringify(GS_PAYROLL));
       localStorage.setItem('melview_gov_logs', JSON.stringify(GOV_LOGS));
       if (CURRENT_ROLE) renderWorkstation(CURRENT_ROLE);
     }
 
-    // LOGIN AUTHENTICATION
+    // LOGIN DISPATCH (AUTHENTICATES AGAINST LOCALSTORAGE CREDENTIALS)
     document.getElementById('intranetLoginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const u = document.getElementById('intUser').value.trim().toLowerCase();
       const p = document.getElementById('intPass').value.trim();
       const err = document.getElementById('intError');
 
-      let dept = "";
-      if (u === 'judge1' && p === 'admin5') dept = "Judiciary (Supreme Court)";
-      else if (u === 'law3' && p === 'admin2') dept = "Executive / Senate";
-      else if (u === 'police1' && p === 'admin3') dept = "Melview State Police";
-      else if (u === 'sheriff1' && p === 'admin4') dept = "County Sheriff Office";
-      else if (u === 'elections1' && p === 'admin6') dept = "Independent Electoral Commission";
-      else if (u === 'transport1' && p === 'admin7') dept = "Department of Transportation";
-      else if (u === 'doj1' && p === 'admin8') dept = "Department of Justice";
-      else if (u === 'records1' && p === 'admin9') dept = "Master Private Personnel Archive";
+      const userDb = JSON.parse(localStorage.getItem('melview_auth_credentials')) || DEFAULT_CREDENTIALS;
+      const matched = userDb.find(cred => cred.user.toLowerCase() === u && cred.pass === p);
 
-      if (dept) {
-        CURRENT_ROLE = u;
-        CURRENT_DEPT = dept;
+      if (matched) {
+        CURRENT_ROLE = matched.roleKey;
+        CURRENT_DEPT = matched.dept;
         err.style.display = 'none';
         document.getElementById('loginGateCard').style.display = 'none';
         document.getElementById('workstationView').style.display = 'block';
         document.getElementById('authPill').textContent = `AUTH: ${u.toUpperCase()}`;
-        renderWorkstation(u);
+        renderWorkstation(matched.roleKey);
       } else {
         err.style.display = 'block';
       }
@@ -385,21 +327,19 @@
       document.getElementById('authPill').textContent = 'RESTRICTED ACCESS';
     };
 
-    // =========================================================================
-    // MODULAR DIVERGENT WORKSTATION RENDERING
-    // =========================================================================
-    function renderWorkstation(role) {
+    // RENDER WORKSTATION
+    function renderWorkstation(roleKey) {
       const container = document.getElementById('workstationView');
       if (!container) return;
       
       let theme = "theme-records";
-      if (role === 'judge1') theme = "theme-judiciary";
-      else if (role === 'law3') theme = "theme-executive";
-      else if (role === 'police1') theme = "theme-msp";
-      else if (role === 'sheriff1') theme = "theme-mcso";
-      else if (role === 'elections1') theme = "theme-iec";
-      else if (role === 'transport1') theme = "theme-dot";
-      else if (role === 'doj1') theme = "theme-doj";
+      if (roleKey === 'judiciary') theme = "theme-judiciary";
+      else if (roleKey === 'government') theme = "theme-executive";
+      else if (roleKey === 'dept_msp') theme = "theme-msp";
+      else if (roleKey === 'dept_mcso') theme = "theme-mcso";
+      else if (roleKey === 'dept_iec') theme = "theme-iec";
+      else if (roleKey === 'dept_dot') theme = "theme-dot";
+      else if (roleKey === 'dept_doj') theme = "theme-doj";
 
       container.className = `workstation-container ${theme}`;
       container.innerHTML = `
@@ -411,7 +351,7 @@
           <button type="button" class="btn btn-danger" onclick="logoutTerminal()">Sign Out</button>
         </div>
         <div class="workstation-body">
-          ${getWorkstationSpecificModules(role)}
+          ${getWorkstationSpecificModules(roleKey)}
           ${getCommonAgencyRosterModule()}
           <div style="margin-top:2rem;">
             <h4 style="font-size:0.85rem; color:#94a3b8; margin-bottom:0.5rem;">Agency Session Audit Log</h4>
@@ -420,21 +360,19 @@
         </div>
       `;
 
-      attachWorkstationListeners(role);
+      attachWorkstationListeners(roleKey);
     }
 
-    // WORKSTATION SPECIFIC MODULES
-    function getWorkstationSpecificModules(role) {
-      if (role === 'police1' || role === 'sheriff1') {
+    function getWorkstationSpecificModules(roleKey) {
+      if (roleKey === 'dept_msp' || roleKey === 'dept_mcso') {
         return `
-          <!-- NCIC BOLO & BROADCAST PANEL (WITH ADD & REMOVE) -->
           <div class="card-panel">
             <h3 style="color:#38bdf8; font-size:1.1rem; margin-bottom:0.5rem;">🚨 NCIC / CAD BOLO Broadcast Console</h3>
             <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Broadcast temporary Be-On-The-Lookout alerts across all field units.</p>
             <form id="addBoloForm" style="margin-bottom:1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr 3fr auto; align-items:flex-end;">
-                <div class="form-group"><label>BOLO Type</label><select id="boloType" class="gov-select"><option value="Stolen Vehicle">Stolen Vehicle</option><option value="Armed Suspect">Armed Suspect</option><option value="Missing / Endangered">Missing / Endangered</option><option value="Officer Safety">Officer Safety</option></select></div>
-                <div class="form-group"><label>Target Subject / Vehicle</label><input type="text" id="boloTitle" class="gov-input" required /></div>
+                <div class="form-group"><label>BOLO Type</label><select id="boloType" class="gov-select"><option value="Stolen Vehicle">Stolen Vehicle</option><option value="Armed Suspect">Armed Suspect</option><option value="Missing / Endangered">Missing / Endangered</option></select></div>
+                <div class="form-group"><label>Target Subject / Plate</label><input type="text" id="boloTitle" class="gov-input" required /></div>
                 <div class="form-group"><label>Factual Summary</label><input type="text" id="boloDesc" class="gov-input" required /></div>
                 <button type="submit" class="btn btn-danger" style="height:38px;">Issue BOLO</button>
               </div>
@@ -442,11 +380,11 @@
             <div class="table-container">
               <table class="gov-table">
                 <thead><tr><th>BOLO ID</th><th>Type</th><th>Subject</th><th>Summary</th><th>Issuer</th><th>Action</th></tr></thead>
-                <tbody id="boloTableBody">
+                <tbody>
                   ${NCIC_BOLOS.map((b, idx) => `
                     <tr>
                       <td><strong>${b.id}</strong></td><td><span class="badge badge-danger">${b.type}</span></td><td><strong>${b.title}</strong></td><td>${b.desc}</td><td>${b.issuer}</td>
-                      <td><button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBOLO(${idx})">Cancel / Clear BOLO</button></td>
+                      <td><button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBOLO(${idx})">Clear BOLO</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -454,10 +392,8 @@
             </div>
           </div>
 
-          <!-- CCW PERMIT REVOCATION MODULE (WITH REVOKE & REINSTATE) -->
           <div class="card-panel" style="border-left-color:var(--gov-red);">
-            <h3 style="color:#f87171; font-size:1.1rem; margin-bottom:0.5rem;">🔫 Concealed Carry (CCW) Permit Revocation Portal</h3>
-            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Revoke or reinstate citizen concealed carry permits following Title 8 Division 5 infractions.</p>
+            <h3 style="color:#f87171; font-size:1.1rem; margin-bottom:0.5rem;">🔫 Concealed Carry (CCW) Permit Revocation</h3>
             <div class="table-container">
               <table class="gov-table">
                 <thead><tr><th>Permit ID</th><th>Licensee Name</th><th>Status</th><th>Expiry</th><th>Action</th></tr></thead>
@@ -479,27 +415,26 @@
             </div>
           </div>
         `;
-      } else if (role === 'judge1' || role === 'doj1') {
+      } else if (roleKey === 'judiciary' || roleKey === 'dept_doj') {
         return `
-          <!-- JUDICIAL EVIDENCE VAULT (WITH ADD & EXPUNGE) -->
           <div class="card-panel">
             <h3 style="color:#38bdf8; font-size:1.1rem; margin-bottom:0.5rem;">📦 Evidence Locker & Chain-of-Custody Vault</h3>
             <form id="addEvidenceForm" style="margin-bottom:1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr 1fr auto; align-items:flex-end;">
-                <div class="form-group"><label>Case Docket Ref</label><input type="text" id="evCase" class="gov-input" required /></div>
-                <div class="form-group"><label>Seized Item Description</label><input type="text" id="evItem" class="gov-input" required /></div>
-                <div class="form-group"><label>Logging Officer</label><input type="text" id="evOff" class="gov-input" required /></div>
-                <button type="submit" class="btn btn-success" style="height:38px;">Vault Evidence</button>
+                <div class="form-group"><label>Docket Ref</label><input type="text" id="evCase" class="gov-input" required /></div>
+                <div class="form-group"><label>Item Description</label><input type="text" id="evItem" class="gov-input" required /></div>
+                <div class="form-group"><label>Officer</label><input type="text" id="evOff" class="gov-input" required /></div>
+                <button type="submit" class="btn btn-success" style="height:38px;">Vault Item</button>
               </div>
             </form>
             <div class="table-container">
               <table class="gov-table">
-                <thead><tr><th>Evidence ID</th><th>Case Ref</th><th>Item Description</th><th>Officer</th><th>Status</th><th>Action</th></tr></thead>
+                <thead><tr><th>Evidence ID</th><th>Case Ref</th><th>Item</th><th>Officer</th><th>Status</th><th>Action</th></tr></thead>
                 <tbody>
                   ${EVIDENCE_LOCKER.map((e, idx) => `
                     <tr>
                       <td><strong>${e.id}</strong></td><td>${e.caseRef}</td><td>${e.item}</td><td>${e.officer}</td><td><span class="badge badge-success">${e.status}</span></td>
-                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeEvidence(${idx})">Release / Destroy</button></td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeEvidence(${idx})">Release / Purge</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -507,14 +442,13 @@
             </div>
           </div>
 
-          <!-- STATE BAR GRIEVANCES (WITH FILE & RESOLVE) -->
           <div class="card-panel" style="border-left-color:var(--gov-gold);">
-            <h3 style="color:#fef08a; font-size:1.1rem; margin-bottom:0.5rem;">⚖️ State Bar Attorney Ethics & Grievance Board</h3>
+            <h3 style="color:#fef08a; font-size:1.1rem; margin-bottom:0.5rem;">⚖️ State Bar Attorney Grievance Board</h3>
             <form id="addGrievanceForm" style="margin-bottom:1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 1fr 2fr auto; align-items:flex-end;">
                 <div class="form-group"><label>Attorney</label><input type="text" id="grvAtt" class="gov-input" required /></div>
                 <div class="form-group"><label>Complainant</label><input type="text" id="grvComp" class="gov-input" required /></div>
-                <div class="form-group"><label>Ethical Violation Grounds</label><input type="text" id="grvReason" class="gov-input" required /></div>
+                <div class="form-group"><label>Violation Grounds</label><input type="text" id="grvReason" class="gov-input" required /></div>
                 <button type="submit" class="btn btn-danger" style="height:38px;">File Grievance</button>
               </div>
             </form>
@@ -525,7 +459,7 @@
                   ${BAR_GRIEVANCES.map((g, idx) => `
                     <tr>
                       <td><strong>${g.id}</strong></td><td>${g.attorney}</td><td>${g.complainant}</td><td>${g.reason}</td><td><span class="badge badge-pending">${g.status}</span></td>
-                      <td><button type="button" class="btn btn-success" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="resolveGrievance(${idx})">Dismiss / Resolve</button></td>
+                      <td><button type="button" class="btn btn-success" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="resolveGrievance(${idx})">Dismiss / Close</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -533,16 +467,15 @@
             </div>
           </div>
         `;
-      } else if (role === 'transport1') {
+      } else if (roleKey === 'dept_dot') {
         return `
-          <!-- DOT FLEET READINESS & IMPOUND (WITH ADD & RELEASE) -->
           <div class="card-panel" style="border-left-color:#f59e0b;">
             <h3 style="color:#fde68a; font-size:1.1rem; margin-bottom:0.5rem;">🚚 State Fleet Logistics & Impound Matrix</h3>
             <form id="addDotLogisticsForm" style="margin-bottom:1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 1fr 2fr auto; align-items:flex-end;">
-                <div class="form-group"><label>Vehicle Tag</label><input type="text" id="dotTag" class="gov-input" required /></div>
-                <div class="form-group"><label>Vehicle Type</label><input type="text" id="dotType" class="gov-input" required /></div>
-                <div class="form-group"><label>Operational Status</label><select id="dotStat" class="gov-select"><option value="In Service (Operational)">In Service (Operational)</option><option value="Deadlined (Mechanical)">Deadlined (Mechanical)</option><option value="Impounded by State">Impounded by State</option></select></div>
+                <div class="form-group"><label>Tag / Plate</label><input type="text" id="dotTag" class="gov-input" required /></div>
+                <div class="form-group"><label>Type</label><input type="text" id="dotType" class="gov-input" required /></div>
+                <div class="form-group"><label>Status</label><select id="dotStat" class="gov-select"><option value="In Service (Operational)">In Service (Operational)</option><option value="Deadlined (Mechanical)">Deadlined (Mechanical)</option><option value="Impounded by State">Impounded by State</option></select></div>
                 <button type="submit" class="btn btn-success" style="height:38px;">Log Vehicle</button>
               </div>
             </form>
@@ -553,7 +486,7 @@
                   ${DOT_LOGISTICS.map((d, idx) => `
                     <tr>
                       <td><strong>${d.id}</strong></td><td>${d.tag}</td><td>${d.type}</td><td><span class="badge badge-navy">${d.status}</span></td>
-                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeDotLogistics(${idx})">Release / Remove</button></td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeDotLogistics(${idx})">Release Asset</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -561,24 +494,22 @@
             </div>
           </div>
         `;
-      } else if (role === 'law3') {
+      } else if (roleKey === 'government') {
         return `
-          <!-- EXECUTIVE SEOC EAS BROADCAST -->
           <div class="card-panel" style="border-left-color:#ef4444;">
             <h3 style="color:#f87171; font-size:1.1rem; margin-bottom:0.5rem;">🚨 State Emergency Alert System (SEOC Broadcast)</h3>
             <form id="easBroadcastForm">
-              <div class="form-group" style="margin-bottom:0.5rem;"><input type="text" id="easAlertTextInput" class="gov-input" placeholder="Enter statewide emergency text to display on public portal..." required /></div>
+              <div class="form-group" style="margin-bottom:0.5rem;"><input type="text" id="easAlertTextInput" class="gov-input" placeholder="Broadcast alert to public portal..." required /></div>
               <button type="submit" class="btn btn-danger">Broadcast Emergency Alert</button>
             </form>
           </div>
 
-          <!-- EXECUTIVE COMMISSIONS (WITH ISSUE & RESCIND) -->
           <div class="card-panel" style="border-left-color:#ca8a04;">
-            <h3 style="color:#fef08a; font-size:1.1rem; margin-bottom:0.5rem;">📜 Executive Cabinet Appointments & Commissions</h3>
+            <h3 style="color:#fef08a; font-size:1.1rem; margin-bottom:0.5rem;">📜 Cabinet Commissions & Warrants</h3>
             <form id="addCommissionForm" style="margin-bottom:1rem;">
               <div class="form-grid" style="grid-template-columns: 2fr 2fr auto; align-items:flex-end;">
-                <div class="form-group"><label>Appointed Official</label><input type="text" id="commUser" class="gov-input" required /></div>
-                <div class="form-group"><label>Constitutional Office</label><input type="text" id="commOffice" class="gov-input" required /></div>
+                <div class="form-group"><label>Appointee</label><input type="text" id="commUser" class="gov-input" required /></div>
+                <div class="form-group"><label>Office Title</label><input type="text" id="commOffice" class="gov-input" required /></div>
                 <button type="submit" class="btn btn-success" style="height:38px;">Issue Commission</button>
               </div>
             </form>
@@ -589,31 +520,7 @@
                   ${EXEC_COMMISSIONS.map((c, idx) => `
                     <tr>
                       <td><strong>${c.id}</strong></td><td>${c.appointee}</td><td>${c.office}</td><td>${c.date}</td><td><span class="badge badge-success">${c.status}</span></td>
-                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeCommission(${idx})">Rescind Commission</button></td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        `;
-      } else if (role === 'records1') {
-        return `
-          <!-- MASTER PERSONNEL ARCHIVE (OPM) WITH INLINE EDIT & PURGE -->
-          <div class="card-panel" style="border-left-color:#60a5fa;">
-            <h3 style="color:#93c5fd; font-size:1.1rem; margin-bottom:0.5rem;">📂 Master Personnel Database Editor (OPM Suite)</h3>
-            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Edit master state personnel appointments, clearance levels, and active status.</p>
-            <div class="table-container">
-              <table class="gov-table">
-                <thead><tr><th>File ID</th><th>Username</th><th>Department</th><th>Role</th><th>Clearance</th><th>Status</th><th>Actions</th></tr></thead>
-                <tbody>
-                  ${PRIVATE_PERSONNEL.map((emp, idx) => `
-                    <tr>
-                      <td><strong>${emp.id}</strong></td><td>${emp.user}</td><td>${emp.dept}</td><td>${emp.role}</td><td><span class="badge badge-navy">${emp.clearance}</span></td><td><span class="badge ${emp.status === 'Active' ? 'badge-success' : 'badge-danger'}">${emp.status}</span></td>
-                      <td>
-                        <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openEditPersonnelModal(${idx})">✏️ Edit</button>
-                        <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="deleteMasterPersonnelRecord('${emp.id}', '${emp.user}')">Expunge</button>
-                      </td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeCommission(${idx})">Rescind</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -625,7 +532,6 @@
       return '';
     }
 
-    // COMMON ROSTER & IA MODULE (FOR EVERY AGENCY)
     function getCommonAgencyRosterModule() {
       const rosterList = DEPT_ROSTERS[CURRENT_DEPT] || [];
       const shiftList = DEPT_SHIFTS[CURRENT_DEPT] || [];
@@ -634,7 +540,6 @@
       return `
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
           
-          <!-- Roster Module (Add & Terminate) -->
           <div class="card-panel">
             <h3 style="color:#f8fafc; font-size:1.05rem; margin-bottom:0.5rem;">Department Personnel Roster</h3>
             <form id="addRosterForm" style="margin-bottom:1rem;">
@@ -651,7 +556,7 @@
                   ${rosterList.length === 0 ? `<tr><td colspan="3" style="text-align:center; color:#94a3b8;">No personnel registered.</td></tr>` : rosterList.map((m, idx) => `
                     <tr>
                       <td><strong>${m.user}</strong></td><td>${m.rank}</td>
-                      <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="terminateEmployeePersonnel('${CURRENT_DEPT}', ${idx})">🚫 Terminate</button></td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="terminateMember('${CURRENT_DEPT}', ${idx})">🚫 Terminate</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -659,7 +564,6 @@
             </div>
           </div>
 
-          <!-- Shifts Module (Add & End Shift) -->
           <div class="card-panel">
             <h3 style="color:#f8fafc; font-size:1.05rem; margin-bottom:0.5rem;">Active Patrol Shifts & Assignments</h3>
             <form id="addShiftForm" style="margin-bottom:1rem;">
@@ -685,7 +589,6 @@
             </div>
           </div>
 
-          <!-- IA Disciplinary Module (Log & Remove/Clear) -->
           <div class="card-panel">
             <h3 style="color:#f87171; font-size:1.05rem; margin-bottom:0.5rem;">Internal Affairs (IA) Disciplinary Registry</h3>
             <form id="addIAForm" style="margin-bottom:1rem;">
@@ -711,7 +614,6 @@
             </div>
           </div>
 
-          <!-- Mutual Aid & Tactical Dispatch (Dispatch & Stand Down) -->
           <div class="card-panel">
             <h3 style="color:#f8fafc; font-size:1.05rem; margin-bottom:0.5rem;">Inter-Agency Mutual Aid Calls</h3>
             <form id="addMutualAidForm" style="margin-bottom:1rem;">
@@ -740,8 +642,8 @@
       `;
     }
 
-    // ATTACH EVENT LISTENERS FOR ACTIVE FORMS
-    function attachWorkstationListeners(role) {
+    // ATTACH LISTENERS
+    function attachWorkstationListeners(roleKey) {
       const rosterForm = document.getElementById('addRosterForm');
       if (rosterForm) {
         rosterForm.addEventListener('submit', function(e) {
@@ -879,68 +781,40 @@
           const text = document.getElementById('easAlertTextInput').value.trim();
           GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | SEOC EAS ALERT | "${text}"`);
           saveIntranet();
-          syncToGoogleSheet({
-            timestamp: new Date().toISOString(), action: "EAS_EMERGENCY_BROADCAST", id: `EAS-${Math.floor(100+Math.random()*900)}`,
-            appellant: "Statewide Alert", category: "Emergency Alert", ref: CURRENT_DEPT, status: "ACTIVE", officer: CURRENT_ROLE, notes: text
-          });
           alert(`Emergency broadcast dispatched.`);
-        });
-      }
-
-      const editPersForm = document.getElementById('editPersonnelForm');
-      if (editPersForm) {
-        editPersForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const id = document.getElementById('editEmpId').value;
-          const user = document.getElementById('editEmpUser').value.trim();
-          const dept = document.getElementById('editEmpDept').value;
-          const role = document.getElementById('editEmpRole').value.trim();
-          const clearance = document.getElementById('editEmpClearance').value;
-          const status = document.getElementById('editEmpStatus').value;
-          const idx = PRIVATE_PERSONNEL.findIndex(p => p.id === id);
-          if (idx !== -1) {
-            PRIVATE_PERSONNEL[idx] = { id, user, dept, role, clearance, status };
-            saveIntranet();
-            alert(`Record ${id} updated.`);
-            closeEditPersonnelModal();
-          }
         });
       }
     }
 
-    // REMOVAL HANDLERS FOR ALL ADDED ITEMS
+    // EXPUNGE / ACTION HANDLERS
     window.removeBOLO = function(idx) {
-      const b = NCIC_BOLOS.splice(idx, 1)[0];
-      GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | BOLO CLEARED | Cancelled BOLO ${b.id} (${b.title})`);
+      NCIC_BOLOS.splice(idx, 1);
       saveIntranet();
-      alert(`BOLO ${b.id} cleared from CAD.`);
+      alert("BOLO cleared from CAD.");
     };
 
     window.removeEvidence = function(idx) {
-      const ev = EVIDENCE_LOCKER.splice(idx, 1)[0];
-      GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | EVIDENCE DESTROYED | ${ev.id} released.`);
+      EVIDENCE_LOCKER.splice(idx, 1);
       saveIntranet();
-      alert(`Evidence ${ev.id} released/destroyed.`);
+      alert("Evidence released from vault.");
     };
 
     window.resolveGrievance = function(idx) {
-      const g = BAR_GRIEVANCES.splice(idx, 1)[0];
-      GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | GRIEVANCE RESOLVED | ${g.id} closed.`);
+      BAR_GRIEVANCES.splice(idx, 1);
       saveIntranet();
-      alert(`Grievance ${g.id} dismissed.`);
+      alert("Grievance closed.");
     };
 
     window.removeDotLogistics = function(idx) {
-      const d = DOT_LOGISTICS.splice(idx, 1)[0];
+      DOT_LOGISTICS.splice(idx, 1);
       saveIntranet();
-      alert(`Vehicle ${d.tag} removed.`);
+      alert("Vehicle asset removed.");
     };
 
     window.removeCommission = function(idx) {
-      const c = EXEC_COMMISSIONS.splice(idx, 1)[0];
-      GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | COMMISSION RESCINDED | Rescinded ${c.office} for ${c.appointee}`);
+      EXEC_COMMISSIONS.splice(idx, 1);
       saveIntranet();
-      alert(`Commission ${c.id} rescinded.`);
+      alert("Commission rescinded.");
     };
 
     window.removeDeptShift = function(dept, idx) {
@@ -966,7 +840,6 @@
       const item = PUBLIC_REGISTRY.find(r => r.id === id);
       if (item) {
         item.status = "Revoked / Seized";
-        GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CCW REVOKED | ${name} (${id}) - Grounds: "${reason}"`);
         saveIntranet();
         alert(`CCW Permit ${id} revoked.`);
       }
@@ -981,7 +854,7 @@
       }
     };
 
-    window.terminateEmployeePersonnel = function(dept, idx) {
+    window.terminateMember = function(dept, idx) {
       const emp = DEPT_ROSTERS[dept][idx];
       const reason = prompt(`Legal grounds for TERMINATING ${emp.user} from ${dept} (Article XIII, § 5):`);
       if (!reason) return;
@@ -993,34 +866,8 @@
       const master = PRIVATE_PERSONNEL.find(p => p.user.toLowerCase() === emp.user.toLowerCase());
       if (master) master.status = "Terminated";
 
-      GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | TERMINATION | ${emp.user} terminated from ${dept} - Reason: "${reason}"`);
       saveIntranet();
       alert(`Official Termination executed for ${emp.user}.`);
-    };
-
-    window.openEditPersonnelModal = function(idx) {
-      const emp = PRIVATE_PERSONNEL[idx];
-      document.getElementById('editEmpId').value = emp.id;
-      document.getElementById('editEmpUser').value = emp.user;
-      document.getElementById('editEmpDept').value = emp.dept;
-      document.getElementById('editEmpRole').value = emp.role;
-      document.getElementById('editEmpClearance').value = emp.clearance;
-      document.getElementById('editEmpStatus').value = emp.status;
-      document.getElementById('editPersonnelModal').style.display = 'flex';
-    };
-
-    window.closeEditPersonnelModal = function() {
-      document.getElementById('editPersonnelModal').style.display = 'none';
-    };
-
-    window.deleteMasterPersonnelRecord = function(id, user) {
-      if (!confirm(`Delete ${user} (${id}) from database?`)) return;
-      const idx = PRIVATE_PERSONNEL.findIndex(p => p.id === id);
-      if (idx !== -1) {
-        PRIVATE_PERSONNEL.splice(idx, 1);
-        saveIntranet();
-        alert(`Record ${id} purged.`);
-      }
     };
   </script>
 </body>
