@@ -215,21 +215,36 @@
     </div>
   </footer>
 
+  <!-- INTEGRATED LOCAL INTELLIGENCE LEGAL ASSISTANT -->
+  <div id="aiChatWidget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: var(--font-sans);">
+    <button id="aiToggleBtn" onclick="toggleAIChat()" style="background: #0f172a; color: #38bdf8; border: 2px solid #38bdf8; border-radius: 50px; padding: 12px 20px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 8px;">
+      ⚡ Department AI Co-Pilot
+    </button>
+
+    <div id="aiChatWindow" style="display: none; width: 390px; height: 500px; background: #0b1319; border: 2px solid #38bdf8; border-radius: 8px; flex-direction: column; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.7); margin-top: 10px;">
+      <div style="background: #0f172a; color: #f8fafc; padding: 12px 16px; border-bottom: 2px solid #38bdf8; font-size: 0.85rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center;">
+        <span id="aiDeptTitleLabel">Agency AI Intelligence Co-Pilot</span>
+        <button onclick="toggleAIChat()" style="background: none; border: none; color: #94a3b8; font-size: 1.1rem; cursor: pointer;">✕</button>
+      </div>
+      <div style="padding: 6px 12px; background: #060a0f; border-bottom: 1px solid #1e293b; display: flex; gap: 6px; overflow-x: auto; font-size: 0.75rem;">
+        <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setIntranetPrompt('warrant')">📑 Warrant Grounds</button>
+        <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setIntranetPrompt('indictment')">⚖️ Indictment Help</button>
+        <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setIntranetPrompt('custody cap')">⏱️ Custody Cap</button>
+      </div>
+      <div id="aiIntranetMessages" style="flex: 1; padding: 12px; overflow-y: auto; font-size: 0.82rem; color: #e2e8f0; display: flex; flex-direction: column; gap: 8px;">
+        <div style="background: #111827; padding: 10px 12px; border-radius: 4px; border-left: 3px solid #38bdf8;">
+          Local Legal Co-Pilot Active. Ask any question regarding statutory fines, MCR-2026-01 rules, or document drafting. No external API key required.
+        </div>
+      </div>
+      <div style="padding: 8px 12px; background: #060a0f; border-top: 1px solid #1e293b; display: flex; gap: 6px;">
+        <input type="text" id="aiIntranetInput" placeholder="Enter query..." style="flex: 1; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 6px 10px; border-radius: 3px; font-size: 0.8rem;" onkeydown="if(event.key==='Enter') sendIntranetLocalQuery()" />
+        <button onclick="sendIntranetLocalQuery()" class="btn" style="padding: 6px 12px;">Ask</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbynIMouFbor3yW33M12O3bH8xPtm5zElOZgGiPBFKyaEDmvqhV8REdGxhUj9QN-fk0B/exec";
-
-    function syncToGoogleSheet(payload) {
-      if (!GOOGLE_SHEET_WEBAPP_URL) return;
-      try {
-        fetch(GOOGLE_SHEET_WEBAPP_URL, {
-          method: "POST", mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        }).catch(err => console.error("Sync error:", err));
-      } catch(e) {}
-    }
-
-    // HIGH-PRECISION LEGAL FORMATTING ENGINE
+    // FORMAL DOCUMENT COMPILER
     function formatOfficialLegalDoc(headerTitle, instrumentType, id, authority, mainBody, signatureBlock) {
       return `========================================================================================
                        ${headerTitle.toUpperCase()}
@@ -245,8 +260,8 @@ JURISDICTION: STATE OF MELVIEW (TITLE 8 & ORGANIC LAW)
 ----------------------------------------------------------------------------------------
 I. PREAMBLE & STATEMENT OF JURISDICTION:
 Be it known to all public officers, magistrates, and citizens of the State of Melview,
-that this instrument is formally executed pursuant to the constitutional powers and
-statutory provisions vested in the issuing authority.
+that this instrument is formally executed pursuant to constitutional provisions vested
+in the issuing authority.
 
 ----------------------------------------------------------------------------------------
 II. FORMAL MATTERS, FINDINGS & CODIFIED PROVISIONS:
@@ -255,8 +270,7 @@ ${mainBody}
 ----------------------------------------------------------------------------------------
 III. MANDATORY COMPLIANCE & LEGAL EFFECT:
 Pursuant to Article II, Section 7 of the Constitution of Melview, this instrument carries
-binding force of law. Willful obstruction, defiance, or non-compliance constitutes a
-Class A Felony under Title 8, Section 8-602 (Official Misconduct & Deprivation of Law).
+binding force of law. Willful obstruction constitutes a Class A Felony under Title 8.
 
 ----------------------------------------------------------------------------------------
 IV. ATTESTATION, SEAL & EXECUTION:
@@ -306,10 +320,10 @@ ${signatureBlock}
     const DEPT_METADATA = {
       "judiciary": { name: "Judiciary of Melview", emblem: "⚖️", title: "Supreme & District Court Judicial Gateway", motto: "Fiat Justitia Ruat Caelum • Let Justice Be Done Though the Heavens Fall", badge: "ARTICLE IX ADJUDICATION" },
       "government": { name: "Executive Chamber & Senate", emblem: "🏛️", title: "State Executive Chamber & General Assembly", motto: "Salus Populi Suprema Lex Esto • The Welfare of the People Shall Be the Supreme Law", badge: "TITLE 4 & 5 LEGISLATIVE/EXECUTIVE" },
-      "dept_msp": { name: "Melview State Police", emblem: "⭐", title: "State Highway Patrol & Criminal Investigation Bureau", motto: "Semper Vigilis • Integritas et Constantia (Always Vigilant • Integrity and Steadfastness)", badge: "TITLE 8 LAW ENFORCEMENT" },
+      "dept_msp": { name: "Melview State Police", emblem: "⭐", title: "State Highway Patrol & Criminal Investigation Bureau", motto: "Semper Vigilis • Integritas et Constantia", badge: "TITLE 8 LAW ENFORCEMENT" },
       "dept_mcso": { name: "County Sheriff's Office", emblem: "🛡️", title: "County Sheriff Command & Corrections Administration", motto: "To Protect, Serve, and Defend Constitutional Liberty", badge: "CONSTITUTIONAL COUNTY JURISDICTION" },
       "dept_iec": { name: "Electoral Commission (IEC)", emblem: "🗳️", title: "Independent Electoral Commission of Melview", motto: "Integrity, Transparency, and Equal Franchise for All Citizens", badge: "TITLE 10 ELECTORAL CODE" },
-      "dept_dot": { name: "Dept. of Transportation (DOT)", emblem: "🚚", title: "State Transit Corridor & Infrastructure Bureau", motto: "Connecting Communities • Ensuring Safe and Efficient Transit", badge: "TITLE 6 TRANSIT ADMINISTRATION" },
+      "dept_dot": { name: "Dept. of Transportation (DOT)", emblem: "🚚", title: "State Transit Corridor & Infrastructure Bureau", motto: "Connecting Communities • Ensuring Safe Transit", badge: "TITLE 6 TRANSIT ADMINISTRATION" },
       "dept_doj": { name: "Department of Justice (DOJ)", emblem: "⚔️", title: "Office of the Attorney General & Criminal Prosecution", motto: "Lex Est Tutissima Cassis • The Law Is the Safest Shield", badge: "CHIEF LAW OFFICER" },
       "dept_records": { name: "Personnel Archive (OPM)", emblem: "📂", title: "Master Civil Service & Personnel Archive", motto: "Custodians of the Public Trust & Civil Merit Records", badge: "ARTICLE XIII CIVIL SERVICE" },
       "root": { name: "Supreme Root Developer", emblem: "⚡", title: "Master Root Architecture & Developer Console", motto: "Omnipotent System Integrity & Universal Override Key", badge: "UNRESTRICTED ROOT ACCESS" }
@@ -322,20 +336,20 @@ ${signatureBlock}
     ];
 
     let LEGISLATIVE_BILLS = JSON.parse(localStorage.getItem('melview_draft_bills')) || [
-      { id: "SB-2026-D1", title: "Public Infrastructure & Transit Security Act", sponsor: "Sen. Vance", type: "Statutory Bill", status: "Enacted Slip Law", summary: "Appropriating state funds for automated camera monitoring along Route 1.", formattedDoc: "" }
+      { id: "SB-2026-D1", title: "Public Infrastructure & Transit Security Act", sponsor: "Sen. Vance", type: "Statutory Bill", status: "Enacted Slip Law", summary: "Appropriating state funds for automated camera monitoring along Route 1.", fullText: "TITLE I. SHORT TITLE\nThis Act shall be cited as the 'Public Infrastructure & Transit Security Act'.\n\nTITLE II. STATUTORY SECTIONS\n§ 101. Camera Surveillance Authorization on Route 1 Corridor." }
     ];
 
     let JUDICIAL_ORDERS = JSON.parse(localStorage.getItem('melview_court_orders')) || [
-      { id: "WR-2026-904", target: "Marcus_Vance", type: "Search Warrant (Div 5 Contraband)", judge: "Chief Justice Sterling", grounds: "Probable cause sworn under MCR-2026-01 Title III regarding illegal weapons distribution.", command: "Commanding peace officers to search premises at North District Warehouse 4.", status: "Active Judicial Order", date: "2026-08-25", formattedDoc: "" },
-      { id: "ORD-2026-102", target: "Alexander_Kane", type: "Appellate Judgment & Order", judge: "Associate Justice Vance", grounds: "Review of traffic stop validity under Article I Section 6.", command: "Reversing lower citation and remitting assessed fines.", status: "Active Judicial Order", date: "2026-08-26", formattedDoc: "" }
+      { id: "WR-2026-904", target: "Marcus_Vance", type: "Search Warrant (Div 5 Contraband)", judge: "Chief Justice Sterling", grounds: "Probable cause sworn under MCR-2026-01 Title III regarding illegal weapons distribution.", command: "Commanding peace officers to search premises at North District Warehouse 4.", status: "Active Judicial Order", date: "2026-08-25" },
+      { id: "ORD-2026-102", target: "Alexander_Kane", type: "Appellate Judgment & Order", judge: "Associate Justice Vance", grounds: "Review of traffic stop validity under Article I Section 6.", command: "Reversing lower citation and remitting assessed fines.", status: "Active Judicial Order", date: "2026-08-26" }
     ];
 
     let EXEC_DIRECTIVES = JSON.parse(localStorage.getItem('melview_exec_directives')) || [
-      { id: "DIR-2026-01", title: "Statewide Critical Infrastructure Protective Posture", target: "State Police / Sheriff", auth: "Article V, § 4", status: "Enacted Decree", directive: "Increasing patrol frequency around Capitol building and transit junctions.", formattedDoc: "" }
+      { id: "DIR-2026-01", title: "Statewide Critical Infrastructure Protective Posture", target: "State Police / Sheriff", auth: "Article V, § 4", status: "Enacted Decree", directive: "Increasing patrol frequency around Capitol building and transit junctions." }
     ];
 
     let NDA_REGISTRY = JSON.parse(localStorage.getItem('melview_nda_registry')) || [
-      { id: "NDA-2026-001", signatory: "John_Miller_RP", dept: "Department of Justice", scope: "Executive Advisory & Trial Discovery", status: "Executed & Verified", date: "2026-08-25", formattedDoc: "" }
+      { id: "NDA-2026-001", signatory: "John_Miller_RP", dept: "Department of Justice", scope: "Executive Advisory & Trial Discovery", status: "Executed & Verified", date: "2026-08-25" }
     ];
 
     let PUBLIC_REGISTRY = JSON.parse(localStorage.getItem('melview_registry')) || [
@@ -394,7 +408,6 @@ ${signatureBlock}
       if (CURRENT_ROLE) renderWorkstation(CURRENT_ROLE);
     }
 
-    // OVERRIDE CHECK
     const activeOverride = sessionStorage.getItem('melview_active_override');
     if (activeOverride) {
       const parsed = JSON.parse(activeOverride);
@@ -409,7 +422,6 @@ ${signatureBlock}
       renderWorkstation(parsed.roleKey);
     }
 
-    // LOGIN DISPATCH
     document.getElementById('intranetLoginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const u = (document.getElementById('intUser').value || '').trim().toLowerCase();
@@ -446,7 +458,6 @@ ${signatureBlock}
       document.getElementById('authPill').className = 'badge badge-navy';
     };
 
-    // RENDER WORKSTATION VIEW
     function renderWorkstation(roleKey) {
       const container = document.getElementById('workstationView');
       if (!container) return;
@@ -497,7 +508,6 @@ ${signatureBlock}
       attachWorkstationListeners(roleKey);
     }
 
-    // 1. DYNAMIC FOIA INBOX ROUTED TO CURRENT DEPARTMENT
     function getFOIADepartmentInboxModule() {
       const myDeptRequests = FOIA_REQUESTS.filter(f => f.dept.toLowerCase().includes(CURRENT_DEPT.toLowerCase()) || CURRENT_DEPT.toLowerCase().includes(f.dept.toLowerCase()) || CURRENT_ROLE === 'root');
       
@@ -547,12 +557,11 @@ ${signatureBlock}
       `;
     }
 
-    // 2. UNIVERSAL NON-DISCLOSURE AGREEMENT (NDA) GENERATOR
     function getNDASigningModule() {
       return `
         <div class="card-panel" style="border-left-color:var(--gov-gold);">
           <h3 style="color:var(--gov-gold); font-size:1.1rem; margin-bottom:0.5rem;">🔒 Official State Non-Disclosure Agreement (NDA) & Confidentiality Execution</h3>
-          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Generate and seal legally binding 6-Clause Non-Disclosure Agreements with automatic statutory indemnification blocks.</p>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Generate and seal legally binding Non-Disclosure Agreements with automatic statutory indemnification blocks.</p>
           <form id="signNdaForm" style="margin-bottom:1rem;">
             <div class="form-grid" style="grid-template-columns: 2fr 2fr 3fr auto; align-items:flex-end;">
               <div class="form-group"><label>Signatory Full Name</label><input type="text" id="ndaParty" class="gov-input" required /></div>
@@ -603,13 +612,9 @@ de-certification, and statutory custody.`;
       return formatOfficialLegalDoc("NON-DISCLOSURE & CONFIDENTIALITY AGREEMENT", "Binding Executive Instrument", id, "Article XV & Title 8 § 609", body, sig);
     }
 
-    // 3. SPECIALIZED BRANCH WORKSTATION MODULES & ENGINES
     function getWorkstationSpecificModules(roleKey) {
-      
-      // JUDICIARY WORKSTATION (NO POLICE PATROL GRIDS!)
       if (roleKey === 'judiciary') {
         return `
-          <!-- SUPREME COURT OPINION & WRITTEN JUDGMENT ENGINE -->
           <div class="card-panel" style="border-left-color:#3b82f6;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:#38bdf8; font-size:1.15rem;">⚖️ Supreme Court Written Opinion & Appellate Judgment Template</h3>
@@ -661,7 +666,6 @@ de-certification, and statutory custody.`;
             </div>
           </div>
 
-          <!-- PROBABLE CAUSE WARRANT GENERATOR (MCR-2026-01 TITLE III) -->
           <div class="card-panel" style="border-left-color:var(--gov-gold);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:var(--gov-gold); font-size:1.15rem;">📑 Sworn Search / Arrest Warrant & Affidavit Generator</h3>
@@ -688,10 +692,8 @@ de-certification, and statutory custody.`;
         `;
       }
 
-      // EXECUTIVE & LEGISLATIVE WORKSTATION
       if (roleKey === 'government' || roleKey === 'root') {
         return `
-          <!-- SENATE STATUTORY SLIP LAW DRAFTING ENGINE -->
           <div class="card-panel" style="border-left-color:#38bdf8;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:#38bdf8; font-size:1.15rem;">📜 General Assembly Statutory Slip Law Drafter</h3>
@@ -741,7 +743,6 @@ de-certification, and statutory custody.`;
             </div>
           </div>
 
-          <!-- GUBERNATORIAL EXECUTIVE ORDER ENGINE -->
           <div class="card-panel" style="border-left-color:var(--gov-gold);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:var(--gov-gold); font-size:1.15rem;">🏛️ Gubernatorial Executive Order & Directive Generator</h3>
@@ -781,11 +782,9 @@ de-certification, and statutory custody.`;
         `;
       }
 
-      // STATE POLICE & SHERIFF WORKSTATION (PATROL GRIDS & CAD)
       if (roleKey === 'dept_msp' || roleKey === 'dept_mcso') {
         const myShifts = DEPT_SHIFTS[CURRENT_DEPT] || [];
         return `
-          <!-- CAD / NCIC BOLO BROADCAST -->
           <div class="card-panel">
             <h3 style="color:#38bdf8; font-size:1.1rem; margin-bottom:0.5rem;">🚨 NCIC / CAD BOLO Broadcast Console</h3>
             <form id="addBoloForm" style="margin-bottom:1rem;">
@@ -811,7 +810,6 @@ de-certification, and statutory custody.`;
             </div>
           </div>
 
-          <!-- ACTIVE PATROL SHIFTS (ONLY FOR LAW ENFORCEMENT) -->
           <div class="card-panel" style="border-left-color:#22c55e;">
             <h3 style="color:#4ade80; font-size:1.1rem; margin-bottom:0.5rem;">🚓 Active Patrol Shifts & Sector Command Board</h3>
             <form id="addShiftForm" style="margin-bottom:1rem;">
@@ -839,10 +837,8 @@ de-certification, and statutory custody.`;
         `;
       }
 
-      // DEPARTMENT OF JUSTICE
       if (roleKey === 'dept_doj') {
         return `
-          <!-- CRIMINAL BILL OF INDICTMENT GENERATOR -->
           <div class="card-panel" style="border-left-color:#db2777;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:#f472b6; font-size:1.15rem;">📜 Grand Jury Criminal Bill of Indictment Engine</h3>
@@ -868,10 +864,8 @@ de-certification, and statutory custody.`;
         `;
       }
 
-      // DEPARTMENT OF TRANSPORTATION
       if (roleKey === 'dept_dot') {
         return `
-          <!-- TRANSIT REGULATION & HEAVY HAUL PERMIT ENGINE -->
           <div class="card-panel" style="border-left-color:#f59e0b;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:#fde68a; font-size:1.15rem;">🚚 State Transit Corridor Regulation & Heavy Haul Permit Generator</h3>
@@ -890,10 +884,8 @@ de-certification, and statutory custody.`;
         `;
       }
 
-      // ELECTORAL COMMISSION (IEC)
       if (roleKey === 'dept_iec') {
         return `
-          <!-- ELECTION PROCLAMATION & VOTER CERTIFICATION ENGINE -->
           <div class="card-panel" style="border-left-color:#22c55e;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:#4ade80; font-size:1.15rem;">🗳️ Election Proclamation & Voter Roll Certification Engine</h3>
@@ -915,10 +907,8 @@ de-certification, and statutory custody.`;
         `;
       }
 
-      // MASTER RECORDS ARCHIVE (OPM)
       if (roleKey === 'dept_records') {
         return `
-          <!-- OATH OF OFFICE & COMMISSION ARCHIVE ENGINE -->
           <div class="card-panel" style="border-left-color:#60a5fa;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:#93c5fd; font-size:1.15rem;">📂 Master Oath of Office & Constitutional Commission Registry</h3>
@@ -943,7 +933,6 @@ de-certification, and statutory custody.`;
       return '';
     }
 
-    // FORM TEMPLATE FORMATTERS FOR EXPORTS
     function opinionFormattedTemplate(id, parties, author, grounds, holding) {
       const body = `APPEAL DOCKET NO.: ${id}
 IN RE: ${parties}
@@ -983,7 +972,6 @@ ${directive}`;
       return formatOfficialLegalDoc("EXECUTIVE CHAMBER • STATE OF MELVIEW", "Gubernatorial Executive Order", id, auth, body, sig);
     }
 
-    // 4. COMMON ROSTER & IA MODULE (UNIVERSAL TO ALL AGENCIES)
     function getCommonAgencyRosterModule(roleKey) {
       const rosterList = DEPT_ROSTERS[CURRENT_DEPT] || [];
       const iaList = DEPT_IA[CURRENT_DEPT] || [];
@@ -1044,9 +1032,7 @@ ${directive}`;
       `;
     }
 
-    // ATTACH LISTENERS
     function attachWorkstationListeners(roleKey) {
-      // FOIA Disclose
       window.fulfillFOIARequest = function(id) {
         const item = FOIA_REQUESTS.find(f => f.id === id);
         if (item) {
@@ -1058,7 +1044,6 @@ ${directive}`;
         }
       };
 
-      // FOIA Exempt
       window.denyFOIARequest = function(id) {
         const reason = prompt("Enter formal statutory exemption under Article XV for withholding records:");
         if (!reason) return;
@@ -1072,7 +1057,6 @@ ${directive}`;
         }
       };
 
-      // NDA Execution
       const ndaForm = document.getElementById('signNdaForm');
       if (ndaForm) {
         ndaForm.addEventListener('submit', function(e) {
@@ -1090,7 +1074,6 @@ ${directive}`;
         });
       }
 
-      // Judicial Opinion Form
       const jOpForm = document.getElementById('judicialOpinionForm');
       if (jOpForm) {
         jOpForm.addEventListener('submit', function(e) {
@@ -1110,7 +1093,6 @@ ${directive}`;
         });
       }
 
-      // Judicial Warrant Form
       const wForm = document.getElementById('courtWarrantForm');
       if (wForm) {
         wForm.addEventListener('submit', function(e) {
@@ -1129,7 +1111,6 @@ ${directive}`;
         });
       }
 
-      // Draft Bill Form
       const billForm = document.getElementById('draftBillForm');
       if (billForm) {
         billForm.addEventListener('submit', function(e) {
@@ -1150,7 +1131,6 @@ ${directive}`;
         });
       }
 
-      // EO Form
       const eoForm = document.getElementById('promulgateEoForm');
       if (eoForm) {
         eoForm.addEventListener('submit', function(e) {
@@ -1168,7 +1148,6 @@ ${directive}`;
         });
       }
 
-      // Common Roster Form
       const rosterForm = document.getElementById('addRosterForm');
       if (rosterForm) {
         rosterForm.addEventListener('submit', function(e) {
@@ -1182,7 +1161,6 @@ ${directive}`;
         });
       }
 
-      // Shift Form (LE only)
       const shiftForm = document.getElementById('addShiftForm');
       if (shiftForm) {
         shiftForm.addEventListener('submit', function(e) {
@@ -1197,7 +1175,6 @@ ${directive}`;
         });
       }
 
-      // IA Form
       const iaForm = document.getElementById('addIAForm');
       if (iaForm) {
         iaForm.addEventListener('submit', function(e) {
@@ -1213,7 +1190,6 @@ ${directive}`;
       }
     }
 
-    // REMOVAL HANDLERS
     window.removeNDA = function(idx) {
       NDA_REGISTRY.splice(idx, 1);
       saveIntranet();
@@ -1270,6 +1246,56 @@ ${directive}`;
       saveIntranet();
       alert(`Official Termination executed for ${emp.user}.`);
     };
+
+    // LOCAL LEGAL QUERY ENGINE (ZERO API KEY REQUIRED)
+    function toggleAIChat() {
+      const win = document.getElementById('aiChatWindow');
+      win.style.display = win.style.display === 'none' ? 'flex' : 'none';
+      if (CURRENT_DEPT) {
+        document.getElementById('aiDeptTitleLabel').textContent = `${CURRENT_DEPT} Co-Pilot`;
+      }
+    }
+
+    function setIntranetPrompt(type) {
+      if (type === 'warrant') document.getElementById('aiIntranetInput').value = "warrant grounds";
+      else if (type === 'indictment') document.getElementById('aiIntranetInput').value = "indictment";
+      else if (type === 'custody cap') document.getElementById('aiIntranetInput').value = "custody cap";
+      sendIntranetLocalQuery();
+    }
+
+    function sendIntranetLocalQuery() {
+      const input = document.getElementById('aiIntranetInput');
+      const q = input.value.trim().toLowerCase();
+      if (!q) return;
+
+      const container = document.getElementById('aiIntranetMessages');
+      container.innerHTML += `<div style="background: #0284c7; color: #fff; padding: 8px 12px; border-radius: 4px; align-self: flex-end; max-width: 85%;">${input.value}</div>`;
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      let reply = "I am searching the local State of Melview Legal Repository. Please reference a specific Title 8 code (§ 8-101 through § 8-610), MCR-2026-01 court procedure, or drafting term.";
+
+      if (q.includes("custody") || q.includes("cap") || q.includes("limit") || q.includes("time")) {
+        reply = "<strong>Statutory Custody Cap (Title 8 § 103):</strong> All custodial sentencing across all combined charges is capped at a strict maximum of <strong>30 minutes</strong> per arrest event. Detaining any individual beyond 30 minutes without a signed Supreme Court order constitutes unlawful imprisonment.";
+      } else if (q.includes("warrant") || q.includes("search") || q.includes("affidavit")) {
+        reply = "<strong>Warrant Standards (MCR-2026-01 Title III & Art. I § 6):</strong> All search and arrest warrants require an affidavit of sworn probable cause setting forth specific facts, identifying the target with particularity, and signed by a Judicial Officer.";
+      } else if (q.includes("pit") || q.includes("pursuit") || q.includes("speed")) {
+        reply = "<strong>Pursuit Protocol (MCR-2026-01 § 401):</strong> PIT maneuvers are strictly restricted to speeds <strong>under 35 MPH</strong> unless deadly physical force has been formally authorized by command.";
+      } else if (q.includes("foia") || q.includes("records") || q.includes("72")) {
+        reply = "<strong>FOIA Compliance Window (Article XV):</strong> All agencies must fulfill or articulate formal statutory exemptions for public records requests within <strong>72 hours</strong> of filing.";
+      } else if (q.includes("gta") || q.includes("stolen vehicle") || q.includes("8-208")) {
+        reply = "<strong>§ 8-208 Grand Theft Auto (GTA):</strong> Class B Felony. Fine: $1,000. Custody: 10 - 15 Mins. Sanctions: Vehicle recovery, 4 driver points.";
+      } else if (q.includes("murder") || q.includes("8-109")) {
+        reply = "<strong>§ 8-109 First-Degree Premeditated Murder:</strong> Capital Felony. Fine: $5,000. Custody: 30 Mins (Maximum Statutory Cap). Sanctions: Permanent civic disqualification, weapon blacklisting.";
+      } else if (q.includes("indictment")) {
+        reply = "<strong>Grand Jury Indictment (Article IX):</strong> Formal felony charging instrument issued by the Department of Justice naming specific statutory counts under Title 8, bail recommendations, and prosecutor attestation.";
+      }
+
+      setTimeout(() => {
+        container.innerHTML += `<div style="background: #111827; padding: 10px 12px; border-radius: 4px; border-left: 3px solid #22c55e;">${reply}</div>`;
+        container.scrollTop = container.scrollHeight;
+      }, 250);
+    }
   </script>
 </body>
 </html>
