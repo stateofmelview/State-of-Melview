@@ -113,7 +113,7 @@
     .btn-secondary { background-color: var(--gov-gray-dark); }
     .btn-gold { background-color: #ca8a04; color: #fff; }
     
-    /* ELECTION AD HERO BANNER */
+    /* ELECTION AD HERO BANNER & FULLY UNCROPPED IMAGE PREVIEW */
     .election-hero-banner {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -128,11 +128,12 @@
     }
     .election-poster-preview {
       width: 100%;
+      height: auto;
       border-radius: 6px;
       border: 3px solid var(--gov-gold);
       box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-      max-height: 420px;
-      object-fit: cover;
+      object-fit: contain;
+      display: block;
     }
     footer.gov-footer {
       background-color: var(--gov-navy-dark); color: #aebbc5;
@@ -196,7 +197,7 @@
       <span>INDEPENDENT ELECTORAL COMMISSION • EST. 2026</span>
     </div>
 
-    <!-- 1. DASHBOARD WITH ELECTIONS CAMPAIGN AD -->
+    <!-- 1. DASHBOARD WITH ELECTIONS CAMPAIGN HERO -->
     <section id="pane-dashboard" class="tab-pane active">
       <div class="election-hero-banner">
         <div>
