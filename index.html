@@ -113,7 +113,6 @@
     .btn-secondary { background-color: var(--gov-gray-dark); }
     .btn-gold { background-color: #ca8a04; color: #fff; }
     
-    /* ELECTION AD HERO BANNER & FULLY UNCROPPED IMAGE PREVIEW */
     .election-hero-banner {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -239,19 +238,19 @@
       </div>
     </section>
 
-    <!-- 2. ELECTIONS GATEWAY & ANONYMOUS BALLOT VAULT -->
+    <!-- 2. ELECTIONS GATEWAY & DYNAMIC BALLOT VAULT -->
     <section id="pane-elections" class="tab-pane">
       <div class="gov-card" style="border-top:4px solid #22c55e;">
         <div class="gov-card-header">
           <h2 class="gov-card-title">🗳️ 2026 General Election Official Ballot & Tally Vault</h2>
-          <span class="badge badge-success">IEC CERTIFIED ELECTION CYCLE</span>
+          <button type="button" class="btn btn-secondary" onclick="loadDynamicBallotOptions(); updateElectionTally();">🔄 Refresh Candidates & Tally</button>
         </div>
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem; margin-bottom:2rem;">
           <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:1.5rem;">
             <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--gov-navy); margin-bottom:0.5rem;">Cast Your Official Electronic Ballot</h3>
             <p style="font-size:0.8rem; color:var(--gov-gray-dark); margin-bottom:1rem;">
-              Ballots are anonymous, cryptographically counted, and checked against the 14-day character eligibility ledger (SB 100 § 301).
+              Ballots are anonymous, cryptographically counted, and checked against the 14-day character eligibility ledger (SB 100 § 301). Candidates are certified live by the IEC.
             </p>
             <form id="publicVoteForm">
               <div class="form-group" style="margin-bottom:1rem;">
@@ -261,19 +260,13 @@
               <div class="form-group" style="margin-bottom:1rem;">
                 <label>Office of the Governor</label>
                 <select id="voteGov" class="gov-select" required>
-                  <option value="">-- Select Gubernatorial Candidate --</option>
-                  <option value="Arthur Vance (Progressive Unity)">Arthur Vance (Progressive Unity)</option>
-                  <option value="Marcus Sterling (Constitutional Law & Order)">Marcus Sterling (Constitutional Law & Order)</option>
-                  <option value="Write-In / Abstain">Write-In / Abstain</option>
+                  <option value="">-- Loading Certified Candidates --</option>
                 </select>
               </div>
               <div class="form-group" style="margin-bottom:1.25rem;">
                 <label>At-Large State Senate Seat</label>
                 <select id="voteSenate" class="gov-select" required>
-                  <option value="">-- Select Senate Candidate --</option>
-                  <option value="Rachel Sterling (Judicial Reform)">Rachel Sterling (Judicial Reform)</option>
-                  <option value="John Miller (Civil Liberties & Commerce)">John Miller (Civil Liberties & Commerce)</option>
-                  <option value="Thomas Cole (Public Safety Caucus)">Thomas Cole (Public Safety Caucus)</option>
+                  <option value="">-- Loading Certified Candidates --</option>
                 </select>
               </div>
               <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Submit Official Ballot to Vault</button>
@@ -291,18 +284,11 @@
             </div>
             <div style="margin-bottom:1.25rem;">
               <div style="font-size:0.8rem; font-weight:700; color:#fef08a; margin-bottom:0.25rem;">GUBERNATORIAL ELECTION:</div>
-              <div id="govTallyBars" style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.35rem;">
-                <div>Arthur Vance: <span id="tally_vance">0 votes (0%)</span></div>
-                <div>Marcus Sterling: <span id="tally_sterling">0 votes (0%)</span></div>
-              </div>
+              <div id="govTallyBars" style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.35rem;"></div>
             </div>
             <div>
               <div style="font-size:0.8rem; font-weight:700; color:#fef08a; margin-bottom:0.25rem;">SENATE AT-LARGE SEAT:</div>
-              <div id="senateTallyBars" style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.35rem;">
-                <div>Rachel Sterling: <span id="tally_rachel">0 votes (0%)</span></div>
-                <div>John Miller: <span id="tally_miller">0 votes (0%)</span></div>
-                <div>Thomas Cole: <span id="tally_cole">0 votes (0%)</span></div>
-              </div>
+              <div id="senateTallyBars" style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.35rem;"></div>
             </div>
           </div>
         </div>
@@ -618,8 +604,8 @@
         reply = "<strong>§ 8-208 Grand Theft Auto (GTA):</strong> Class B Felony. Fine: $1,000. Custody: 10 - 15 Mins. Sanctions: Vehicle recovery and 4 driver license points.";
       } else if (q.includes("murder") || q.includes("8-109")) {
         reply = "<strong>§ 8-109 First-Degree Premeditated Murder:</strong> Capital Felony. Fine: $5,000. Custody: 30 Mins (Maximum Statutory Cap). Sanctions: Permanent civic disqualification.";
-      } else if (q.includes("election") || q.includes("vote") || q.includes("ballot")) {
-        reply = "<strong>Electoral Process (Article X & SB 100):</strong> Voting is conducted via the official Electronic Ballot Vault. All electors must be verified 14 days prior to ballot open; alt-account exploitation carries a Capital Felony penalty under § 8-608.";
+      } else if (q.includes("election") || q.includes("vote") || q.includes("ballot") || q.includes("candidate")) {
+        reply = "<strong>Electoral Process (Article X & SB 100):</strong> Voting is conducted via the official Electronic Ballot Vault. Candidates are certified live by the IEC and all electors must be verified 14 days prior to ballot open.";
       }
 
       setTimeout(() => {
@@ -768,33 +754,85 @@
       });
     }
 
+    // DYNAMIC BALLOT & CANDIDATE LOADER (SYNCS DIRECTLY WITH IEC INTRANET)
+    function loadDynamicBallotOptions() {
+      const candidates = JSON.parse(localStorage.getItem('melview_election_candidates')) || {
+        governor: [
+          { name: "Arthur Vance", party: "Progressive Unity" },
+          { name: "Marcus Sterling", party: "Constitutional Law & Order" }
+        ],
+        senate: [
+          { name: "Rachel Sterling", party: "Judicial Reform" },
+          { name: "John Miller", party: "Civil Liberties & Commerce" },
+          { name: "Thomas Cole", party: "Public Safety Caucus" }
+        ]
+      };
+
+      const govSelect = document.getElementById('voteGov');
+      if (govSelect) {
+        govSelect.innerHTML = '<option value="">-- Select Gubernatorial Candidate --</option>';
+        candidates.governor.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = `${c.name} (${c.party})`;
+          opt.textContent = `${c.name} (${c.party})`;
+          govSelect.appendChild(opt);
+        });
+        const writeIn = document.createElement('option');
+        writeIn.value = "Write-In / Abstain";
+        writeIn.textContent = "Write-In / Abstain";
+        govSelect.appendChild(writeIn);
+      }
+
+      const senSelect = document.getElementById('voteSenate');
+      if (senSelect) {
+        senSelect.innerHTML = '<option value="">-- Select Senate Candidate --</option>';
+        candidates.senate.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = `${c.name} (${c.party})`;
+          opt.textContent = `${c.name} (${c.party})`;
+          senSelect.appendChild(opt);
+        });
+      }
+    }
+
+    // LIVE ELECTION TALLY RE-CALCULATOR
     function updateElectionTally() {
+      ELECTION_BALLOTS = JSON.parse(localStorage.getItem('melview_election_ballots')) || [];
+      const candidates = JSON.parse(localStorage.getItem('melview_election_candidates')) || { governor: [], senate: [] };
+      
       const total = ELECTION_BALLOTS.length;
       document.getElementById('tallyTotalCount').textContent = total;
 
-      let vance = 0; let sterling = 0;
-      let rachel = 0; let miller = 0; let cole = 0;
+      const govContainer = document.getElementById('govTallyBars');
+      if (govContainer) {
+        govContainer.innerHTML = '';
+        candidates.governor.forEach(c => {
+          const candKey = `${c.name} (${c.party})`;
+          const votes = ELECTION_BALLOTS.filter(b => b.gov === candKey).length;
+          const pct = total ? Math.round((votes / total) * 100) : 0;
+          govContainer.innerHTML += `<div>${c.name} (${c.party}): <span style="color:#38bdf8; font-weight:700;">${votes} votes (${pct}%)</span></div>`;
+        });
+      }
 
-      ELECTION_BALLOTS.forEach(b => {
-        if (b.gov.includes('Vance')) vance++;
-        if (b.gov.includes('Sterling')) sterling++;
-        if (b.senate.includes('Rachel')) rachel++;
-        if (b.senate.includes('Miller')) miller++;
-        if (b.senate.includes('Cole')) cole++;
-      });
-
-      const pVance = total ? Math.round((vance / total) * 100) : 0;
-      const pSterling = total ? Math.round((sterling / total) * 100) : 0;
-      const pRachel = total ? Math.round((rachel / total) * 100) : 0;
-      const pMiller = total ? Math.round((miller / total) * 100) : 0;
-      const pCole = total ? Math.round((cole / total) * 100) : 0;
-
-      document.getElementById('tally_vance').textContent = `${vance} votes (${pVance}%)`;
-      document.getElementById('tally_sterling').textContent = `${sterling} votes (${pSterling}%)`;
-      document.getElementById('tally_rachel').textContent = `${rachel} votes (${pRachel}%)`;
-      document.getElementById('tally_miller').textContent = `${miller} votes (${pMiller}%)`;
-      document.getElementById('tally_cole').textContent = `${cole} votes (${pCole}%)`;
+      const senateContainer = document.getElementById('senateTallyBars');
+      if (senateContainer) {
+        senateContainer.innerHTML = '';
+        candidates.senate.forEach(c => {
+          const candKey = `${c.name} (${c.party})`;
+          const votes = ELECTION_BALLOTS.filter(b => b.senate === candKey).length;
+          const pct = total ? Math.round((votes / total) * 100) : 0;
+          senateContainer.innerHTML += `<div>${c.name} (${c.party}): <span style="color:#38bdf8; font-weight:700;">${votes} votes (${pct}%)</span></div>`;
+        });
+      }
     }
+
+    // AUTO-SYNC ACROSS BROWSER TABS WHEN IEC UPDATES CANDIDATES
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'melview_election_candidates' || e.key === 'melview_election_ballots') {
+        loadDynamicBallotOptions();
+        updateElectionTally();
+      }
+    });
 
     const PENAL_DATABASE = [
       { code: "§ 8-101", name: "Verbal Harassment / Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Verbal warning; temporary custody" },
@@ -962,6 +1000,7 @@
       renderRegistryTable(PUBLIC_REGISTRY);
       renderPenalTable(PENAL_DATABASE);
       initCalculator();
+      loadDynamicBallotOptions();
       updateElectionTally();
     });
   </script>
