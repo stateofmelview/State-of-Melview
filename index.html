@@ -113,7 +113,6 @@
     .btn-secondary { background-color: var(--gov-gray-dark); }
     .btn-gold { background-color: #ca8a04; color: #fff; }
     
-    /* ELECTION HERO BANNER */
     .election-hero-banner {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -135,8 +134,6 @@
       object-fit: contain;
       display: block;
     }
-
-    /* CAPITOL PANORAMA HERO */
     .capitol-hero-card {
       position: relative;
       background: linear-gradient(180deg, rgba(15, 25, 35, 0.75) 0%, rgba(11, 19, 25, 0.95) 100%),
@@ -160,8 +157,6 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    /* HOVER TOOLTIP SYSTEM */
     .gov-tooltip {
       position: relative;
       display: inline-block;
@@ -204,12 +199,15 @@
       visibility: visible;
       opacity: 1;
     }
-
     footer.gov-footer {
       background-color: var(--gov-navy-dark); color: #aebbc5;
       border-top: 4px solid var(--gov-navy); padding: 2.5rem 1.5rem; font-size: 0.85rem; margin-top: auto;
     }
   </style>
+
+  <!-- FIREBASE SCRIPTS (COMPAT) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -240,7 +238,7 @@
           2026-08-27 15:00:00 UTC
           <span class="tooltip-text">
             <strong>SYSTEM TELEMETRY: ONLINE</strong><br>
-            • CJIS/JDIS State Gateway Active<br>
+            • Firebase Cloud Database Active<br>
             • Time Source: Supreme Atomic Reference
           </span>
         </div>
@@ -274,7 +272,7 @@
       <span class="gov-tooltip">
         INDEPENDENT ELECTORAL COMMISSION • EST. 2026
         <span class="tooltip-text">
-          <strong>Constitutional Authority:</strong> Article X & SB 100 Mandate governing voter verification and fair franchise.
+          <strong>Constitutional Authority:</strong> Article X & SB 100 Mandate governing real-time voter verification.
         </span>
       </span>
     </div>
@@ -325,7 +323,7 @@
         <div class="metric-card gov-tooltip" style="display:block; border-bottom:none;">
           <div class="metric-label">Active General Election</div>
           <div class="metric-number" style="color:var(--gov-green);">Ballot Live</div>
-          <span class="tooltip-text"><strong>IEC Electronic Vault:</strong> Open for all verified 14-day character electors under SB 100 § 301.</span>
+          <span class="tooltip-text"><strong>Live Firebase Vault:</strong> Global real-time election server active across all player devices.</span>
         </div>
       </div>
 
@@ -343,19 +341,19 @@
       </div>
     </section>
 
-    <!-- 2. ELECTIONS GATEWAY & DYNAMIC BALLOT VAULT -->
+    <!-- 2. ELECTIONS GATEWAY & CLOUD BALLOT VAULT -->
     <section id="pane-elections" class="tab-pane">
       <div class="gov-card" style="border-top:4px solid #22c55e;">
         <div class="gov-card-header">
-          <h2 class="gov-card-title">🗳️ 2026 General Election Official Ballot & Tally Vault</h2>
-          <button type="button" class="btn btn-secondary" onclick="loadDynamicBallotOptions(); updateElectionTally();">🔄 Refresh Candidates & Tally</button>
+          <h2 class="gov-card-title">🗳️ 2026 General Election Official Ballot & Cloud Tally Vault</h2>
+          <span class="badge badge-success">LIVE FIREBASE SYNC ACTIVE</span>
         </div>
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem; margin-bottom:2rem;">
           <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:1.5rem;">
             <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--gov-navy); margin-bottom:0.5rem;">Cast Your Official Electronic Ballot</h3>
             <p style="font-size:0.8rem; color:var(--gov-gray-dark); margin-bottom:1rem;">
-              Ballots are anonymous, cryptographically counted, and checked against the <span class="gov-tooltip"><strong>14-day character eligibility ledger</strong><span class="tooltip-text"><strong>SB 100 § 301:</strong> Citizens must hold active verified character tenure prior to balloting.</span></span>.
+              Ballots are anonymous, cryptographically counted, and synchronized directly with the global electoral cloud database.
             </p>
             <form id="publicVoteForm">
               <div class="form-group" style="margin-bottom:1rem;">
@@ -365,26 +363,26 @@
               <div class="form-group" style="margin-bottom:1rem;">
                 <label>Office of the Governor</label>
                 <select id="voteGov" class="gov-select" required>
-                  <option value="">-- Loading Certified Candidates --</option>
+                  <option value="">-- Connecting to Global Ballot Server... --</option>
                 </select>
               </div>
               <div class="form-group" style="margin-bottom:1.25rem;">
                 <label>At-Large State Senate Seat</label>
                 <select id="voteSenate" class="gov-select" required>
-                  <option value="">-- Loading Certified Candidates --</option>
+                  <option value="">-- Connecting to Global Ballot Server... --</option>
                 </select>
               </div>
-              <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Submit Official Ballot to Vault</button>
+              <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Submit Official Ballot to Cloud Vault</button>
             </form>
           </div>
 
           <div style="background:#0b1319; color:#f8fafc; border-radius:4px; padding:1.5rem; border:1px solid #334155;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-              <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:#fef08a;">Live Certified Election Tally</h3>
-              <span class="badge badge-navy">AUTO-COUNT</span>
+              <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:#fef08a;">Live Global Certified Election Tally</h3>
+              <span class="badge badge-navy">REALTIME DB</span>
             </div>
             <div style="font-size:0.85rem; margin-bottom:1.5rem;">
-              <div>Total Ballots Cast: <strong id="tallyTotalCount" style="color:#38bdf8; font-size:1.2rem;">0</strong></div>
+              <div>Total Ballots Cast Globally: <strong id="tallyTotalCount" style="color:#38bdf8; font-size:1.2rem;">0</strong></div>
               <div style="font-size:0.75rem; color:#94a3b8;">Threshold for Majority: 50% + 1 Vote</div>
             </div>
             <div style="margin-bottom:1.25rem;">
@@ -469,7 +467,7 @@
                 <td>Full weapons forfeiture; judicial check-ins.</td>
               </tr>
               <tr>
-                <td><span class="badge badge-danger gov-tooltip">Capital Felony<span class="tooltip-text">Murder / Treason. Ineligible for release. Pre-trial detention strictly capped at 30 minutes (§ 8-103).</span></span></td>
+                <td><span class="badge badge-danger gov-tooltip">Capital Felony<span class="tooltip-text">Murder / Treason. Pre-trial detention strictly capped at 30 minutes (§ 8-103).</span></span></td>
                 <td><strong>NO BAIL (Remand to Custody)</strong></td>
                 <td>Ineligible for Pre-Trial Release</td>
                 <td>Pre-trial detention capped at 30 minutes (§ 8-103).</td>
@@ -517,7 +515,7 @@
           <h2 class="gov-card-title">Article XV Open Public Records / FOIA Portal</h2>
           <span class="badge badge-navy gov-tooltip">
             72-HOUR STATUTORY CLOCK
-            <span class="tooltip-text"><strong>Article XV Mandate:</strong> Agencies must disclose records or formally articulate statutory exemptions within 72 hours of filing.</span>
+            <span class="tooltip-text">Agencies must disclose records or formally articulate exemptions within 72 hours.</span>
           </span>
         </div>
         <form id="foiaSubmitForm">
@@ -571,7 +569,7 @@
           <h2 class="gov-card-title">Custodial Sentencing & Statutory Bail Calculator</h2>
           <span class="badge badge-navy gov-tooltip">
             TITLE 8 § 103 COMPLIANT
-            <span class="tooltip-text">Enforcing the absolute 30-minute maximum custody limit across all stacked criminal charges.</span>
+            <span class="tooltip-text">Enforcing the absolute 30-minute maximum custody limit.</span>
           </span>
         </div>
         <div style="display:grid; grid-template-columns: 2fr 1fr; gap:1.5rem;">
@@ -663,6 +661,104 @@
   </div>
 
   <script>
+    // HARDCODED FIREBASE INITIALIZATION WITH YOUR EXACT PROJECT DATA
+    const firebaseConfig = {
+      apiKey: "AIzaSyBW1Rti6BxPaKZttJKlNNp35GgmVaIoqns",
+      authDomain: "melview-state.firebaseapp.com",
+      databaseURL: "https://melview-state-default-rtdb.firebaseio.com",
+      projectId: "melview-state",
+      storageBucket: "melview-state.firebasestorage.app",
+      messagingSenderId: "844497560348",
+      appId: "1:844497560348:web:6177be6f35e083387c50d9"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const defaultCandidates = {
+      governor: [
+        { name: "Arthur Vance", party: "Progressive Unity" },
+        { name: "Marcus Sterling", party: "Constitutional Law & Order" }
+      ],
+      senate: [
+        { name: "Rachel Sterling", party: "Judicial Reform" },
+        { name: "John Miller", party: "Civil Liberties & Commerce" },
+        { name: "Thomas Cole", party: "Public Safety Caucus" }
+      ]
+    };
+
+    // REAL-TIME CLOUD LISTENER FOR CANDIDATE ROSTERS
+    db.ref('elections/candidates').on('value', (snapshot) => {
+      const candidates = snapshot.val() || defaultCandidates;
+      renderPublicBallotOptions(candidates);
+    });
+
+    // REAL-TIME CLOUD LISTENER FOR VOTES
+    db.ref('elections/ballots').on('value', (snapshot) => {
+      const ballotsData = snapshot.val() || {};
+      const ballotList = Object.values(ballotsData);
+      updateCloudTally(ballotList);
+    });
+
+    function renderPublicBallotOptions(candidates) {
+      const govSelect = document.getElementById('voteGov');
+      if (govSelect) {
+        govSelect.innerHTML = '<option value="">-- Select Gubernatorial Candidate --</option>';
+        (candidates.governor || []).forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = `${c.name} (${c.party})`;
+          opt.textContent = `${c.name} (${c.party})`;
+          govSelect.appendChild(opt);
+        });
+        const writeIn = document.createElement('option');
+        writeIn.value = "Write-In / Abstain";
+        writeIn.textContent = "Write-In / Abstain";
+        govSelect.appendChild(writeIn);
+      }
+
+      const senSelect = document.getElementById('voteSenate');
+      if (senSelect) {
+        senSelect.innerHTML = '<option value="">-- Select Senate Candidate --</option>';
+        (candidates.senate || []).forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = `${c.name} (${c.party})`;
+          opt.textContent = `${c.name} (${c.party})`;
+          senSelect.appendChild(opt);
+        });
+      }
+    }
+
+    function updateCloudTally(ballots) {
+      const total = ballots.length;
+      document.getElementById('tallyTotalCount').textContent = total;
+
+      db.ref('elections/candidates').once('value', (snapshot) => {
+        const candidates = snapshot.val() || defaultCandidates;
+
+        const govContainer = document.getElementById('govTallyBars');
+        if (govContainer) {
+          govContainer.innerHTML = '';
+          (candidates.governor || []).forEach(c => {
+            const candKey = `${c.name} (${c.party})`;
+            const votes = ballots.filter(b => b.gov === candKey).length;
+            const pct = total ? Math.round((votes / total) * 100) : 0;
+            govContainer.innerHTML += `<div>${c.name} (${c.party}): <span style="color:#38bdf8; font-weight:700;">${votes} votes (${pct}%)</span></div>`;
+          });
+        }
+
+        const senateContainer = document.getElementById('senateTallyBars');
+        if (senateContainer) {
+          senateContainer.innerHTML = '';
+          (candidates.senate || []).forEach(c => {
+            const candKey = `${c.name} (${c.party})`;
+            const votes = ballots.filter(b => b.senate === candKey).length;
+            const pct = total ? Math.round((votes / total) * 100) : 0;
+            senateContainer.innerHTML += `<div>${c.name} (${c.party}): <span style="color:#38bdf8; font-weight:700;">${votes} votes (${pct}%)</span></div>`;
+          });
+        }
+      });
+    }
+
     function downloadDoc(filename, content) {
       const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body style="font-family:serif; line-height:1.6; padding:2rem;"><h2>STATE OF MELVIEW OFFICIAL RECORD</h2><hr/><pre style="font-family:inherit; white-space:pre-wrap;">${content}</pre></body></html>`;
       const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
@@ -676,7 +772,7 @@
 
     function updateClock() {
       const clockEl = document.getElementById('liveClock');
-      if (clockEl) clockEl.innerHTML = `${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC <span class="tooltip-text"><strong>SYSTEM TELEMETRY: ONLINE</strong><br>• CJIS/JDIS Gateway Active<br>• Time Source: Supreme Reference</span>`;
+      if (clockEl) clockEl.innerHTML = `${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC <span class="tooltip-text"><strong>SYSTEM TELEMETRY: ONLINE</strong><br>• Firebase Cloud Realtime DB Active<br>• Time Source: Supreme Reference</span>`;
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -689,8 +785,6 @@
       if (targetPane) targetPane.classList.add('active');
       if (targetBtn) targetBtn.classList.add('active');
     };
-
-    let ELECTION_BALLOTS = JSON.parse(localStorage.getItem('melview_election_ballots')) || [];
 
     let JUDICIAL_ORDERS = JSON.parse(localStorage.getItem('melview_court_orders')) || [
       { id: "WR-2026-904", target: "Marcus_Vance", type: "Search Warrant (Div 5 Contraband)", judge: "Chief Justice Sterling", grounds: "Probable cause sworn under MCR-2026-01 Title III regarding illegal weapons distribution.", command: "Commanding peace officers to search premises at North District Warehouse 4.", status: "Active Judicial Order", date: "2026-08-25" },
@@ -802,83 +896,6 @@
       });
     }
 
-    function loadDynamicBallotOptions() {
-      const candidates = JSON.parse(localStorage.getItem('melview_election_candidates')) || {
-        governor: [
-          { name: "Arthur Vance", party: "Progressive Unity" },
-          { name: "Marcus Sterling", party: "Constitutional Law & Order" }
-        ],
-        senate: [
-          { name: "Rachel Sterling", party: "Judicial Reform" },
-          { name: "John Miller", party: "Civil Liberties & Commerce" },
-          { name: "Thomas Cole", party: "Public Safety Caucus" }
-        ]
-      };
-
-      const govSelect = document.getElementById('voteGov');
-      if (govSelect) {
-        govSelect.innerHTML = '<option value="">-- Select Gubernatorial Candidate --</option>';
-        candidates.governor.forEach(c => {
-          const opt = document.createElement('option');
-          opt.value = `${c.name} (${c.party})`;
-          opt.textContent = `${c.name} (${c.party})`;
-          govSelect.appendChild(opt);
-        });
-        const writeIn = document.createElement('option');
-        writeIn.value = "Write-In / Abstain";
-        writeIn.textContent = "Write-In / Abstain";
-        govSelect.appendChild(writeIn);
-      }
-
-      const senSelect = document.getElementById('voteSenate');
-      if (senSelect) {
-        senSelect.innerHTML = '<option value="">-- Select Senate Candidate --</option>';
-        candidates.senate.forEach(c => {
-          const opt = document.createElement('option');
-          opt.value = `${c.name} (${c.party})`;
-          opt.textContent = `${c.name} (${c.party})`;
-          senSelect.appendChild(opt);
-        });
-      }
-    }
-
-    function updateElectionTally() {
-      ELECTION_BALLOTS = JSON.parse(localStorage.getItem('melview_election_ballots')) || [];
-      const candidates = JSON.parse(localStorage.getItem('melview_election_candidates')) || { governor: [], senate: [] };
-      
-      const total = ELECTION_BALLOTS.length;
-      document.getElementById('tallyTotalCount').textContent = total;
-
-      const govContainer = document.getElementById('govTallyBars');
-      if (govContainer) {
-        govContainer.innerHTML = '';
-        candidates.governor.forEach(c => {
-          const candKey = `${c.name} (${c.party})`;
-          const votes = ELECTION_BALLOTS.filter(b => b.gov === candKey).length;
-          const pct = total ? Math.round((votes / total) * 100) : 0;
-          govContainer.innerHTML += `<div>${c.name} (${c.party}): <span style="color:#38bdf8; font-weight:700;">${votes} votes (${pct}%)</span></div>`;
-        });
-      }
-
-      const senateContainer = document.getElementById('senateTallyBars');
-      if (senateContainer) {
-        senateContainer.innerHTML = '';
-        candidates.senate.forEach(c => {
-          const candKey = `${c.name} (${c.party})`;
-          const votes = ELECTION_BALLOTS.filter(b => b.senate === candKey).length;
-          const pct = total ? Math.round((votes / total) * 100) : 0;
-          senateContainer.innerHTML += `<div>${c.name} (${c.party}): <span style="color:#38bdf8; font-weight:700;">${votes} votes (${pct}%)</span></div>`;
-        });
-      }
-    }
-
-    window.addEventListener('storage', function(e) {
-      if (e.key === 'melview_election_candidates' || e.key === 'melview_election_ballots') {
-        loadDynamicBallotOptions();
-        updateElectionTally();
-      }
-    });
-
     const PENAL_DATABASE = [
       { code: "§ 8-101", name: "Verbal Harassment / Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Verbal warning; temporary custody" },
       { code: "§ 8-102", name: "Simple Assault / Non-Severe Battery", div: "1", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Civil restraining order" },
@@ -941,6 +958,7 @@
     };
 
     function attachFormListeners() {
+      // CLOUD VOTE SUBMISSION
       const voteForm = document.getElementById('publicVoteForm');
       if (voteForm) {
         voteForm.addEventListener('submit', function(e) {
@@ -949,16 +967,24 @@
           const gov = document.getElementById('voteGov').value;
           const senate = document.getElementById('voteSenate').value;
 
-          if (ELECTION_BALLOTS.find(b => b.voter.toLowerCase() === voter.toLowerCase())) {
-            alert(`Error: A ballot has already been cast for '${voter}'. Duplicate voting is prohibited under § 8-608.`);
-            return;
-          }
+          const sanitizedVoterKey = voter.replace(/[.#$\[\]]/g, "_").toLowerCase();
 
-          ELECTION_BALLOTS.push({ voter, gov, senate, timestamp: new Date().toISOString() });
-          localStorage.setItem('melview_election_ballots', JSON.stringify(ELECTION_BALLOTS));
-          updateElectionTally();
-          alert(`Official ballot recorded into the Vault for ${voter}. Thank you for voting!`);
-          voteForm.reset();
+          db.ref(`elections/ballots/${sanitizedVoterKey}`).once('value', (snapshot) => {
+            if (snapshot.exists()) {
+              alert(`Error: A ballot has already been cast for '${voter}'. Duplicate voting is prohibited under § 8-608.`);
+              return;
+            }
+
+            db.ref(`elections/ballots/${sanitizedVoterKey}`).set({
+              voter: voter,
+              gov: gov,
+              senate: senate,
+              timestamp: new Date().toISOString()
+            }).then(() => {
+              alert(`Official ballot recorded into the Cloud Vault for ${voter}. Thank you for voting!`);
+              voteForm.reset();
+            });
+          });
         });
       }
 
@@ -1061,8 +1087,6 @@
       renderFOIATable();
       renderRegistryTable(PUBLIC_REGISTRY);
       initCalculator();
-      loadDynamicBallotOptions();
-      updateElectionTally();
     });
   </script>
 </body>
