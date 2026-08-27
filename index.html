@@ -83,7 +83,7 @@
       flex-wrap: wrap;
       gap: 1.5rem;
     }
-    .brand-block { display: flex; align-items: center; gap: 1.25rem; cursor: pointer; }
+    .brand-block { display: flex; align-items: center; gap: 1.25rem; cursor: pointer; text-decoration: none; color: #fff; }
     .state-seal {
       width: 58px; height: 58px; border-radius: 50%;
       background: radial-gradient(circle, #2a4359 0%, #111c24 100%);
@@ -119,7 +119,7 @@
     }
     .nav-tab-btn.docs-tab-btn { background-color: #1e3a5f; color: #93c5fd; }
     .nav-tab-btn.secure-tab-btn { background-color: #241911; border-top: 3px solid var(--gov-gold); color: var(--gov-gold-light); }
-    .nav-tab-btn.secure-tab-btn.active { background-color: var(--gov-white); color: #704700; border-top: 3px solid var(--gov-gold); }
+    .nav-tab-btn.secure-tab-btn:hover { background-color: #3b2615; color: #ffffff; }
 
     .main-wrapper { max-width: 1400px; margin: 1.5rem auto; padding: 0 1.5rem; flex: 1; width: 100%; }
     .official-oversight-stamp {
@@ -172,80 +172,29 @@
       background-color: var(--gov-blue-primary); color: #ffffff; border: none;
       padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 700; cursor: pointer;
       border-radius: 3px; display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans);
+      text-decoration: none;
     }
     .btn:hover { background-color: var(--gov-blue-dark); }
     .btn-secondary { background-color: var(--gov-gray-dark); }
     .btn-danger { background-color: var(--gov-red); }
     .btn-success { background-color: var(--gov-green); }
 
-    /* Workstation Containers */
-    .workstation-container { border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15); margin-bottom: 2rem; }
-    .workstation-topbar { padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .workstation-body { padding: 2rem; }
-
-    .theme-judiciary { background-color: #f8fafc; border: 2px solid #334155; }
-    .theme-judiciary .workstation-topbar { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-bottom: 3px solid var(--gov-gold); color: #f8fafc; }
-    .theme-judiciary .card-panel { background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #3b82f6; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
-
-    .theme-executive { background-color: #fcfbf9; border: 2px solid #854d0e; }
-    .theme-executive .workstation-topbar { background: linear-gradient(135deg, #1c1917 0%, #292524 100%); border-bottom: 3px solid #eab308; color: #fef08a; }
-    .theme-executive .card-panel { background: #ffffff; border: 1px solid #e7e5e4; border-left: 4px solid #ca8a04; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
-
-    .theme-msp { background-color: #090d16; color: #e2e8f0; border: 2px solid #1e3a8a; }
-    .theme-msp .workstation-topbar { background: #1e3a8a; border-bottom: 3px solid #38bdf8; color: #ffffff; }
-    .theme-msp .card-panel { background: #111827; border: 1px solid #1e293b; border-left: 4px solid #38bdf8; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; color: #f8fafc; }
-    .theme-msp .gov-input, .theme-msp .gov-select { background: #030712; color: #f8fafc; border-color: #334155; }
-    .theme-msp .gov-table { background: #111827; color: #f8fafc; }
-    .theme-msp .gov-table th { background: #030712; color: #38bdf8; border-color: #1e293b; }
-    .theme-msp .gov-table td { border-color: #1e293b; }
-
-    .theme-mcso { background-color: #fbf9f5; border: 2px solid #78350f; }
-    .theme-mcso .workstation-topbar { background: #451a03; border-bottom: 3px solid #d97706; color: #fef3c7; }
-    .theme-mcso .card-panel { background: #ffffff; border: 1px solid #fed7aa; border-left: 4px solid #b45309; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
-
-    .theme-iec { background-color: #f0fdf4; border: 2px solid #166534; }
-    .theme-iec .workstation-topbar { background: #14532d; border-bottom: 3px solid #22c55e; color: #dcfce7; }
-    .theme-iec .card-panel { background: #ffffff; border: 1px solid #bbf7d0; border-left: 4px solid #16a34a; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
-
-    .theme-dot { background-color: #fffbeb; border: 2px solid #92400e; }
-    .theme-dot .workstation-topbar { background: #78350f; border-bottom: 3px solid #f59e0b; color: #fef3c7; }
-    .theme-dot .card-panel { background: #ffffff; border: 1px solid #fde68a; border-left: 4px solid #d97706; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
-
-    .theme-doj { background-color: #fdf2f8; border: 2px solid #831843; }
-    .theme-doj .workstation-topbar { background: #500724; border-bottom: 3px solid #db2777; color: #fce7f3; }
-    .theme-doj .card-panel { background: #ffffff; border: 1px solid #fbcfe8; border-left: 4px solid #be185d; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
-
-    .theme-records { background-color: #f8fafc; border: 2px solid #0f172a; }
-    .theme-records .workstation-topbar { background: #020617; border-bottom: 3px solid #64748b; color: #94a3b8; }
-    .theme-records .card-panel { background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0f172a; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
-
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6); z-index: 1000; display: none;
-      align-items: center; justify-content: center; padding: 1rem;
-    }
-    .modal-dialog {
-      background: #ffffff; border: 2px solid var(--gov-red);
-      border-radius: 4px; padding: 1.5rem; max-width: 550px; width: 100%;
-    }
-    .audit-terminal-viewer {
-      background: #2d3748; color: #e2e8f0; font-family: var(--font-mono);
-      font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 250px; overflow-y: auto;
-    }
-    .audit-entry { margin-bottom: 0.35rem; padding-bottom: 0.35rem; border-bottom: 1px dotted #4a5568; }
     footer.gov-footer {
       background-color: var(--gov-navy-dark); color: #aebbc5;
       border-top: 4px solid var(--gov-navy); padding: 2.5rem 1.5rem; font-size: 0.85rem; margin-top: auto;
+    }
+    .footer-inner {
+      max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- EAS Live Banner -->
+  <!-- Live SEOC Banner -->
   <div id="liveEASBanner">
     <div class="eas-flex">
-      <span>🚨 <strong>STATE EMERGENCY BROADCAST (SEOC):</strong> <span id="easBroadcastText">Route 1 Transit Corridor Closed Due to Active Major Tactical Police Operation.</span></span>
-      <button type="button" class="btn btn-secondary" style="background:#450a0a; font-size:0.75rem; padding:0.25rem 0.5rem;" onclick="dismissEASBanner()">Dismiss Alert</button>
+      <span>🚨 <strong>STATE EMERGENCY BROADCAST (SEOC):</strong> <span id="easBroadcastText">Route 1 Transit Corridor Closed Due to Active Tactical Incident.</span></span>
+      <button type="button" class="btn btn-secondary" style="background:#450a0a; font-size:0.75rem; padding:0.25rem 0.5rem;" onclick="dismissEASBanner()">Dismiss</button>
     </div>
   </div>
 
@@ -272,8 +221,8 @@
         </div>
       </div>
       <div class="header-right">
-        <div class="live-clock-pill" id="liveClock">2026-08-27 14:00:00 UTC</div>
-        <div id="authStatusPill" class="badge badge-navy">PUBLIC ACCESS PORTAL</div>
+        <div class="live-clock-pill" id="liveClock">2026-08-27 15:00:00 UTC</div>
+        <div class="badge badge-navy">PUBLIC ACCESS PORTAL</div>
       </div>
     </div>
   </header>
@@ -281,7 +230,7 @@
   <nav class="gov-nav">
     <div class="nav-inner">
       <button type="button" class="nav-tab-btn active" onclick="switchNav('dashboard')" id="nav-dashboard">Executive Dashboard</button>
-      <a href="laws.html" class="nav-tab-btn docs-tab-btn">📜 Constitution & Slip Laws (Full Docs) ↗</a>
+      <a href="laws.html" class="nav-tab-btn docs-tab-btn">📜 Constitution & Slip Laws (Full Text) ↗</a>
       <button type="button" class="nav-tab-btn" onclick="switchNav('penal-code')" id="nav-penal-code">Title 8 Penal Code</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('public-docket')" id="nav-public-docket">Supreme Court Docket</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('bail-schedule')" id="nav-bail-schedule">⚖️ Bail Risk Matrix</button>
@@ -295,7 +244,7 @@
       <button type="button" class="nav-tab-btn" onclick="switchNav('elections')" id="nav-elections">Elections Gateway</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('judicial-sop')" id="nav-judicial-sop">Court Rules (MCR-2026-01)</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('bar-exam')" id="nav-bar-exam">Bar Examination</button>
-      <button type="button" class="nav-tab-btn secure-tab-btn" onclick="switchNav('secure-terminal')" id="nav-secure-terminal">🔐 Restricted Workstation</button>
+      <a href="intranet.html" class="nav-tab-btn secure-tab-btn">🔐 Restricted Workstations ↗</a>
     </div>
   </nav>
 
@@ -319,7 +268,7 @@
           <span class="badge badge-navy">JURISDICTION: STATE OF MELVIEW</span>
         </div>
         <p style="margin-bottom: 1rem;">
-          This centralized repository codifies the supreme organic laws, statutory slip laws, unified penal schedules, and judicial standard operating procedures of the <strong>State of Melview</strong>.
+          This centralized repository codifies the organic laws, statutory slip laws, unified penal schedules, and judicial standard operating procedures of the <strong>State of Melview</strong>.
         </p>
         <div style="background-color: var(--gov-blue-light); border-left: 4px solid var(--gov-blue-primary); padding: 1.25rem; font-size: 0.9rem;">
           <strong>Constitutional Supremacy & Rule of Law:</strong>
@@ -330,7 +279,7 @@
       </div>
     </section>
 
-    <!-- 2. TITLE 8 PENAL CODE (60 OFFENSES ACROSS 6 DIVISIONS) -->
+    <!-- 2. TITLE 8 PENAL CODE -->
     <section id="pane-penal-code" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -340,7 +289,7 @@
         <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr; margin-bottom: 1rem;">
           <div class="form-group">
             <label>Search Master Schedule</label>
-            <input type="text" id="penalSearch" class="gov-input" placeholder="Search by § section code, offense name, or fine..." oninput="filterPenalTable()" />
+            <input type="text" id="penalSearch" class="gov-input" placeholder="Search code, offense, fine..." oninput="filterPenalTable()" />
           </div>
           <div class="form-group">
             <label>Classification Filter</label>
@@ -369,14 +318,7 @@
         <div class="table-container">
           <table class="gov-table">
             <thead>
-              <tr>
-                <th>Statutory Code</th>
-                <th>Offense Name & Description</th>
-                <th>Classification</th>
-                <th>Standard Fine</th>
-                <th>Custody Threshold</th>
-                <th>Sanctions & Licensure Actions</th>
-              </tr>
+              <tr><th>Statutory Code</th><th>Offense Name & Description</th><th>Classification</th><th>Standard Fine</th><th>Custody Threshold</th><th>Sanctions & Licensure Actions</th></tr>
             </thead>
             <tbody id="penalTableBody"></tbody>
           </table>
@@ -389,23 +331,14 @@
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Supreme & District Court Public Case Docket</h2>
-          <div style="display: flex; gap: 0.5rem;">
-            <button type="button" class="btn btn-secondary" onclick="renderPublicDocket()">🔄 Refresh Docket</button>
-            <button type="button" class="btn" onclick="switchNav('submit-appeal')">📝 File Appeal</button>
-          </div>
+          <button type="button" class="btn btn-secondary" onclick="renderPublicDocket()">🔄 Refresh Docket</button>
         </div>
         <div style="margin-bottom: 1.5rem; border: 1px solid var(--gov-gray-mid); border-radius: 4px; overflow: hidden;">
-          <div style="background: var(--gov-navy); color: #fff; padding: 0.6rem 1rem; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
-            <span>📊 STATE OF MELVIEW MASTER JUDICIAL SPREADSHEET (LIVE FEED)</span>
-            <span class="badge badge-success" style="font-size:0.65rem;">SYNCHRONIZED</span>
-          </div>
           <iframe id="liveGoogleSheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ/pubhtml?widget=true&amp;headers=false" style="width: 100%; height: 320px; border: none; background: #ffffff;"></iframe>
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr><th>Docket ID</th><th>Party / Subject</th><th>Matter Category</th><th>Timestamp</th><th>Status</th><th>Judicial Findings & Ruling</th></tr>
-            </thead>
+            <thead><tr><th>Docket ID</th><th>Appellant / Subject</th><th>Matter Category</th><th>Timestamp</th><th>Status</th><th>Ruling & Notes</th></tr></thead>
             <tbody id="publicDocketTableBody"></tbody>
           </table>
         </div>
@@ -421,9 +354,7 @@
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr><th>Offense Classification Tier</th><th>Standard Bail Amount</th><th>Pre-Trial Release Eligibility</th><th>Mandatory Conditions</th></tr>
-            </thead>
+            <thead><tr><th>Offense Classification Tier</th><th>Standard Bail Amount</th><th>Pre-Trial Release Eligibility</th><th>Mandatory Conditions</th></tr></thead>
             <tbody>
               <tr><td><span class="badge badge-infraction">Infraction Violations</span></td><td><strong>$0 (Citation Only)</strong></td><td>Release on Own Recognizance (ROR)</td><td>Written promise to comply / appear.</td></tr>
               <tr><td><span class="badge badge-misdemeanor">Standard Misdemeanor</span></td><td><strong>$500 – $1,500 Bond</strong></td><td>Eligible for Recognizance / Bond</td><td>Surrender of seized contraband; zero police contact.</td></tr>
@@ -445,9 +376,7 @@
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr><th>Bill ID</th><th>Title of Proposed Act</th><th>Primary Sponsor</th><th>Stage</th><th>Roll-Call Tally</th><th>Gubernatorial Action</th></tr>
-            </thead>
+            <thead><tr><th>Bill ID</th><th>Title of Proposed Act</th><th>Primary Sponsor</th><th>Stage</th><th>Roll-Call Tally</th><th>Gubernatorial Action</th></tr></thead>
             <tbody id="billTrackerTableBody"></tbody>
           </table>
         </div>
@@ -463,9 +392,7 @@
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr><th>Notice ID</th><th>Issuing Agency</th><th>Subject Title</th><th>Date</th><th>Authority</th><th>Operational Scope</th></tr>
-            </thead>
+            <thead><tr><th>Notice ID</th><th>Issuing Agency</th><th>Subject Title</th><th>Date</th><th>Authority</th><th>Operational Scope</th></tr></thead>
             <tbody id="agencyRegisterTableBody"></tbody>
           </table>
         </div>
@@ -481,9 +408,7 @@
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr><th>Order Number</th><th>Title & Subject</th><th>Target Agency</th><th>Date</th><th>Status</th><th>Export</th></tr>
-            </thead>
+            <thead><tr><th>Order Number</th><th>Title & Subject</th><th>Target Agency</th><th>Date</th><th>Status</th><th>Export</th></tr></thead>
             <tbody id="execOrdersTableBody"></tbody>
           </table>
         </div>
@@ -531,17 +456,6 @@
         <div class="gov-card-header">
           <h2 class="gov-card-title">State Bar & Concealed Carry (CCW) Public Roster</h2>
           <span class="badge badge-navy">ARTICLE VII LICENSURE</span>
-        </div>
-        <div class="form-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 1rem;">
-          <div class="form-group"><label>Search Registry</label><input type="text" id="registrySearch" class="gov-input" oninput="filterRegistryTable()" /></div>
-          <div class="form-group">
-            <label>Filter Category</label>
-            <select id="registryTypeFilter" class="gov-select" onchange="filterRegistryTable()">
-              <option value="ALL">All Licenses</option>
-              <option value="State Bar License">State Bar Attorney License</option>
-              <option value="Concealed Carry">Concealed Carry Permit (CCW)</option>
-            </select>
-          </div>
         </div>
         <div class="table-container">
           <table class="gov-table">
@@ -601,30 +515,29 @@
           <h2 class="gov-card-title">Independent Electoral Commission (IEC) Proclamation</h2>
           <span class="badge badge-navy">TITLE 10 ELECTORAL CODE</span>
         </div>
-        <div style="background-color:var(--gov-blue-light); border-left:4px solid var(--gov-blue-primary); padding:1.25rem; margin-bottom:1.5rem;">
+        <div style="background-color:var(--gov-blue-light); border-left:4px solid var(--gov-blue-primary); padding:1.25rem;">
           <h3 style="font-family:var(--font-serif); color:var(--gov-navy); font-size:1.15rem;">General Election Proclamation of 2026</h3>
-          <p style="font-size:0.9rem; margin-top:0.35rem;">Pursuant to Article X of the Constitution and Senate Bill No. 100, candidacy declarations are open for Governor, Lt. Governor, and seven (7) At-Large Senate seats.</p>
+          <p style="font-size:0.9rem; margin-top:0.35rem;">Candidacy declarations open for Governor, Lt. Governor, and seven (7) At-Large Senate seats under Article X.</p>
         </div>
       </div>
     </section>
 
-    <!-- 13. COURT RULES (MCR-2026-01) -->
+    <!-- 13. COURT RULES SUMMARY -->
     <section id="pane-judicial-sop" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Document MCR-2026-01: Court Rules & Standards Manual</h2>
-          <button type="button" class="btn btn-secondary" onclick="downloadAsWord('Document_MCR_2026_01_Judicial_SOP', document.getElementById('sopManualDoc').innerText)">💾 Export Word (.doc)</button>
         </div>
-        <div id="sopManualDoc" style="background:#fff; padding:1.5rem; font-family:var(--font-serif); line-height:1.8;">
+        <div style="background:#fff; padding:1.5rem; font-family:var(--font-serif); line-height:1.8;">
           <p><strong>DOCUMENT NO. MCR-2026-01</strong> • State Judicial Rules & Standards Manual<br>Drafted by jackbillyeye • Government Oversight</p>
-          <p style="margin-top:1rem;"><strong>§ 101. Courtroom Decorum.</strong> All parties appearing before the courts of Melview shall maintain professional decorum, addressing judicial officers as "Your Honor." Contempt citations (§ 8-409) shall result in immediate bailiff detention.</p>
-          <p><strong>§ 201. State Bar Admission.</strong> Candidates must achieve a passing score of at least 80% on the Uniform Bar Examination.</p>
-          <p><strong>§ 401. Law Enforcement Pursuit Protocol.</strong> PIT maneuvers are restricted to under 35 MPH unless deadly force is justified.</p>
+          <p style="margin-top:1rem;"><strong>§ 101. Courtroom Decorum.</strong> Address judicial officers as "Your Honor." Contempt citations (§ 8-409) shall result in immediate bailiff custody.</p>
+          <p><strong>§ 201. State Bar Admission.</strong> Uniform Bar Exam requires 80% passing threshold for attorney certification.</p>
+          <p><strong>§ 401. Pursuit Protocol.</strong> PIT maneuvers restricted to under 35 MPH unless deadly force is authorized.</p>
         </div>
       </div>
     </section>
 
-    <!-- 14. STATE BAR EXAM SELF TEST -->
+    <!-- 14. BAR EXAM -->
     <section id="pane-bar-exam" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -652,101 +565,12 @@
               <label style="display:block; font-size:0.85rem;"><input type="radio" name="q3" value="c"> 72 hours</label>
             </div>
           </div>
-          <button type="submit" class="btn" style="margin-top:1.5rem;">Submit Examination for Scoring</button>
+          <button type="submit" class="btn" style="margin-top:1.5rem;">Submit Exam</button>
         </form>
         <div id="barExamResult" style="display:none; margin-top:1.5rem; padding:1rem; border-radius:4px;"></div>
       </div>
     </section>
-
-    <!-- 15. RESTRICTED INTRANET WORKSTATIONS -->
-    <section id="pane-secure-terminal" class="tab-pane">
-      <div id="secureAuthGate" class="gov-card" style="max-width:500px; margin:2rem auto; border-top:4px solid var(--gov-gold);">
-        <div class="gov-card-header" style="justify-content:center; text-align:center;">
-          <div>
-            <h2 class="gov-card-title" style="font-size:1.25rem;">Restricted Government Sign-In</h2>
-            <p style="font-size:0.75rem; color:var(--gov-gray-dark); text-transform:uppercase;">Official Identification Required</p>
-          </div>
-        </div>
-        <form id="stateLoginForm">
-          <div class="form-group" style="margin-bottom:1rem;">
-            <label>Government Username</label>
-            <input type="text" id="loginUsername" class="gov-input" placeholder="e.g. judge1, law3, police1, sheriff1, records1..." required />
-          </div>
-          <div class="form-group" style="margin-bottom:1.5rem;">
-            <label>Security Password</label>
-            <input type="password" id="loginPassword" class="gov-input" placeholder="••••••••" required />
-          </div>
-          <button type="submit" class="btn" style="width:100%; justify-content:center;">Sign In to Workstation</button>
-        </form>
-        <div id="loginErrorMsg" style="display:none; color:var(--gov-red); font-size:0.8rem; text-align:center; margin-top:1rem; font-weight:700;">
-          ❌ ACCESS DENIED: Invalid Security Credentials (§ 8-603).
-        </div>
-      </div>
-
-      <!-- Dynamic Workstation Rendering Area -->
-      <div id="dynamicWorkstationContainer" style="display:none;"></div>
-    </section>
   </main>
-
-  <!-- MODAL FOR AUTHORIZED CASE EXPUNGEMENT -->
-  <div id="deletionModal" class="modal-overlay">
-    <div class="modal-dialog">
-      <h3 style="font-family:var(--font-serif); color:var(--gov-red); margin-bottom:0.5rem;">⚠️ Confirm Case Expungement</h3>
-      <p style="font-size:0.85rem; color:var(--gov-gray-dark); margin-bottom:1rem;" id="modalTargetText"></p>
-      <div class="form-group" style="margin-bottom:1rem;"><label>Authorizing Judge Username</label><input type="text" id="modalAuthUsername" class="gov-input" required /></div>
-      <div class="form-group" style="margin-bottom:1.25rem;"><label>Official Reason</label><input type="text" id="modalAuthReason" class="gov-input" required /></div>
-      <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
-        <button type="button" class="btn btn-secondary" onclick="closeDeletionModal()">Cancel</button>
-        <button type="button" class="btn btn-danger" onclick="executeConfirmedDeletion()">Authorize & Expunge</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL FOR MASTER PERSONNEL RECORD EDIT -->
-  <div id="editPersonnelModal" class="modal-overlay">
-    <div class="modal-dialog" style="border-color:var(--gov-blue-primary);">
-      <h3 style="font-family:var(--font-serif); color:var(--gov-navy); margin-bottom:0.5rem;">✏️ Edit State Personnel Record</h3>
-      <form id="editPersonnelForm">
-        <input type="hidden" id="editEmpId" />
-        <div class="form-group" style="margin-bottom:0.75rem;"><label>Username</label><input type="text" id="editEmpUser" class="gov-input" required /></div>
-        <div class="form-group" style="margin-bottom:0.75rem;">
-          <label>Department</label>
-          <select id="editEmpDept" class="gov-select">
-            <option value="Judiciary (Supreme Court)">Judiciary (Supreme Court)</option>
-            <option value="Executive / Senate">Executive / Senate</option>
-            <option value="Melview State Police">Melview State Police</option>
-            <option value="County Sheriff Office">County Sheriff Office</option>
-            <option value="Independent Electoral Commission">Independent Electoral Commission</option>
-            <option value="Department of Transportation">Department of Transportation</option>
-            <option value="Department of Justice">Department of Justice</option>
-          </select>
-        </div>
-        <div class="form-group" style="margin-bottom:0.75rem;"><label>Role / Title</label><input type="text" id="editEmpRole" class="gov-input" required /></div>
-        <div class="form-group" style="margin-bottom:0.75rem;">
-          <label>Clearance Tier</label>
-          <select id="editEmpClearance" class="gov-select">
-            <option value="Level 1 General Public Trust">Level 1 General Public Trust</option>
-            <option value="Level 2 Department Staff">Level 2 Department Staff</option>
-            <option value="Level 3 Operational Command">Level 3 Operational Command</option>
-            <option value="Level 4 Constitutional Officer">Level 4 Constitutional Officer</option>
-            <option value="Level 5 Executive Authority">Level 5 Executive Authority</option>
-          </select>
-        </div>
-        <div class="form-group" style="margin-bottom:1.25rem;">
-          <label>Standing</label>
-          <select id="editEmpStatus" class="gov-select">
-            <option value="Active">Active</option>
-            <option value="Suspended">Suspended</option>
-            <option value="Terminated">Terminated</option>
-          </select>
-        </div>
-        <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
-          <button type="button" class="btn btn-secondary" onclick="closeEditPersonnelModal()">Cancel</button>
-          <button type="submit" class="btn btn-success">Save Record</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <footer class="gov-footer">
     <div class="footer-inner">
@@ -828,36 +652,6 @@
       { id: "FOIA-2026-02", req: "Citizen Defense League", dept: "Department of Justice", date: "2026-08-24 16:00 UTC", deadline: "2026-08-27 16:00 UTC", status: "Fulfilled / Published" }
     ];
 
-    let DEPT_ROSTERS = JSON.parse(localStorage.getItem('melview_dept_rosters')) || {
-      "Melview State Police": [{ user: "Colonel_Davis", rank: "State Police Commissioner" }],
-      "County Sheriff Office": [{ user: "Sheriff_Hopkins", rank: "Elected County Sheriff" }],
-      "Independent Electoral Commission": [{ user: "Chief_Commissioner_Lee", rank: "Chief Electoral Commissioner" }],
-      "Department of Transportation": [{ user: "Director_Miller", rank: "Director of Transportation" }],
-      "Department of Justice": [{ user: "Attorney_General_Vance", rank: "Attorney General" }]
-    };
-
-    let DEPT_SHIFTS = JSON.parse(localStorage.getItem('melview_dept_shifts')) || {
-      "Melview State Police": [{ user: "Trooper_Cole", callsign: "1-ADAM-12", sector: "Highway Corridor 1" }]
-    };
-
-    let DEPT_IA = JSON.parse(localStorage.getItem('melview_dept_ia')) || {
-      "Melview State Police": [{ user: "Cadet_Marks", sanction: "Written Reprimand", reason: "Radio protocol infraction." }]
-    };
-
-    let DEPT_MUTUAL_AID = JSON.parse(localStorage.getItem('melview_dept_aid')) || [
-      { from: "County Sheriff Office", target: "Melview State Police", scope: "Air support for sector containment.", status: "Active Call" }
-    ];
-
-    let JUDICIAL_LOGS = JSON.parse(localStorage.getItem('melview_judge_logs')) || [
-      "2026-08-25 14:25 UTC | JUDICIAL ACTION | ACCEPTED Appeal AP-2026-1042",
-      "2026-08-25 18:50 UTC | JUDICIAL ACTION | DENIED Appeal AP-2026-1088"
-    ];
-
-    let GOV_LOGS = JSON.parse(localStorage.getItem('melview_gov_logs')) || [
-      "2026-08-25 10:00 UTC | EXECUTIVE ACTION | Promulgated Executive Order EO-2026-004",
-      "2026-08-25 12:30 UTC | SENATE ASSEMBLY | Enacted Senate Bill SB 104"
-    ];
-
     window.saveState = function() {
       localStorage.setItem('melview_docket', JSON.stringify(MASTER_DOCKET));
       localStorage.setItem('melview_bill_tracker', JSON.stringify(BILL_TRACKER));
@@ -866,13 +660,6 @@
       localStorage.setItem('melview_master_personnel', JSON.stringify(PRIVATE_PERSONNEL));
       localStorage.setItem('melview_eos', JSON.stringify(EXEC_ORDERS));
       localStorage.setItem('melview_foia', JSON.stringify(FOIA_REQUESTS));
-      localStorage.setItem('melview_dept_rosters', JSON.stringify(DEPT_ROSTERS));
-      localStorage.setItem('melview_dept_shifts', JSON.stringify(DEPT_SHIFTS));
-      localStorage.setItem('melview_dept_ia', JSON.stringify(DEPT_IA));
-      localStorage.setItem('melview_dept_aid', JSON.stringify(DEPT_MUTUAL_AID));
-      localStorage.setItem('melview_judge_logs', JSON.stringify(JUDICIAL_LOGS));
-      localStorage.setItem('melview_gov_logs', JSON.stringify(GOV_LOGS));
-      
       renderPublicDocket();
       renderBillTrackerTable();
       renderAgencyRegisterTable();
@@ -880,8 +667,6 @@
       renderPrivatePersonnelTable();
       renderExecOrdersTable();
       renderFOIATable();
-      if (CURRENT_AUTH_ROLE) renderWorkstationView(CURRENT_AUTH_ROLE);
-      renderLogs();
     };
 
     window.renderBillTrackerTable = function() {
@@ -976,485 +761,8 @@
       renderRegistryTable(filtered);
     };
 
-    window.renderLogs = function() {
-      const jViewer = document.getElementById('judiciaryAuditLogs');
-      if (jViewer) jViewer.innerHTML = JUDICIAL_LOGS.map(l => `<div class="audit-entry">🏛️ ${l}</div>`).join('');
-      const gViewer = document.getElementById('govAuditLogs');
-      if (gViewer) gViewer.innerHTML = GOV_LOGS.map(l => `<div class="audit-entry">📜 ${l}</div>`).join('');
-    };
-
-    // =========================================================================
-    // LAW ENFORCEMENT CCW REVOCATION SYSTEM
-    // =========================================================================
-    window.renderCCWRevocationTable = function() {
-      const tbody = document.getElementById('deptCCWManageTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      const ccwList = PUBLIC_REGISTRY.filter(r => r.cat.includes('Concealed Carry') || r.cat.includes('CCW'));
-      ccwList.forEach(item => {
-        let badgeClass = item.status === 'Active & Certified' ? 'badge-success' : 'badge-danger';
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><strong>${item.id}</strong></td>
-          <td>${item.name}</td>
-          <td><span class="badge ${badgeClass}">${item.status}</span></td>
-          <td>${item.exp}</td>
-          <td>
-            ${item.status === 'Active & Certified' ? `
-              <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="revokeCCWPermit('${item.id}', '${item.name}')">🚫 Revoke CCW</button>
-            ` : `
-              <button type="button" class="btn btn-success" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="reinstateCCWPermit('${item.id}')">Reinstate</button>
-            `}
-          </td>
-        `;
-        tbody.appendChild(row);
-      });
-    };
-
-    window.revokeCCWPermit = function(permitId, licenseeName) {
-      const reason = prompt(`Enter formal legal grounds for REVOKING CCW Permit for ${licenseeName} (Title 8 Div 5):`);
-      if (!reason) return;
-      const item = PUBLIC_REGISTRY.find(r => r.id === permitId);
-      if (item) {
-        item.status = "Revoked / Seized";
-        const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-        GOV_LOGS.unshift(`${now} | CCW REVOKED | ${licenseeName} (${permitId}) Revoked by ${CURRENT_DEPT_NAME} - Reason: "${reason}"`);
-        saveState();
-        alert(`Concealed Carry Permit ${permitId} for ${licenseeName} marked REVOKED.`);
-      }
-    };
-
-    window.reinstateCCWPermit = function(permitId) {
-      const item = PUBLIC_REGISTRY.find(r => r.id === permitId);
-      if (item) {
-        item.status = "Active & Certified";
-        saveState();
-        alert(`Permit ${permitId} reinstated to active standing.`);
-      }
-    };
-
-    // =========================================================================
-    // EMERGENCY ALERT BROADCAST
-    // =========================================================================
-    window.broadcastEASAlert = function(e) {
-      if (e) e.preventDefault();
-      const text = document.getElementById('easAlertTextInput').value.trim();
-      if (!text) return;
-      document.getElementById('easBroadcastText').textContent = text;
-      document.getElementById('liveEASBanner').style.display = 'block';
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-      GOV_LOGS.unshift(`${now} | SEOC EAS ALERT | "${text}"`);
-      saveState();
-      alert("Statewide Emergency Alert broadcast dispatched.");
-    };
-
     window.dismissEASBanner = function() {
       document.getElementById('liveEASBanner').style.display = 'none';
-    };
-
-    // =========================================================================
-    // MASTER PERSONNEL ARCHIVE (OPM)
-    // =========================================================================
-    window.openEditPersonnelModal = function(idx) {
-      const emp = PRIVATE_PERSONNEL[idx];
-      document.getElementById('editEmpId').value = emp.id;
-      document.getElementById('editEmpUser').value = emp.user;
-      document.getElementById('editEmpDept').value = emp.dept;
-      document.getElementById('editEmpRole').value = emp.role;
-      document.getElementById('editEmpClearance').value = emp.clearance;
-      document.getElementById('editEmpStatus').value = emp.status;
-      document.getElementById('editPersonnelModal').style.display = 'flex';
-    };
-
-    window.closeEditPersonnelModal = function() {
-      document.getElementById('editPersonnelModal').style.display = 'none';
-    };
-
-    window.handleSaveMasterPersonnel = function(e) {
-      if (e) e.preventDefault();
-      const id = document.getElementById('editEmpId').value;
-      const user = document.getElementById('editEmpUser').value.trim();
-      const dept = document.getElementById('editEmpDept').value;
-      const role = document.getElementById('editEmpRole').value.trim();
-      const clearance = document.getElementById('editEmpClearance').value;
-      const status = document.getElementById('editEmpStatus').value;
-
-      const idx = PRIVATE_PERSONNEL.findIndex(p => p.id === id);
-      if (idx !== -1) {
-        PRIVATE_PERSONNEL[idx] = { id, user, dept, role, clearance, status };
-        saveState();
-        alert(`Personnel file ${id} (${user}) saved.`);
-        closeEditPersonnelModal();
-      }
-    };
-
-    window.deleteMasterPersonnelRecord = function(empId, userName) {
-      if (!confirm(`Permanently delete ${userName} (${empId}) from master personnel database?`)) return;
-      const idx = PRIVATE_PERSONNEL.findIndex(p => p.id === empId);
-      if (idx !== -1) {
-        PRIVATE_PERSONNEL.splice(idx, 1);
-        const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-        GOV_LOGS.unshift(`${now} | ARCHIVE PURGE | Deleted ${userName} (${empId}) from master archive.`);
-        saveState();
-        alert(`Record ${empId} purged.`);
-      }
-    };
-
-    window.terminateEmployeePersonnel = function(deptName, idx) {
-      const emp = DEPT_ROSTERS[deptName][idx];
-      const reason = prompt(`Enter formal legal grounds for TERMINATING ${emp.user} from ${deptName} (Article XIII, § 5):`);
-      if (!reason) return;
-
-      DEPT_ROSTERS[deptName].splice(idx, 1);
-
-      if (!DEPT_IA[deptName]) DEPT_IA[deptName] = [];
-      DEPT_IA[deptName].push({ user: emp.user, sanction: "Termination / Discharged", reason: reason });
-
-      const masterEmp = PRIVATE_PERSONNEL.find(p => p.user.toLowerCase() === emp.user.toLowerCase());
-      if (masterEmp) masterEmp.status = "Terminated";
-
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-      GOV_LOGS.unshift(`${now} | TERMINATION | ${emp.user} terminated from ${deptName} - Reason: "${reason}"`);
-      saveState();
-
-      syncToGoogleSheet({
-        timestamp: now, action: "EMPLOYEE_TERMINATED", id: `TERM-${Math.floor(100+Math.random()*900)}`,
-        appellant: emp.user, category: "Termination", ref: deptName, status: "TERMINATED", officer: CURRENT_AUTH_ROLE, notes: reason
-      });
-
-      alert(`Official Termination executed for ${emp.user}.`);
-    };
-
-    // =========================================================================
-    // DIVERGENT RESTRICTED WORKSTATION BUILDER
-    // =========================================================================
-    let CURRENT_AUTH_ROLE = null;
-    let CURRENT_DEPT_NAME = "";
-
-    window.renderWorkstationView = function(role) {
-      const container = document.getElementById('dynamicWorkstationContainer');
-      if (!container) return;
-      container.innerHTML = '';
-
-      if (role === 'judiciary') {
-        container.className = 'workstation-container theme-judiciary';
-        container.innerHTML = `
-          <div class="workstation-topbar">
-            <div>
-              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--gov-gold-light);">High Court Case Management System (CM/ECF Suite)</span>
-              <h3 style="font-family:var(--font-serif); font-size:1.3rem;">Supreme Court Judicial Chamber</h3>
-            </div>
-            <div style="display:flex; gap:0.5rem;">
-              <button type="button" class="btn btn-secondary" style="font-size:0.75rem;" onclick="exportDocketToExcel()">📊 Export Docket (.csv)</button>
-              <button type="button" class="btn btn-danger" style="font-size:0.75rem;" onclick="logoutTerminal()">Sign Out</button>
-            </div>
-          </div>
-          <div class="workstation-body">
-            <div class="card-panel">
-              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#1e3a8a; margin-bottom:0.75rem;">Citizen Appeals Adjudication Queue</h4>
-              <div id="judiciaryAppealsQueue"></div>
-            </div>
-            <div class="card-panel" style="border-left-color:var(--gov-gold);">
-              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#704700; margin-bottom:0.5rem;">State Bar Admissions & Disbarment</h4>
-              <form id="admitBarForm" style="margin-bottom:1rem;">
-                <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr auto; align-items:flex-end;">
-                  <div class="form-group"><label style="font-size:0.75rem;">Candidate Name</label><input type="text" id="barName" class="gov-input" required /></div>
-                  <div class="form-group"><label style="font-size:0.75rem;">Bar Score (%)</label><input type="number" id="barScore" class="gov-input" min="0" max="100" required /></div>
-                  <div class="form-group"><label style="font-size:0.75rem;">Status</label><select id="barStatus" class="gov-select"><option value="Active & Certified">Active & Certified</option><option value="Suspended">Suspended</option><option value="Disbarred">Disbarred</option></select></div>
-                  <button type="submit" class="btn btn-success" style="font-size:0.8rem; height:38px;">Admit Candidate</button>
-                </div>
-              </form>
-              <div class="table-container">
-                <table class="gov-table">
-                  <thead><tr><th>License ID</th><th>Attorney Name</th><th>Score</th><th>Status</th><th>Action</th></tr></thead>
-                  <tbody id="judgeBarManageTable"></tbody>
-                </table>
-              </div>
-            </div>
-            <div class="card-panel">
-              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#1e3a8a; margin-bottom:0.75rem;">Schedule Court Trial</h4>
-              <form id="scheduleTrialForm">
-                <div class="form-grid">
-                  <div class="form-group"><label style="font-size:0.75rem;">Defendant</label><input type="text" id="trialDefendant" class="gov-input" required /></div>
-                  <div class="form-group"><label style="font-size:0.75rem;">Charge</label><input type="text" id="trialCharge" class="gov-input" required /></div>
-                  <div class="form-group"><label style="font-size:0.75rem;">Defender</label><input type="text" id="trialDefender" class="gov-input" required /></div>
-                  <div class="form-group"><label style="font-size:0.75rem;">Phase</label><select id="trialPhase" class="gov-select"><option value="Phase I: Arraignment & Plea">Phase I: Arraignment & Plea</option><option value="Phase II: Evidentiary Hearing">Phase II: Evidentiary Hearing</option><option value="Phase III: Oral Arguments">Phase III: Oral Arguments</option><option value="Phase IV: Verdict & Sentencing">Phase IV: Verdict & Sentencing</option></select></div>
-                </div>
-                <button type="submit" class="btn btn-success">Schedule Entry</button>
-              </form>
-            </div>
-            <div class="card-panel" style="border-left-color:var(--gov-red);">
-              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--gov-red); margin-bottom:0.75rem;">Master Docket Removal & Expungement</h4>
-              <div class="table-container">
-                <table class="gov-table">
-                  <thead><tr><th>Docket ID</th><th>Target</th><th>Category</th><th>Status</th><th>Action</th></tr></thead>
-                  <tbody id="judgeDocketManageTable"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        `;
-        renderJudiciaryQueue();
-        renderJudgeDocketManageTable();
-        renderJudgeBarManageTable();
-      } else if (role === 'government') {
-        container.className = 'workstation-container theme-executive';
-        container.innerHTML = `
-          <div class="workstation-topbar">
-            <div>
-              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--gov-gold-light);">Capitol Executive & Senate Suite</span>
-              <h3 style="font-family:var(--font-serif); font-size:1.3rem;">Executive Chamber & Legislative Floor</h3>
-            </div>
-            <button type="button" class="btn btn-danger" style="font-size:0.75rem;" onclick="logoutTerminal()">Sign Out</button>
-          </div>
-          <div class="workstation-body">
-            <div class="card-panel" style="border-left-color:#ef4444;">
-              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#b91c1c; margin-bottom:0.5rem;">🚨 State Emergency Alert System (SEOC Broadcast)</h4>
-              <form id="easBroadcastForm">
-                <div class="form-group" style="margin-bottom:0.5rem;"><input type="text" id="easAlertTextInput" class="gov-input" placeholder="Enter emergency alert text..." required /></div>
-                <button type="submit" class="btn btn-danger" style="width:100%;">Dispatch Emergency Alert</button>
-              </form>
-            </div>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
-              <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-navy); margin-bottom:0.75rem;">Senate Roll Call Vote Tally</h4>
-                <form id="senateVoteForm">
-                  <div class="form-group" style="margin-bottom:0.75rem;"><label style="font-size:0.75rem;">Bill Title</label><input type="text" id="svBill" class="gov-input" required /></div>
-                  <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom:0.75rem;">
-                    <div class="form-group"><label style="font-size:0.75rem;">Yeas</label><input type="number" id="svYeas" class="gov-input" min="0" max="7" value="5" required /></div>
-                    <div class="form-group"><label style="font-size:0.75rem;">Nays</label><input type="number" id="svNays" class="gov-input" min="0" max="7" value="2" required /></div>
-                    <div class="form-group"><label style="font-size:0.75rem;">Abstain</label><input type="number" id="svAbstain" class="gov-input" min="0" max="7" value="0" required /></div>
-                  </div>
-                  <button type="submit" class="btn" style="width:100%;">Record Vote</button>
-                </form>
-              </div>
-              <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-navy); margin-bottom:0.75rem;">Executive Pardon Grant</h4>
-                <form id="execPardonForm">
-                  <div class="form-group" style="margin-bottom:0.75rem;"><label style="font-size:0.75rem;">Recipient Citizen</label><input type="text" id="pardonCitizen" class="gov-input" required /></div>
-                  <div class="form-group" style="margin-bottom:0.75rem;"><label style="font-size:0.75rem;">Action</label><select id="pardonType" class="gov-select"><option value="Full Executive Pardon">Full Executive Pardon</option><option value="Sentence Commutation">Sentence Commutation</option></select></div>
-                  <button type="submit" class="btn btn-success" style="width:100%;">Grant Clemency</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        `;
-      } else {
-        let themeClass = 'theme-records';
-        if (role === 'dept_msp') themeClass = 'theme-msp';
-        else if (role === 'dept_mcso') themeClass = 'theme-mcso';
-        else if (role === 'dept_iec') themeClass = 'theme-iec';
-        else if (role === 'dept_dot') themeClass = 'theme-dot';
-        else if (role === 'dept_doj') themeClass = 'theme-doj';
-
-        container.className = `workstation-container ${themeClass}`;
-        container.innerHTML = `
-          <div class="workstation-topbar">
-            <div>
-              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em;">Agency Command Workstation</span>
-              <h3 style="font-family:var(--font-serif); font-size:1.3rem;">${CURRENT_DEPT_NAME} Intranet</h3>
-            </div>
-            <button type="button" class="btn btn-danger" style="font-size:0.75rem;" onclick="logoutTerminal()">Sign Out</button>
-          </div>
-          <div class="workstation-body">
-            ${(role === 'dept_msp' || role === 'dept_mcso') ? `
-              <div class="card-panel" style="border-left-color:var(--gov-red);">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-red); margin-bottom:0.5rem;">🔫 Weapon & CCW Permit Revocation Portal</h4>
-                <p style="font-size:0.8rem; margin-bottom:1rem;">Revoke or suspend citizen carry permits following Title 8 Division 5 infractions.</p>
-                <div class="table-container">
-                  <table class="gov-table">
-                    <thead><tr><th>Permit ID</th><th>Licensee Name</th><th>Status</th><th>Expiry</th><th>Action</th></tr></thead>
-                    <tbody id="deptCCWManageTableBody"></tbody>
-                  </table>
-                </div>
-              </div>
-            ` : ''}
-
-            ${role === 'dept_records' ? `
-              <div class="card-panel" style="margin-bottom:1.5rem;">
-                <h4 style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:0.5rem;">📂 Master Personnel Database Editor (OPM Suite)</h4>
-                <div class="table-container">
-                  <table class="gov-table">
-                    <thead><tr><th>File ID</th><th>Username</th><th>Department</th><th>Role</th><th>Clearance</th><th>Status</th><th>Actions</th></tr></thead>
-                    <tbody id="masterPersonnelManageTableBody"></tbody>
-                  </table>
-                </div>
-              </div>
-            ` : ''}
-
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
-              <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Personnel Roster & Terminations</h4>
-                <form id="addPersonnelForm" style="margin-bottom:1rem;">
-                  <div class="form-grid" style="grid-template-columns: 2fr 1fr auto; align-items:flex-end;">
-                    <div class="form-group"><label style="font-size:0.75rem;">Username</label><input type="text" id="rosterUser" class="gov-input" required /></div>
-                    <div class="form-group"><label style="font-size:0.75rem;">Rank</label><input type="text" id="rosterRank" class="gov-input" required /></div>
-                    <button type="submit" class="btn btn-success" style="font-size:0.8rem; height:38px;">Add</button>
-                  </div>
-                </form>
-                <div class="table-container"><table class="gov-table"><thead><tr><th>Username</th><th>Rank</th><th>Action</th></tr></thead><tbody id="deptRosterTableBody"></tbody></table></div>
-              </div>
-
-              <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Shift & Patrol Board</h4>
-                <form id="addShiftForm" style="margin-bottom:1rem;">
-                  <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr auto; align-items:flex-end;">
-                    <div class="form-group"><label style="font-size:0.75rem;">Member</label><input type="text" id="shiftUser" class="gov-input" required /></div>
-                    <div class="form-group"><label style="font-size:0.75rem;">Callsign</label><input type="text" id="shiftCallsign" class="gov-input" required /></div>
-                    <div class="form-group"><label style="font-size:0.75rem;">Sector</label><input type="text" id="shiftSector" class="gov-input" required /></div>
-                    <button type="submit" class="btn btn-success" style="font-size:0.8rem; height:38px;">Assign</button>
-                  </div>
-                </form>
-                <div class="table-container"><table class="gov-table"><thead><tr><th>Member</th><th>Callsign</th><th>Sector</th><th>Action</th></tr></thead><tbody id="deptShiftTableBody"></tbody></table></div>
-              </div>
-
-              <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Internal Affairs Registry</h4>
-                <form id="addDisciplineForm" style="margin-bottom:1rem;">
-                  <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:0.5rem;">
-                    <div class="form-group"><label style="font-size:0.75rem;">Subject</label><input type="text" id="iaUser" class="gov-input" required /></div>
-                    <div class="form-group"><label style="font-size:0.75rem;">Sanction</label><select id="iaSanction" class="gov-select"><option value="Written Reprimand">Written Reprimand</option><option value="Suspension">Suspension</option><option value="Rank Demotion">Rank Demotion</option><option value="Termination / Discharged">Termination / Discharged</option></select></div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:0.5rem;"><label style="font-size:0.75rem;">Finding</label><input type="text" id="iaReason" class="gov-input" required /></div>
-                  <button type="submit" class="btn btn-danger" style="width:100%;">Record Action</button>
-                </form>
-                <div class="table-container"><table class="gov-table"><thead><tr><th>Personnel</th><th>Sanction</th><th>Audit</th></tr></thead><tbody id="deptIATableBody"></tbody></table></div>
-              </div>
-
-              <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Mutual Aid Calls</h4>
-                <form id="addMutualAidForm" style="margin-bottom:1rem;">
-                  <div class="form-grid" style="grid-template-columns: 1fr 2fr; margin-bottom:0.5rem;">
-                    <div class="form-group"><label style="font-size:0.75rem;">Agency</label><select id="aidTargetDept" class="gov-select"><option value="Melview State Police">Melview State Police</option><option value="County Sheriff Office">County Sheriff Office</option><option value="Department of Transportation">Department of Transportation</option><option value="Department of Justice">Department of Justice</option></select></div>
-                    <div class="form-group"><label style="font-size:0.75rem;">Scope</label><input type="text" id="aidScope" class="gov-input" required /></div>
-                  </div>
-                  <button type="submit" class="btn btn-success" style="width:100%;">Dispatch Mutual Aid</button>
-                </form>
-                <div class="table-container"><table class="gov-table"><thead><tr><th>Request</th><th>Target</th><th>Status</th><th>Action</th></tr></thead><tbody id="deptAidTableBody"></tbody></table></div>
-              </div>
-            </div>
-          </div>
-        `;
-        renderDeptRoster(CURRENT_DEPT_NAME);
-        renderDeptShifts(CURRENT_DEPT_NAME);
-        renderDeptIA(CURRENT_DEPT_NAME);
-        renderDeptAid();
-        if (role === 'dept_msp' || role === 'dept_mcso') renderCCWRevocationTable();
-        if (role === 'dept_records') renderMasterPersonnelManageTable();
-      }
-      attachFormListeners();
-    };
-
-    function renderDeptRoster(deptName) {
-      const tbody = document.getElementById('deptRosterTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      const list = DEPT_ROSTERS[deptName] || [];
-      list.forEach((m, idx) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${m.user}</strong></td><td>${m.rank}</td><td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="terminateEmployeePersonnel('${deptName}', ${idx})">🚫 Terminate</button></td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    function renderDeptShifts(deptName) {
-      const tbody = document.getElementById('deptShiftTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      const shifts = DEPT_SHIFTS[deptName] || [];
-      shifts.forEach((s, sIdx) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${s.user}</strong></td><td>${s.callsign}</td><td>${s.sector}</td><td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptShift('${deptName}', ${sIdx})">End Shift</button></td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    function renderDeptIA(deptName) {
-      const tbody = document.getElementById('deptIATableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      const iaList = DEPT_IA[deptName] || [];
-      iaList.forEach(ia => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${ia.user}</strong></td><td><span class="badge badge-danger">${ia.sanction}</span><br><span style="font-size:0.75rem;">${ia.reason}</span></td><td><span class="badge badge-navy">AUDITED</span></td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    function renderDeptAid() {
-      const tbody = document.getElementById('deptAidTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      DEPT_MUTUAL_AID.forEach((aid, idx) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${aid.from}</strong>: ${aid.scope}</td><td>${aid.target}</td><td><span class="badge badge-success">${aid.status}</span></td><td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeMutualAidCall(${idx})">Stand Down</button></td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    window.removeMutualAidCall = function(idx) {
-      const call = DEPT_MUTUAL_AID[idx];
-      DEPT_MUTUAL_AID.splice(idx, 1);
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-      GOV_LOGS.unshift(`${now} | MUTUAL AID CANCELLED | Call closed between ${call.from} and ${call.target}.`);
-      saveState();
-      alert("Mutual aid / backup call stood down.");
-    };
-
-    window.renderMasterPersonnelManageTable = function() {
-      const tbody = document.getElementById('masterPersonnelManageTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      PRIVATE_PERSONNEL.forEach((emp, index) => {
-        let badgeClass = emp.status === 'Active' ? 'badge-success' : 'badge-danger';
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${emp.id}</strong></td><td>${emp.user}</td><td>${emp.dept}</td><td>${emp.role}</td><td><span class="badge badge-navy">${emp.clearance}</span></td><td><span class="badge ${badgeClass}">${emp.status}</span></td><td><button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openEditPersonnelModal(${index})">✏️ Edit</button> <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="deleteMasterPersonnelRecord('${emp.id}', '${emp.user}')">Expunge</button></td>`;
-        tbody.appendChild(row);
-      });
-    };
-
-    window.handleStateLogin = function(e) {
-      if (e) e.preventDefault();
-      const u = (document.getElementById('loginUsername')?.value || '').trim().toLowerCase();
-      const p = (document.getElementById('loginPassword')?.value || '').trim();
-      const err = document.getElementById('loginErrorMsg');
-
-      let role = null;
-      let deptName = "";
-
-      if (u === 'judge1' && p === 'admin5') { role = 'judiciary'; deptName = "Supreme Court Judicial Chamber"; }
-      else if (u === 'law3' && p === 'admin2') { role = 'government'; deptName = "Executive Chamber & Senate"; }
-      else if (u === 'police1' && p === 'admin3') { role = 'dept_msp'; deptName = "Melview State Police"; }
-      else if (u === 'sheriff1' && p === 'admin4') { role = 'dept_mcso'; deptName = "County Sheriff Office"; }
-      else if (u === 'elections1' && p === 'admin6') { role = 'dept_iec'; deptName = "Independent Electoral Commission"; }
-      else if (u === 'transport1' && p === 'admin7') { role = 'dept_dot'; deptName = "Department of Transportation"; }
-      else if (u === 'doj1' && p === 'admin8') { role = 'dept_doj'; deptName = "Department of Justice"; }
-      else if (u === 'records1' && p === 'admin9') { role = 'dept_records'; deptName = "Master Private Personnel Archive"; }
-
-      if (role) {
-        CURRENT_AUTH_ROLE = role;
-        CURRENT_DEPT_NAME = deptName;
-        if (err) err.style.display = 'none';
-        document.getElementById('secureAuthGate').style.display = 'none';
-        document.getElementById('dynamicWorkstationContainer').style.display = 'block';
-        const pill = document.getElementById('authStatusPill');
-        pill.className = 'badge badge-success';
-        pill.innerHTML = `AUTH: ${u.toUpperCase()}`;
-        renderWorkstationView(role);
-      } else {
-        if (err) err.style.display = 'block';
-      }
-    };
-
-    window.logoutTerminal = function() {
-      CURRENT_AUTH_ROLE = null;
-      document.getElementById('secureAuthGate').style.display = 'block';
-      document.getElementById('dynamicWorkstationContainer').style.display = 'none';
-      document.getElementById('loginUsername').value = '';
-      document.getElementById('loginPassword').value = '';
-      const pill = document.getElementById('authStatusPill');
-      pill.className = 'badge badge-navy';
-      pill.innerHTML = 'PUBLIC ACCESS PORTAL';
     };
 
     // =========================================================================
@@ -1616,290 +924,52 @@
 
     // FORM LISTENERS ATTACHMENT
     function attachFormListeners() {
-      const formBindings = [
-        { id: 'foiaSubmitForm', handler: (e) => handleFOIASubmit(e) },
-        { id: 'stateLoginForm', handler: (e) => handleStateLogin(e) },
-        { id: 'editPersonnelForm', handler: (e) => handleSaveMasterPersonnel(e) },
-        { id: 'admitBarForm', handler: (e) => handleAdmitBarCandidate(e) },
-        { id: 'scheduleTrialForm', handler: (e) => handleScheduleTrial(e) },
-        { id: 'senateVoteForm', handler: (e) => handleSenateRollCall(e) },
-        { id: 'execPardonForm', handler: (e) => handleExecutivePardon(e) },
-        { id: 'quickEOForm', handler: (e) => handleQuickEO(e) },
-        { id: 'addPersonnelForm', handler: (e) => handleAddPersonnel(e) },
-        { id: 'addShiftForm', handler: (e) => handleAddShift(e) },
-        { id: 'addDisciplineForm', handler: (e) => handleAddDiscipline(e) },
-        { id: 'addMutualAidForm', handler: (e) => handleAddMutualAid(e) },
-        { id: 'easBroadcastForm', handler: (e) => broadcastEASAlert(e) },
-        { id: 'barExamForm', handler: (e) => gradeBarExam(e) }
-      ];
+      const foiaForm = document.getElementById('foiaSubmitForm');
+      if (foiaForm) {
+        foiaForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const name = document.getElementById('foiaName').value.trim();
+          const dept = document.getElementById('foiaDept').value;
+          const details = document.getElementById('foiaDetails').value.trim();
+          const now = new Date();
+          const deadline = new Date(now.getTime() + (72 * 60 * 60 * 1000));
+          const newId = `FOIA-2026-${Math.floor(10 + Math.random() * 90)}`;
 
-      formBindings.forEach(fb => {
-        const el = document.getElementById(fb.id);
-        if (el) {
-          el.addEventListener('submit', function(e) {
-            e.preventDefault();
-            fb.handler(e);
+          FOIA_REQUESTS.unshift({
+            id: newId, req: name, dept: dept,
+            date: now.toISOString().replace('T', ' ').substring(0, 16) + ' UTC',
+            deadline: deadline.toISOString().replace('T', ' ').substring(0, 16) + ' UTC',
+            status: "Active (72h Clock Initiated)"
           });
-        }
-      });
-    }
-
-    function handleFOIASubmit(e) {
-      if (e) e.preventDefault();
-      const name = document.getElementById('foiaName').value.trim();
-      const dept = document.getElementById('foiaDept').value;
-      const details = document.getElementById('foiaDetails').value.trim();
-      const now = new Date();
-      const deadline = new Date(now.getTime() + (72 * 60 * 60 * 1000));
-      const newId = `FOIA-2026-${Math.floor(10 + Math.random() * 90)}`;
-
-      FOIA_REQUESTS.unshift({
-        id: newId, req: name, dept: dept,
-        date: now.toISOString().replace('T', ' ').substring(0, 16) + ' UTC',
-        deadline: deadline.toISOString().replace('T', ' ').substring(0, 16) + ' UTC',
-        status: "Active (72h Clock Initiated)"
-      });
-      saveState();
-      alert(`FOIA Request ${newId} submitted. 72-Hour timer running.`);
-      document.getElementById('foiaSubmitForm').reset();
-    }
-
-    function handleAdmitBarCandidate(e) {
-      if (e) e.preventDefault();
-      const name = document.getElementById('barName').value.trim();
-      const score = parseInt(document.getElementById('barScore').value, 10);
-      const status = document.getElementById('barStatus').value;
-      const newId = `BAR-2026-${Math.floor(100 + Math.random() * 900)}`;
-
-      PUBLIC_REGISTRY.push({ id: newId, name: name, cat: "State Bar License", score: `${score}% (${score >= 80 ? 'Passed' : 'Failed'})`, exp: "2027-01-01", status: status });
-      saveState();
-      alert(`Attorney ${name} enrolled in State Bar.`);
-      document.getElementById('admitBarForm').reset();
-    }
-
-    function handleScheduleTrial(e) {
-      if (e) e.preventDefault();
-      const def = document.getElementById('trialDefendant').value.trim();
-      const charge = document.getElementById('trialCharge').value.trim();
-      const defender = document.getElementById('trialDefender').value.trim();
-      const phase = document.getElementById('trialPhase').value;
-      const newId = `TR-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-
-      MASTER_DOCKET.unshift({ id: newId, appellant: def, category: phase, ref: charge, time: new Date().toISOString().substring(0,16)+' UTC', status: "Scheduled", justiceNotes: `Defender: ${defender}` });
-      saveState();
-      alert(`Trial docket ${newId} scheduled.`);
-      document.getElementById('scheduleTrialForm').reset();
-    }
-
-    function handleSenateRollCall(e) {
-      if (e) e.preventDefault();
-      const bill = document.getElementById('svBill').value.trim();
-      const yeas = parseInt(document.getElementById('svYeas').value, 10);
-      const nays = parseInt(document.getElementById('svNays').value, 10);
-      const passed = yeas >= 4;
-      GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | SENATE VOTE | ${bill} - ${passed ? 'PASSED' : 'FAILED'} (${yeas}-${nays})`);
-      saveState();
-      alert(`Senate Roll Call on ${bill} recorded: ${passed ? 'PASSED' : 'FAILED'}.`);
-      document.getElementById('senateVoteForm').reset();
-    }
-
-    function handleExecutivePardon(e) {
-      if (e) e.preventDefault();
-      const citizen = document.getElementById('pardonCitizen').value.trim();
-      const pType = document.getElementById('pardonType').value;
-      MASTER_DOCKET.unshift({ id: `EX-PARDON-${Math.floor(1000+Math.random()*9000)}`, appellant: citizen, category: pType, ref: "Gubernatorial Decree", time: new Date().toISOString().substring(0,16)+' UTC', status: "Accepted", justiceNotes: "Executive Clemency Granted." });
-      saveState();
-      alert(`Pardon issued to ${citizen}.`);
-      document.getElementById('execPardonForm').reset();
-    }
-
-    function handleQuickEO(e) {
-      if (e) e.preventDefault();
-      const num = document.getElementById('qEONum').value;
-      const dir = document.getElementById('qEODirective').value;
-      EXEC_ORDERS.unshift({ num: num, title: num, dept: "Executive Chamber", date: new Date().toISOString().substring(0,10), status: "Active Enactment", dir: dir });
-      saveState();
-      alert(`Executive Order ${num} promulgated.`);
-      document.getElementById('quickEOForm').reset();
-    }
-
-    function handleAddPersonnel(e) {
-      if (e) e.preventDefault();
-      const user = document.getElementById('rosterUser').value.trim();
-      const rank = document.getElementById('rosterRank').value.trim();
-      if (!DEPT_ROSTERS[CURRENT_DEPT_NAME]) DEPT_ROSTERS[CURRENT_DEPT_NAME] = [];
-      DEPT_ROSTERS[CURRENT_DEPT_NAME].push({ user: user, rank: rank });
-
-      if (!PRIVATE_PERSONNEL.find(p => p.user.toLowerCase() === user.toLowerCase())) {
-        PRIVATE_PERSONNEL.push({ id: `EMP-2026-${Math.floor(100 + Math.random() * 900)}`, user: user, dept: CURRENT_DEPT_NAME, role: rank, clearance: "Level 2 Department Staff", status: "Active" });
+          saveState();
+          alert(`FOIA Request ${newId} submitted. 72-Hour timer running.`);
+          foiaForm.reset();
+        });
       }
-      saveState();
-      alert(`Personnel ${user} added.`);
-      document.getElementById('addPersonnelForm').reset();
-    }
 
-    function handleAddShift(e) {
-      if (e) e.preventDefault();
-      const user = document.getElementById('shiftUser').value.trim();
-      const callsign = document.getElementById('shiftCallsign').value.trim();
-      const sector = document.getElementById('shiftSector').value.trim();
-      if (!DEPT_SHIFTS[CURRENT_DEPT_NAME]) DEPT_SHIFTS[CURRENT_DEPT_NAME] = [];
-      DEPT_SHIFTS[CURRENT_DEPT_NAME].push({ user: user, callsign: callsign, sector: sector });
-      saveState();
-      alert(`Shift assigned for ${user}.`);
-      document.getElementById('addShiftForm').reset();
-    }
-
-    window.removeDeptShift = function(deptName, idx) {
-      DEPT_SHIFTS[deptName].splice(idx, 1);
-      saveState();
-    };
-
-    function handleAddDiscipline(e) {
-      if (e) e.preventDefault();
-      const user = document.getElementById('iaUser').value.trim();
-      const sanction = document.getElementById('iaSanction').value;
-      const reason = document.getElementById('iaReason').value.trim();
-      if (!DEPT_IA[CURRENT_DEPT_NAME]) DEPT_IA[CURRENT_DEPT_NAME] = [];
-      DEPT_IA[CURRENT_DEPT_NAME].push({ user: user, sanction: sanction, reason: reason });
-      saveState();
-      alert(`Disciplinary action logged for ${user}.`);
-      document.getElementById('addDisciplineForm').reset();
-    }
-
-    function handleAddMutualAid(e) {
-      if (e) e.preventDefault();
-      const target = document.getElementById('aidTargetDept').value;
-      const scope = document.getElementById('aidScope').value.trim();
-      DEPT_MUTUAL_AID.unshift({ from: CURRENT_DEPT_NAME, target: target, scope: scope, status: "Active Call" });
-      saveState();
-      alert(`Mutual aid call dispatched to ${target}.`);
-      document.getElementById('addMutualAidForm').reset();
-    }
-
-    function gradeBarExam(e) {
-      if (e) e.preventDefault();
-      const form = document.getElementById('barExamForm');
-      const answers = { q1: 'c', q2: 'b', q3: 'c' };
-      let correct = 0;
-      for (let key in answers) {
-        const selected = form.querySelector(`input[name="${key}"]:checked`);
-        if (selected && selected.value === answers[key]) correct++;
-      }
-      const scorePercent = Math.round((correct / 3) * 100);
-      const resultBox = document.getElementById('barExamResult');
-      resultBox.style.display = "block";
-      if (scorePercent >= 80) {
-        resultBox.style.background = "#ecf3ec"; resultBox.style.borderLeft = "4px solid var(--gov-green)"; resultBox.style.color = "#005a10";
-        resultBox.innerHTML = `<strong>EXAMINATION PASSED: ${scorePercent}% (${correct}/3)</strong><br>Eligible for admission to the State Bar.`;
-      } else {
-        resultBox.style.background = "#fbeae8"; resultBox.style.borderLeft = "4px solid var(--gov-red)"; resultBox.style.color = "#b50909";
-        resultBox.innerHTML = `<strong>EXAMINATION FAILED: ${scorePercent}% (${correct}/3)</strong><br>Passing threshold is 80%.`;
+      const barForm = document.getElementById('barExamForm');
+      if (barForm) {
+        barForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const answers = { q1: 'c', q2: 'b', q3: 'c' };
+          let correct = 0;
+          for (let key in answers) {
+            const selected = barForm.querySelector(`input[name="${key}"]:checked`);
+            if (selected && selected.value === answers[key]) correct++;
+          }
+          const scorePercent = Math.round((correct / 3) * 100);
+          const resultBox = document.getElementById('barExamResult');
+          resultBox.style.display = "block";
+          if (scorePercent >= 80) {
+            resultBox.style.background = "#ecf3ec"; resultBox.style.borderLeft = "4px solid var(--gov-green)"; resultBox.style.color = "#005a10";
+            resultBox.innerHTML = `<strong>EXAMINATION PASSED: ${scorePercent}% (${correct}/3)</strong><br>Eligible for admission to the State Bar.`;
+          } else {
+            resultBox.style.background = "#fbeae8"; resultBox.style.borderLeft = "4px solid var(--gov-red)"; resultBox.style.color = "#b50909";
+            resultBox.innerHTML = `<strong>EXAMINATION FAILED: ${scorePercent}% (${correct}/3)</strong><br>Passing threshold is 80%.`;
+          }
+        });
       }
     }
-
-    function renderJudiciaryQueue() {
-      const container = document.getElementById('judiciaryAppealsQueue');
-      if (!container) return;
-      container.innerHTML = '';
-      const pendingItems = MASTER_DOCKET.filter(item => item.status === 'Pending Review');
-      if (pendingItems.length === 0) {
-        container.innerHTML = `<div style="padding:1.25rem; text-align:center; color:var(--gov-gray-dark); background:#f8fafc; border:1px solid #cbd5e0;">No pending appeals awaiting judicial review.</div>`;
-        return;
-      }
-      pendingItems.forEach(item => {
-        const div = document.createElement('div');
-        div.style.cssText = "border:1px solid #cbd5e0; background:#ffffff; padding:1.25rem; margin-bottom:1rem; border-left:4px solid #2b6cb0;";
-        div.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <div><strong>${item.id}</strong> — <span>${item.appellant}</span> [${item.category}]</div>
-            <span class="badge badge-pending">PENDING</span>
-          </div>
-          <p style="font-size:0.85rem;"><strong>Reference:</strong> ${item.ref}</p>
-          <div class="form-group" style="margin:0.5rem 0;"><input type="text" id="notes_${item.id}" class="gov-input" placeholder="Enter findings..." /></div>
-          <div style="display:flex; gap:0.5rem;">
-            <button type="button" class="btn btn-success" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Accepted')">Accept</button>
-            <button type="button" class="btn btn-danger" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Denied')">Deny</button>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    window.adjudicateAppeal = function(docketId, decision) {
-      const notesInput = document.getElementById(`notes_${docketId}`);
-      const notes = notesInput ? notesInput.value.trim() : "";
-      const target = MASTER_DOCKET.find(i => i.id === docketId);
-      if (target) {
-        target.status = decision;
-        target.justiceNotes = notes || (decision === 'Accepted' ? 'Granted by Court Order.' : 'Denied following review.');
-        saveState();
-        alert(`Docket ${docketId} marked ${decision.toUpperCase()}.`);
-      }
-    };
-
-    function renderJudgeDocketManageTable() {
-      const tbody = document.getElementById('judgeDocketManageTable');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      MASTER_DOCKET.forEach(item => {
-        let badgeClass = item.status === 'Accepted' ? 'badge-success' : 'badge-danger';
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${item.id}</strong></td><td>${item.appellant}</td><td>${item.category}</td><td><span class="badge ${badgeClass}">${item.status.toUpperCase()}</span></td><td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openDeletionModal('${item.id}', '${item.appellant}')">Expunge</button></td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    let DELETION_TARGET_ID = null;
-    window.openDeletionModal = function(docketId, appellantName) {
-      DELETION_TARGET_ID = docketId;
-      document.getElementById('modalTargetText').innerHTML = `Expunge Docket <strong>${docketId}</strong> (${appellantName}) from official register.`;
-      document.getElementById('modalAuthUsername').value = '';
-      document.getElementById('modalAuthReason').value = '';
-      document.getElementById('deletionModal').style.display = 'flex';
-    };
-
-    window.closeDeletionModal = function() {
-      DELETION_TARGET_ID = null;
-      document.getElementById('deletionModal').style.display = 'none';
-    };
-
-    window.executeConfirmedDeletion = function() {
-      const user = document.getElementById('modalAuthUsername').value.trim();
-      const reason = document.getElementById('modalAuthReason').value.trim();
-      if (!user || !reason) return;
-      const targetIdx = MASTER_DOCKET.findIndex(i => i.id === DELETION_TARGET_ID);
-      if (targetIdx !== -1) {
-        MASTER_DOCKET.splice(targetIdx, 1);
-        JUDICIAL_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | EXPUNGEMENT | (${user}) Expunged ${DELETION_TARGET_ID} - Reason: "${reason}"`);
-        saveState();
-        alert(`Docket ${DELETION_TARGET_ID} expunged.`);
-        closeDeletionModal();
-      }
-    };
-
-    function renderJudgeBarManageTable() {
-      const tbody = document.getElementById('judgeBarManageTable');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      const barAttorneys = PUBLIC_REGISTRY.filter(i => i.cat === 'State Bar License');
-      barAttorneys.forEach(item => {
-        let badgeClass = item.status === 'Active & Certified' ? 'badge-success' : 'badge-danger';
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${item.id}</strong></td><td>${item.name}</td><td>${item.score}</td><td><span class="badge ${badgeClass}">${item.status}</span></td><td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBarMember('${item.id}', '${item.name}')">Revoke</button></td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    window.removeBarMember = function(id, name) {
-      if (!confirm(`Revoke license for ${name} (${id})?`)) return;
-      const idx = PUBLIC_REGISTRY.findIndex(i => i.id === id);
-      if (idx !== -1) {
-        PUBLIC_REGISTRY.splice(idx, 1);
-        saveState();
-        alert(`License ${id} revoked.`);
-      }
-    };
 
     // LIFECYCLE INITIALIZER
     document.addEventListener("DOMContentLoaded", function() {
@@ -1913,7 +983,6 @@
       renderPrivatePersonnelTable();
       renderPenalTable(PENAL_DATABASE);
       initCalculator();
-      renderLogs();
     });
 
     renderPublicDocket();
@@ -1925,7 +994,6 @@
     renderPrivatePersonnelTable();
     renderPenalTable(PENAL_DATABASE);
     initCalculator();
-    renderLogs();
   </script>
 </body>
 </html>
