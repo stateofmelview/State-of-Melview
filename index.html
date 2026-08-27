@@ -113,6 +113,7 @@
     .btn-secondary { background-color: var(--gov-gray-dark); }
     .btn-gold { background-color: #ca8a04; color: #fff; }
     
+    /* ELECTION HERO BANNER */
     .election-hero-banner {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -134,6 +135,32 @@
       object-fit: contain;
       display: block;
     }
+
+    /* STATE CAPITOL PANORAMA HERO */
+    .capitol-hero-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(15, 25, 35, 0.75) 0%, rgba(11, 19, 25, 0.95) 100%),
+                  url('capitol-banner.png.jfif'),
+                  url('capitol-banner.png');
+      background-size: cover;
+      background-position: center 30%;
+      border: 1px solid var(--gov-gold);
+      border-radius: 6px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .capitol-hero-title {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      color: #fef08a;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
     footer.gov-footer {
       background-color: var(--gov-navy-dark); color: #aebbc5;
       border-top: 4px solid var(--gov-navy); padding: 2.5rem 1.5rem; font-size: 0.85rem; margin-top: auto;
@@ -196,7 +223,7 @@
       <span>INDEPENDENT ELECTORAL COMMISSION • EST. 2026</span>
     </div>
 
-    <!-- 1. DASHBOARD WITH ELECTIONS CAMPAIGN HERO -->
+    <!-- 1. DASHBOARD WITH ELECTIONS HERO & CAPITOL PANORAMA -->
     <section id="pane-dashboard" class="tab-pane active">
       <div class="election-hero-banner">
         <div>
@@ -214,6 +241,15 @@
         </div>
       </div>
 
+      <!-- CAPITOL PANORAMA CARD -->
+      <div class="capitol-hero-card">
+        <span class="badge badge-gold" style="margin-bottom: 0.5rem;">CAPITOL HILL • MELVIEW CITY</span>
+        <h2 class="capitol-hero-title">Seat of the General Assembly & High Judiciary</h2>
+        <p style="font-size: 0.95rem; max-width: 850px; color: #e2e8f0; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
+          Welcome to the centralized repository for the organic laws, statutory slip laws, unified penal schedules, and judicial standard operating procedures of the <strong>State of Melview</strong>.
+        </p>
+      </div>
+
       <div class="metric-grid">
         <div class="metric-card"><div class="metric-label">Organic Supreme Law</div><div class="metric-number">Constitution</div></div>
         <div class="metric-card"><div class="metric-label">Codified Penal Schedule</div><div class="metric-number">60 Offenses</div></div>
@@ -223,12 +259,9 @@
 
       <div class="gov-card">
         <div class="gov-card-header">
-          <h2 class="gov-card-title">Welcome to the Official State Legal Repository</h2>
+          <h2 class="gov-card-title">Constitutional Supremacy & Statutory Guidelines</h2>
           <span class="badge badge-navy">JURISDICTION: STATE OF MELVIEW</span>
         </div>
-        <p style="margin-bottom: 1rem;">
-          This centralized repository codifies the organic laws, statutory slip laws, unified penal schedules, and judicial standard operating procedures of the <strong>State of Melview</strong>.
-        </p>
         <div style="background-color: var(--gov-blue-light); border-left: 4px solid var(--gov-blue-primary); padding: 1.25rem; font-size: 0.9rem;">
           <strong>Constitutional Supremacy & Rule of Law:</strong>
           <p style="margin-top: 0.35rem;">
@@ -500,19 +533,19 @@
 
   <!-- ZERO-API LOCAL STATUTORY ASSISTANT -->
   <div id="aiChatWidget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: var(--font-sans);">
-    <button id="aiToggleBtn" onclick="toggleAIChat()" style="background: var(--gov-navy); color: #ffffff; border: 2px solid var(--gov-gold); border-radius: 50px; padding: 12px 20px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px;">
+    <button type="button" id="aiToggleBtn" onclick="toggleAIChat()" style="background: var(--gov-navy); color: #ffffff; border: 2px solid var(--gov-gold); border-radius: 50px; padding: 12px 20px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px;">
       ⚖️ State Legal Assistant
     </button>
 
     <div id="aiChatWindow" style="display: none; width: 380px; height: 500px; background: #0b1319; border: 2px solid var(--gov-blue-primary); border-radius: 8px; flex-direction: column; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.6); margin-top: 10px;">
       <div style="background: var(--gov-navy); color: #ffffff; padding: 12px 16px; border-bottom: 2px solid var(--gov-gold); font-size: 0.85rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center;">
         <span>State Legal Query Engine</span>
-        <button onclick="toggleAIChat()" style="background: none; border: none; color: #94a3b8; font-size: 1.1rem; cursor: pointer;">✕</button>
+        <button type="button" onclick="toggleAIChat()" style="background: none; border: none; color: #94a3b8; font-size: 1.1rem; cursor: pointer;">✕</button>
       </div>
       <div style="padding: 6px 12px; background: #111c24; border-bottom: 1px solid #1e293b; display: flex; gap: 6px; overflow-x: auto; font-size: 0.75rem;">
-        <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What is the max custody time under Title 8?')">⏱️ Custody Cap</button>
-        <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What is the penalty for § 8-208 Grand Theft Auto?')">🚗 GTA</button>
-        <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What are the PIT maneuver restrictions under MCR-2026-01?')">🚓 PIT Rule</button>
+        <button type="button" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What is the max custody time under Title 8?')">⏱️ Custody Cap</button>
+        <button type="button" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What is the penalty for § 8-208 Grand Theft Auto?')">🚗 GTA</button>
+        <button type="button" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What are the PIT maneuver restrictions under MCR-2026-01?')">🚓 PIT Rule</button>
       </div>
       <div id="aiMessages" style="flex: 1; padding: 12px; overflow-y: auto; font-size: 0.82rem; color: #e2e8f0; display: flex; flex-direction: column; gap: 8px;">
         <div style="background: #15222e; padding: 10px 12px; border-radius: 4px; border-left: 3px solid var(--gov-blue-primary);">
@@ -521,7 +554,7 @@
       </div>
       <div style="padding: 8px 12px; background: #080c10; border-top: 1px solid #1e293b; display: flex; gap: 6px;">
         <input type="text" id="aiInput" placeholder="Ask a statutory question..." style="flex: 1; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 6px 10px; border-radius: 3px; font-size: 0.8rem;" onkeydown="if(event.key==='Enter') sendLocalAIMessage()" />
-        <button onclick="sendLocalAIMessage()" class="btn" style="padding: 6px 12px;">Ask</button>
+        <button type="button" onclick="sendLocalAIMessage()" class="btn" style="padding: 6px 12px;">Ask</button>
       </div>
     </div>
   </div>
@@ -539,9 +572,8 @@
     }
 
     function updateClock() {
-      const now = new Date();
       const clockEl = document.getElementById('liveClock');
-      if (clockEl) clockEl.textContent = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      if (clockEl) clockEl.textContent = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -667,7 +699,6 @@
       });
     }
 
-    // DYNAMIC BALLOT & CANDIDATE LOADER (SYNCS DIRECTLY WITH IEC INTRANET)
     function loadDynamicBallotOptions() {
       const candidates = JSON.parse(localStorage.getItem('melview_election_candidates')) || {
         governor: [
