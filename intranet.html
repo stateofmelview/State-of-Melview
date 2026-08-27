@@ -151,6 +151,10 @@
 
     footer.gov-footer { background-color: var(--gov-navy-dark); color: #94a3b8; border-top: 4px solid var(--gov-navy); padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: auto; }
   </style>
+
+  <!-- FIREBASE SCRIPTS (COMPAT) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -234,7 +238,21 @@
   </div>
 
   <script>
-    // MASTER DOCUMENT COMPILER
+    // HARDCODED FIREBASE INITIALIZATION WITH YOUR EXACT PROJECT DATA
+    const firebaseConfig = {
+      apiKey: "AIzaSyBW1Rti6BxPaKZttJKlNNp35GgmVaIoqns",
+      authDomain: "melview-state.firebaseapp.com",
+      databaseURL: "https://melview-state-default-rtdb.firebaseio.com",
+      projectId: "melview-state",
+      storageBucket: "melview-state.firebasestorage.app",
+      messagingSenderId: "844497560348",
+      appId: "1:844497560348:web:6177be6f35e083387c50d9"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // MASTER HIGH-PRECISION LEGAL COMPILER
     function formatOfficialLegalDoc(headerTitle, instrumentType, id, authority, mainBody, signatureBlock) {
       const dateStr = new Date().toISOString().substring(0, 10);
       const authHash = "0x" + Array.from(id + dateStr).map(c => c.charCodeAt(0).toString(16)).join('').padEnd(24, 'f').substring(0, 24).toUpperCase();
@@ -313,7 +331,6 @@
 </html>`;
     }
 
-    // EXPORT DOWNLOAD DRIVERS
     function downloadAsWord(filename, htmlDocument) {
       const blob = new Blob(['\ufeff' + htmlDocument], { type: 'application/msword' });
       const downloadLink = document.createElement('a');
@@ -430,19 +447,36 @@
       { id: "NDA-2026-001", signatory: "John_Miller_RP", dept: "Department of Justice", scope: "Executive Advisory & Discovery", status: "Executed & Verified", date: "2026-08-25" }
     ];
 
-    let ELECTION_BALLOTS = JSON.parse(localStorage.getItem('melview_election_ballots')) || [];
-    
-    let ELECTION_CANDIDATES = JSON.parse(localStorage.getItem('melview_election_candidates')) || {
-      governor: [
-        { name: "Arthur Vance", party: "Progressive Unity", status: "Certified Ballot" },
-        { name: "Marcus Sterling", party: "Constitutional Law & Order", status: "Certified Ballot" }
-      ],
-      senate: [
-        { name: "Rachel Sterling", party: "Judicial Reform", status: "Certified Ballot" },
-        { name: "John Miller", party: "Civil Liberties & Commerce", status: "Certified Ballot" },
-        { name: "Thomas Cole", party: "Public Safety Caucus", status: "Certified Ballot" }
-      ]
-    };
+    let ELECTION_CANDIDATES = { governor: [], senate: [] };
+    let ELECTION_BALLOTS = [];
+
+    // REAL-TIME CLOUD LISTENER FOR INTRANET CANDIDATES
+    db.ref('elections/candidates').on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        ELECTION_CANDIDATES = snapshot.val();
+      } else {
+        ELECTION_CANDIDATES = {
+          governor: [
+            { name: "Arthur Vance", party: "Progressive Unity", status: "Certified Ballot" },
+            { name: "Marcus Sterling", party: "Constitutional Law & Order", status: "Certified Ballot" }
+          ],
+          senate: [
+            { name: "Rachel Sterling", party: "Judicial Reform", status: "Certified Ballot" },
+            { name: "John Miller", party: "Civil Liberties & Commerce", status: "Certified Ballot" },
+            { name: "Thomas Cole", party: "Public Safety Caucus", status: "Certified Ballot" }
+          ]
+        };
+        db.ref('elections/candidates').set(ELECTION_CANDIDATES);
+      }
+      if (CURRENT_ROLE) renderWorkstation(CURRENT_ROLE);
+    });
+
+    // REAL-TIME CLOUD LISTENER FOR INTRANET BALLOTS
+    db.ref('elections/ballots').on('value', (snapshot) => {
+      const ballotsData = snapshot.val() || {};
+      ELECTION_BALLOTS = Object.values(ballotsData);
+      if (CURRENT_ROLE) renderWorkstation(CURRENT_ROLE);
+    });
 
     let DEPT_ROSTERS = JSON.parse(localStorage.getItem('melview_dept_rosters')) || {
       "Judiciary (Supreme Court)": [{ user: "judge1", rank: "Chief Justice" }],
@@ -474,8 +508,6 @@
       localStorage.setItem('melview_court_orders', JSON.stringify(JUDICIAL_ORDERS));
       localStorage.setItem('melview_exec_directives', JSON.stringify(EXEC_DIRECTIVES));
       localStorage.setItem('melview_nda_registry', JSON.stringify(NDA_REGISTRY));
-      localStorage.setItem('melview_election_ballots', JSON.stringify(ELECTION_BALLOTS));
-      localStorage.setItem('melview_election_candidates', JSON.stringify(ELECTION_CANDIDATES));
       localStorage.setItem('melview_dept_rosters', JSON.stringify(DEPT_ROSTERS));
       localStorage.setItem('melview_dept_shifts', JSON.stringify(DEPT_SHIFTS));
       localStorage.setItem('melview_dept_ia', JSON.stringify(DEPT_IA));
@@ -819,17 +851,20 @@
         `;
       }
 
-      // INDEPENDENT ELECTORAL COMMISSION (IEC) WORKSTATION
+      // INDEPENDENT ELECTORAL COMMISSION (IEC) WORKSTATION (REALTIME FIREBASE SYNC)
       if (roleKey === 'dept_iec' || roleKey === 'root') {
+        const govList = ELECTION_CANDIDATES.governor || [];
+        const senList = ELECTION_CANDIDATES.senate || [];
+
         return `
           <!-- CANDIDATE ROSTER -->
           <div class="card-panel" style="border-left-color:#38bdf8;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-              <h3 style="color:#38bdf8; font-size:1.15rem;">📋 Certified Election Candidate Roster Management (Governor & Senate)</h3>
-              <span class="badge badge-success">TITLE 10 CERTIFICATION</span>
+              <h3 style="color:#38bdf8; font-size:1.15rem;">📋 Certified Election Candidate Roster Management (Global Cloud Database)</h3>
+              <span class="badge badge-success">FIREBASE REALTIME DB</span>
             </div>
             <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">
-              Add, certify, or remove official candidates. Candidate additions automatically update the ballot options on the public voting portal.
+              Adding or removing candidates here updates the public voting portal across all player devices globally in real-time.
             </p>
 
             <form id="addCandidateForm" style="margin-bottom:1.5rem;">
@@ -848,10 +883,10 @@
                   <table class="gov-table">
                     <thead><tr><th>Candidate Name</th><th>Party Ticket</th><th>Action</th></tr></thead>
                     <tbody>
-                      ${ELECTION_CANDIDATES.governor.map((c, i) => `
+                      ${govList.map((c, i) => `
                         <tr>
                           <td><strong>${c.name}</strong></td><td>${c.party}</td>
-                          <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.7rem;" onclick="removeCandidate('governor', ${i})">Disqualify / Remove</button></td>
+                          <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.7rem;" onclick="removeCandidateFromCloud('governor', ${i})">Disqualify / Remove</button></td>
                         </tr>
                       `).join('')}
                     </tbody>
@@ -865,10 +900,10 @@
                   <table class="gov-table">
                     <thead><tr><th>Candidate Name</th><th>Party Ticket</th><th>Action</th></tr></thead>
                     <tbody>
-                      ${ELECTION_CANDIDATES.senate.map((c, i) => `
+                      ${senList.map((c, i) => `
                         <tr>
                           <td><strong>${c.name}</strong></td><td>${c.party}</td>
-                          <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.7rem;" onclick="removeCandidate('senate', ${i})">Disqualify / Remove</button></td>
+                          <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.7rem;" onclick="removeCandidateFromCloud('senate', ${i})">Disqualify / Remove</button></td>
                         </tr>
                       `).join('')}
                     </tbody>
@@ -881,25 +916,25 @@
           <!-- MASTER BALLOT VAULT -->
           <div class="card-panel" style="border-left-color:#22c55e;">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:0.5rem;">
-              <h3 style="color:#4ade80; font-size:1.15rem;">🗳️ Master Ballot Vault & Anti-Alt Voter Audit Ledger</h3>
+              <h3 style="color:#4ade80; font-size:1.15rem;">🗳️ Master Cloud Ballot Vault & Anti-Alt Voter Audit Ledger</h3>
               <div style="display:flex; gap:0.5rem;">
                 <button type="button" class="btn btn-gold" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="exportAuditLedger('word')">💾 Word (.doc)</button>
                 <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="exportAuditLedger('googledoc')">📄 Google Doc</button>
-                <button type="button" class="btn btn-danger" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="purgeBallotVault()">⚠️ Purge All Ballots</button>
+                <button type="button" class="btn btn-danger" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="purgeCloudBallotVault()">⚠️ Purge All Ballots</button>
               </div>
             </div>
             <div class="table-container">
               <table class="gov-table">
                 <thead><tr><th>Voter Character</th><th>Gubernatorial Vote</th><th>Senate Vote</th><th>Timestamp</th><th>Integrity Status</th><th>Action</th></tr></thead>
                 <tbody>
-                  ${ELECTION_BALLOTS.length === 0 ? `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:1.2rem;">No ballots cast in the electronic vault yet.</td></tr>` : ELECTION_BALLOTS.map((b, idx) => `
+                  ${ELECTION_BALLOTS.length === 0 ? `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:1.2rem;">No ballots cast in the cloud vault yet.</td></tr>` : ELECTION_BALLOTS.map((b, idx) => `
                     <tr>
                       <td><strong>${b.voter}</strong></td>
                       <td>${b.gov}</td>
                       <td>${b.senate}</td>
                       <td style="font-family:var(--font-mono); font-size:0.75rem;">${b.timestamp}</td>
                       <td><span class="badge badge-success">Verified Elector</span></td>
-                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="disqualifyBallot(${idx})">Disqualify & Void</button></td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="disqualifyCloudBallot('${b.voter}')">Void Ballot</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -1020,7 +1055,6 @@
 
     function getCommonAgencyRosterModule(roleKey) {
       const rosterList = DEPT_ROSTERS[CURRENT_DEPT] || [];
-      const iaList = DEPT_IA[CURRENT_DEPT] || [];
 
       return `
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
@@ -1064,6 +1098,7 @@
     }
 
     function attachWorkstationListeners(roleKey) {
+      // CLOUD CANDIDATE ADDITION
       const candForm = document.getElementById('addCandidateForm');
       if (candForm) {
         candForm.addEventListener('submit', function(e) {
@@ -1072,24 +1107,17 @@
           const party = document.getElementById('candParty').value.trim();
           const office = document.getElementById('candOffice').value;
 
-          if (!ELECTION_CANDIDATES[office]) ELECTION_CANDIDATES[office] = [];
-          ELECTION_CANDIDATES[office].push({ name, party, status: "Certified Ballot" });
-          
-          GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CANDIDATE CERTIFIED | ${name} for ${office.toUpperCase()}`);
-          saveIntranet();
-          renderWorkstation(CURRENT_ROLE);
-          alert(`Official candidate ${name} (${party}) certified for ${office.toUpperCase()}.`);
+          db.ref(`elections/candidates/${office}`).once('value', (snapshot) => {
+            let currentList = snapshot.val() || [];
+            currentList.push({ name, party, status: "Certified Ballot" });
+            db.ref(`elections/candidates/${office}`).set(currentList).then(() => {
+              GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CLOUD CANDIDATE CERTIFIED | ${name} for ${office.toUpperCase()}`);
+              saveIntranet();
+              alert(`Candidate ${name} (${party}) certified to Firebase cloud!`);
+            });
+          });
         });
       }
-
-      window.removeCandidate = function(office, idx) {
-        const target = ELECTION_CANDIDATES[office][idx];
-        if (!confirm(`Disqualify and remove ${target.name} from the certified ${office.toUpperCase()} ballot?`)) return;
-        ELECTION_CANDIDATES[office].splice(idx, 1);
-        GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CANDIDATE DISQUALIFIED | Removed ${target.name}`);
-        saveIntranet();
-        renderWorkstation(CURRENT_ROLE);
-      };
 
       const ndaForm = document.getElementById('signNdaForm');
       if (ndaForm) {
@@ -1225,78 +1253,6 @@
         createGoogleDocInstance(`${id} Indictment - ${def}`, fullDoc);
       };
 
-      const dotForm = document.getElementById('dotPermitForm');
-      if (dotForm) {
-        dotForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const pId = document.getElementById('dotPId').value.trim();
-          const carrier = document.getElementById('dotPCarrier').value.trim();
-          const route = document.getElementById('dotPRoute').value.trim();
-          const scope = document.getElementById('dotPScope').value;
-
-          const body = `COMMERCIAL CARRIER: ${carrier}\nTRANSIT CORRIDOR:   ${route}\nPERMIT AUTHORIZATION: ${scope}\n\nSTIPULATIONS: Vehicle must maintain transit corridor speeds and adhere to bridge weight classifications.`;
-          const sig = `DIRECTOR OF TRANSPORTATION: _________________________ (DOT Bureau of Highway Safety)`;
-          const fullDoc = formatOfficialLegalDoc("TRANSIT CORRIDOR SPECIAL PERMIT", "Heavy Haul Authorization", pId, "Title 6 Transit Code", body, sig);
-
-          downloadAsWord(`${pId}_TransitPermit_${carrier}`, fullDoc);
-          alert(`Transit Permit ${pId} issued and downloaded.`);
-        });
-      }
-
-      window.submitDotPermitGoogleDoc = function() {
-        const pId = document.getElementById('dotPId').value.trim();
-        const carrier = document.getElementById('dotPCarrier').value.trim();
-        const route = document.getElementById('dotPRoute').value.trim();
-        const scope = document.getElementById('dotPScope').value;
-
-        if (!pId || !carrier) {
-          alert("Please fill in Permit ID and Carrier name.");
-          return;
-        }
-
-        const body = `COMMERCIAL CARRIER: ${carrier}\nTRANSIT CORRIDOR:   ${route}\nPERMIT AUTHORIZATION: ${scope}\n\nSTIPULATIONS: Vehicle must maintain transit corridor speeds and adhere to bridge weight classifications.`;
-        const sig = `DIRECTOR OF TRANSPORTATION: _________________________ (DOT Bureau of Highway Safety)`;
-        const fullDoc = formatOfficialLegalDoc("TRANSIT CORRIDOR SPECIAL PERMIT", "Heavy Haul Authorization", pId, "Title 6 Transit Code", body, sig);
-
-        createGoogleDocInstance(`${pId} DOT Permit - ${carrier}`, fullDoc);
-      };
-
-      const rOathForm = document.getElementById('recordsOathForm');
-      if (rOathForm) {
-        rOathForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const oId = document.getElementById('oathId').value.trim();
-          const user = document.getElementById('oathUser').value.trim();
-          const office = document.getElementById('oathOffice').value.trim();
-          const text = document.getElementById('oathText').value.trim();
-
-          const body = `APPOINTEE: ${user}\nCONSTITUTIONAL OFFICE: ${office}\n\nSWORN OATH STATEMENT:\n"${text}"`;
-          const sig = `COMMISSIONING OFFICER: _________________________ (Civil Service Merit Board)`;
-          const fullDoc = formatOfficialLegalDoc("CONSTITUTIONAL OATH OF OFFICE & COMMISSION", "Civil Commission", oId, "Article XIII Civil Service", body, sig);
-
-          downloadAsWord(`${oId}_OathOfOffice_${user}`, fullDoc);
-          alert(`Constitutional Commission ${oId} archived and downloaded.`);
-        });
-      }
-
-      window.submitOathGoogleDoc = function() {
-        const oId = document.getElementById('oathId').value.trim();
-        const user = document.getElementById('oathUser').value.trim();
-        const office = document.getElementById('oathOffice').value.trim();
-        const text = document.getElementById('oathText').value.trim();
-
-        if (!oId || !user) {
-          alert("Please fill in Commission ID and Appointee Name.");
-          return;
-        }
-
-        const body = `APPOINTEE: ${user}\nCONSTITUTIONAL OFFICE: ${office}\n\nSWORN OATH STATEMENT:\n"${text}"`;
-        const sig = `COMMISSIONING OFFICER: _________________________ (Civil Service Merit Board)`;
-        const fullDoc = formatOfficialLegalDoc("CONSTITUTIONAL OATH OF OFFICE & COMMISSION", "Civil Commission", oId, "Article XIII Civil Service", body, sig);
-
-        createGoogleDocInstance(`${oId} Oath - ${user}`, fullDoc);
-      };
-
       const certForm = document.getElementById('certElectionForm');
       if (certForm) {
         certForm.addEventListener('submit', function(e) {
@@ -1378,13 +1334,41 @@
       }
     }
 
+    // CLOUD CANDIDATE REMOVAL
+    window.removeCandidateFromCloud = function(office, idx) {
+      db.ref(`elections/candidates/${office}`).once('value', (snapshot) => {
+        let currentList = snapshot.val() || [];
+        const target = currentList[idx];
+        if (!confirm(`Disqualify and remove ${target.name} from the global cloud ballot?`)) return;
+        
+        currentList.splice(idx, 1);
+        db.ref(`elections/candidates/${office}`).set(currentList).then(() => {
+          GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | CANDIDATE DISQUALIFIED | Removed ${target.name}`);
+          saveIntranet();
+        });
+      });
+    };
+
+    window.disqualifyCloudBallot = function(voterName) {
+      const sanitizedKey = voterName.replace(/[.#$\[\]]/g, "_").toLowerCase();
+      if (!confirm(`Void cloud ballot cast by '${voterName}' under Title 8 § 608?`)) return;
+      db.ref(`elections/ballots/${sanitizedKey}`).remove().then(() => {
+        alert(`Ballot for '${voterName}' voided from cloud.`);
+      });
+    };
+
+    window.purgeCloudBallotVault = function() {
+      if (!confirm("WARNING: Purge all cloud votes in the vault for a new election?")) return;
+      db.ref('elections/ballots').remove().then(() => {
+        alert("Global ballot vault purged.");
+      });
+    };
+
     window.removeNDA = function(idx) { NDA_REGISTRY.splice(idx, 1); saveIntranet(); renderWorkstation(CURRENT_ROLE); };
     window.removeBill = function(idx) { LEGISLATIVE_BILLS.splice(idx, 1); saveIntranet(); renderWorkstation(CURRENT_ROLE); };
     window.removeEO = function(idx) { EXEC_DIRECTIVES.splice(idx, 1); saveIntranet(); renderWorkstation(CURRENT_ROLE); };
     window.removeCourtOrder = function(idx) { JUDICIAL_ORDERS.splice(idx, 1); saveIntranet(); renderWorkstation(CURRENT_ROLE); };
     window.removeBOLO = function(idx) { NCIC_BOLOS.splice(idx, 1); saveIntranet(); renderWorkstation(CURRENT_ROLE); };
-    window.removeDeptShift = function(dept, idx) { DEPT_SHIFTS[dept].splice(idx, 1); saveIntranet(); renderWorkstation(CURRENT_ROLE); };
-    window.removeIAEntry = function(dept, idx) { DEPT_IA[dept].splice(idx, 1); saveIntranet(); renderWorkstation(CURRENT_ROLE); };
     
     window.terminateMember = function(dept, idx) {
       const emp = DEPT_ROSTERS[dept][idx];
@@ -1395,22 +1379,6 @@
       DEPT_IA[dept].push({ user: emp.user, sanction: "Termination / Discharged", reason });
       saveIntranet();
       renderWorkstation(CURRENT_ROLE);
-    };
-
-    window.disqualifyBallot = function(idx) {
-      const target = ELECTION_BALLOTS[idx];
-      if (!confirm(`Void ballot cast by '${target.voter}' under Title 8 § 608?`)) return;
-      ELECTION_BALLOTS.splice(idx, 1);
-      saveIntranet();
-      renderWorkstation(CURRENT_ROLE);
-    };
-
-    window.purgeBallotVault = function() {
-      if (!confirm("WARNING: Purge all votes in the vault for a new election?")) return;
-      ELECTION_BALLOTS = [];
-      saveIntranet();
-      renderWorkstation(CURRENT_ROLE);
-      alert("Ballot vault purged.");
     };
 
     window.exportAuditLedger = function(format) {
@@ -1489,7 +1457,7 @@
       } else if (q.includes("indictment")) {
         reply = "<strong>Grand Jury Indictment (Article IX):</strong> Formal felony charging instrument issued by the Department of Justice naming specific statutory counts under Title 8, bail recommendations, and prosecutor attestation.";
       } else if (q.includes("election") || q.includes("vote") || q.includes("candidate")) {
-        reply = "<strong>Elections Code (Title 10 & SB 100):</strong> Electronic voting via the ballot vault; character tenure cutoff is 14 days prior to balloting; candidate lists are certified through the IEC workstation.";
+        reply = "<strong>Elections Code (Title 10 & SB 100):</strong> Electronic voting via the ballot vault; candidate lists are certified live through the IEC workstation connected to Firebase.";
       }
 
       setTimeout(() => {
