@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State of Melview | Executive Leadership & System Administration</title>
+  <style>
+    :root {
+      --gov-navy-dark: #060a0f;
+      --gov-navy: #0f172a;
+      --gov-blue: #0284c7;
+      --gov-gold: #eab308;
+      --gov-red: #ef4444;
+      --gov-green: #22c55e;
+      --gov-card-bg: #1e293b;
+      --gov-border: #334155;
+      --font-serif: "Merriweather", "Georgia", serif;
+      --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "Roboto Mono", Consolas, Monaco, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--gov-navy-dark);
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header.gov-header {
+      background: linear-gradient(180deg, #090e17 0%, #0f172a 100%);
+      border-bottom: 4px solid var(--gov-gold);
+      padding: 1.25rem 2rem;
+    }
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .brand-block { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: #fff; }
+    .state-seal {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: radial-gradient(circle, #2a4359 0%, #060a0f 100%);
+      border: 2px solid var(--gov-gold);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gov-gold); font-family: var(--font-serif);
+      font-weight: 700; font-size: 1.5rem;
+    }
+    .brand-title h1 {
+      font-family: var(--font-serif); font-size: 1.3rem;
+      font-weight: 700; text-transform: uppercase;
+    }
+    .brand-title p { font-size: 0.75rem; color: #94a3b8; }
+    .main-wrapper { max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem; flex: 1; width: 100%; }
+    .gov-card {
+      background: var(--gov-card-bg); border: 1px solid var(--gov-border);
+      border-radius: 6px; padding: 2rem; margin-bottom: 1.5rem;
+    }
+    .card-panel {
+      background: #0f172a; border: 1px solid var(--gov-border);
+      border-left: 4px solid var(--gov-gold); padding: 1.5rem; border-radius: 4px; margin-bottom: 1.5rem;
+    }
+    .gov-input, .gov-select {
+      background-color: #060a0f; border: 1px solid var(--gov-border);
+      color: #f8fafc; padding: 0.65rem 0.85rem; border-radius: 3px; font-size: 0.9rem; width: 100%;
+    }
+    .gov-input:focus, .gov-select:focus { outline: 2px solid var(--gov-gold); }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label { font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+    .btn {
+      background-color: var(--gov-blue); color: #ffffff; border: none;
+      padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      border-radius: 3px; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    }
+    .btn-gold { background-color: #ca8a04; color: #fff; }
+    .btn-gold:hover { background-color: #a16207; }
+    .btn-danger { background-color: var(--gov-red); }
+    .btn-secondary { background-color: var(--gov-border); }
+    .table-container { overflow-x: auto; border: 1px solid var(--gov-border); border-radius: 4px; margin: 1rem 0; }
+    table.gov-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; background: var(--gov-card-bg); }
+    table.gov-table th { background-color: #060a0f; color: var(--gov-gold); font-weight: 700; padding: 0.75rem 1rem; text-transform: uppercase; font-size: 0.75rem; border-bottom: 2px solid var(--gov-border); }
+    table.gov-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--gov-border); vertical-align: middle; }
+    .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+    .badge-gold { background: #713f12; color: #fef08a; }
+    .badge-navy { background: #1e3a8a; color: #93c5fd; }
+    .audit-terminal-viewer { background: #060a0f; color: #94a3b8; font-family: var(--font-mono); font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 200px; overflow-y: auto; }
+    .audit-entry { margin-bottom: 0.35rem; border-bottom: 1px dotted var(--gov-border); padding-bottom: 0.35rem; }
+    footer.gov-footer { background-color: #060a0f; color: #64748b; border-top: 4px solid var(--gov-border); padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: auto; }
+  </style>
+</head>
+<body>
+
+  <header class="gov-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-block">
+        <div class="state-seal">M</div>
+        <div class="brand-title">
+          <h1>State of Melview</h1>
+          <p>Executive Leadership & Master System Control Suite</p>
+        </div>
+      </a>
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <a href="index.html" class="btn btn-secondary">Public Portal</a>
+        <a href="intranet.html" class="btn btn-secondary">Agency Intranet</a>
+        <div id="authPill" class="badge badge-gold">LEADERSHIP TERMINAL</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- LOGIN GATE -->
+    <div id="loginCard" class="gov-card" style="max-width:480px; margin:4rem auto; border-top:4px solid var(--gov-gold);">
+      <h2 style="font-family:var(--font-serif); font-size:1.3rem; margin-bottom:0.5rem; text-align:center;">Executive Access Gateway</h2>
+      <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem; text-align:center;">RESTRICTED TO STATE OVERSIGHT, GOVERNOR & CHIEF JUSTICE</p>
+      
+      <form id="leadershipLoginForm">
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label>Executive Username</label>
+          <input type="text" id="lUser" class="gov-input" placeholder="oversight1, gov1, cjustice1..." required />
+        </div>
+        <div class="form-group" style="margin-bottom:1.5rem;">
+          <label>Security Key</label>
+          <input type="password" id="lPass" class="gov-input" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Unlock Administration Console</button>
+      </form>
+      <div id="loginErr" style="display:none; color:#f87171; font-size:0.8rem; text-align:center; margin-top:1rem; font-weight:700;">
+        ❌ ACCESS DENIED: Unauthorized Executive Credentials.
+      </div>
+    </div>
+
+    <!-- MAIN ADMIN CONSOLE -->
+    <div id="adminPanel" style="display:none;">
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <span id="adminRoleDisplay" style="font-size:0.8rem; text-transform:uppercase; color:var(--gov-gold); font-weight:700;">Executive Session</span>
+          <h2 id="adminTitleDisplay" style="font-family:var(--font-serif); font-size:1.5rem;">Master Administration Console</h2>
+        </div>
+        <button type="button" class="btn btn-danger" onclick="logoutLeadership()">Lock Console</button>
+      </div>
+
+      <!-- CREDENTIAL & ACCESS MANAGEMENT -->
+      <div class="card-panel">
+        <h3 style="color:var(--gov-gold); font-size:1.15rem; margin-bottom:0.5rem;">🔐 Intranet Credential & User Management</h3>
+        <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem;">
+          Add secondary user accounts (e.g. <code>judge2</code>, <code>police2</code>), assign designated agency workstations, or change passwords.
+        </p>
+
+        <!-- ADD USER FORM -->
+        <form id="addUserForm" style="margin-bottom:2rem; background:#060a0f; padding:1.25rem; border:1px solid var(--gov-border); border-radius:4px;">
+          <h4 style="font-size:0.85rem; color:#f8fafc; margin-bottom:0.75rem; text-transform:uppercase;">Add New Intranet User</h4>
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr auto; align-items:flex-end;">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" id="newUsername" class="gov-input" placeholder="e.g. judge2, police2, sheriff2..." required />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="text" id="newPassword" class="gov-input" placeholder="Set password..." required />
+            </div>
+            <div class="form-group">
+              <label>Assigned Agency Workstation</label>
+              <select id="newRoleDept" class="gov-select">
+                <option value="Judiciary (Supreme Court)|judiciary">Judiciary (Supreme Court)</option>
+                <option value="Executive / Senate|government">Executive / Senate</option>
+                <option value="Melview State Police|dept_msp">Melview State Police</option>
+                <option value="County Sheriff Office|dept_mcso">County Sheriff Office</option>
+                <option value="Independent Electoral Commission|dept_iec">Independent Electoral Commission</option>
+                <option value="Department of Transportation|dept_dot">Department of Transportation</option>
+                <option value="Department of Justice|dept_doj">Department of Justice</option>
+                <option value="Master Private Personnel Archive|dept_records">Master Personnel Archive</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-gold" style="height:38px;">Provision User</button>
+          </div>
+        </form>
+
+        <!-- ACTIVE CREDENTIALS TABLE -->
+        <h4 style="font-size:0.85rem; color:#f8fafc; margin-bottom:0.5rem; text-transform:uppercase;">Active Credential Directory</h4>
+        <div class="table-container">
+          <table class="gov-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Current Password</th>
+                <th>Assigned Agency Workstation</th>
+                <th>Role Key</th>
+                <th>Password Update</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="credentialTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SYSTEM OVERRIDE CONTROLS -->
+      <div class="card-panel" style="border-left-color:var(--gov-blue);">
+        <h3 style="color:var(--gov-blue); font-size:1.15rem; margin-bottom:0.5rem;">⚡ Emergency System Overrides</h3>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <button type="button" class="btn btn-secondary" onclick="exportFullSystemBackup()">💾 Export Full JSON Backup</button>
+          <button type="button" class="btn btn-danger" onclick="resetDefaultCredentials()">🔄 Reset Default Credentials</button>
+        </div>
+      </div>
+
+      <!-- MASTER AUDIT LOG -->
+      <div style="margin-top:2rem;">
+        <h4 style="font-size:0.85rem; color:#94a3b8; margin-bottom:0.5rem;">Master Executive Audit Trail</h4>
+        <div id="leadershipAuditLogs" class="audit-terminal-viewer"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="gov-footer">
+    <div style="max-width:1400px; margin:0 auto; text-align:center;">
+      STATE OF MELVIEW EXECUTIVE OVERSIGHT & LEADERSHIP GATEWAY
+    </div>
+  </footer>
+
+  <script>
+    const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbynIMouFbor3yW33M12O3bH8xPtm5zElOZgGiPBFKyaEDmvqhV8REdGxhUj9QN-fk0B/exec";
+
+    function syncToGoogleSheet(payload) {
+      if (!GOOGLE_SHEET_WEBAPP_URL) return;
+      try {
+        fetch(GOOGLE_SHEET_WEBAPP_URL, {
+          method: "POST", mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).catch(err => console.error("Sync error:", err));
+      } catch(e) {}
+    }
+
+    const LEADERSHIP_ACCOUNTS = {
+      "oversight1": { pass: "overlord9", role: "State Oversight (Community Owner)" },
+      "gov1": { pass: "lead2026", role: "Governor of Melview" },
+      "cjustice1": { pass: "bench2026", role: "Chief Justice of the Supreme Court" }
+    };
+
+    const DEFAULT_CREDENTIALS = [
+      { user: "judge1", pass: "admin5", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
+      { user: "law3", pass: "admin2", dept: "Executive / Senate", roleKey: "government" },
+      { user: "police1", pass: "admin3", dept: "Melview State Police", roleKey: "dept_msp" },
+      { user: "sheriff1", pass: "admin4", dept: "County Sheriff Office", roleKey: "dept_mcso" },
+      { user: "elections1", pass: "admin6", dept: "Independent Electoral Commission", roleKey: "dept_iec" },
+      { user: "transport1", pass: "admin7", dept: "Department of Transportation", roleKey: "dept_dot" },
+      { user: "doj1", pass: "admin8", dept: "Department of Justice", roleKey: "dept_doj" },
+      { user: "records1", pass: "admin9", dept: "Master Private Personnel Archive", roleKey: "dept_records" }
+    ];
+
+    let INTRANET_USERS = JSON.parse(localStorage.getItem('melview_auth_credentials')) || DEFAULT_CREDENTIALS;
+    let GOV_LOGS = JSON.parse(localStorage.getItem('melview_gov_logs')) || [
+      "2026-08-27 15:00 UTC | LEADERSHIP SUITE | Executive session initialized."
+    ];
+
+    let ACTIVE_LEADER = null;
+
+    function saveLeadershipState() {
+      localStorage.setItem('melview_auth_credentials', JSON.stringify(INTRANET_USERS));
+      localStorage.setItem('melview_gov_logs', JSON.stringify(GOV_LOGS));
+      renderCredentialsTable();
+      renderLogs();
+    }
+
+    // LOGIN
+    document.getElementById('leadershipLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const u = document.getElementById('lUser').value.trim().toLowerCase();
+      const p = document.getElementById('lPass').value.trim();
+      const err = document.getElementById('loginErr');
+
+      if (LEADERSHIP_ACCOUNTS[u] && LEADERSHIP_ACCOUNTS[u].pass === p) {
+        ACTIVE_LEADER = u;
+        err.style.display = 'none';
+        document.getElementById('loginCard').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        document.getElementById('adminRoleDisplay').textContent = `${LEADERSHIP_ACCOUNTS[u].role} • ACTIVE`;
+        document.getElementById('adminTitleDisplay').textContent = `Master Executive Administration`;
+        document.getElementById('authPill').textContent = `AUTH: ${u.toUpperCase()}`;
+        saveLeadershipState();
+      } else {
+        err.style.display = 'block';
+      }
+    });
+
+    window.logoutLeadership = function() {
+      ACTIVE_LEADER = null;
+      document.getElementById('loginCard').style.display = 'block';
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('lUser').value = '';
+      document.getElementById('lPass').value = '';
+      document.getElementById('authPill').textContent = 'LEADERSHIP TERMINAL';
+    };
+
+    // ADD NEW USER (e.g. judge2, police2)
+    document.getElementById('addUserForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const user = document.getElementById('newUsername').value.trim().toLowerCase();
+      const pass = document.getElementById('newPassword').value.trim();
+      const rawDeptRole = document.getElementById('newRoleDept').value.split('|');
+      const dept = rawDeptRole[0];
+      const roleKey = rawDeptRole[1];
+
+      if (INTRANET_USERS.find(u => u.user === user)) {
+        alert(`Error: User '${user}' already exists. Use the table below to update their password.`);
+        return;
+      }
+
+      INTRANET_USERS.push({ user, pass, dept, roleKey });
+      const now = new Date().toISOString().substring(0, 16) + ' UTC';
+      GOV_LOGS.unshift(`${now} | USER PROVISIONED | [${ACTIVE_LEADER}] Created user '${user}' for ${dept}`);
+      saveLeadershipState();
+
+      syncToGoogleSheet({
+        timestamp: now, action: "USER_PROVISIONED", id: user,
+        appellant: user, category: "Credential Management", ref: dept, status: "PROVISIONED", officer: ACTIVE_LEADER, notes: `RoleKey: ${roleKey}`
+      });
+
+      alert(`Account '${user}' provisioned with access to ${dept}.`);
+      document.getElementById('addUserForm').reset();
+    });
+
+    // RENDER CREDENTIALS TABLE
+    function renderCredentialsTable() {
+      const tbody = document.getElementById('credentialTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      INTRANET_USERS.forEach((cred, idx) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${cred.user}</strong></td>
+          <td><code style="background:#060a0f; padding:0.2rem 0.4rem; border-radius:3px; color:#38bdf8;">${cred.pass}</code></td>
+          <td>${cred.dept}</td>
+          <td><span class="badge badge-navy">${cred.roleKey}</span></td>
+          <td>
+            <div style="display:flex; gap:0.4rem;">
+              <input type="text" id="pwd_${idx}" class="gov-input" style="padding:0.3rem 0.5rem; font-size:0.8rem; width:120px;" placeholder="New password" />
+              <button type="button" class="btn btn-gold" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="updateUserPassword(${idx})">Save</button>
+            </div>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="deleteUserAccount(${idx})">Revoke</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // UPDATE PASSWORD
+    window.updateUserPassword = function(idx) {
+      const newPwd = document.getElementById(`pwd_${idx}`).value.trim();
+      if (!newPwd) {
+        alert("Please enter a valid new password.");
+        return;
+      }
+      const target = INTRANET_USERS[idx];
+      target.pass = newPwd;
+      const now = new Date().toISOString().substring(0, 16) + ' UTC';
+      GOV_LOGS.unshift(`${now} | PASSWORD CHANGED | [${ACTIVE_LEADER}] Updated password for '${target.user}'`);
+      saveLeadershipState();
+
+      syncToGoogleSheet({
+        timestamp: now, action: "PASSWORD_CHANGED", id: target.user,
+        appellant: target.user, category: "Credential Management", ref: target.dept, status: "UPDATED", officer: ACTIVE_LEADER, notes: "Password updated via Leadership Terminal"
+      });
+
+      alert(`Password for '${target.user}' successfully changed.`);
+    };
+
+    // DELETE ACCOUNT
+    window.deleteUserAccount = function(idx) {
+      const target = INTRANET_USERS[idx];
+      if (!confirm(`Are you sure you want to permanently revoke credentials for '${target.user}'?`)) return;
+
+      INTRANET_USERS.splice(idx, 1);
+      const now = new Date().toISOString().substring(0, 16) + ' UTC';
+      GOV_LOGS.unshift(`${now} | USER REVOKED | [${ACTIVE_LEADER}] Revoked account '${target.user}'`);
+      saveLeadershipState();
+      alert(`Account '${target.user}' revoked.`);
+    };
+
+    window.resetDefaultCredentials = function() {
+      if (!confirm("Reset all user credentials back to factory system defaults? Custom users will be removed.")) return;
+      INTRANET_USERS = DEFAULT_CREDENTIALS;
+      saveLeadershipState();
+      alert("System credentials reset to defaults.");
+    };
+
+    window.exportFullSystemBackup = function() {
+      const backup = {
+        credentials: INTRANET_USERS,
+        personnel: JSON.parse(localStorage.getItem('melview_master_personnel')),
+        docket: JSON.parse(localStorage.getItem('melview_docket')),
+        registry: JSON.parse(localStorage.getItem('melview_registry')),
+        logs: GOV_LOGS
+      };
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `MELVIEW_SYSTEM_BACKUP_${new Date().toISOString().substring(0, 10)}.json`;
+      a.click();
+    };
+
+    function renderLogs() {
+      const viewer = document.getElementById('leadershipAuditLogs');
+      if (viewer) viewer.innerHTML = GOV_LOGS.map(l => `<div class="audit-entry">${l}</div>`).join('');
+    }
+  </script>
+</body>
+</html>
