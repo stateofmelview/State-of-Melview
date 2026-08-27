@@ -119,7 +119,7 @@
 
   <main class="main-wrapper">
 
-    <!-- SECURE LOGIN GATE (CLEAN & NO DIRECTORY) -->
+    <!-- SECURE LOGIN GATE -->
     <div id="loginCard" class="gov-card" style="max-width:500px; margin:5rem auto; border-top:4px solid var(--gov-gold);">
       <h2 style="font-family:var(--font-serif); font-size:1.4rem; margin-bottom:0.5rem; text-align:center;">Executive Access Gateway</h2>
       <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.75rem; text-align:center; text-transform:uppercase; letter-spacing:0.04em;">
@@ -173,12 +173,9 @@
 
       <!-- CREDENTIAL & ACCESS MANAGEMENT -->
       <div class="card-panel">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; flex-wrap:wrap;">
-          <h3 style="color:var(--gov-gold); font-size:1.15rem;">🔐 Master Credential & User Management</h3>
-          <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="togglePasswordVisibility()" id="togglePwdBtn">👁️ Show Passwords</button>
-        </div>
+        <h3 style="color:var(--gov-gold); font-size:1.15rem; margin-bottom:0.5rem;">🔐 Master Credential & User Directory</h3>
         <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem;">
-          Change any user password, provision new departmental accounts (e.g., <code>judge2</code>, <code>police2</code>), or revoke access immediately.
+          Review agency passwords, provision new departmental accounts (e.g., <code>judge2</code>, <code>police2</code>), or modify credentials.
         </p>
 
         <!-- ADD USER FORM -->
@@ -217,9 +214,9 @@
             <thead>
               <tr>
                 <th>Username</th>
-                <th>Current Password</th>
                 <th>Assigned Agency Workstation</th>
-                <th>Role Key</th>
+                <th>Workstation Role Key</th>
+                <th>Current Password</th>
                 <th>Direct Password Change</th>
                 <th>Actions</th>
               </tr>
@@ -287,7 +284,6 @@
     ];
 
     let ACTIVE_LEADER = null;
-    let SHOW_PASSWORDS = false;
 
     function saveLeadershipState() {
       localStorage.setItem('melview_auth_credentials', JSON.stringify(INTRANET_USERS));
@@ -323,19 +319,12 @@
 
     window.logoutLeadership = function() {
       ACTIVE_LEADER = null;
-      SHOW_PASSWORDS = false;
       document.getElementById('loginCard').style.display = 'block';
       document.getElementById('adminPanel').style.display = 'none';
       document.getElementById('lUser').value = '';
       document.getElementById('lPass').value = '';
       document.getElementById('authPill').textContent = 'LEADERSHIP TERMINAL';
       document.getElementById('authPill').className = 'badge badge-gold';
-    };
-
-    window.togglePasswordVisibility = function() {
-      SHOW_PASSWORDS = !SHOW_PASSWORDS;
-      document.getElementById('togglePwdBtn').textContent = SHOW_PASSWORDS ? '🙈 Hide Passwords' : '👁️ Show Passwords';
-      renderCredentialsTable();
     };
 
     // JUMP TO WORKSTATION
@@ -375,29 +364,44 @@
       document.getElementById('addUserForm').reset();
     });
 
-    // RENDER TABLE
+    // RENDER CREDENTIALS TABLE
     function renderCredentialsTable() {
       const tbody = document.getElementById('credentialTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
 
       INTRANET_USERS.forEach((cred, idx) => {
-        const row = document.createElement('tr');
-        const displayedPassword = SHOW_PASSWORDS ? cred.pass : '••••••••';
+        const isRootUser = cred.user === 'root';
+        const isCurrentSessionRoot = ACTIVE_LEADER === 'root';
         
+        // Passwords for all users are visible, but root is hidden from everyone except root
+        let displayedPasswordHtml = '';
+        if (isRootUser) {
+          if (isCurrentSessionRoot) {
+            displayedPasswordHtml = `<code style="background:#2e1065; padding:0.2rem 0.5rem; border-radius:3px; color:#d8b4fe; font-family:var(--font-mono); font-weight:700;">${cred.pass}</code>`;
+          } else {
+            displayedPasswordHtml = `<span style="color:#a855f7; font-family:var(--font-mono); letter-spacing:0.15em;">••••••••</span> <span style="font-size:0.7rem; color:#64748b;">(Protected)</span>`;
+          }
+        } else {
+          displayedPasswordHtml = `<code style="background:#060a0f; padding:0.2rem 0.5rem; border-radius:3px; color:#38bdf8; font-family:var(--font-mono); font-weight:700;">${cred.pass}</code>`;
+        }
+
+        const row = document.createElement('tr');
         row.innerHTML = `
           <td><strong>${cred.user}</strong></td>
-          <td><code style="background:#060a0f; padding:0.2rem 0.5rem; border-radius:3px; color:#38bdf8; font-family:var(--font-mono);">${displayedPassword}</code></td>
           <td>${cred.dept}</td>
-          <td><span class="badge ${cred.user === 'root' ? 'badge-purple' : 'badge-navy'}">${cred.roleKey}</span></td>
+          <td><span class="badge ${isRootUser ? 'badge-purple' : 'badge-navy'}">${cred.roleKey}</span></td>
+          <td>${displayedPasswordHtml}</td>
           <td>
-            <div style="display:flex; gap:0.4rem;">
-              <input type="text" id="pwd_${idx}" class="gov-input" style="padding:0.3rem 0.5rem; font-size:0.8rem; width:130px;" placeholder="New password" />
-              <button type="button" class="btn btn-gold" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="updateUserPassword(${idx})">Save</button>
-            </div>
+            ${(!isRootUser || isCurrentSessionRoot) ? `
+              <div style="display:flex; gap:0.4rem;">
+                <input type="text" id="pwd_${idx}" class="gov-input" style="padding:0.3rem 0.5rem; font-size:0.8rem; width:130px;" placeholder="New password" />
+                <button type="button" class="btn btn-gold" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="updateUserPassword(${idx})">Save</button>
+              </div>
+            ` : `<span style="font-size:0.75rem; color:#64748b;">Root Locked</span>`}
           </td>
           <td>
-            ${cred.user !== 'root' ? `
+            ${!isRootUser ? `
               <button type="button" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="deleteUserAccount(${idx})">Revoke</button>
             ` : `<span style="font-size:0.75rem; color:#a855f7; font-weight:700;">PERMANENT ROOT</span>`}
           </td>
@@ -414,7 +418,17 @@
         return;
       }
       const target = INTRANET_USERS[idx];
+
+      if (target.user === 'root' && ACTIVE_LEADER !== 'root') {
+        alert("Permission denied: Only the root user can update the root password.");
+        return;
+      }
+
       target.pass = newPwd;
+      if (target.user === 'root') {
+        LEADERSHIP_ACCOUNTS['root'].pass = newPwd;
+      }
+
       const now = new Date().toISOString().substring(0, 16) + ' UTC';
       GOV_LOGS.unshift(`${now} | PASSWORD CHANGED | [${ACTIVE_LEADER}] Changed password for '${target.user}'`);
       saveLeadershipState();
