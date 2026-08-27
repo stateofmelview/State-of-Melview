@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State of Melview | Organic Laws & Statutory Slip Laws</title>
+  <style>
+    :root {
+      --gov-navy-dark: #0b1319;
+      --gov-navy: #15222e;
+      --gov-blue-primary: #005ea2;
+      --gov-blue-dark: #1a4480;
+      --gov-gold: #c09853;
+      --gov-gold-light: #fdf8e2;
+      --gov-gray-light: #f0f0f0;
+      --gov-gray-mid: #dfe1e2;
+      --gov-gray-dark: #565c65;
+      --gov-text: #1b1b1b;
+      --gov-white: #ffffff;
+      --font-serif: "Merriweather", "Georgia", "Times New Roman", serif;
+      --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "Roboto Mono", Consolas, Monaco, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--gov-gray-light);
+      color: var(--gov-text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .usa-banner {
+      background-color: #f0f0f0;
+      border-bottom: 1px solid var(--gov-gray-mid);
+      padding: 0.35rem 1.5rem;
+      font-size: 0.75rem;
+      color: var(--gov-gray-dark);
+    }
+    .usa-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .usa-flag-svg { width: 16px; height: 11px; }
+    header.gov-header {
+      background-color: var(--gov-navy);
+      border-bottom: 4px solid var(--gov-gold);
+      color: var(--gov-white);
+      padding: 1.25rem 2rem;
+    }
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .brand-block { display: flex; align-items: center; gap: 1.25rem; text-decoration: none; color: #fff; }
+    .state-seal {
+      width: 58px; height: 58px; border-radius: 50%;
+      background: radial-gradient(circle, #2a4359 0%, #111c24 100%);
+      border: 2px solid var(--gov-gold);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gov-gold); font-family: var(--font-serif);
+      font-weight: 700; font-size: 1.6rem;
+    }
+    .brand-title h1 {
+      font-family: var(--font-serif); font-size: 1.45rem;
+      font-weight: 700; text-transform: uppercase; line-height: 1.2;
+    }
+    .brand-title p { font-size: 0.8rem; color: #b0c4de; }
+    nav.gov-nav { background-color: var(--gov-navy-dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; }
+    .nav-tab-btn {
+      background: none; border: none; border-top: 3px solid transparent;
+      color: #e1e7ec; padding: 0.85rem 1.1rem; font-size: 0.85rem;
+      font-weight: 600; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans);
+    }
+    .nav-tab-btn:hover { background-color: var(--gov-navy); color: #ffffff; }
+    .nav-tab-btn.active {
+      background-color: var(--gov-white); color: var(--gov-navy);
+      border-top: 3px solid var(--gov-blue-primary); font-weight: 700;
+    }
+    .main-wrapper { max-width: 1400px; margin: 1.5rem auto; padding: 0 1.5rem; flex: 1; width: 100%; }
+    .official-oversight-stamp {
+      background-color: var(--gov-gold-light);
+      border-left: 4px solid var(--gov-gold);
+      padding: 0.65rem 1.25rem; margin-bottom: 1.5rem;
+      font-size: 0.8rem; font-weight: 600; color: #634a00;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+    }
+    .gov-card {
+      background: var(--gov-white); border: 1px solid var(--gov-gray-mid);
+      border-radius: 4px; padding: 2rem; margin-bottom: 1.5rem;
+    }
+    .document-reader-box {
+      background-color: var(--gov-white); border: 1px solid var(--gov-gray-mid);
+      padding: 3rem; font-family: var(--font-serif); color: #212121;
+      line-height: 1.85; font-size: 1rem; border-radius: 4px;
+    }
+    .document-reader-box h2 {
+      font-family: var(--font-serif); font-size: 1.5rem;
+      color: var(--gov-navy); text-align: center; text-transform: uppercase; margin-bottom: 0.25rem;
+    }
+    .document-reader-box .doc-subtitle {
+      font-family: var(--font-sans); font-size: 0.85rem;
+      text-align: center; color: var(--gov-gray-dark); margin-bottom: 2rem;
+    }
+    .document-reader-box h3 {
+      font-family: var(--font-sans); font-size: 1.15rem;
+      color: var(--gov-blue-dark); margin: 2rem 0 0.5rem 0;
+      border-bottom: 1px solid var(--gov-gray-mid); padding-bottom: 0.35rem;
+      text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .document-reader-box p { margin-bottom: 1rem; text-align: justify; }
+    .subnav-cluster { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .subnav-btn {
+      background: var(--gov-gray-light); border: 1px solid var(--gov-gray-mid);
+      color: var(--gov-navy); padding: 0.5rem 0.9rem; font-size: 0.8rem;
+      font-weight: 600; border-radius: 3px; cursor: pointer;
+    }
+    .subnav-btn.active {
+      background: var(--gov-blue-primary); color: #ffffff; border-color: var(--gov-blue-primary);
+    }
+    .btn {
+      background-color: var(--gov-blue-primary); color: #ffffff;
+      border: none; padding: 0.6rem 1.2rem; font-size: 0.85rem;
+      font-weight: 700; cursor: pointer; border-radius: 3px;
+      display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    }
+    .btn-secondary { background-color: var(--gov-gray-dark); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    table.gov-table {
+      width: 100%; border-collapse: collapse; font-size: 0.85rem;
+      text-align: left; background: var(--gov-white); margin: 1rem 0;
+    }
+    table.gov-table th {
+      background-color: #f0f4f8; color: var(--gov-navy);
+      font-weight: 700; padding: 0.85rem 1rem; text-transform: uppercase;
+      font-size: 0.75rem; border-bottom: 2px solid var(--gov-gray-mid);
+    }
+    table.gov-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--gov-gray-mid); }
+    footer.gov-footer {
+      background-color: var(--gov-navy-dark); color: #aebbc5;
+      border-top: 4px solid var(--gov-navy); padding: 2.5rem 1.5rem;
+      font-size: 0.85rem; margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="usa-banner">
+    <div class="usa-banner-content">
+      <svg class="usa-flag-svg" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="16" height="11" fill="#B22234"/>
+        <rect y="1.69" width="16" height="1.69" fill="white"/>
+        <rect y="5.07" width="16" height="1.69" fill="white"/>
+        <rect y="8.45" width="16" height="1.69" fill="white"/>
+        <rect width="6.4" height="5.92" fill="#3C3B6E"/>
+      </svg>
+      <span>Official Repository of Organic Laws & Statutory Slip Measures • <strong>State of Melview</strong></span>
+    </div>
+  </div>
+
+  <header class="gov-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-block">
+        <div class="state-seal">M</div>
+        <div class="brand-title">
+          <h1>State of Melview</h1>
+          <p>Official Statutory Repository, Court Standards & Administration</p>
+        </div>
+      </a>
+      <a href="index.html" class="btn btn-secondary">⬅️ Return to Government Hub</a>
+    </div>
+  </header>
+
+  <nav class="gov-nav">
+    <div class="nav-inner">
+      <button type="button" class="nav-tab-btn active" onclick="showDocSection('const')" id="btn-tab-const">📜 State Constitution</button>
+      <button type="button" class="nav-tab-btn" onclick="showDocSection('statutes')" id="btn-tab-statutes">🏛️ Statutory Slip Laws (SB 100–104)</button>
+      <button type="button" class="nav-tab-btn" onclick="showDocSection('mcr')" id="btn-tab-mcr">⚖️ Court Rules (MCR-2026-01)</button>
+    </div>
+  </nav>
+
+  <main class="main-wrapper">
+    <div class="official-oversight-stamp">
+      <span>OFFICIAL STATUTORY RECORD • GENERAL ASSEMBLY ARCHIVE</span>
+      <span>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</span>
+    </div>
+
+    <!-- CONSTITUTION -->
+    <section id="sec-const" class="tab-pane active">
+      <div class="gov-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+          <h2 style="font-family:var(--font-serif); font-size:1.3rem; color:var(--gov-navy);">Constitution of the State of Melview</h2>
+          <button type="button" class="btn btn-secondary" onclick="window.print()">🖨️ Print Document</button>
+        </div>
+        <div class="document-reader-box">
+          <h2>CONSTITUTION OF THE STATE OF MELVIEW</h2>
+          <div class="doc-subtitle">
+            A practical state constitution for an organized roleplay government, adapted from Melview constitutional principles, United States constitutional structure, and established RO-state governance models.<br>
+            <strong>DRAFT VERSION 1.0 • 25 AUGUST 2026</strong><br>
+            <em>For use within the State of Melview roleplay community. This instrument governs roleplay government and does not create real-world legal rights or obligations.</em>
+          </div>
+
+          <h3>PREAMBLE</h3>
+          <p>We, the people and members of the State of Melview, in order to establish an orderly, realistic, accountable, and playable State; to preserve liberty while maintaining public order; to divide governmental power so that no single role may exercise all authority; to provide fair elections and dependable institutions; to secure due process and equal treatment; to recognize the practical authority of the community owners, developers, and administrators over the Roblox group and game; and to promote professional roleplay, public service, and responsible leadership, do hereby establish this Constitution as the supreme governing instrument of the State of Melview roleplay government.</p>
+          <p>This Constitution is designed as a community governance document. It is inspired by real constitutional systems, but each provision is adapted to the scale, mechanics, staffing realities, and platform rules of a Roblox roleplay state.</p>
+          <p>All officers, departments, agencies, courts, and members acting in a governmental capacity shall respect this Constitution. Where an operational group rule or platform requirement conflicts with roleplay law, the platform requirement and reserved community-management authority control.</p>
+
+          <h3>ARTICLE 1 - DECLARATION OF RIGHTS AND LIBERTIES</h3>
+          <p><strong>Section 1. INHERENT DIGNITY AND EQUALITY:</strong> All residents are entitled to equal treatment under the law. No governmental officer may deny a roleplay service, hearing, employment opportunity, or public benefit on arbitrary or discriminatory grounds.</p>
+          <p><strong>Section 2. FREEDOM OF EXPRESSION:</strong> Residents may criticize officers, departments, laws, and policies in good faith, subject to rules against harassment, threats, spam, impersonation, or disruption of official operations.</p>
+          <p><strong>Section 3. PEACEFUL ASSEMBLY:</strong> Residents may organize demonstrations, meetings, political campaigns, and civic events, provided they comply with lawful time, place, safety, and game-session rules.</p>
+          <p><strong>Section 4. DUE PROCESS:</strong> No resident shall be deprived of a roleplay license, public position, or governmental privilege for alleged misconduct without notice of the allegation and a reasonable opportunity to respond, except for temporary emergency measures necessary for immediate safety.</p>
+          <p><strong>Section 5. PRESUMPTION OF INNOCENCE:</strong> A person accused of a roleplay offense is presumed innocent until the competent authority makes a finding under applicable law.</p>
+          <p><strong>Section 6. SEARCH AND SEIZURE:</strong> Government agents shall not conduct unreasonable searches of roleplay persons, vehicles, or property. Warrants or recognized exceptions shall be required when the applicable code demands them.</p>
+          <p><strong>Section 7. COUNSEL AND REPRESENTATION:</strong> A person facing a serious roleplay criminal charge may request representation by an attorney or eligible public defender when the legal system provides such a service.</p>
+          <p><strong>Section 8. PRIVACY AND COMMUNICATIONS:</strong> Government personnel shall not misuse private community information, leaked logs, or administrative data for roleplay advantage. Confidential records shall be handled under community-management rules.</p>
+          <p><strong>Section 9. RIGHT TO PETITION:</strong> Residents may file complaints, requests, petitions, legislative proposals, and appeals to competent officials without retaliation for making the complaint in good faith.</p>
+          <p><strong>Section 10. RIGHT TO VOTE:</strong> Qualified citizens have the right to participate in elections, referenda, and recalls administered under this Constitution, subject to eligibility rules and platform limitations.</p>
+          <p><strong>Section 11. PROTECTION FROM ARBITRARY PUNISHMENT:</strong> No officer shall impose a penalty solely because a resident is unpopular, disagrees with leadership, or declines an improper order. Government action must have a constitutional, statutory, departmental, or valid emergency basis.</p>
+          <p><strong>Section 12. RIGHT TO A FAIR HEARING:</strong> Courts and administrative bodies shall provide a neutral decision-maker, notice of the issue, an opportunity to present relevant information, and a written or recorded decision where practicable.</p>
+
+          <h3>ARTICLE 2 - SOVEREIGNTY, CITIZENSHIP, AND GOVERNMENT STRUCTURE</h3>
+          <p><strong>Section 1. STATE STATUS:</strong> Melview shall be known officially as the State of Melview. Government authority is exercised for the benefit of the roleplay community and its residents.</p>
+          <p><strong>Section 2. SOURCE OF GOVERNMENT:</strong> All governmental roleplay authority ultimately derives from the community members participating in the State, subject to the reserved authority of the community owners, developers, and administrators recognized in Article III.</p>
+          <p><strong>Section 3. THREE BRANCHES:</strong> The roleplay government shall be divided into legislative, executive, and judicial branches. No officer shall simultaneously exercise incompatible powers of two branches except where this Constitution expressly provides for temporary or ceremonial duties.</p>
+          <p><strong>Section 4. LEGISLATIVE BRANCH:</strong> Legislative power is vested in the General Assembly, which may be organized as the State Senate and, when community size permits, a House of Representatives established by law. Until a House is separately constituted, the Senate may exercise the legislative power as a unicameral chamber under this Constitution.</p>
+          <p><strong>Section 5. EXECUTIVE BRANCH:</strong> Executive power is vested in the Governor and, when acting under this Constitution, the Lieutenant Governor and executive departments established by law.</p>
+          <p><strong>Section 6. JUDICIAL BRANCH:</strong> Judicial power is vested in the Supreme Court of Melview and such lower courts as the General Assembly establishes by law. Courts shall have authority to interpret this Constitution and laws within roleplay jurisdiction.</p>
+          <p><strong>Section 7. SUPREMACY:</strong> This Constitution is supreme within the roleplay government. A statute, executive order, department rule, municipal ordinance, or official action inconsistent with this Constitution is void to the extent of the conflict, subject to the review and reserved authority provisions of Article III.</p>
+
+          <h3>ARTICLE 3 - COMMUNITY MANAGEMENT AND DEVELOPER AUTHORITY</h3>
+          <p><strong>Section 1. RESERVED COMMUNITY AUTHORITY:</strong> The owner, developer, community executive, or authorized management body of the State of Melview Roblox community shall constitute the Community Management Authority. The exact group rank titles may change, but the functional authority remains reserved.</p>
+          <p><strong>Section 2. PLATFORM AND DEVELOPMENT POWERS:</strong> Community Management retains exclusive authority over Roblox group ownership, group permissions, game ownership and configuration, asset publishing, development, moderation, server infrastructure, administrative security, anti-exploit measures, platform compliance, and other non-roleplay matters.</p>
+          <p><strong>Section 3. PROTECTION OF THE COMMUNITY:</strong> Community Management may suspend, modify, or terminate a governmental office, department, election, or roleplay system when reasonably necessary to protect the game, the community, the group, the platform account, or the integrity of development. Such action is not a criminal or political judgment and shall not be represented as one.</p>
+          <p><strong>Section 4. ROLEPLAY GOVERNMENT AUTONOMY:</strong> Except for reserved matters, Community Management should permit the Governor, Legislature, Judiciary, and departments to conduct ordinary roleplay governance without unnecessary interference. Management may provide oversight, appoint transitional administrators, or intervene when necessary to preserve community integrity.</p>
+          <p><strong>Section 5. LIMITS ON ROLEPLAY POWERS:</strong> No constitutional office may claim that a roleplay warrant, bill, court judgment, or executive order compels Roblox itself, the group owner, developers, moderators, or external platforms to take an action. Roleplay authority exists only within the community's recognized roleplay environment.</p>
+          <p><strong>Section 6. CENTRAL ADMINISTRATIVE REVIEW:</strong> Community Management may establish a management review panel or designate specific senior group roles to review disputes involving group governance, rank permissions, developer conduct, or conflicts between roleplay government and platform requirements. Its decisions on reserved matters are final.</p>
+
+          <h3>ARTICLE 4 - THE GENERAL ASSEMBLY</h3>
+          <p><strong>Section 1. COMPOSITION:</strong> The General Assembly shall ordinarily operate through the State Senate. The Senate should contain five to nine Senators, with the exact number established by election law or group policy based on active membership. A House of Representatives may be created when population and activity justify a second chamber.</p>
+          <p><strong>Section 2. PRESIDENT OF THE SENATE:</strong> The Lieutenant Governor shall preside over the Senate. The Senate shall elect a President pro tempore from among its members to preside when the Lieutenant Governor is absent or when the Constitution assigns that office additional duties.</p>
+          <p><strong>Section 3. QUALIFICATIONS:</strong> A Senator must be a member of the State community in good standing, meet any minimum group-membership period set by election law, demonstrate basic knowledge of the Constitution and legislative procedure, and not be serving a disqualifying disciplinary sanction. Law may establish additional reasonable qualifications.</p>
+          <p><strong>Section 4. POWERS:</strong> The General Assembly may enact statutes; establish departments and lower courts; appropriate roleplay resources; regulate public agencies; authorize licenses and permits; confirm nominees where constitutionally required; investigate public administration; ratify or reject specified executive appointments; and propose constitutional amendments.</p>
+          <p><strong>Section 5. BILLS:</strong> A bill shall be introduced by a member, referred to an appropriate committee when practical, debated, and voted upon. A majority of members present and voting is sufficient for ordinary legislation unless this Constitution or statute requires a higher threshold.</p>
+          <p><strong>Section 6. GOVERNOR'S VETO:</strong> Every bill passed by the General Assembly shall be presented to the Governor. The Governor may sign it, veto it with written objections, or take no action. If the Governor neither signs nor vetoes a bill within five calendar days of presentation, the bill becomes law. The Senate may override a veto by a two-thirds vote of its full membership.</p>
+          <p><strong>Section 7. INVESTIGATIONS:</strong> The Assembly may issue subpoenas, request departmental records, hold hearings, and compel testimony within roleplay jurisdiction, subject to privacy, safety, and Community Management restrictions. No investigation may be used to bypass a court order or to punish a citizen merely for protected criticism.</p>
+          <p><strong>Section 8. BUDGET:</strong> No public department may receive a formal roleplay budget from the state treasury except pursuant to legislation or a valid temporary appropriation.</p>
+          <p><strong>Section 9. ETHICS OF LEGISLATORS:</strong> Members of the Assembly shall disclose material conflicts of interest, shall not use legislative office to obtain private advantages unavailable to ordinary residents, and shall not use hidden administrative permissions to alter a vote or legislative record.</p>
+
+          <h3>ARTICLE 5 - THE GOVERNOR AND LIEUTENANT GOVERNOR</h3>
+          <p><strong>Section 1. GOVERNOR:</strong> The Governor is the chief executive officer of the State and head of the Executive Branch. The Governor shall represent the State, execute laws, issue lawful executive orders, appoint executive officers where authorized, propose legislative priorities, and serve as commander in chief of the State Guard subject to this Constitution and law.</p>
+          <p><strong>Section 2. ELECTION AND TERM:</strong> The Governor and Lieutenant Governor shall be elected jointly for a term of four months unless election law establishes a different term not exceeding six months. A person may not serve more than two consecutive full terms unless a constitutional waiver is approved under Article XVI.</p>
+          <p><strong>Section 3. QUALIFICATIONS:</strong> A candidate must be in good standing, have maintained active participation in the community for the period specified by election law, have no disqualifying unresolved disciplinary matter, and pass any constitutional or civics assessment adopted by the Electoral Commission.</p>
+          <p><strong>Section 4. EXECUTIVE ORDERS:</strong> The Governor may issue executive orders to direct executive departments, implement existing law, organize executive operations, and address administrative matters. An executive order may not create a criminal offense, appropriate permanent funds, suspend a constitutional right, or contradict a statute or this Constitution.</p>
+          <p><strong>Section 5. APPOINTMENTS:</strong> The Governor may appoint department heads, commissioners, and other officials where law provides. Senate confirmation shall be required for the Attorney General, Supreme Court justices, and any other offices expressly designated by law.</p>
+          <p><strong>Section 6. STATE OF THE STATE:</strong> At least once each term, the Governor shall deliver a state of the State address or written report identifying executive priorities, departmental performance, major legislation, and community-wide issues requiring attention.</p>
+          <p><strong>Section 7. LIEUTENANT GOVERNOR:</strong> The Lieutenant Governor shall assist the Governor; preside over the Senate; succeed to the Governor's powers and duties upon vacancy; and perform other duties established by law. The Lieutenant Governor shall not exercise executive authority independent of the Governor except as provided by this Constitution.</p>
+          <p><strong>Section 8. SUCCESSION:</strong> Upon death, resignation, removal, permanent incapacitation, or disqualification of the Governor, the Lieutenant Governor shall become Governor for the remainder of the term. If both offices are vacant, succession shall proceed to the Secretary of the State, Attorney General, President pro tempore, Chief Justice, and then a temporary Acting Governor chosen by the Senate from eligible senior officials.</p>
+
+          <h3>ARTICLES 6 THROUGH 17</h3>
+          <p><strong>ARTICLE 6. EXECUTIVE DEPARTMENTS:</strong> Establishes the Governor's Cabinet, the Secretary of the State, department heads, and rulemaking authorities.<br>
+          <strong>ARTICLE 7. DEPARTMENT OF JUSTICE & LEGAL SERVICE:</strong> Governs the Attorney General, statewide prosecution, public defense services, State Bar admission (80% score), and law enforcement standards.<br>
+          <strong>ARTICLE 8. PUBLIC SAFETY & STATE GUARD:</strong> Defines State Police statewide command, elected County Sheriff local authority, Emergency Services, and the State Guard.<br>
+          <strong>ARTICLE 9. THE JUDICIARY:</strong> Supreme Court and District Court jurisdiction, judicial review, sworn search/arrest warrants, and appeals.<br>
+          <strong>ARTICLE 10. ELECTIONS & IEC:</strong> Regulates the independent Electoral Commission, 14-day anti-alt voter checks, candidate rules, and recall procedures.<br>
+          <strong>ARTICLE 11. LOCAL GOVERNMENT:</strong> Municipal ordinances, home rule boundaries, and intergovernmental mutual-aid pacts.<br>
+          <strong>ARTICLE 12. CIVIL SERVICE & OATHS:</strong> Mandatory oaths of office, civil service promotion standards, and official appointment rosters.<br>
+          <strong>ARTICLE 13. IMPEACHMENT & ETHICS:</strong> 2/3 legislative impeachment trials, administrative discipline, and anti-corruption mandates.<br>
+          <strong>ARTICLE 14. EMERGENCY POWERS:</strong> 14-day Gubernatorial emergency limits and continuity of government.<br>
+          <strong>ARTICLE 15. PUBLIC TRANSPARENCY:</strong> Public records access, open meetings, and the mandatory 72-hour FOIA clock.<br>
+          <strong>ARTICLE 16. AMENDMENTS:</strong> 2/3 Senate proposal and public ratification referenda.<br>
+          <strong>ARTICLE 17. FINAL PROVISIONS:</strong> Supersession of prior community instruments and platform roleplay governance scope.</p>
+
+          <h3>APPENDIX A - OPERATIONAL ROLE ALIGNMENT</h3>
+          <table class="gov-table">
+            <thead>
+              <tr><th>Role Function</th><th>Constitutional Place</th><th>Primary Authority</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Community Owner / Senior Management</strong></td><td>Community Management Authority</td><td>Article III: platform, group, game, development, security, and reserved administrative authority.</td></tr>
+              <tr><td><strong>Governor</strong></td><td>Chief Executive</td><td>Article V: executive leadership, appointments, executive orders, emergency powers, commander in chief.</td></tr>
+              <tr><td><strong>Lieutenant Governor</strong></td><td>Executive + Legislative liaison</td><td>Article V and IV: succession, Senate presidency, legislative procedure.</td></tr>
+              <tr><td><strong>Secretary of the State</strong></td><td>Chief administrative secretary</td><td>Article VI and XV: official records, certifications, publication, administrative coordination.</td></tr>
+              <tr><td><strong>Attorney General</strong></td><td>Chief legal service</td><td>Article VII: state legal representation, prosecution supervision, legal advice, attorney standards.</td></tr>
+              <tr><td><strong>Senators / Legislators</strong></td><td>Legislative branch</td><td>Article IV: legislation, budgets, investigations, confirmations, impeachment, amendments.</td></tr>
+              <tr><td><strong>Chief Justice / Associate Justices</strong></td><td>Supreme Court</td><td>Article IX: constitutional review, final appeals, impeachment trials.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>ADOPTION AND CERTIFICATION</h3>
+          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.8;">
+            <p>Date of Ratification: 25 August 2026</p>
+            <p>Authority: <strong>jackbillyeye • Government Oversight</strong></p>
+            <p style="margin-top: 0.5rem;"><em>"I certify that the foregoing document is the official constitutional text adopted for the State of Melview roleplay community, subject to the reserved authority of Community Management and the amendment procedures contained herein."</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATUTES -->
+    <section id="sec-statutes" class="tab-pane">
+      <div class="gov-card">
+        <div class="subnav-cluster">
+          <button type="button" class="subnav-btn active" onclick="loadSlip('sb100')" id="sub-sb100">SB 100 • Electoral Act</button>
+          <button type="button" class="subnav-btn" onclick="loadSlip('sb101')" id="sub-sb101">SB 101 • Senate Procedure</button>
+          <button type="button" class="subnav-btn" onclick="loadSlip('sb102')" id="sub-sb102">SB 102 • Judiciary Org</button>
+          <button type="button" class="subnav-btn" onclick="loadSlip('sb103')" id="sub-sb103">SB 103 • Penal & Standards</button>
+          <button type="button" class="subnav-btn" onclick="loadSlip('sb104')" id="sub-sb104">SB 104 • Executive Cabinet</button>
+        </div>
+        <div id="slipContentBox" class="document-reader-box"></div>
+      </div>
+    </section>
+
+    <!-- MCR-2026-01 COURT RULES -->
+    <section id="sec-mcr" class="tab-pane">
+      <div class="gov-card">
+        <div class="document-reader-box">
+          <h2>STATE OF MELVIEW JUDICIAL & EXECUTIVE INSTRUMENTS</h2>
+          <div class="doc-subtitle">
+            DOCUMENT NO. MCR-2026-01<br>
+            State Judicial Rules & Law Enforcement Standards Manual (Decorum, Bar Admissions, Warrant Protocols & Field SOPs)<br>
+            <strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong>
+          </div>
+          <h3>TITLE I. RULES OF COURT, DECORUM, AND TRIAL PROCEEDINGS</h3>
+          <p><strong>§ 101. Courtroom Decorum.</strong> All parties appearing before the Supreme Court or District Court of the State of Melview shall maintain professional decorum, addressing judicial officers as "Your Honor." Contempt citations (§ 8-409) shall result in immediate bailiff detention.</p>
+          <p><strong>§ 102. Trial Procedure.</strong> Criminal trials proceed in four distinct phases: (1) Arraignment & Plea; (2) Evidence & Witnesses; (3) Closing Arguments; (4) Verdict & Sentencing.</p>
+          <h3>TITLE II. STATE BAR ADMISSION</h3>
+          <p><strong>§ 201. Examination Standards.</strong> Candidates must achieve a passing score of at least 80% on the Melview Uniform Bar Examination to hold an active License to Practice Law.</p>
+          <h3>TITLE III. SEARCH & ARREST WARRANTS</h3>
+          <p><strong>§ 301. Probable Cause Affidavits.</strong> General warrants are strictly prohibited. Warrants require written sworn affidavits establishing probable cause under Article I, § 6.</p>
+          <h3>TITLE IV. LAW ENFORCEMENT FIELD SOPS</h3>
+          <p><strong>§ 401. Pursuit Protocols.</strong> PIT maneuvers are restricted to under 35 MPH unless deadly force is justified.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gov-footer">
+    <div style="max-width:1400px; margin:0 auto; text-align:center;">
+      STATE OF MELVIEW OFFICIAL STATUTORY & CONSTITUTIONAL REPOSITORY • DRAFTED BY JACKBILLYEYE
+    </div>
+  </footer>
+
+  <script>
+    const SLIP_LAWS = {
+      sb100: `
+        <h2>SENATE BILL NO. 100</h2>
+        <div class="doc-subtitle">State Electoral Act of 2026 (Title 10 – Elections and Franchise Code)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
+        <p><strong>PRIMARY SPONSOR:</strong> Government Oversight / Office of the Secretary of the State<br><strong>CONSTITUTIONAL AUTHORITY:</strong> Article IV, § 4; Article X, §§ 1-7</p>
+        <h3>TITLE I. GENERAL PROVISIONS</h3>
+        <p><strong>§ 101. Short Title.</strong> This Act shall be cited as the "State Electoral Act of 2026."</p>
+        <p><strong>§ 102. Authority.</strong> Establishes the independent Electoral Commission (IEC), anti-alt verification, and balloting procedures.</p>
+        <h3>TITLE II. THE INDEPENDENT ELECTORAL COMMISSION</h3>
+        <p><strong>§ 201. Structure.</strong> Three-member neutral board confirmed by the Senate.</p>
+        <h3>TITLE III. VOTER QUALIFICATIONS</h3>
+        <p><strong>§ 301. 14-Day Anti-Alt Rule.</strong> 14 days of active group membership required prior to poll opening.</p>
+        <p><strong>§ 302. Ranked Choice Voting.</strong> Instant-runoff voting utilized for joint gubernatorial tickets.</p>
+      `,
+      sb101: `
+        <h2>SENATE BILL NO. 101</h2>
+        <div class="doc-subtitle">Legislative Organization, Senate Procedure, and Public Ethics Act of 2026 (Title 4 & 15)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
+        <p><strong>PRIMARY SPONSOR:</strong> Government Oversight / Legislative Committee<br><strong>CONSTITUTIONAL AUTHORITY:</strong> Article IV, §§ 1-9; Article XV</p>
+        <h3>TITLE I. SENATE OFFICERS</h3>
+        <p><strong>§ 101. Officers.</strong> Lieutenant Governor presides; Senate elects President pro tempore.</p>
+        <h3>TITLE II. LEGISLATIVE PROCESS</h3>
+        <p><strong>§ 201. Veto Override.</strong> 2/3 supermajority of the seated Senate overrides a Gubernatorial veto.</p>
+      `,
+      sb102: `
+        <h2>SENATE BILL NO. 102</h2>
+        <div class="doc-subtitle">Judiciary Organization and Legal Services Act of 2026 (Title 7 & 9)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
+        <p><strong>PRIMARY SPONSOR:</strong> Government Oversight / Office of Judicial Administration<br><strong>CONSTITUTIONAL AUTHORITY:</strong> Article IX, §§ 1-9</p>
+        <h3>TITLE I. COURT STRUCTURE</h3>
+        <p><strong>§ 101. Supreme Court.</strong> Supreme judicial power vested in one Chief Justice and Associate Justices.</p>
+        <p><strong>§ 102. Judicial Review.</strong> Exclusive power to invalidate unconstitutional acts.</p>
+      `,
+      sb103: `
+        <h2>SENATE BILL NO. 103</h2>
+        <div class="doc-subtitle">State Penal Code and Law Enforcement Standards Act of 2026 (Title 8)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
+        <p><strong>PRIMARY SPONSOR:</strong> Public Safety Joint Committee<br><strong>CONSTITUTIONAL AUTHORITY:</strong> Article I; Article VIII</p>
+        <h3>TITLE I. PENAL CLASSIFICATIONS</h3>
+        <p><strong>§ 103. Statutory Custody Limit.</strong> Under Title 8 § 103, no arrest event shall exceed thirty (30) minutes of custodial holding.</p>
+      `,
+      sb104: `
+        <h2>SENATE BILL NO. 104</h2>
+        <div class="doc-subtitle">Executive Organization and Cabinet Governance Act of 2026 (Title 6)<br><strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong></div>
+        <p><strong>PRIMARY SPONSOR:</strong> Office of the Governor<br><strong>CONSTITUTIONAL AUTHORITY:</strong> Article V, § 5; Article VI</p>
+        <h3>TITLE I. COMMAND SEPARATION</h3>
+        <p><strong>§ 302. State Police vs. Sheriff.</strong> State Police operates statewide highway jurisdiction; County Sheriff maintains local constitutional autonomy.</p>
+      `
+    };
+
+    function showDocSection(sec) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('sec-' + sec).classList.add('active');
+      document.getElementById('btn-tab-' + sec).classList.add('active');
+      if (sec === 'statutes') loadSlip('sb100');
+    }
+
+    function loadSlip(id) {
+      document.querySelectorAll('.subnav-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('sub-' + id).classList.add('active');
+      document.getElementById('slipContentBox').innerHTML = SLIP_LAWS[id];
+    }
+  </script>
+</body>
+</html>
