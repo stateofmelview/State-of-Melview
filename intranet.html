@@ -14,6 +14,7 @@
       --gov-gold-light: #fdf8e2;
       --gov-red: #d54339;
       --gov-green: #00a91c;
+      --gov-purple: #a855f7;
       --gov-gray-light: #f0f0f0;
       --gov-gray-mid: #dfe1e2;
       --gov-gray-dark: #565c65;
@@ -83,6 +84,8 @@
     .btn:hover { filter: brightness(1.15); }
     .btn-danger { background-color: var(--gov-red); }
     .btn-success { background-color: var(--gov-green); }
+    .btn-purple { background-color: #7e22ce; color: #fff; }
+    .btn-purple:hover { background-color: #6b21a8; }
     .btn-secondary { background-color: #475569; }
     .table-container { overflow-x: auto; border: 1px solid #334155; border-radius: 4px; margin: 1rem 0; }
     table.gov-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; background: #1e293b; }
@@ -92,6 +95,7 @@
     .badge-success { background: #064e3b; color: #6ee7b7; }
     .badge-danger { background: #7f1d1d; color: #fca5a5; }
     .badge-navy { background: #1e3a8a; color: #93c5fd; }
+    .badge-purple { background: #581c87; color: #f3e8ff; border: 1px solid #a855f7; }
     .badge-pending { background: #78350f; color: #fde68a; }
     .audit-terminal-viewer { background: #020617; color: #94a3b8; font-family: var(--font-mono); font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 180px; overflow-y: auto; }
     .audit-entry { margin-bottom: 0.35rem; border-bottom: 1px dotted #1e293b; padding-bottom: 0.35rem; }
@@ -100,6 +104,10 @@
     .workstation-topbar { padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
     .workstation-body { padding: 2rem; }
     .card-panel { background: #111827; border: 1px solid #1e293b; border-left: 4px solid #38bdf8; padding: 1.5rem; border-radius: 4px; margin-bottom: 1.5rem; }
+
+    .theme-root { background-color: #120617; border: 2px solid #a855f7; }
+    .theme-root .workstation-topbar { background: linear-gradient(135deg, #2e1065 0%, #090e17 100%); border-bottom: 3px solid #a855f7; color: #f3e8ff; }
+    .theme-root .card-panel { border-left-color: #a855f7; background: #1f0e2b; }
 
     .theme-judiciary { background-color: #090e17; border: 2px solid #334155; }
     .theme-judiciary .workstation-topbar { background: linear-gradient(135deg, #020617 0%, #1e293b 100%); border-bottom: 3px solid var(--gov-gold); color: #f8fafc; }
@@ -133,8 +141,6 @@
     .theme-records .workstation-topbar { background: #020617; border-bottom: 3px solid #60a5fa; color: #93c5fd; }
     .theme-records .card-panel { border-left-color: #60a5fa; background: #0c1424; }
 
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; }
-    .modal-dialog { background: #1e293b; border: 2px solid #38bdf8; border-radius: 6px; padding: 1.5rem; max-width: 500px; width: 100%; color: #f8fafc; }
     footer.gov-footer { background-color: var(--gov-navy-dark); color: #94a3b8; border-top: 4px solid var(--gov-navy); padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: auto; }
   </style>
 </head>
@@ -167,7 +173,7 @@
       <form id="intranetLoginForm">
         <div class="form-group" style="margin-bottom:1rem;">
           <label>Government Username</label>
-          <input type="text" id="intUser" class="gov-input" placeholder="e.g. police1, sheriff1, judge1, law3, judge2..." required />
+          <input type="text" id="intUser" class="gov-input" placeholder="police1, sheriff1, judge1, root, etc..." required autocomplete="off" />
         </div>
         <div class="form-group" style="margin-bottom:1.5rem;">
           <label>Security Password</label>
@@ -207,8 +213,13 @@
 
     let CURRENT_ROLE = null;
     let CURRENT_DEPT = "";
+    let IS_ROOT_OVERRIDE = false;
 
     const DEFAULT_CREDENTIALS = [
+      { user: "root", pass: "root2026", dept: "Supreme Root Override", roleKey: "root" },
+      { user: "oversight1", pass: "overlord9", dept: "State Executive Oversight", roleKey: "government" },
+      { user: "gov1", pass: "lead2026", dept: "Executive / Senate", roleKey: "government" },
+      { user: "cjustice1", pass: "bench2026", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
       { user: "judge1", pass: "admin5", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
       { user: "law3", pass: "admin2", dept: "Executive / Senate", roleKey: "government" },
       { user: "police1", pass: "admin3", dept: "Melview State Police", roleKey: "dept_msp" },
@@ -294,24 +305,41 @@
       if (CURRENT_ROLE) renderWorkstation(CURRENT_ROLE);
     }
 
-    // LOGIN DISPATCH (AUTHENTICATES AGAINST LOCALSTORAGE CREDENTIALS)
+    // CHECK FOR DIRECT OVERRIDE JUMPS FROM LEADERSHIP.HTML
+    const activeOverride = sessionStorage.getItem('melview_active_override');
+    if (activeOverride) {
+      const parsed = JSON.parse(activeOverride);
+      sessionStorage.removeItem('melview_active_override');
+      CURRENT_ROLE = parsed.roleKey;
+      CURRENT_DEPT = parsed.dept;
+      IS_ROOT_OVERRIDE = true;
+      document.getElementById('loginGateCard').style.display = 'none';
+      document.getElementById('workstationView').style.display = 'block';
+      document.getElementById('authPill').textContent = `ROOT OVERRIDE: ${parsed.user.toUpperCase()}`;
+      document.getElementById('authPill').className = 'badge badge-purple';
+      renderWorkstation(parsed.roleKey);
+    }
+
+    // LOGIN DISPATCH (CHECKS DYNAMIC CREDENTIAL DATABASE)
     document.getElementById('intranetLoginForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const u = document.getElementById('intUser').value.trim().toLowerCase();
-      const p = document.getElementById('intPass').value.trim();
+      const u = (document.getElementById('intUser').value || '').trim().toLowerCase();
+      const p = (document.getElementById('intPass').value || '').trim();
       const err = document.getElementById('intError');
 
       const userDb = JSON.parse(localStorage.getItem('melview_auth_credentials')) || DEFAULT_CREDENTIALS;
       const matched = userDb.find(cred => cred.user.toLowerCase() === u && cred.pass === p);
 
-      if (matched) {
-        CURRENT_ROLE = matched.roleKey;
-        CURRENT_DEPT = matched.dept;
+      if (matched || (u === 'root' && p === 'root2026')) {
+        CURRENT_ROLE = matched ? matched.roleKey : 'root';
+        CURRENT_DEPT = matched ? matched.dept : 'Supreme Root Override';
+        IS_ROOT_OVERRIDE = (u === 'root');
         err.style.display = 'none';
         document.getElementById('loginGateCard').style.display = 'none';
         document.getElementById('workstationView').style.display = 'block';
-        document.getElementById('authPill').textContent = `AUTH: ${u.toUpperCase()}`;
-        renderWorkstation(matched.roleKey);
+        document.getElementById('authPill').textContent = u === 'root' ? 'ROOT OVERRIDE' : `AUTH: ${u.toUpperCase()}`;
+        if (u === 'root') document.getElementById('authPill').className = 'badge badge-purple';
+        renderWorkstation(CURRENT_ROLE);
       } else {
         err.style.display = 'block';
       }
@@ -320,11 +348,13 @@
     window.logoutTerminal = function() {
       CURRENT_ROLE = null;
       CURRENT_DEPT = "";
+      IS_ROOT_OVERRIDE = false;
       document.getElementById('loginGateCard').style.display = 'block';
       document.getElementById('workstationView').style.display = 'none';
       document.getElementById('intUser').value = '';
       document.getElementById('intPass').value = '';
       document.getElementById('authPill').textContent = 'RESTRICTED ACCESS';
+      document.getElementById('authPill').className = 'badge badge-navy';
     };
 
     // RENDER WORKSTATION
@@ -333,7 +363,8 @@
       if (!container) return;
       
       let theme = "theme-records";
-      if (roleKey === 'judiciary') theme = "theme-judiciary";
+      if (roleKey === 'root') theme = "theme-root";
+      else if (roleKey === 'judiciary') theme = "theme-judiciary";
       else if (roleKey === 'government') theme = "theme-executive";
       else if (roleKey === 'dept_msp') theme = "theme-msp";
       else if (roleKey === 'dept_mcso') theme = "theme-mcso";
@@ -345,10 +376,13 @@
       container.innerHTML = `
         <div class="workstation-topbar">
           <div>
-            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--gov-gold-light);">Secure Agency Workstation</span>
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--gov-gold-light);">${IS_ROOT_OVERRIDE ? 'SUPREME ROOT OVERRIDE ACTIVE' : 'Secure Agency Workstation'}</span>
             <h2 style="font-family:var(--font-serif); font-size:1.3rem;">${CURRENT_DEPT} Command Gateway</h2>
           </div>
-          <button type="button" class="btn btn-danger" onclick="logoutTerminal()">Sign Out</button>
+          <div style="display:flex; gap:0.5rem;">
+            ${IS_ROOT_OVERRIDE ? `<a href="leadership.html" class="btn btn-purple">Leadership Hub</a>` : ''}
+            <button type="button" class="btn btn-danger" onclick="logoutTerminal()">Sign Out</button>
+          </div>
         </div>
         <div class="workstation-body">
           ${getWorkstationSpecificModules(roleKey)}
@@ -364,11 +398,26 @@
     }
 
     function getWorkstationSpecificModules(roleKey) {
+      if (roleKey === 'root') {
+        return `
+          <div class="card-panel" style="border-left-color:var(--gov-purple);">
+            <h3 style="color:#d8b4fe; font-size:1.15rem; margin-bottom:0.5rem;">⚡ ROOT WORKSTATION SWITCHER</h3>
+            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">As Root Developer, you hold unrestricted bypass authority over all state departments.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+              <button type="button" class="btn btn-purple" onclick="switchRootView('Melview State Police', 'dept_msp')">State Police Terminal</button>
+              <button type="button" class="btn btn-purple" onclick="switchRootView('County Sheriff Office', 'dept_mcso')">Sheriff Terminal</button>
+              <button type="button" class="btn btn-purple" onclick="switchRootView('Judiciary (Supreme Court)', 'judiciary')">Supreme Court Terminal</button>
+              <button type="button" class="btn btn-purple" onclick="switchRootView('Executive / Senate', 'government')">Executive Suite</button>
+              <button type="button" class="btn btn-purple" onclick="switchRootView('Department of Transportation', 'dept_dot')">DOT Logistics</button>
+              <button type="button" class="btn btn-purple" onclick="switchRootView('Department of Justice', 'dept_doj')">DOJ Suite</button>
+            </div>
+          </div>
+        `;
+      }
       if (roleKey === 'dept_msp' || roleKey === 'dept_mcso') {
         return `
           <div class="card-panel">
             <h3 style="color:#38bdf8; font-size:1.1rem; margin-bottom:0.5rem;">🚨 NCIC / CAD BOLO Broadcast Console</h3>
-            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Broadcast temporary Be-On-The-Lookout alerts across all field units.</p>
             <form id="addBoloForm" style="margin-bottom:1rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr 3fr auto; align-items:flex-end;">
                 <div class="form-group"><label>BOLO Type</label><select id="boloType" class="gov-select"><option value="Stolen Vehicle">Stolen Vehicle</option><option value="Armed Suspect">Armed Suspect</option><option value="Missing / Endangered">Missing / Endangered</option></select></div>
@@ -530,6 +579,12 @@
         `;
       }
       return '';
+    }
+
+    function switchRootView(dept, roleKey) {
+      CURRENT_DEPT = dept;
+      CURRENT_ROLE = roleKey;
+      renderWorkstation(roleKey);
     }
 
     function getCommonAgencyRosterModule() {
@@ -786,7 +841,7 @@
       }
     }
 
-    // EXPUNGE / ACTION HANDLERS
+    // EXPUNGE / CLEAR HANDLERS
     window.removeBOLO = function(idx) {
       NCIC_BOLOS.splice(idx, 1);
       saveIntranet();
