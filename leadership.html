@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>State of Melview | Executive Leadership & System Administration</title>
+  <title>State of Melview | Executive Leadership & Master System Control Suite</title>
   <style>
     :root {
       --gov-navy-dark: #060a0f;
@@ -12,6 +12,7 @@
       --gov-gold: #eab308;
       --gov-red: #ef4444;
       --gov-green: #22c55e;
+      --gov-purple: #a855f7;
       --gov-card-bg: #1e293b;
       --gov-border: #334155;
       --font-serif: "Merriweather", "Georgia", serif;
@@ -70,7 +71,7 @@
       color: #f8fafc; padding: 0.65rem 0.85rem; border-radius: 3px; font-size: 0.9rem; width: 100%;
     }
     .gov-input:focus, .gov-select:focus { outline: 2px solid var(--gov-gold); }
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
     .form-group label { font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
     .btn {
@@ -80,6 +81,8 @@
     }
     .btn-gold { background-color: #ca8a04; color: #fff; }
     .btn-gold:hover { background-color: #a16207; }
+    .btn-purple { background-color: #7e22ce; color: #fff; }
+    .btn-purple:hover { background-color: #6b21a8; }
     .btn-danger { background-color: var(--gov-red); }
     .btn-secondary { background-color: var(--gov-border); }
     .table-container { overflow-x: auto; border: 1px solid var(--gov-border); border-radius: 4px; margin: 1rem 0; }
@@ -88,6 +91,7 @@
     table.gov-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--gov-border); vertical-align: middle; }
     .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
     .badge-gold { background: #713f12; color: #fef08a; }
+    .badge-purple { background: #581c87; color: #f3e8ff; border: 1px solid #a855f7; }
     .badge-navy { background: #1e3a8a; color: #93c5fd; }
     .audit-terminal-viewer { background: #060a0f; color: #94a3b8; font-family: var(--font-mono); font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 200px; overflow-y: auto; }
     .audit-entry { margin-bottom: 0.35rem; border-bottom: 1px dotted var(--gov-border); padding-bottom: 0.35rem; }
@@ -116,23 +120,32 @@
   <main class="main-wrapper">
 
     <!-- LOGIN GATE -->
-    <div id="loginCard" class="gov-card" style="max-width:480px; margin:4rem auto; border-top:4px solid var(--gov-gold);">
-      <h2 style="font-family:var(--font-serif); font-size:1.3rem; margin-bottom:0.5rem; text-align:center;">Executive Access Gateway</h2>
-      <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem; text-align:center;">RESTRICTED TO STATE OVERSIGHT, GOVERNOR & CHIEF JUSTICE</p>
+    <div id="loginCard" class="gov-card" style="max-width:520px; margin:3rem auto; border-top:4px solid var(--gov-gold);">
+      <h2 style="font-family:var(--font-serif); font-size:1.35rem; margin-bottom:0.5rem; text-align:center;">Executive Access Gateway</h2>
+      <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem; text-align:center;">RESTRICTED TO STATE OVERSIGHT, GOVERNOR & ROOT OVERRIDE</p>
       
       <form id="leadershipLoginForm">
         <div class="form-group" style="margin-bottom:1rem;">
-          <label>Executive Username</label>
-          <input type="text" id="lUser" class="gov-input" placeholder="oversight1, gov1, cjustice1..." required />
+          <label>Executive / Root Username</label>
+          <input type="text" id="lUser" class="gov-input" placeholder="root, oversight1, gov1, cjustice1..." required autocomplete="off" />
         </div>
-        <div class="form-group" style="margin-bottom:1.5rem;">
-          <label>Security Key</label>
+        <div class="form-group" style="margin-bottom:1.25rem;">
+          <label>Security Key / Password</label>
           <input type="password" id="lPass" class="gov-input" placeholder="••••••••" required />
         </div>
-        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Unlock Administration Console</button>
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; padding:0.75rem;">Unlock Administration Console</button>
       </form>
-      <div id="loginErr" style="display:none; color:#f87171; font-size:0.8rem; text-align:center; margin-top:1rem; font-weight:700;">
-        ❌ ACCESS DENIED: Unauthorized Executive Credentials.
+
+      <div style="margin-top:1.5rem; padding:1rem; background:#0f172a; border:1px solid #334155; border-radius:4px; font-size:0.75rem;">
+        <div style="color:var(--gov-gold); font-weight:700; margin-bottom:0.35rem;">AUTHORIZED ACCESS DIRECTORY:</div>
+        <div>• <strong>root</strong> / <code>root2026</code> (SUPREME ROOT OVERRIDE)</div>
+        <div>• <strong>oversight1</strong> / <code>overlord9</code> (Community Owner)</div>
+        <div>• <strong>gov1</strong> / <code>lead2026</code> (Governor)</div>
+        <div>• <strong>cjustice1</strong> / <code>bench2026</code> (Chief Justice)</div>
+      </div>
+
+      <div id="loginErr" style="display:none; color:#f87171; font-size:0.85rem; text-align:center; margin-top:1rem; font-weight:700;">
+        ❌ ACCESS DENIED: Invalid Executive Credentials.
       </div>
     </div>
 
@@ -147,16 +160,33 @@
         <button type="button" class="btn btn-danger" onclick="logoutLeadership()">Lock Console</button>
       </div>
 
+      <!-- ROOT DIRECT IMPERSONATION / WORKSTATION JUMP -->
+      <div id="rootImpersonatePanel" class="card-panel" style="border-left-color:var(--gov-purple); display:none;">
+        <h3 style="color:#d8b4fe; font-size:1.15rem; margin-bottom:0.35rem;">⚡ ROOT WORKSTATION OVERRIDE JUMP</h3>
+        <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">
+          Directly launch and control any agency workstation with full bypass privileges without logging out.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+          <button type="button" class="btn btn-purple" onclick="jumpToWorkstation('police1')">🚓 Launch Melview State Police</button>
+          <button type="button" class="btn btn-purple" onclick="jumpToWorkstation('sheriff1')">⭐ Launch County Sheriff Office</button>
+          <button type="button" class="btn btn-purple" onclick="jumpToWorkstation('judge1')">⚖️ Launch Supreme Court</button>
+          <button type="button" class="btn btn-purple" onclick="jumpToWorkstation('law3')">🏛️ Launch Executive / Senate</button>
+          <button type="button" class="btn btn-purple" onclick="jumpToWorkstation('doj1')">📜 Launch Department of Justice</button>
+          <button type="button" class="btn btn-purple" onclick="jumpToWorkstation('transport1')">🚚 Launch Department of Transportation</button>
+          <button type="button" class="btn btn-purple" onclick="jumpToWorkstation('records1')">📂 Launch Master Personnel Archive</button>
+        </div>
+      </div>
+
       <!-- CREDENTIAL & ACCESS MANAGEMENT -->
       <div class="card-panel">
-        <h3 style="color:var(--gov-gold); font-size:1.15rem; margin-bottom:0.5rem;">🔐 Intranet Credential & User Management</h3>
+        <h3 style="color:var(--gov-gold); font-size:1.15rem; margin-bottom:0.5rem;">🔐 Master Credential & User Management</h3>
         <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem;">
-          Add secondary user accounts (e.g. <code>judge2</code>, <code>police2</code>), assign designated agency workstations, or change passwords.
+          Change any user password, provision new departmental accounts (e.g., <code>judge2</code>, <code>police2</code>), or revoke access immediately.
         </p>
 
         <!-- ADD USER FORM -->
         <form id="addUserForm" style="margin-bottom:2rem; background:#060a0f; padding:1.25rem; border:1px solid var(--gov-border); border-radius:4px;">
-          <h4 style="font-size:0.85rem; color:#f8fafc; margin-bottom:0.75rem; text-transform:uppercase;">Add New Intranet User</h4>
+          <h4 style="font-size:0.85rem; color:#f8fafc; margin-bottom:0.75rem; text-transform:uppercase;">Provision New Intranet Account</h4>
           <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr auto; align-items:flex-end;">
             <div class="form-group">
               <label>Username</label>
@@ -179,12 +209,12 @@
                 <option value="Master Private Personnel Archive|dept_records">Master Personnel Archive</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-gold" style="height:38px;">Provision User</button>
+            <button type="submit" class="btn btn-gold" style="height:38px;">Provision Account</button>
           </div>
         </form>
 
         <!-- ACTIVE CREDENTIALS TABLE -->
-        <h4 style="font-size:0.85rem; color:#f8fafc; margin-bottom:0.5rem; text-transform:uppercase;">Active Credential Directory</h4>
+        <h4 style="font-size:0.85rem; color:#f8fafc; margin-bottom:0.5rem; text-transform:uppercase;">Active User & Credential Database</h4>
         <div class="table-container">
           <table class="gov-table">
             <thead>
@@ -193,21 +223,12 @@
                 <th>Current Password</th>
                 <th>Assigned Agency Workstation</th>
                 <th>Role Key</th>
-                <th>Password Update</th>
-                <th>Action</th>
+                <th>Direct Password Change</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="credentialTableBody"></tbody>
           </table>
-        </div>
-      </div>
-
-      <!-- SYSTEM OVERRIDE CONTROLS -->
-      <div class="card-panel" style="border-left-color:var(--gov-blue);">
-        <h3 style="color:var(--gov-blue); font-size:1.15rem; margin-bottom:0.5rem;">⚡ Emergency System Overrides</h3>
-        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-          <button type="button" class="btn btn-secondary" onclick="exportFullSystemBackup()">💾 Export Full JSON Backup</button>
-          <button type="button" class="btn btn-danger" onclick="resetDefaultCredentials()">🔄 Reset Default Credentials</button>
         </div>
       </div>
 
@@ -223,7 +244,7 @@
 
   <footer class="gov-footer">
     <div style="max-width:1400px; margin:0 auto; text-align:center;">
-      STATE OF MELVIEW EXECUTIVE OVERSIGHT & LEADERSHIP GATEWAY
+      STATE OF MELVIEW EXECUTIVE OVERSIGHT & ROOT OVERRIDE GATEWAY
     </div>
   </footer>
 
@@ -242,12 +263,17 @@
     }
 
     const LEADERSHIP_ACCOUNTS = {
-      "oversight1": { pass: "overlord9", role: "State Oversight (Community Owner)" },
+      "root": { pass: "root2026", role: "SUPREME ROOT DEVELOPER (MASTER OVERRIDE)" },
+      "oversight1": { pass: "overlord9", role: "State Executive Oversight (Community Owner)" },
       "gov1": { pass: "lead2026", role: "Governor of Melview" },
       "cjustice1": { pass: "bench2026", role: "Chief Justice of the Supreme Court" }
     };
 
     const DEFAULT_CREDENTIALS = [
+      { user: "root", pass: "root2026", dept: "Supreme Root Override", roleKey: "root" },
+      { user: "oversight1", pass: "overlord9", dept: "State Executive Oversight", roleKey: "government" },
+      { user: "gov1", pass: "lead2026", dept: "Executive / Senate", roleKey: "government" },
+      { user: "cjustice1", pass: "bench2026", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
       { user: "judge1", pass: "admin5", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
       { user: "law3", pass: "admin2", dept: "Executive / Senate", roleKey: "government" },
       { user: "police1", pass: "admin3", dept: "Melview State Police", roleKey: "dept_msp" },
@@ -272,11 +298,11 @@
       renderLogs();
     }
 
-    // LOGIN
+    // LOGIN DISPATCH
     document.getElementById('leadershipLoginForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const u = document.getElementById('lUser').value.trim().toLowerCase();
-      const p = document.getElementById('lPass').value.trim();
+      const u = (document.getElementById('lUser').value || '').trim().toLowerCase();
+      const p = (document.getElementById('lPass').value || '').trim();
       const err = document.getElementById('loginErr');
 
       if (LEADERSHIP_ACCOUNTS[u] && LEADERSHIP_ACCOUNTS[u].pass === p) {
@@ -286,7 +312,11 @@
         document.getElementById('adminPanel').style.display = 'block';
         document.getElementById('adminRoleDisplay').textContent = `${LEADERSHIP_ACCOUNTS[u].role} • ACTIVE`;
         document.getElementById('adminTitleDisplay').textContent = `Master Executive Administration`;
-        document.getElementById('authPill').textContent = `AUTH: ${u.toUpperCase()}`;
+        document.getElementById('authPill').textContent = u === 'root' ? 'ROOT OVERRIDE' : `AUTH: ${u.toUpperCase()}`;
+        if (u === 'root') document.getElementById('authPill').className = 'badge badge-purple';
+
+        document.getElementById('rootImpersonatePanel').style.display = (u === 'root' || u === 'oversight1') ? 'block' : 'none';
+
         saveLeadershipState();
       } else {
         err.style.display = 'block';
@@ -300,9 +330,19 @@
       document.getElementById('lUser').value = '';
       document.getElementById('lPass').value = '';
       document.getElementById('authPill').textContent = 'LEADERSHIP TERMINAL';
+      document.getElementById('authPill').className = 'badge badge-gold';
     };
 
-    // ADD NEW USER (e.g. judge2, police2)
+    // JUMP TO WORKSTATION
+    window.jumpToWorkstation = function(targetUser) {
+      const target = INTRANET_USERS.find(u => u.user === targetUser);
+      if (target) {
+        sessionStorage.setItem('melview_active_override', JSON.stringify(target));
+        window.location.href = 'intranet.html';
+      }
+    };
+
+    // ADD USER
     document.getElementById('addUserForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const user = document.getElementById('newUsername').value.trim().toLowerCase();
@@ -311,14 +351,14 @@
       const dept = rawDeptRole[0];
       const roleKey = rawDeptRole[1];
 
-      if (INTRANET_USERS.find(u => u.user === user)) {
-        alert(`Error: User '${user}' already exists. Use the table below to update their password.`);
+      if (INTRANET_USERS.find(u => u.user.toLowerCase() === user)) {
+        alert(`Error: User '${user}' already exists.`);
         return;
       }
 
       INTRANET_USERS.push({ user, pass, dept, roleKey });
       const now = new Date().toISOString().substring(0, 16) + ' UTC';
-      GOV_LOGS.unshift(`${now} | USER PROVISIONED | [${ACTIVE_LEADER}] Created user '${user}' for ${dept}`);
+      GOV_LOGS.unshift(`${now} | USER PROVISIONED | [${ACTIVE_LEADER}] Created '${user}' for ${dept}`);
       saveLeadershipState();
 
       syncToGoogleSheet({
@@ -326,11 +366,11 @@
         appellant: user, category: "Credential Management", ref: dept, status: "PROVISIONED", officer: ACTIVE_LEADER, notes: `RoleKey: ${roleKey}`
       });
 
-      alert(`Account '${user}' provisioned with access to ${dept}.`);
+      alert(`Account '${user}' provisioned for ${dept}.`);
       document.getElementById('addUserForm').reset();
     });
 
-    // RENDER CREDENTIALS TABLE
+    // RENDER TABLE
     function renderCredentialsTable() {
       const tbody = document.getElementById('credentialTableBody');
       if (!tbody) return;
@@ -342,15 +382,17 @@
           <td><strong>${cred.user}</strong></td>
           <td><code style="background:#060a0f; padding:0.2rem 0.4rem; border-radius:3px; color:#38bdf8;">${cred.pass}</code></td>
           <td>${cred.dept}</td>
-          <td><span class="badge badge-navy">${cred.roleKey}</span></td>
+          <td><span class="badge ${cred.user === 'root' ? 'badge-purple' : 'badge-navy'}">${cred.roleKey}</span></td>
           <td>
             <div style="display:flex; gap:0.4rem;">
-              <input type="text" id="pwd_${idx}" class="gov-input" style="padding:0.3rem 0.5rem; font-size:0.8rem; width:120px;" placeholder="New password" />
+              <input type="text" id="pwd_${idx}" class="gov-input" style="padding:0.3rem 0.5rem; font-size:0.8rem; width:130px;" placeholder="New password" />
               <button type="button" class="btn btn-gold" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="updateUserPassword(${idx})">Save</button>
             </div>
           </td>
           <td>
-            <button type="button" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="deleteUserAccount(${idx})">Revoke</button>
+            ${cred.user !== 'root' ? `
+              <button type="button" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="deleteUserAccount(${idx})">Revoke</button>
+            ` : `<span style="font-size:0.75rem; color:#a855f7; font-weight:700;">PERMANENT ROOT</span>`}
           </td>
         `;
         tbody.appendChild(row);
@@ -361,13 +403,13 @@
     window.updateUserPassword = function(idx) {
       const newPwd = document.getElementById(`pwd_${idx}`).value.trim();
       if (!newPwd) {
-        alert("Please enter a valid new password.");
+        alert("Please enter a new password.");
         return;
       }
       const target = INTRANET_USERS[idx];
       target.pass = newPwd;
       const now = new Date().toISOString().substring(0, 16) + ' UTC';
-      GOV_LOGS.unshift(`${now} | PASSWORD CHANGED | [${ACTIVE_LEADER}] Updated password for '${target.user}'`);
+      GOV_LOGS.unshift(`${now} | PASSWORD CHANGED | [${ACTIVE_LEADER}] Changed password for '${target.user}'`);
       saveLeadershipState();
 
       syncToGoogleSheet({
@@ -375,13 +417,17 @@
         appellant: target.user, category: "Credential Management", ref: target.dept, status: "UPDATED", officer: ACTIVE_LEADER, notes: "Password updated via Leadership Terminal"
       });
 
-      alert(`Password for '${target.user}' successfully changed.`);
+      alert(`Password for '${target.user}' successfully changed to '${newPwd}'.`);
     };
 
     // DELETE ACCOUNT
     window.deleteUserAccount = function(idx) {
       const target = INTRANET_USERS[idx];
-      if (!confirm(`Are you sure you want to permanently revoke credentials for '${target.user}'?`)) return;
+      if (target.user === 'root') {
+        alert("Root account cannot be deleted.");
+        return;
+      }
+      if (!confirm(`Revoke credentials for '${target.user}'?`)) return;
 
       INTRANET_USERS.splice(idx, 1);
       const now = new Date().toISOString().substring(0, 16) + ' UTC';
@@ -390,32 +436,13 @@
       alert(`Account '${target.user}' revoked.`);
     };
 
-    window.resetDefaultCredentials = function() {
-      if (!confirm("Reset all user credentials back to factory system defaults? Custom users will be removed.")) return;
-      INTRANET_USERS = DEFAULT_CREDENTIALS;
-      saveLeadershipState();
-      alert("System credentials reset to defaults.");
-    };
-
-    window.exportFullSystemBackup = function() {
-      const backup = {
-        credentials: INTRANET_USERS,
-        personnel: JSON.parse(localStorage.getItem('melview_master_personnel')),
-        docket: JSON.parse(localStorage.getItem('melview_docket')),
-        registry: JSON.parse(localStorage.getItem('melview_registry')),
-        logs: GOV_LOGS
-      };
-      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `MELVIEW_SYSTEM_BACKUP_${new Date().toISOString().substring(0, 10)}.json`;
-      a.click();
-    };
-
     function renderLogs() {
       const viewer = document.getElementById('leadershipAuditLogs');
       if (viewer) viewer.innerHTML = GOV_LOGS.map(l => `<div class="audit-entry">${l}</div>`).join('');
     }
+
+    renderCredentialsTable();
+    renderLogs();
   </script>
 </body>
 </html>
