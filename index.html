@@ -175,9 +175,9 @@
     <div class="nav-inner">
       <button type="button" class="nav-tab-btn active" onclick="switchNav('dashboard')" id="nav-dashboard">Executive Dashboard</button>
       <button type="button" class="nav-tab-btn election-special-btn" onclick="switchNav('elections')" id="nav-elections">🗳️ General Election 2026</button>
+      <a href="penal.html" class="nav-tab-btn" style="background:#854d0e; color:#fef08a;">⚖️ Title 8 Master Penal Repository ↗</a>
       <a href="laws.html" class="nav-tab-btn" style="background:#1e3a5f; color:#93c5fd;">📜 Constitution & Slip Laws ↗</a>
       <button type="button" class="nav-tab-btn" onclick="switchNav('court-orders')" id="nav-court-orders">⚖️ Judicial Orders & Warrants</button>
-      <button type="button" class="nav-tab-btn" onclick="switchNav('penal-code')" id="nav-penal-code">Title 8 Penal Code</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('public-docket')" id="nav-public-docket">Supreme Court Docket</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('bail-schedule')" id="nav-bail-schedule">⚖️ Bail Risk Matrix</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('legislative-tracker')" id="nav-legislative-tracker">📜 Legislative Tracker</button>
@@ -313,52 +313,7 @@
       </div>
     </section>
 
-    <!-- 4. TITLE 8 PENAL CODE -->
-    <section id="pane-penal-code" class="tab-pane">
-      <div class="gov-card">
-        <div class="gov-card-header">
-          <h2 class="gov-card-title">Title 8: State Penal Code Master Schedule</h2>
-          <span class="badge badge-navy">MAX CUSTODY: 30 MINS</span>
-        </div>
-        <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr; margin-bottom: 1rem;">
-          <div class="form-group">
-            <label>Search Schedule</label>
-            <input type="text" id="penalSearch" class="gov-input" placeholder="Search offense, fine, code..." oninput="filterPenalTable()" />
-          </div>
-          <div class="form-group">
-            <label>Classification Filter</label>
-            <select id="penalClassFilter" class="gov-select" onchange="filterPenalTable()">
-              <option value="ALL">All Classifications</option>
-              <option value="Capital Felony">Capital Felony</option>
-              <option value="Class A Felony">Class A Felony</option>
-              <option value="Class B Felony">Class B Felony</option>
-              <option value="Misdemeanor">Misdemeanor</option>
-              <option value="Infraction">Infraction</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Division Filter</label>
-            <select id="penalDivisionFilter" class="gov-select" onchange="filterPenalTable()">
-              <option value="ALL">All Divisions (1 through 6)</option>
-              <option value="1">Div 1: Persons</option>
-              <option value="2">Div 2: Property</option>
-              <option value="3">Div 3: Traffic</option>
-              <option value="4">Div 4: Public Order</option>
-              <option value="5">Div 5: Weapons</option>
-              <option value="6">Div 6: Government Crimes</option>
-            </select>
-          </div>
-        </div>
-        <div class="table-container">
-          <table class="gov-table">
-            <thead><tr><th>Statutory Code</th><th>Offense Name</th><th>Classification</th><th>Standard Fine</th><th>Custody Threshold</th><th>Sanctions</th></tr></thead>
-            <tbody id="penalTableBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. SUPREME COURT DOCKET -->
+    <!-- 4. SUPREME COURT DOCKET -->
     <section id="pane-public-docket" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -373,7 +328,7 @@
       </div>
     </section>
 
-    <!-- 6. BAIL RISK MATRIX -->
+    <!-- 5. BAIL RISK MATRIX -->
     <section id="pane-bail-schedule" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -395,7 +350,7 @@
       </div>
     </section>
 
-    <!-- 7. LEGISLATIVE TRACKER -->
+    <!-- 6. LEGISLATIVE TRACKER -->
     <section id="pane-legislative-tracker" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -410,7 +365,7 @@
       </div>
     </section>
 
-    <!-- 8. EXECUTIVE ORDERS -->
+    <!-- 7. EXECUTIVE ORDERS -->
     <section id="pane-exec-orders" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -425,7 +380,7 @@
       </div>
     </section>
 
-    <!-- 9. FOIA PORTAL -->
+    <!-- 8. FOIA PORTAL -->
     <section id="pane-foia-portal" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -461,7 +416,7 @@
       </div>
     </section>
 
-    <!-- 10. PUBLIC REGISTRY -->
+    <!-- 9. PUBLIC REGISTRY -->
     <section id="pane-public-registry" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -476,7 +431,7 @@
       </div>
     </section>
 
-    <!-- 11. CUSTODY CALCULATOR -->
+    <!-- 10. CUSTODY CALCULATOR -->
     <section id="pane-custody-calc" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -502,7 +457,7 @@
       </div>
     </section>
 
-    <!-- 12. BAR EXAM -->
+    <!-- 11. BAR EXAM -->
     <section id="pane-bar-exam" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -556,12 +511,12 @@
       </div>
       <div style="padding: 6px 12px; background: #111c24; border-bottom: 1px solid #1e293b; display: flex; gap: 6px; overflow-x: auto; font-size: 0.75rem;">
         <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What is the max custody time under Title 8?')">⏱️ Custody Cap</button>
-        <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What is the penalty for § 8-208 Grand Theft Auto?')">🚗 Grand Theft Auto</button>
+        <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What is the penalty for § 8-208 Grand Theft Auto?')">🚗 GTA</button>
         <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.7rem;" onclick="setPrompt('What are the PIT maneuver restrictions under MCR-2026-01?')">🚓 PIT Rule</button>
       </div>
       <div id="aiMessages" style="flex: 1; padding: 12px; overflow-y: auto; font-size: 0.82rem; color: #e2e8f0; display: flex; flex-direction: column; gap: 8px;">
         <div style="background: #15222e; padding: 10px 12px; border-radius: 4px; border-left: 3px solid var(--gov-blue-primary);">
-          Greetings. I am the State of Melview Legal Assistant. Ask any question regarding the 60 codified penal offenses, bail risk matrix, or procedural court rules.
+          Greetings. I am the State of Melview Legal Assistant. Ask any question regarding the codified penal offenses, bail matrix, or procedural court rules.
         </div>
       </div>
       <div style="padding: 8px 12px; background: #080c10; border-top: 1px solid #1e293b; display: flex; gap: 6px;">
@@ -572,48 +527,6 @@
   </div>
 
   <script>
-    function toggleAIChat() {
-      const win = document.getElementById('aiChatWindow');
-      win.style.display = win.style.display === 'none' ? 'flex' : 'none';
-    }
-
-    function setPrompt(text) {
-      document.getElementById('aiInput').value = text;
-      sendLocalAIMessage();
-    }
-
-    function sendLocalAIMessage() {
-      const input = document.getElementById('aiInput');
-      const q = input.value.trim().toLowerCase();
-      if (!q) return;
-
-      const container = document.getElementById('aiMessages');
-      container.innerHTML += `<div style="background: var(--gov-blue-primary); color: #fff; padding: 8px 12px; border-radius: 4px; align-self: flex-end; max-width: 85%;">${input.value}</div>`;
-      input.value = '';
-      container.scrollTop = container.scrollHeight;
-
-      let reply = "I am searching the official State of Melview Repository. Please specify a Title 8 penal code (§ 8-101 through § 8-610), bail tier, or MCR-2026-01 procedural rule.";
-
-      if (q.includes("custody") || q.includes("cap") || q.includes("limit") || q.includes("time") || q.includes("30")) {
-        reply = "<strong>Statutory Custody Cap (Title 8 § 103):</strong> All custodial sentencing across all combined charges is strictly capped at a maximum of <strong>30 minutes</strong> per arrest event.";
-      } else if (q.includes("pit") || q.includes("pursuit") || q.includes("speed")) {
-        reply = "<strong>Pursuit Protocol (MCR-2026-01 § 401):</strong> PIT maneuvers are strictly restricted to speeds <strong>under 35 MPH</strong> unless deadly physical force has been formally authorized.";
-      } else if (q.includes("foia") || q.includes("72") || q.includes("open records")) {
-        reply = "<strong>Article XV Open Records:</strong> State agencies must fulfill or formally articulate exemptions for public records requests within <strong>72 hours</strong>.";
-      } else if (q.includes("gta") || q.includes("auto") || q.includes("8-208")) {
-        reply = "<strong>§ 8-208 Grand Theft Auto (GTA):</strong> Class B Felony. Fine: $1,000. Custody: 10 - 15 Mins. Sanctions: Vehicle recovery and 4 driver license points.";
-      } else if (q.includes("murder") || q.includes("8-109")) {
-        reply = "<strong>§ 8-109 First-Degree Premeditated Murder:</strong> Capital Felony. Fine: $5,000. Custody: 30 Mins (Maximum Statutory Cap). Sanctions: Permanent civic disqualification.";
-      } else if (q.includes("election") || q.includes("vote") || q.includes("ballot") || q.includes("candidate")) {
-        reply = "<strong>Electoral Process (Article X & SB 100):</strong> Voting is conducted via the official Electronic Ballot Vault. Candidates are certified live by the IEC and all electors must be verified 14 days prior to ballot open.";
-      }
-
-      setTimeout(() => {
-        container.innerHTML += `<div style="background: #15222e; padding: 10px 12px; border-radius: 4px; border-left: 3px solid var(--gov-green);">${reply}</div>`;
-        container.scrollTop = container.scrollHeight;
-      }, 250);
-    }
-
     function downloadDoc(filename, content) {
       const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body style="font-family:serif; line-height:1.6; padding:2rem;"><h2>STATE OF MELVIEW OFFICIAL RECORD</h2><hr/><pre style="font-family:inherit; white-space:pre-wrap;">${content}</pre></body></html>`;
       const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
@@ -795,7 +708,6 @@
       }
     }
 
-    // LIVE ELECTION TALLY RE-CALCULATOR
     function updateElectionTally() {
       ELECTION_BALLOTS = JSON.parse(localStorage.getItem('melview_election_ballots')) || [];
       const candidates = JSON.parse(localStorage.getItem('melview_election_candidates')) || { governor: [], senate: [] };
@@ -826,7 +738,6 @@
       }
     }
 
-    // AUTO-SYNC ACROSS BROWSER TABS WHEN IEC UPDATES CANDIDATES
     window.addEventListener('storage', function(e) {
       if (e.key === 'melview_election_candidates' || e.key === 'melview_election_ballots') {
         loadDynamicBallotOptions();
@@ -850,31 +761,6 @@
       { code: "§ 8-405", name: "Fleeing / Eluding (Vehicular Pursuit)", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Mandatory vehicle impound" },
       { code: "§ 8-608", name: "Electoral Fraud / Alt Exploitation", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Voiding of election; permanent ban" }
     ];
-
-    function renderPenalTable(items = PENAL_DATABASE) {
-      const tbody = document.getElementById('penalTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      items.forEach(item => {
-        let badgeClass = item.class === 'Capital Felony' ? 'badge-felony' : (item.class.includes('Felony') ? 'badge-misdemeanor' : 'badge-infraction');
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${item.code}</strong></td><td>${item.name}</td><td><span class="badge ${badgeClass}">${item.class}</span></td><td>$${item.fine.toLocaleString()}</td><td>${item.custody}</td><td style="color:var(--gov-gray-dark); font-size:0.8rem;">${item.sanction}</td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    window.filterPenalTable = function() {
-      const q = (document.getElementById('penalSearch')?.value || '').toLowerCase();
-      const c = document.getElementById('penalClassFilter')?.value || 'ALL';
-      const d = document.getElementById('penalDivisionFilter')?.value || 'ALL';
-      const filtered = PENAL_DATABASE.filter(item => {
-        const matchesQ = item.code.toLowerCase().includes(q) || item.name.toLowerCase().includes(q);
-        const matchesC = (c === 'ALL' || item.class === c);
-        const matchesD = (d === 'ALL' || item.div === d);
-        return matchesQ && matchesC && matchesD;
-      });
-      renderPenalTable(filtered);
-    };
 
     function initCalculator() {
       const select = document.getElementById('calcOffenseSelect');
@@ -990,6 +876,48 @@
       }
     }
 
+    function toggleAIChat() {
+      const win = document.getElementById('aiChatWindow');
+      win.style.display = win.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    function setPrompt(text) {
+      document.getElementById('aiInput').value = text;
+      sendLocalAIMessage();
+    }
+
+    function sendLocalAIMessage() {
+      const input = document.getElementById('aiInput');
+      const q = input.value.trim().toLowerCase();
+      if (!q) return;
+
+      const container = document.getElementById('aiMessages');
+      container.innerHTML += `<div style="background: var(--gov-blue-primary); color: #fff; padding: 8px 12px; border-radius: 4px; align-self: flex-end; max-width: 85%;">${input.value}</div>`;
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      let reply = "I am searching the official State of Melview Repository. Please specify a Title 8 penal code (§ 8-101 through § 8-610), bail tier, or MCR-2026-01 procedural rule.";
+
+      if (q.includes("custody") || q.includes("cap") || q.includes("limit") || q.includes("time") || q.includes("30")) {
+        reply = "<strong>Statutory Custody Cap (Title 8 § 103):</strong> All custodial sentencing across all combined charges is strictly capped at a maximum of <strong>30 minutes</strong> per arrest event.";
+      } else if (q.includes("pit") || q.includes("pursuit") || q.includes("speed")) {
+        reply = "<strong>Pursuit Protocol (MCR-2026-01 § 401):</strong> PIT maneuvers are strictly restricted to speeds <strong>under 35 MPH</strong> unless deadly physical force has been formally authorized.";
+      } else if (q.includes("foia") || q.includes("72") || q.includes("open records")) {
+        reply = "<strong>Article XV Open Records:</strong> State agencies must fulfill or formally articulate exemptions for public records requests within <strong>72 hours</strong>.";
+      } else if (q.includes("gta") || q.includes("auto") || q.includes("8-208")) {
+        reply = "<strong>§ 8-208 Grand Theft Auto (GTA):</strong> Class B Felony. Fine: $1,000. Custody: 10 - 15 Mins. Sanctions: Vehicle recovery and 4 driver license points.";
+      } else if (q.includes("murder") || q.includes("8-109")) {
+        reply = "<strong>§ 8-109 First-Degree Premeditated Murder:</strong> Capital Felony. Fine: $5,000. Custody: 30 Mins (Maximum Statutory Cap). Sanctions: Permanent civic disqualification.";
+      } else if (q.includes("election") || q.includes("vote") || q.includes("ballot") || q.includes("candidate")) {
+        reply = "<strong>Electoral Process (Article X & SB 100):</strong> Voting is conducted via the official Electronic Ballot Vault. Candidates are certified live by the IEC and all electors must be verified 14 days prior to ballot open.";
+      }
+
+      setTimeout(() => {
+        container.innerHTML += `<div style="background: #15222e; padding: 10px 12px; border-radius: 4px; border-left: 3px solid var(--gov-green);">${reply}</div>`;
+        container.scrollTop = container.scrollHeight;
+      }, 250);
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
       attachFormListeners();
       renderCourtOrders();
@@ -998,7 +926,6 @@
       renderExecOrdersTable();
       renderFOIATable();
       renderRegistryTable(PUBLIC_REGISTRY);
-      renderPenalTable(PENAL_DATABASE);
       initCalculator();
       loadDynamicBallotOptions();
       updateElectionTally();
