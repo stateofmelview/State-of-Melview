@@ -88,6 +88,7 @@
     .badge-navy { background: #1e3a8a; color: #93c5fd; }
     .badge-purple { background: #581c87; color: #f3e8ff; border: 1px solid #a855f7; }
     .badge-gold { background: #713f12; color: #fef08a; }
+    .badge-pending { background: #78350f; color: #fde68a; }
     .audit-terminal-viewer { background: #020617; color: #94a3b8; font-family: var(--font-mono); font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 180px; overflow-y: auto; }
     .audit-entry { margin-bottom: 0.35rem; border-bottom: 1px dotted #1e293b; padding-bottom: 0.35rem; }
     
@@ -204,7 +205,7 @@
     </div>
   </footer>
 
-  <!-- ZERO-API DEPARTMENTAL LEGAL QUERY ASSISTANT -->
+  <!-- ZERO-API CO-PILOT ASSISTANT -->
   <div id="aiChatWidget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: var(--font-sans);">
     <button id="aiToggleBtn" onclick="toggleAIChat()" style="background: #0f172a; color: #38bdf8; border: 2px solid #38bdf8; border-radius: 50px; padding: 12px 20px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 8px;">
       ⚡ Department AI Co-Pilot
@@ -233,58 +234,107 @@
   </div>
 
   <script>
-    // FORMAL COMPILER FOR .DOC & GOOGLE DOCS
+    // FORMAL LEGAL BROADSIDE COMPILER & DOCUMENT ENGINE
     function formatOfficialLegalDoc(headerTitle, instrumentType, id, authority, mainBody, signatureBlock) {
-      return `========================================================================================
-                       ${headerTitle.toUpperCase()}
-                       STATE OF MELVIEW • OFFICIAL RECORD
-========================================================================================
+      const dateStr = new Date().toISOString().substring(0, 10);
+      const authHash = "0x" + Array.from(id + dateStr).map(c => c.charCodeAt(0).toString(16)).join('').padEnd(24, 'f').substring(0, 24).toUpperCase();
 
-DOCUMENT IDENTIFIER: ${id}
-INSTRUMENT CATEGORY: ${instrumentType.toUpperCase()}
-GOVERNING AUTHORITY: ${authority}
-DATE OF PROMULGATION: ${new Date().toISOString().substring(0, 10)}
-JURISDICTION: STATE OF MELVIEW (TITLE 8 & ORGANIC LAW)
-
-----------------------------------------------------------------------------------------
-I. PREAMBLE & STATEMENT OF JURISDICTION:
-Be it known to all public officers, magistrates, and citizens of the State of Melview,
-that this instrument is formally executed pursuant to constitutional provisions vested
-in the issuing authority.
-
-----------------------------------------------------------------------------------------
-II. FORMAL MATTERS, FINDINGS & CODIFIED PROVISIONS:
-${mainBody}
-
-----------------------------------------------------------------------------------------
-III. MANDATORY COMPLIANCE & LEGAL EFFECT:
-Pursuant to Article II, Section 7 of the Constitution of Melview, this instrument carries
-binding force of law. Willful obstruction constitutes a Class A Felony under Title 8.
-
-----------------------------------------------------------------------------------------
-IV. ATTESTATION, SEAL & EXECUTION:
-Executed under the Official Seal of the State of Melview.
-
-${signatureBlock}
-
-[SEAL OF THE STATE OF MELVIEW]
-========================================================================================`;
+      return `<!DOCTYPE html>
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset='utf-8'>
+  <title>${headerTitle} - ${id}</title>
+  <style>
+    @page { size: letter; margin: 1.0in; mso-paper-source: 0; }
+    body { font-family: 'Times New Roman', Times, 'Georgia', serif; font-size: 11pt; line-height: 1.4; color: #0b1319; background: #ffffff; padding: 20px; }
+    .legal-outer-border { border: 3px double #15222e; padding: 24px; margin: 0 auto; max-width: 800px; }
+    .legal-inner-frame { border: 1px solid #c09853; padding: 20px; }
+    .doc-header { text-align: center; border-bottom: 2px solid #15222e; padding-bottom: 12px; margin-bottom: 16px; }
+    .doc-header h1 { font-size: 15pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 4px 0; color: #15222e; }
+    .doc-header h2 { font-size: 11pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 4px 0; color: #854d0e; }
+    .doc-header .motto { font-size: 9pt; font-style: italic; color: #565c65; }
+    .meta-table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-bottom: 16px; border-bottom: 1px solid #dfe1e2; padding-bottom: 8px; }
+    .meta-table td { padding: 4px 0; vertical-align: top; }
+    .meta-label { font-weight: bold; color: #15222e; width: 25%; text-transform: uppercase; font-size: 8.5pt; }
+    .meta-val { color: #1b1b1b; font-family: 'Courier New', Courier, monospace; font-weight: 600; }
+    .legal-body { font-size: 10.5pt; text-align: justify; line-height: 1.5; margin-bottom: 20px; white-space: pre-wrap; }
+    .statutory-warning-box { border: 1.5px solid #d54339; background-color: #fdf8e2; padding: 10px 14px; font-size: 9pt; margin-bottom: 20px; border-left: 6px solid #d54339; }
+    .sig-grid { width: 100%; border-collapse: collapse; margin-top: 25px; page-break-inside: avoid; }
+    .sig-grid td { width: 50%; vertical-align: top; padding: 0 10px; }
+    .sig-line { border-top: 1.5px solid #15222e; padding-top: 4px; margin-top: 35px; font-size: 9.5pt; font-weight: bold; text-transform: uppercase; }
+    .seal-box { border: 2px dashed #c09853; padding: 10px; text-align: center; font-size: 8pt; color: #854d0e; margin-top: 15px; background: #fafaf9; }
+  </style>
+</head>
+<body>
+<div class='legal-outer-border'>
+  <div class='legal-inner-frame'>
+    <div class='doc-header'>
+      <div style='font-size:10pt; font-weight:bold; letter-spacing:1px; color:#1a4480; margin-bottom:2px;'>IN THE SUPREME GOVERNMENTAL JURISDICTION OF THE</div>
+      <h1>STATE OF MELVIEW</h1>
+      <h2>${headerTitle.toUpperCase()}</h2>
+      <div class='motto'>“Salus Populi Suprema Lex Esto • Justice and Prosperity • Organic Law Est. 2026”</div>
+    </div>
+    <table class='meta-table'>
+      <tr>
+        <td class='meta-label'>Official ID:</td><td class='meta-val'>${id}</td>
+        <td class='meta-label'>Promulgation Date:</td><td class='meta-val'>${dateStr}</td>
+      </tr>
+      <tr>
+        <td class='meta-label'>Instrument Type:</td><td class='meta-val'>${instrumentType.toUpperCase()}</td>
+        <td class='meta-label'>Classification:</td><td class='meta-val' style='color:#b91c1c;'>OFFICIAL STATE RECORD</td>
+      </tr>
+      <tr>
+        <td class='meta-label'>Governing Authority:</td><td class='meta-val' colspan='3'>${authority}</td>
+      </tr>
+    </table>
+    <div class='legal-body'>${mainBody}</div>
+    <div class='statutory-warning-box'>
+      <strong>Mandatory Statutory Attestation & Compliance Notice (Title 8 § 602 / § 609):</strong>
+      This legal instrument is certified under official seal. Willful defiance or obstruction constitutes a Class A Felony. Custodial measures strictly adhere to Title 8 § 103 (30-Minute Maximum Statutory Cap).
+    </div>
+    <table class='sig-grid'>
+      <tr>
+        <td>
+          <div class='seal-box'>
+            <strong>[ OFFICIAL STATE SEAL ]</strong><br>
+            STATE OF MELVIEW • RECORDED IN THE PERMANENT ROSTER<br>
+            VERIFICATION HASH: <span style='font-family:monospace;'>${authHash}</span>
+          </div>
+        </td>
+        <td>
+          <div class='sig-line'>${signatureBlock.replace(/\\n/g, '<br>')}</div>
+          <div style='font-size:8.5pt; color:#565c65; font-style:italic;'>Attested & Countersigned under Sovereign Seal</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>`;
     }
 
-    function createGoogleDocInstance(title, documentBody) {
-      const templateUri = `https://docs.google.com/document/create?title=${encodeURIComponent(title)}&body=${encodeURIComponent(documentBody)}`;
-      window.open(templateUri, '_blank');
-    }
-
-    function downloadAsWord(filename, textContent) {
-      const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body style="font-family:'Times New Roman', Times, serif; line-height:1.6; padding:3rem; max-width:850px; margin:auto;"><pre style="font-family:inherit; white-space:pre-wrap; font-size:11pt;">${textContent}</pre></body></html>`;
-      const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+    // DIRECT WORD (.DOC) EXPORT
+    function downloadAsWord(filename, htmlDocument) {
+      const blob = new Blob(['\ufeff' + htmlDocument], { type: 'application/msword' });
       const downloadLink = document.createElement('a');
       downloadLink.href = URL.createObjectURL(blob);
       downloadLink.download = `${filename}.doc`;
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
+    }
+
+    // DIRECT GOOGLE DOC CREATION & CLIPBOARD SYNC
+    function createGoogleDocInstance(title, htmlDocument) {
+      const plainText = htmlDocument.replace(/<[^>]*>?/gm, '\n').replace(/\n\s*\n/g, '\n\n').trim();
+      
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(plainText).catch(() => {});
+      }
+
+      const templateUri = `https://docs.google.com/document/create?title=${encodeURIComponent(title)}&body=${encodeURIComponent(plainText)}`;
+      window.open(templateUri, '_blank');
+      alert(`Google Doc initialized for "${title}".\n\nThe full legal text has also been copied to your clipboard so you can paste (Ctrl+V) directly if prompted!`);
     }
 
     let CURRENT_ROLE = null;
@@ -324,7 +374,7 @@ ${signatureBlock}
     ];
 
     let LEGISLATIVE_BILLS = JSON.parse(localStorage.getItem('melview_draft_bills')) || [
-      { id: "SB-2026-D1", title: "Public Infrastructure & Transit Security Act", sponsor: "Sen. Vance", type: "Statutory Bill", status: "Enacted Slip Law", summary: "Appropriating state funds for automated camera monitoring along Route 1." }
+      { id: "SB-2026-D1", title: "Public Infrastructure & Transit Security Act", sponsor: "Sen. Vance", type: "Statutory Bill", status: "Enacted Slip Law", summary: "Appropriating state funds for automated camera monitoring along Route 1.", fullText: "TITLE I. SHORT TITLE\nThis Act shall be cited as the 'Public Infrastructure & Transit Security Act'.\n\nTITLE II. STATUTORY SECTIONS\n§ 101. Camera Surveillance Authorization on Route 1 Corridor." }
     ];
 
     let JUDICIAL_ORDERS = JSON.parse(localStorage.getItem('melview_court_orders')) || [
@@ -523,7 +573,7 @@ ${signatureBlock}
           </form>
           <div class="table-container">
             <table class="gov-table">
-              <thead><tr><th>NDA ID</th><th>Signatory</th><th>Agency</th><th>Scope</th><th>Date</th><th>Exports</th><th>Manage</th></tr></thead>
+              <thead><tr><th>NDA ID</th><th>Signatory</th><th>Agency</th><th>Scope</th><th>Date</th><th>Professional Exports</th><th>Manage</th></tr></thead>
               <tbody>
                 ${NDA_REGISTRY.map((nda, idx) => `
                   <tr>
@@ -758,7 +808,8 @@ de-certification, and statutory custody.`;
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:0.5rem;">
               <h3 style="color:#4ade80; font-size:1.15rem;">🗳️ Master Ballot Vault & Anti-Alt Voter Audit Ledger</h3>
               <div style="display:flex; gap:0.5rem;">
-                <button type="button" class="btn btn-gold" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="exportAuditLedger()">💾 Export Audit (.doc)</button>
+                <button type="button" class="btn btn-gold" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="exportAuditLedger()">💾 Word (.doc)</button>
+                <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="exportAuditLedgerGoogleDoc()">📄 Google Doc</button>
                 <button type="button" class="btn btn-danger" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="purgeBallotVault()">⚠️ Purge All Ballots</button>
               </div>
             </div>
@@ -799,7 +850,10 @@ de-certification, and statutory custody.`;
                 <label>Proclamation Directives & Anti-Alt Verification Mandate</label>
                 <textarea id="iecProcDirectives" class="gov-input" placeholder="Pursuant to SB 100 § 301, all electors must verify character identity with the Independent Electoral Commission..." required></textarea>
               </div>
-              <button type="submit" class="btn btn-success">Promulgate Official Proclamation</button>
+              <div style="display:flex; gap:0.5rem;">
+                <button type="submit" class="btn btn-success">Promulgate & Download Word (.doc)</button>
+                <button type="button" class="btn btn-gold" onclick="submitProclamationGoogleDoc()">Promulgate to Google Doc</button>
+              </div>
             </form>
           </div>
 
@@ -809,7 +863,10 @@ de-certification, and statutory custody.`;
               <div class="form-grid" style="grid-template-columns: 2fr 2fr auto; align-items:flex-end;">
                 <div class="form-group"><label>Certified Winner Full Name</label><input type="text" id="winName" class="gov-input" placeholder="e.g. Arthur Vance" required /></div>
                 <div class="form-group"><label>Constitutional Office Won</label><input type="text" id="winOffice" class="gov-input" placeholder="e.g. Governor of Melview" required /></div>
-                <button type="submit" class="btn btn-gold" style="height:38px;">Generate Return (.doc)</button>
+                <div style="display:flex; gap:0.35rem;">
+                  <button type="submit" class="btn btn-gold" style="height:38px;">Generate Word (.doc)</button>
+                  <button type="button" class="btn btn-secondary" style="height:38px;" onclick="submitCertGoogleDoc()">Google Doc</button>
+                </div>
               </div>
             </form>
           </div>
@@ -894,7 +951,10 @@ de-certification, and statutory custody.`;
                 <label>Prosecutorial Bail & Remand Request</label>
                 <input type="text" id="indBail" class="gov-input" placeholder="Requesting remand to custody / $15,000 cash bail under Title 8..." required />
               </div>
-              <button type="submit" class="btn btn-success">File Formal Criminal Indictment</button>
+              <div style="display:flex; gap:0.5rem;">
+                <button type="submit" class="btn btn-success">File & Download Word (.doc)</button>
+                <button type="button" class="btn btn-gold" onclick="submitIndictmentGoogleDoc()">File to Google Doc</button>
+              </div>
             </form>
           </div>
         `;
@@ -915,7 +975,10 @@ de-certification, and statutory custody.`;
                 <div class="form-group"><label>Corridor Route</label><input type="text" id="dotPRoute" class="gov-input" value="Highway Corridor 1" required /></div>
                 <div class="form-group"><label>Permit Scope</label><select id="dotPScope" class="gov-select"><option value="Oversized Commercial Haul">Oversized Commercial Haul</option><option value="Hazmat Transit Authorization">Hazmat Transit Authorization</option><option value="Emergency Road Closure">Emergency Road Closure</option></select></div>
               </div>
-              <button type="submit" class="btn btn-gold">Issue Official Transit Permit</button>
+              <div style="display:flex; gap:0.5rem;">
+                <button type="submit" class="btn btn-gold">Issue Word (.doc)</button>
+                <button type="button" class="btn btn-secondary" onclick="submitDotPermitGoogleDoc()">Issue to Google Doc</button>
+              </div>
             </form>
           </div>
         `;
@@ -939,7 +1002,10 @@ de-certification, and statutory custody.`;
                 <label>Sworn Constitutional Oath Record</label>
                 <input type="text" id="oathText" class="gov-input" value="I do solemnly swear that I will support and defend the Constitution of the State of Melview..." required />
               </div>
-              <button type="submit" class="btn btn-gold">Archive Certified Constitutional Oath</button>
+              <div style="display:flex; gap:0.5rem;">
+                <button type="submit" class="btn btn-gold">Archive & Download Word (.doc)</button>
+                <button type="button" class="btn btn-secondary" onclick="submitOathGoogleDoc()">Archive to Google Doc</button>
+              </div>
             </form>
           </div>
         `;
@@ -1178,6 +1244,20 @@ de-certification, and statutory custody.`;
         });
       }
 
+      window.submitIndictmentGoogleDoc = function() {
+        const id = document.getElementById('indId').value.trim();
+        const def = document.getElementById('indDef').value.trim();
+        const pros = document.getElementById('indPros').value.trim();
+        const counts = document.getElementById('indCounts').value.trim();
+        const bail = document.getElementById('indBail').value.trim();
+
+        const body = `STATE OF MELVIEW vs. ${def.toUpperCase()}\n\nCHARGING COUNTS:\n${counts}\n\nBAIL / REMAND RECOMMENDATION:\n${bail}`;
+        const sig = `PROSECUTING ATTORNEY: _________________________ (${pros})\nFOREPERSON OF GRAND JURY: _________________________ (True Bill Presentment)`;
+        const fullDoc = formatOfficialLegalDoc("GRAND JURY BILL OF INDICTMENT", "Criminal Charging Instrument", id, "Article IX & Title 8", body, sig);
+
+        createGoogleDocInstance(`${id} Indictment - ${def}`, fullDoc);
+      };
+
       const dotForm = document.getElementById('dotPermitForm');
       if (dotForm) {
         dotForm.addEventListener('submit', function(e) {
@@ -1196,6 +1276,19 @@ de-certification, and statutory custody.`;
         });
       }
 
+      window.submitDotPermitGoogleDoc = function() {
+        const pId = document.getElementById('dotPId').value.trim();
+        const carrier = document.getElementById('dotPCarrier').value.trim();
+        const route = document.getElementById('dotPRoute').value.trim();
+        const scope = document.getElementById('dotPScope').value;
+
+        const body = `COMMERCIAL CARRIER: ${carrier}\nTRANSIT CORRIDOR:   ${route}\nPERMIT AUTHORIZATION: ${scope}\n\nSTIPULATIONS: Vehicle must maintain transit corridor speeds and adhere to bridge weight classifications.`;
+        const sig = `DIRECTOR OF TRANSPORTATION: _________________________ (DOT Bureau of Highway Safety)`;
+        const fullDoc = formatOfficialLegalDoc("TRANSIT CORRIDOR SPECIAL PERMIT", "Heavy Haul Authorization", pId, "Title 6 Transit Code", body, sig);
+
+        createGoogleDocInstance(`${pId} DOT Permit - ${carrier}`, fullDoc);
+      };
+
       const rOathForm = document.getElementById('recordsOathForm');
       if (rOathForm) {
         rOathForm.addEventListener('submit', function(e) {
@@ -1213,6 +1306,19 @@ de-certification, and statutory custody.`;
           alert(`Constitutional Commission ${oId} archived and downloaded.`);
         });
       }
+
+      window.submitOathGoogleDoc = function() {
+        const oId = document.getElementById('oathId').value.trim();
+        const user = document.getElementById('oathUser').value.trim();
+        const office = document.getElementById('oathOffice').value.trim();
+        const text = document.getElementById('oathText').value.trim();
+
+        const body = `APPOINTEE: ${user}\nCONSTITUTIONAL OFFICE: ${office}\n\nSWORN OATH STATEMENT:\n"${text}"`;
+        const sig = `COMMISSIONING OFFICER: _________________________ (Civil Service Merit Board)`;
+        const fullDoc = formatOfficialLegalDoc("CONSTITUTIONAL OATH OF OFFICE & COMMISSION", "Civil Commission", oId, "Article XIII Civil Service", body, sig);
+
+        createGoogleDocInstance(`${oId} Oath - ${user}`, fullDoc);
+      };
 
       const procForm = document.getElementById('iecProclamationForm');
       if (procForm) {
@@ -1234,6 +1340,19 @@ de-certification, and statutory custody.`;
         });
       }
 
+      window.submitProclamationGoogleDoc = function() {
+        const pId = document.getElementById('iecProcId').value.trim();
+        const title = document.getElementById('iecProcTitle').value.trim();
+        const cutoff = document.getElementById('iecProcCutoff').value.trim();
+        const dir = document.getElementById('iecProcDirectives').value.trim();
+
+        const body = `ELECTION TITLE: ${title}\nCUTOFF MANDATE: ${cutoff}\n\nDIRECTIVES:\n${dir}`;
+        const sig = `CHIEF ELECTORAL COMMISSIONER: _________________________ (Lee, IEC Commission)`;
+        const fullDoc = formatOfficialLegalDoc("WRIT OF ELECTION PROCLAMATION", "Official Proclamation", pId, "Article X & SB 100", body, sig);
+
+        createGoogleDocInstance(`${pId} Election Proclamation`, fullDoc);
+      };
+
       const certForm = document.getElementById('certElectionForm');
       if (certForm) {
         certForm.addEventListener('submit', function(e) {
@@ -1250,6 +1369,18 @@ de-certification, and statutory custody.`;
           alert(`Official Certificate of Election generated for ${winName}.`);
         });
       }
+
+      window.submitCertGoogleDoc = function() {
+        const winName = document.getElementById('winName').value.trim();
+        const winOffice = document.getElementById('winOffice').value.trim();
+        const certId = `CERT-ELEC-2026-${Math.floor(100+Math.random()*900)}`;
+
+        const body = `BE IT KNOWN TO ALL CITIZENS OF THE STATE OF MELVIEW:\n\nPursuant to the official canvass of the ballots cast in the 2026 General Election under Article X of the Constitution, the Independent Electoral Commission hereby certifies that:\n\n                              ${winName.toUpperCase()}\n\nhaving received the requisite constitutional majority of verified votes, is duly and legally elected to the high office of:\n\n                              ${winOffice.toUpperCase()}\n\nEmpowered to execute all duties, honors, and constitutional mandates appertaining thereto upon taking the sacred Oath of Office prescribed under Article XIII.`;
+        const sig = `CHIEF ELECTORAL COMMISSIONER: _________________________ (Lee, IEC Commission)\nATTESTATION CLERK:             _________________________ (Deputy Commissioner, IEC)`;
+        const fullDoc = formatOfficialLegalDoc("CERTIFICATE OF ELECTION & CERTIFIED RETURN", "Constitutional Certification", certId, "Article X & SB 100", body, sig);
+
+        createGoogleDocInstance(`${certId} Election Certificate - ${winName}`, fullDoc);
+      };
 
       const rosterForm = document.getElementById('addRosterForm');
       if (rosterForm) {
@@ -1339,6 +1470,17 @@ de-certification, and statutory custody.`;
       const sig = `CHIEF ELECTORAL COMMISSIONER: _________________________ (Lee, IEC)\nAUDIT VERIFICATION OFFICER:   _________________________ (Kim, IEC Audit)`;
       const doc = formatOfficialLegalDoc("ELECTORAL AUDIT & CANVASS LEDGER", "Audit Record", "AUD-2026-ELEC", "SB 100 § 301", body, sig);
       downloadAsWord("IEC_Electoral_Audit_Ledger", doc);
+    };
+
+    window.exportAuditLedgerGoogleDoc = function() {
+      const total = ELECTION_BALLOTS.length;
+      let body = `CANVASS AUDIT LEDGER • STATE OF MELVIEW ELECTIONS\nTotal Certified Ballots: ${total}\n\n`;
+      ELECTION_BALLOTS.forEach((b, i) => {
+        body += `[${i+1}] Elector: ${b.voter} | Governor: ${b.gov} | Senate: ${b.senate} | Cast: ${b.timestamp}\n`;
+      });
+      const sig = `CHIEF ELECTORAL COMMISSIONER: _________________________ (Lee, IEC)\nAUDIT VERIFICATION OFFICER:   _________________________ (Kim, IEC Audit)`;
+      const doc = formatOfficialLegalDoc("ELECTORAL AUDIT & CANVASS LEDGER", "Audit Record", "AUD-2026-ELEC", "SB 100 § 301", body, sig);
+      createGoogleDocInstance("IEC Electoral Canvass Audit Ledger", doc);
     };
 
     // LOCAL ZERO-API ASSISTANT
