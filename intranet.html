@@ -142,11 +142,6 @@
     .theme-records .workstation-topbar { background: #020617; border-bottom: 3px solid #60a5fa; color: #93c5fd; }
     .theme-records .card-panel { border-left-color: #60a5fa; background: #0c1424; }
 
-    .doc-preview-modal {
-      background: #020617; border: 1px solid #475569; border-radius: 4px; padding: 1.25rem;
-      font-family: var(--font-mono); font-size: 0.8rem; color: #cbd5e1; margin-top: 1rem;
-      max-height: 250px; overflow-y: auto; white-space: pre-wrap;
-    }
     footer.gov-footer { background-color: var(--gov-navy-dark); color: #94a3b8; border-top: 4px solid var(--gov-navy); padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: auto; }
   </style>
 </head>
@@ -217,6 +212,24 @@
       } catch(e) {}
     }
 
+    // Google Docs Generator / Provisioning Link Handler
+    function createGoogleDocInstance(title, documentBody) {
+      const templateUri = `https://docs.google.com/document/create?title=${encodeURIComponent(title)}&body=${encodeURIComponent(documentBody)}`;
+      window.open(templateUri, '_blank');
+    }
+
+    // Standalone Word (.doc) Downloader
+    function downloadAsWord(filename, textContent) {
+      const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body style="font-family:serif; line-height:1.6; padding:2rem;"><h2>STATE OF MELVIEW OFFICIAL LEGAL INSTRUMENT</h2><hr/><pre style="font-family:inherit; white-space:pre-wrap;">${textContent}</pre></body></html>`;
+      const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = `${filename}.doc`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+
     let CURRENT_ROLE = null;
     let CURRENT_DEPT = "";
     let IS_ROOT_OVERRIDE = false;
@@ -237,11 +250,12 @@
     ];
 
     let LEGISLATIVE_BILLS = JSON.parse(localStorage.getItem('melview_draft_bills')) || [
-      { id: "SB-2026-D1", title: "Public Infrastructure & Transit Security Act", sponsor: "Sen. Vance", type: "Statutory Bill", status: "Referred to Committee", summary: "Appropriating state funds for automated camera monitoring along Route 1." }
+      { id: "SB-2026-D1", title: "Public Infrastructure & Transit Security Act", sponsor: "Sen. Vance", type: "Statutory Bill", status: "Referred to Committee", summary: "Appropriating state funds for automated camera monitoring along Route 1.", fullText: "TITLE I. SHORT TITLE\nThis Act shall be cited as the 'Public Infrastructure & Transit Security Act'.\n\nTITLE II. STATUTORY SECTIONS\n§ 101. Camera Surveillance Authorization on Route 1 Corridor." }
     ];
 
     let JUDICIAL_ORDERS = JSON.parse(localStorage.getItem('melview_court_orders')) || [
-      { id: "ORD-2026-904", target: "Marcus_Vance", type: "Search Warrant (Div 5 Contraband)", judge: "Chief Justice Sterling", grounds: "Probable cause sworn under MCR-2026-01 Title III.", status: "Active Judicial Order" }
+      { id: "WR-2026-904", target: "Marcus_Vance", type: "Search Warrant (Div 5 Contraband)", judge: "Chief Justice Sterling", grounds: "Probable cause sworn under MCR-2026-01 Title III regarding illegal weapons distribution.", command: "Commanding peace officers to search premises at North District Warehouse 4.", status: "Active Judicial Order", date: "2026-08-25" },
+      { id: "ORD-2026-102", target: "Alexander_Kane", type: "Appellate Judgment & Order", judge: "Associate Justice Vance", grounds: "Review of traffic stop validity under Article I Section 6.", command: "Reversing lower citation and remitting assessed fines.", status: "Active Judicial Order", date: "2026-08-26" }
     ];
 
     let EXEC_DIRECTIVES = JSON.parse(localStorage.getItem('melview_exec_directives')) || [
@@ -326,7 +340,7 @@
       if (CURRENT_ROLE) renderWorkstation(CURRENT_ROLE);
     }
 
-    // CHECK FOR OVERRIDE FROM LEADERSHIP
+    // OVERRIDE CHECK
     const activeOverride = sessionStorage.getItem('melview_active_override');
     if (activeOverride) {
       const parsed = JSON.parse(activeOverride);
@@ -341,7 +355,7 @@
       renderWorkstation(parsed.roleKey);
     }
 
-    // LOGIN
+    // LOGIN DISPATCH
     document.getElementById('intranetLoginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const u = (document.getElementById('intUser').value || '').trim().toLowerCase();
@@ -420,7 +434,7 @@
       attachWorkstationListeners(roleKey);
     }
 
-    // 1. TIMEZONE & BUFFER SCHEDULING MODULE
+    // TIMEZONE & BUFFER MATRIX
     function getTimeManagementModule() {
       const now = new Date();
       const utcStr = now.toUTCString().slice(17, 25);
@@ -433,21 +447,21 @@
             <h3 style="color:#38bdf8; font-size:1.1rem;">⏱️ Operational Clock & Hearing Buffer Scheduler</h3>
             <span class="badge badge-navy">STANDARDIZED TIME SYNC</span>
           </div>
-          <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom:1rem;">
+          <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom:0.5rem;">
             <div style="background:#060a0f; padding:0.75rem; border:1px solid #334155; border-radius:4px; text-align:center;">
-              <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">Coordinated Universal (UTC)</span>
+              <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">Universal UTC</span>
               <div style="font-family:var(--font-mono); font-size:1.2rem; color:#38bdf8; font-weight:700;">${utcStr}</div>
             </div>
             <div style="background:#060a0f; padding:0.75rem; border:1px solid #334155; border-radius:4px; text-align:center;">
-              <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">Eastern Time (US-EST)</span>
+              <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">Eastern (US-EST)</span>
               <div style="font-family:var(--font-mono); font-size:1.2rem; color:#f8fafc; font-weight:700;">${estStr}</div>
             </div>
             <div style="background:#060a0f; padding:0.75rem; border:1px solid #334155; border-radius:4px; text-align:center;">
-              <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">Pacific Time (US-PST)</span>
+              <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">Pacific (US-PST)</span>
               <div style="font-family:var(--font-mono); font-size:1.2rem; color:#f8fafc; font-weight:700;">${pstStr}</div>
             </div>
             <div style="background:#060a0f; padding:0.75rem; border:1px solid #334155; border-radius:4px; text-align:center;">
-              <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">Hearing Buffer Window</span>
+              <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">Hearing Pre-Trial Buffer</span>
               <div style="font-family:var(--font-mono); font-size:1.2rem; color:#4ade80; font-weight:700;">15 MIN BUFFER</div>
             </div>
           </div>
@@ -455,28 +469,33 @@
       `;
     }
 
-    // 2. DIGITAL NON-DISCLOSURE AGREEMENT (NDA) MODULE
+    // NDA SIGNING & GOOGLE DOCS PROVISIONING
     function getNDASigningModule() {
       return `
         <div class="card-panel" style="border-left-color:var(--gov-gold);">
-          <h3 style="color:var(--gov-gold); font-size:1.1rem; margin-bottom:0.5rem;">🔒 Official State Non-Disclosure Agreement (NDA) & Confidentiality Execution</h3>
-          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Execute binding non-disclosure agreements for counsel, contractors, or sensitive executive consultations.</p>
+          <h3 style="color:var(--gov-gold); font-size:1.1rem; margin-bottom:0.5rem;">🔒 Official State Non-Disclosure Agreement (NDA) Generator</h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Generate, sign, and export binding confidentiality agreements directly into Google Docs or Word.</p>
           <form id="signNdaForm" style="margin-bottom:1rem;">
             <div class="form-grid" style="grid-template-columns: 2fr 2fr 3fr auto; align-items:flex-end;">
-              <div class="form-group"><label>Signatory Party Full Name</label><input type="text" id="ndaParty" class="gov-input" required /></div>
+              <div class="form-group"><label>Signatory Full Name</label><input type="text" id="ndaParty" class="gov-input" required /></div>
               <div class="form-group"><label>Governing State Agency</label><input type="text" id="ndaDept" class="gov-input" value="${CURRENT_DEPT}" required /></div>
-              <div class="form-group"><label>Confidential Scope & Matter</label><input type="text" id="ndaScope" class="gov-input" placeholder="e.g. Cabinet Deliberations, Internal Discovery..." required /></div>
-              <button type="submit" class="btn btn-gold" style="height:38px;">Execute & Seal NDA</button>
+              <div class="form-group"><label>Confidential Scope</label><input type="text" id="ndaScope" class="gov-input" placeholder="e.g. Executive Cabinet, Discovery Evidence..." required /></div>
+              <button type="submit" class="btn btn-gold" style="height:38px;">Execute NDA</button>
             </div>
           </form>
           <div class="table-container">
             <table class="gov-table">
-              <thead><tr><th>NDA ID</th><th>Signatory</th><th>Agency</th><th>Scope</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+              <thead><tr><th>NDA ID</th><th>Signatory</th><th>Agency</th><th>Scope</th><th>Date</th><th>Export Actions</th><th>Manage</th></tr></thead>
               <tbody>
                 ${NDA_REGISTRY.map((nda, idx) => `
                   <tr>
                     <td><strong>${nda.id}</strong></td><td>${nda.signatory}</td><td>${nda.dept}</td><td>${nda.scope}</td><td>${nda.date}</td>
-                    <td><span class="badge badge-success">${nda.status}</span></td>
+                    <td>
+                      <div style="display:flex; gap:0.35rem;">
+                        <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${nda.id}_NDA_${nda.signatory}', 'STATE OF MELVIEW NON-DISCLOSURE AGREEMENT\\n\\nDocument ID: ${nda.id}\\nSignatory: ${nda.signatory}\\nAgency: ${nda.dept}\\nScope: ${nda.scope}\\nExecution Date: ${nda.date}\\n\\nPursuant to Article XV, the undersigned agrees to maintain strict confidentiality of all official records and proceedings.')">💾 Word (.doc)</button>
+                        <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${nda.id} NDA - ${nda.signatory}', 'STATE OF MELVIEW NON-DISCLOSURE AGREEMENT\\n\\nDocument ID: ${nda.id}\\nSignatory: ${nda.signatory}\\nAgency: ${nda.dept}\\nScope: ${nda.scope}\\nExecution Date: ${nda.date}\\n\\nPursuant to Article XV, the undersigned agrees to maintain strict confidentiality.')">📄 Google Doc</button>
+                      </div>
+                    </td>
                     <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeNDA(${idx})">Revoke</button></td>
                   </tr>
                 `).join('')}
@@ -487,48 +506,54 @@
       `;
     }
 
-    // 3. ROLE SPECIFIC MODULES (SENATE BILLS, COURT DECISIONS, GUBERNATORIAL ORDERS)
+    // SPECIFIC MODULES (SENATE, EXECUTIVE, JUDICIARY)
     function getWorkstationSpecificModules(roleKey) {
       if (roleKey === 'government' || roleKey === 'root') {
         return `
-          <!-- SENATE STATUTORY BILL DRAFTING ENGINE -->
+          <!-- SENATE BILL GENERATOR WITH GOOGLE DOCS & WORD EXPORT -->
           <div class="card-panel" style="border-left-color:#38bdf8;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-              <h3 style="color:#38bdf8; font-size:1.15rem;">📜 General Assembly Statutory Bill Drafting & Enactment Engine</h3>
+              <h3 style="color:#38bdf8; font-size:1.15rem;">📜 General Assembly Statutory Bill Drafter & Slip Law Generator</h3>
               <span class="badge badge-navy">TITLE 4 PROCEDURE</span>
             </div>
-            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Draft and construct standardized statutory legislation for floor presentation, committee review, and enactment.</p>
+            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Construct structured legislation and automatically export to Google Docs or download as Word.</p>
             <form id="draftBillForm" style="margin-bottom:1.5rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr 1fr 1fr;">
-                <div class="form-group"><label>Bill Designation ID</label><input type="text" id="bId" class="gov-input" placeholder="e.g. SB 105" required /></div>
-                <div class="form-group"><label>Formal Title of Proposed Act</label><input type="text" id="bTitle" class="gov-input" placeholder="e.g. Homeland Port Security Act of 2026" required /></div>
-                <div class="form-group"><label>Primary Sponsor (Senator)</label><input type="text" id="bSponsor" class="gov-input" required /></div>
-                <div class="form-group"><label>Legislative Classification</label><select id="bType" class="gov-select"><option value="Statutory Slip Law">Statutory Slip Law</option><option value="Organic Constitutional Amendment">Constitutional Amendment (Art. XVI)</option><option value="Appropriation Act">Appropriation Act</option></select></div>
+                <div class="form-group"><label>Bill Identifier</label><input type="text" id="bId" class="gov-input" placeholder="e.g. SB 105" required /></div>
+                <div class="form-group"><label>Proposed Act Title</label><input type="text" id="bTitle" class="gov-input" placeholder="e.g. State Infrastructure Act of 2026" required /></div>
+                <div class="form-group"><label>Primary Sponsor</label><input type="text" id="bSponsor" class="gov-input" required /></div>
+                <div class="form-group"><label>Bill Type</label><select id="bType" class="gov-select"><option value="Statutory Slip Law">Statutory Slip Law</option><option value="Constitutional Amendment">Constitutional Amendment</option><option value="Appropriations Act">Appropriations Act</option></select></div>
               </div>
               <div class="form-group" style="margin-bottom:0.75rem;">
-                <label>Title I: Short Title & Enacting Clauses</label>
-                <input type="text" id="bEnacting" class="gov-input" placeholder="Be it enacted by the Senate of the State of Melview in General Assembly convened..." required />
+                <label>Title I: Enacting Clauses & Short Title</label>
+                <input type="text" id="bEnacting" class="gov-input" value="Be it enacted by the Senate of the State of Melview in General Assembly convened..." required />
               </div>
               <div class="form-group" style="margin-bottom:0.75rem;">
-                <label>Title II: Codified Statutory Sections & Subsections</label>
-                <textarea id="bSections" class="gov-input" placeholder="§ 101. Definitions...&#10;§ 102. Operational Requirements...&#10;§ 103. Penal Sanctions..." required></textarea>
+                <label>Title II: Codified Sections & Sanctions</label>
+                <textarea id="bSections" class="gov-input" placeholder="§ 101. Operational Mandate...&#10;§ 102. Penal Violations & Enforcing Agency..." required></textarea>
               </div>
               <div class="form-group" style="margin-bottom:1rem;">
-                <label>Legislative Findings & Justification Summary</label>
-                <input type="text" id="bSummary" class="gov-input" placeholder="Articulate public necessity and legal basis under Article IV..." required />
+                <label>Legislative Findings & Summary</label>
+                <input type="text" id="bSummary" class="gov-input" placeholder="Justification and policy statement..." required />
               </div>
-              <button type="submit" class="btn btn-success">Construct & File Statutory Bill</button>
+              <button type="submit" class="btn btn-success">File & Construct Legislation</button>
             </form>
 
             <div class="table-container">
               <table class="gov-table">
-                <thead><tr><th>Bill ID</th><th>Title of Proposed Act</th><th>Sponsor</th><th>Classification</th><th>Status</th><th>Actions</th></tr></thead>
+                <thead><tr><th>Bill ID</th><th>Act Title</th><th>Sponsor</th><th>Classification</th><th>Exports</th><th>Manage</th></tr></thead>
                 <tbody>
                   ${LEGISLATIVE_BILLS.map((b, idx) => `
                     <tr>
                       <td><strong>${b.id}</strong></td><td><strong>${b.title}</strong><br><span style="font-size:0.75rem; color:#94a3b8;">${b.summary}</span></td>
-                      <td>${b.sponsor}</td><td><span class="badge badge-navy">${b.type}</span></td><td><span class="badge badge-pending">${b.status}</span></td>
-                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBill(${idx})">Withdraw Bill</button></td>
+                      <td>${b.sponsor}</td><td><span class="badge badge-navy">${b.type}</span></td>
+                      <td>
+                        <div style="display:flex; gap:0.35rem;">
+                          <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${b.id}_SlipLaw', 'STATE OF MELVIEW GENERAL ASSEMBLY\\n\\n${b.id}: ${b.title}\\nSponsor: ${b.sponsor}\\nType: ${b.type}\\n\\n${b.fullText || b.summary}')">💾 Word (.doc)</button>
+                          <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${b.id} - ${b.title}', 'STATE OF MELVIEW GENERAL ASSEMBLY\\n\\n${b.id}: ${b.title}\\nSponsor: ${b.sponsor}\\nType: ${b.type}\\n\\n${b.fullText || b.summary}')">📄 Google Doc</button>
+                        </div>
+                      </td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBill(${idx})">Withdraw</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -536,38 +561,35 @@
             </div>
           </div>
 
-          <!-- EXECUTIVE ORDER & GUBERNATORIAL DIRECTIVE ENGINE -->
+          <!-- EXECUTIVE ORDER PROMULGATION WITH EXPORTS -->
           <div class="card-panel" style="border-left-color:var(--gov-gold);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-              <h3 style="color:var(--gov-gold); font-size:1.15rem;">🏛️ Executive Order & Gubernatorial Decree Promulgation Engine</h3>
-              <span class="badge badge-gold">ARTICLE V EXECUTIVE POWER</span>
+              <h3 style="color:var(--gov-gold); font-size:1.15rem;">🏛️ Executive Order & Gubernatorial Decree Generator</h3>
+              <span class="badge badge-gold">ARTICLE V POWER</span>
             </div>
-            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Formulate, seal, and promulgate official Executive Orders, administrative mandates, and agency reorganization decrees.</p>
             <form id="promulgateEoForm" style="margin-bottom:1.5rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr 2fr;">
-                <div class="form-group"><label>Order Designation</label><input type="text" id="eoNum" class="gov-input" placeholder="e.g. EO-2026-005" required /></div>
-                <div class="form-group"><label>Order Title / Subject</label><input type="text" id="eoTitle" class="gov-input" placeholder="e.g. Mobilization of Emergency Interagency Taskforce" required /></div>
-                <div class="form-group"><label>Target State Agencies</label><input type="text" id="eoTarget" class="gov-input" placeholder="e.g. Melview State Police, DOT, DOJ" required /></div>
+                <div class="form-group"><label>Order ID</label><input type="text" id="eoNum" class="gov-input" placeholder="e.g. EO-2026-005" required /></div>
+                <div class="form-group"><label>Order Title</label><input type="text" id="eoTitle" class="gov-input" placeholder="e.g. Critical Transit Security Posture" required /></div>
+                <div class="form-group"><label>Target Agencies</label><input type="text" id="eoTarget" class="gov-input" placeholder="e.g. MSP, MCSO, DOT" required /></div>
               </div>
-              <div class="form-group" style="margin-bottom:0.75rem;">
-                <label>Constitutional Authority & Preamble</label>
-                <input type="text" id="eoAuth" class="gov-input" value="Pursuant to the executive power vested in the Governor under Article V of the Constitution..." required />
-              </div>
-              <div class="form-group" style="margin-bottom:1rem;">
-                <label>Operational Mandates & Binding Directives</label>
-                <textarea id="eoDirectives" class="gov-input" placeholder="1. The State Police shall establish security checkpoints along...&#10;2. The Department of Transportation shall allocate assets to..." required></textarea>
-              </div>
+              <div class="form-group" style="margin-bottom:0.75rem;"><label>Preamble</label><input type="text" id="eoAuth" class="gov-input" value="Pursuant to Article V of the Constitution of the State of Melview..." required /></div>
+              <div class="form-group" style="margin-bottom:1rem;"><label>Mandates</label><textarea id="eoDirectives" class="gov-input" placeholder="1. Directing agencies to enforce...&#10;2. Resources allocated to..." required></textarea></div>
               <button type="submit" class="btn btn-gold">Promulgate Executive Order</button>
             </form>
-
             <div class="table-container">
               <table class="gov-table">
-                <thead><tr><th>Order ID</th><th>Title & Subject</th><th>Target Agencies</th><th>Authority</th><th>Status</th><th>Actions</th></tr></thead>
+                <thead><tr><th>Order ID</th><th>Title</th><th>Target Agencies</th><th>Authority</th><th>Exports</th><th>Manage</th></tr></thead>
                 <tbody>
                   ${EXEC_DIRECTIVES.map((eo, idx) => `
                     <tr>
-                      <td><strong>${eo.id}</strong></td><td><strong>${eo.title}</strong><br><span style="font-size:0.75rem; color:#94a3b8;">${eo.directive}</span></td>
-                      <td>${eo.target}</td><td>${eo.auth}</td><td><span class="badge badge-success">${eo.status}</span></td>
+                      <td><strong>${eo.id}</strong></td><td><strong>${eo.title}</strong></td><td>${eo.target}</td><td>${eo.auth}</td>
+                      <td>
+                        <div style="display:flex; gap:0.35rem;">
+                          <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${eo.id}_ExecutiveOrder', 'EXECUTIVE CHAMBER • STATE OF MELVIEW\\n\\n${eo.id}: ${eo.title}\\nTarget Agencies: ${eo.target}\\nAuthority: ${eo.auth}\\n\\nDIRECTIVES:\\n${eo.directive}')">💾 Word (.doc)</button>
+                          <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${eo.id} - ${eo.title}', 'EXECUTIVE CHAMBER • STATE OF MELVIEW\\n\\n${eo.id}: ${eo.title}\\nTarget Agencies: ${eo.target}\\nAuthority: ${eo.auth}\\n\\nDIRECTIVES:\\n${eo.directive}')">📄 Google Doc</button>
+                        </div>
+                      </td>
                       <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeEO(${idx})">Rescind</button></td>
                     </tr>
                   `).join('')}
@@ -578,40 +600,40 @@
         `;
       } else if (roleKey === 'judiciary' || roleKey === 'dept_doj') {
         return `
-          <!-- JUDICIAL DECISION & WARRANT GENERATOR -->
+          <!-- JUDICIAL RULING & WARRANT ENGINE WITH DIRECT DOCS / WORD EXPORTS -->
           <div class="card-panel" style="border-left-color:#3b82f6;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-              <h3 style="color:#38bdf8; font-size:1.15rem;">⚖️ Supreme & District Court Judicial Ruling & Warrant Generator</h3>
+              <h3 style="color:#38bdf8; font-size:1.15rem;">⚖️ Supreme Court Judicial Ruling, Warrant & Order Generator</h3>
               <span class="badge badge-navy">MCR-2026-01 COMPLIANT</span>
             </div>
-            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Construct binding judicial orders, probable cause search/arrest warrants, evidentiary rulings, and formal appeals decrees.</p>
+            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Issue sealed court orders that synchronize to the public portal with instant Word & Google Docs exports.</p>
             <form id="courtOrderForm" style="margin-bottom:1.5rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr 1fr 1fr;">
-                <div class="form-group"><label>Order / Docket ID</label><input type="text" id="jId" class="gov-input" placeholder="e.g. WR-2026-9045" required /></div>
-                <div class="form-group"><label>Defendant / Subject / Property</label><input type="text" id="jTarget" class="gov-input" placeholder="e.g. John Doe / Vehicle Plate / Residence" required /></div>
-                <div class="form-group"><label>Judicial Instrument</label><select id="jType" class="gov-select"><option value="Search Warrant (Art. I § 6)">Search Warrant (Art. I § 6)</option><option value="Arrest Warrant (Div 1/5 Offense)">Arrest Warrant (Div 1/5 Offense)</option><option value="Appellate Judgment & Order">Appellate Judgment & Order</option><option value="Evidentiary Suppression Order">Evidentiary Suppression Order</option></select></div>
-                <div class="form-group"><label>Presiding Judicial Officer</label><input type="text" id="jJudge" class="gov-input" value="Chief Justice / Associate Justice" required /></div>
+                <div class="form-group"><label>Order / Docket ID</label><input type="text" id="jId" class="gov-input" placeholder="e.g. WR-2026-9046" required /></div>
+                <div class="form-group"><label>Target Subject / Defendant</label><input type="text" id="jTarget" class="gov-input" placeholder="e.g. John Doe / Vehicle Plate" required /></div>
+                <div class="form-group"><label>Order Instrument</label><select id="jType" class="gov-select"><option value="Search Warrant (Art. I § 6)">Search Warrant (Art. I § 6)</option><option value="Arrest Warrant (Div 1/5)">Arrest Warrant (Div 1/5)</option><option value="Appellate Judgment & Order">Appellate Judgment & Order</option><option value="Evidentiary Suppression Order">Evidentiary Suppression Order</option></select></div>
+                <div class="form-group"><label>Presiding Judge</label><input type="text" id="jJudge" class="gov-input" value="Chief Justice / Associate Justice" required /></div>
               </div>
-              <div class="form-group" style="margin-bottom:0.75rem;">
-                <label>Probable Cause Findings & Evidentiary Grounds</label>
-                <textarea id="jGrounds" class="gov-input" placeholder="Sworn affidavit establishes probable cause that the subject committed violations under Title 8 §..." required></textarea>
-              </div>
-              <div class="form-group" style="margin-bottom:1rem;">
-                <label>Specific Order, Seizure Terms & Judicial Command</label>
-                <input type="text" id="jCommand" class="gov-input" placeholder="Commanding all Peace Officers of the State of Melview to execute seizure / detention..." required />
-              </div>
+              <div class="form-group" style="margin-bottom:0.75rem;"><label>Sworn Probable Cause / Legal Findings</label><textarea id="jGrounds" class="gov-input" placeholder="Sworn affidavit establishes probable cause under Title 8 §..." required></textarea></div>
+              <div class="form-group" style="margin-bottom:1rem;"><label>Judicial Command & Execution Terms</label><input type="text" id="jCommand" class="gov-input" placeholder="Commanding peace officers of Melview to execute search/remand..." required /></div>
               <button type="submit" class="btn btn-success">Issue Sealed Judicial Order</button>
             </form>
 
             <div class="table-container">
               <table class="gov-table">
-                <thead><tr><th>Order ID</th><th>Defendant / Target</th><th>Instrument</th><th>Presiding Judge</th><th>Status</th><th>Actions</th></tr></thead>
+                <thead><tr><th>Order ID</th><th>Subject / Defendant</th><th>Instrument</th><th>Judge</th><th>Exports</th><th>Manage</th></tr></thead>
                 <tbody>
                   ${JUDICIAL_ORDERS.map((ord, idx) => `
                     <tr>
                       <td><strong>${ord.id}</strong></td><td><strong>${ord.target}</strong><br><span style="font-size:0.75rem; color:#94a3b8;">${ord.grounds}</span></td>
-                      <td><span class="badge badge-navy">${ord.type}</span></td><td>${ord.judge}</td><td><span class="badge badge-success">${ord.status}</span></td>
-                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeCourtOrder(${idx})">Vacate / Quash</button></td>
+                      <td><span class="badge badge-navy">${ord.type}</span></td><td>${ord.judge}</td>
+                      <td>
+                        <div style="display:flex; gap:0.35rem;">
+                          <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${ord.id}_JudicialOrder', 'SUPREME COURT OF THE STATE OF MELVIEW\\n\\nOFFICIAL JUDICIAL INSTRUMENT: ${ord.id}\\nInstrument Category: ${ord.type}\\nTarget / Defendant: ${ord.target}\\nPresiding Judge: ${ord.judge}\\n\\nFINDINGS & GROUNDS:\\n${ord.grounds}\\n\\nJUDICIAL COMMAND:\\n${ord.command || 'Commanding compliance by all parties.'}')">💾 Word (.doc)</button>
+                          <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${ord.id} - ${ord.type}', 'SUPREME COURT OF THE STATE OF MELVIEW\\n\\nOFFICIAL JUDICIAL INSTRUMENT: ${ord.id}\\nInstrument Category: ${ord.type}\\nTarget / Defendant: ${ord.target}\\nPresiding Judge: ${ord.judge}\\n\\nFINDINGS & GROUNDS:\\n${ord.grounds}\\n\\nJUDICIAL COMMAND:\\n${ord.command || 'Commanding compliance by all parties.'}')">📄 Google Doc</button>
+                        </div>
+                      </td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeCourtOrder(${idx})">Vacate</button></td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -712,7 +734,6 @@
 
     // ATTACH LISTENERS
     function attachWorkstationListeners(roleKey) {
-      // NDA Sign Form
       const ndaForm = document.getElementById('signNdaForm');
       if (ndaForm) {
         ndaForm.addEventListener('submit', function(e) {
@@ -724,13 +745,12 @@
           const date = new Date().toISOString().substring(0, 10);
 
           NDA_REGISTRY.unshift({ id: newId, signatory, dept, scope, status: "Executed & Verified", date });
-          GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | NDA EXECUTED | Sealed agreement ${newId} for ${signatory}`);
+          GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | NDA EXECUTED | Sealed ${newId} for ${signatory}`);
           saveIntranet();
-          alert(`Official NDA ${newId} executed and filed for ${signatory}.`);
+          alert(`Official NDA ${newId} executed.`);
         });
       }
 
-      // Draft Bill Form
       const billForm = document.getElementById('draftBillForm');
       if (billForm) {
         billForm.addEventListener('submit', function(e) {
@@ -739,16 +759,18 @@
           const title = document.getElementById('bTitle').value.trim();
           const sponsor = document.getElementById('bSponsor').value.trim();
           const type = document.getElementById('bType').value;
+          const enacting = document.getElementById('bEnacting').value.trim();
+          const sections = document.getElementById('bSections').value.trim();
           const summary = document.getElementById('bSummary').value.trim();
 
-          LEGISLATIVE_BILLS.unshift({ id, title, sponsor, type, status: "Filed with Clerk", summary });
+          const fullText = `${enacting}\n\n${sections}\n\nLEGISLATIVE SUMMARY:\n${summary}`;
+          LEGISLATIVE_BILLS.unshift({ id, title, sponsor, type, status: "Filed with Clerk", summary, fullText });
           GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | BILL FILED | ${id}: ${title} (by ${sponsor})`);
           saveIntranet();
-          alert(`Statutory Bill ${id} constructed and filed for General Assembly review.`);
+          alert(`Statutory Bill ${id} constructed and filed.`);
         });
       }
 
-      // Promulgate EO Form
       const eoForm = document.getElementById('promulgateEoForm');
       if (eoForm) {
         eoForm.addEventListener('submit', function(e) {
@@ -762,11 +784,10 @@
           EXEC_DIRECTIVES.unshift({ id, title, target, auth, status: "Enacted Decree", directive });
           GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | EO PROMULGATED | ${id}: ${title}`);
           saveIntranet();
-          alert(`Executive Order ${id} promulgated under executive seal.`);
+          alert(`Executive Order ${id} promulgated.`);
         });
       }
 
-      // Judicial Order Form
       const jForm = document.getElementById('courtOrderForm');
       if (jForm) {
         jForm.addEventListener('submit', function(e) {
@@ -776,15 +797,16 @@
           const type = document.getElementById('jType').value;
           const judge = document.getElementById('jJudge').value.trim();
           const grounds = document.getElementById('jGrounds').value.trim();
+          const command = document.getElementById('jCommand').value.trim();
+          const date = new Date().toISOString().substring(0, 10);
 
-          JUDICIAL_ORDERS.unshift({ id, target, type, judge, grounds, status: "Active Judicial Order" });
+          JUDICIAL_ORDERS.unshift({ id, target, type, judge, grounds, command, status: "Active Judicial Order", date });
           GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | COURT ORDER | Issued ${type} ${id} (Judge ${judge})`);
           saveIntranet();
-          alert(`Judicial Order ${id} sealed and issued.`);
+          alert(`Judicial Order ${id} issued.`);
         });
       }
 
-      // Common Roster Form
       const rosterForm = document.getElementById('addRosterForm');
       if (rosterForm) {
         rosterForm.addEventListener('submit', function(e) {
@@ -793,20 +815,11 @@
           const rank = document.getElementById('rRank').value.trim();
           if (!DEPT_ROSTERS[CURRENT_DEPT]) DEPT_ROSTERS[CURRENT_DEPT] = [];
           DEPT_ROSTERS[CURRENT_DEPT].push({ user, rank });
-
-          if (!PRIVATE_PERSONNEL.find(p => p.user.toLowerCase() === user.toLowerCase())) {
-            PRIVATE_PERSONNEL.push({
-              id: `EMP-2026-${Math.floor(100+Math.random()*900)}`, user, dept: CURRENT_DEPT, role: rank,
-              clearance: "Level 2 Department Staff", status: "Active"
-            });
-          }
-          GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | ROSTER | Added ${user} (${rank}) to ${CURRENT_DEPT}`);
           saveIntranet();
           alert(`Personnel ${user} added to roster.`);
         });
       }
 
-      // Shift Form
       const shiftForm = document.getElementById('addShiftForm');
       if (shiftForm) {
         shiftForm.addEventListener('submit', function(e) {
@@ -821,7 +834,6 @@
         });
       }
 
-      // IA Form
       const iaForm = document.getElementById('addIAForm');
       if (iaForm) {
         iaForm.addEventListener('submit', function(e) {
@@ -837,7 +849,7 @@
       }
     }
 
-    // EXPUNGE / CLEAR ACTIONS
+    // EXPUNGE ACTIONS
     window.removeNDA = function(idx) {
       NDA_REGISTRY.splice(idx, 1);
       saveIntranet();
