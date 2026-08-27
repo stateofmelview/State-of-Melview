@@ -102,7 +102,6 @@
     .audit-terminal-viewer { background: #020617; color: #94a3b8; font-family: var(--font-mono); font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 180px; overflow-y: auto; }
     .audit-entry { margin-bottom: 0.35rem; border-bottom: 1px dotted #1e293b; padding-bottom: 0.35rem; }
     
-    /* WORKSTATION DIVERGENT THEMES & EMBLEMS */
     .workstation-container { border-radius: 8px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); margin-bottom: 2rem; }
     .workstation-topbar { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
     .workstation-body { padding: 2rem; }
@@ -115,55 +114,46 @@
     }
     .dept-motto { font-style: italic; font-family: var(--font-serif); font-size: 0.85rem; opacity: 0.85; margin-top: 0.2rem; }
 
-    /* Judiciary */
     .theme-judiciary { background-color: #060a12; border: 2px solid #334155; }
     .theme-judiciary .workstation-topbar { background: linear-gradient(135deg, #090e17 0%, #1e293b 100%); border-bottom: 3px solid #d4af37; color: #f8fafc; }
     .theme-judiciary .dept-emblem-badge { background: radial-gradient(circle, #1e3a8a 0%, #090e17 100%); border-color: #d4af37; }
     .theme-judiciary .card-panel { border-left-color: #3b82f6; background: #0c1424; }
 
-    /* Executive */
     .theme-executive { background-color: #120c06; border: 2px solid #854d0e; }
     .theme-executive .workstation-topbar { background: linear-gradient(135deg, #1c140c 0%, #291e14 100%); border-bottom: 3px solid #eab308; color: #fef08a; }
     .theme-executive .dept-emblem-badge { background: radial-gradient(circle, #78350f 0%, #1c140c 100%); border-color: #eab308; }
     .theme-executive .card-panel { border-left-color: #ca8a04; background: #1c130b; }
 
-    /* State Police */
     .theme-msp { background-color: #040812; border: 2px solid #1e3a8a; }
     .theme-msp .workstation-topbar { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); border-bottom: 3px solid #38bdf8; color: #ffffff; }
     .theme-msp .dept-emblem-badge { background: radial-gradient(circle, #0284c7 0%, #0f172a 100%); border-color: #38bdf8; }
     .theme-msp .card-panel { border-left-color: #38bdf8; background: #091322; }
 
-    /* Sheriff */
     .theme-mcso { background-color: #120904; border: 2px solid #9a3412; }
     .theme-mcso .workstation-topbar { background: linear-gradient(135deg, #2a1106 0%, #451a03 100%); border-bottom: 3px solid #f97316; color: #ffedd5; }
     .theme-mcso .dept-emblem-badge { background: radial-gradient(circle, #c2410c 0%, #2a1106 100%); border-color: #f97316; }
     .theme-mcso .card-panel { border-left-color: #f97316; background: #1a0f08; }
 
-    /* IEC */
     .theme-iec { background-color: #041208; border: 2px solid #166534; }
     .theme-iec .workstation-topbar { background: linear-gradient(135deg, #052e16 0%, #14532d 100%); border-bottom: 3px solid #22c55e; color: #dcfce7; }
     .theme-iec .dept-emblem-badge { background: radial-gradient(circle, #16a34a 0%, #052e16 100%); border-color: #22c55e; }
     .theme-iec .card-panel { border-left-color: #22c55e; background: #081a0e; }
 
-    /* DOT */
     .theme-dot { background-color: #140e04; border: 2px solid #b45309; }
     .theme-dot .workstation-topbar { background: linear-gradient(135deg, #2e1a06 0%, #78350f 100%); border-bottom: 3px solid #f59e0b; color: #fef3c7; }
     .theme-dot .dept-emblem-badge { background: radial-gradient(circle, #d97706 0%, #2e1a06 100%); border-color: #f59e0b; }
     .theme-dot .card-panel { border-left-color: #f59e0b; background: #1c1409; }
 
-    /* DOJ */
     .theme-doj { background-color: #12040c; border: 2px solid #9d174d; }
     .theme-doj .workstation-topbar { background: linear-gradient(135deg, #2a0818 0%, #500724 100%); border-bottom: 3px solid #ec4899; color: #fce7f3; }
     .theme-doj .dept-emblem-badge { background: radial-gradient(circle, #be185d 0%, #2a0818 100%); border-color: #ec4899; }
     .theme-doj .card-panel { border-left-color: #ec4899; background: #1c0913; }
 
-    /* Records */
     .theme-records { background-color: #060b13; border: 2px solid #3b82f6; }
     .theme-records .workstation-topbar { background: linear-gradient(135deg, #020617 0%, #1e293b 100%); border-bottom: 3px solid #60a5fa; color: #93c5fd; }
     .theme-records .dept-emblem-badge { background: radial-gradient(circle, #2563eb 0%, #020617 100%); border-color: #60a5fa; }
     .theme-records .card-panel { border-left-color: #60a5fa; background: #0c1424; }
 
-    /* Root */
     .theme-root { background-color: #100517; border: 2px solid #a855f7; }
     .theme-root .workstation-topbar { background: linear-gradient(135deg, #1e0933 0%, #3b0764 100%); border-bottom: 3px solid #c084fc; color: #f3e8ff; }
     .theme-root .dept-emblem-badge { background: radial-gradient(circle, #9333ea 0%, #1e0933 100%); border-color: #c084fc; }
@@ -239,13 +229,52 @@
       } catch(e) {}
     }
 
+    // HIGH-PRECISION LEGAL FORMATTING ENGINE
+    function formatOfficialLegalDoc(headerTitle, instrumentType, id, authority, mainBody, signatureBlock) {
+      return `========================================================================================
+                       ${headerTitle.toUpperCase()}
+                       STATE OF MELVIEW • OFFICIAL RECORD
+========================================================================================
+
+DOCUMENT IDENTIFIER: ${id}
+INSTRUMENT CATEGORY: ${instrumentType.toUpperCase()}
+GOVERNING AUTHORITY: ${authority}
+DATE OF PROMULGATION: ${new Date().toISOString().substring(0, 10)}
+JURISDICTION: STATE OF MELVIEW (TITLE 8 & ORGANIC LAW)
+
+----------------------------------------------------------------------------------------
+I. PREAMBLE & STATEMENT OF JURISDICTION:
+Be it known to all public officers, magistrates, and citizens of the State of Melview,
+that this instrument is formally executed pursuant to the constitutional powers and
+statutory provisions vested in the issuing authority.
+
+----------------------------------------------------------------------------------------
+II. FORMAL MATTERS, FINDINGS & CODIFIED PROVISIONS:
+${mainBody}
+
+----------------------------------------------------------------------------------------
+III. MANDATORY COMPLIANCE & LEGAL EFFECT:
+Pursuant to Article II, Section 7 of the Constitution of Melview, this instrument carries
+binding force of law. Willful obstruction, defiance, or non-compliance constitutes a
+Class A Felony under Title 8, Section 8-602 (Official Misconduct & Deprivation of Law).
+
+----------------------------------------------------------------------------------------
+IV. ATTESTATION, SEAL & EXECUTION:
+Executed under the Official Seal of the State of Melview.
+
+${signatureBlock}
+
+[SEAL OF THE STATE OF MELVIEW]
+========================================================================================`;
+    }
+
     function createGoogleDocInstance(title, documentBody) {
       const templateUri = `https://docs.google.com/document/create?title=${encodeURIComponent(title)}&body=${encodeURIComponent(documentBody)}`;
       window.open(templateUri, '_blank');
     }
 
     function downloadAsWord(filename, textContent) {
-      const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body style="font-family:serif; line-height:1.6; padding:2rem;"><h2>STATE OF MELVIEW OFFICIAL INSTRUMENT</h2><hr/><pre style="font-family:inherit; white-space:pre-wrap;">${textContent}</pre></body></html>`;
+      const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body style="font-family:'Times New Roman', Times, serif; line-height:1.6; padding:3rem; max-width:850px; margin:auto;"><pre style="font-family:inherit; white-space:pre-wrap; font-size:11pt;">${textContent}</pre></body></html>`;
       const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
       const downloadLink = document.createElement('a');
       downloadLink.href = URL.createObjectURL(blob);
@@ -293,16 +322,20 @@
     ];
 
     let LEGISLATIVE_BILLS = JSON.parse(localStorage.getItem('melview_draft_bills')) || [
-      { id: "SB-2026-D1", title: "Public Infrastructure & Transit Security Act", sponsor: "Sen. Vance", type: "Statutory Bill", status: "Referred to Committee", summary: "Appropriating state funds for automated camera monitoring along Route 1.", fullText: "TITLE I. SHORT TITLE\nThis Act shall be cited as the 'Public Infrastructure & Transit Security Act'.\n\nTITLE II. STATUTORY SECTIONS\n§ 101. Camera Surveillance Authorization on Route 1 Corridor." }
+      { id: "SB-2026-D1", title: "Public Infrastructure & Transit Security Act", sponsor: "Sen. Vance", type: "Statutory Bill", status: "Enacted Slip Law", summary: "Appropriating state funds for automated camera monitoring along Route 1.", formattedDoc: "" }
     ];
 
     let JUDICIAL_ORDERS = JSON.parse(localStorage.getItem('melview_court_orders')) || [
-      { id: "WR-2026-904", target: "Marcus_Vance", type: "Search Warrant (Div 5 Contraband)", judge: "Chief Justice Sterling", grounds: "Probable cause sworn under MCR-2026-01 Title III regarding illegal weapons distribution.", command: "Commanding peace officers to search premises at North District Warehouse 4.", status: "Active Judicial Order", date: "2026-08-25" },
-      { id: "ORD-2026-102", target: "Alexander_Kane", type: "Appellate Judgment & Order", judge: "Associate Justice Vance", grounds: "Review of traffic stop validity under Article I Section 6.", command: "Reversing lower citation and remitting assessed fines.", status: "Active Judicial Order", date: "2026-08-26" }
+      { id: "WR-2026-904", target: "Marcus_Vance", type: "Search Warrant (Div 5 Contraband)", judge: "Chief Justice Sterling", grounds: "Probable cause sworn under MCR-2026-01 Title III regarding illegal weapons distribution.", command: "Commanding peace officers to search premises at North District Warehouse 4.", status: "Active Judicial Order", date: "2026-08-25", formattedDoc: "" },
+      { id: "ORD-2026-102", target: "Alexander_Kane", type: "Appellate Judgment & Order", judge: "Associate Justice Vance", grounds: "Review of traffic stop validity under Article I Section 6.", command: "Reversing lower citation and remitting assessed fines.", status: "Active Judicial Order", date: "2026-08-26", formattedDoc: "" }
     ];
 
     let EXEC_DIRECTIVES = JSON.parse(localStorage.getItem('melview_exec_directives')) || [
-      { id: "DIR-2026-01", title: "Statewide Critical Infrastructure Protective Posture", target: "State Police / Sheriff", auth: "Article V, § 4", status: "Enacted Decree", directive: "Increasing patrol frequency around Capitol building and transit junctions." }
+      { id: "DIR-2026-01", title: "Statewide Critical Infrastructure Protective Posture", target: "State Police / Sheriff", auth: "Article V, § 4", status: "Enacted Decree", directive: "Increasing patrol frequency around Capitol building and transit junctions.", formattedDoc: "" }
+    ];
+
+    let NDA_REGISTRY = JSON.parse(localStorage.getItem('melview_nda_registry')) || [
+      { id: "NDA-2026-001", signatory: "John_Miller_RP", dept: "Department of Justice", scope: "Executive Advisory & Trial Discovery", status: "Executed & Verified", date: "2026-08-25", formattedDoc: "" }
     ];
 
     let PUBLIC_REGISTRY = JSON.parse(localStorage.getItem('melview_registry')) || [
@@ -342,7 +375,7 @@
     ];
 
     let GOV_LOGS = JSON.parse(localStorage.getItem('melview_gov_logs')) || [
-      "2026-08-27 15:00 UTC | INTRANET SESSION | Specialized Agency Gateways Initialized."
+      "2026-08-27 15:00 UTC | INTRANET SESSION | Specialized High-Precision Drafting Suite Initialized."
     ];
 
     function saveIntranet() {
@@ -350,6 +383,7 @@
       localStorage.setItem('melview_draft_bills', JSON.stringify(LEGISLATIVE_BILLS));
       localStorage.setItem('melview_court_orders', JSON.stringify(JUDICIAL_ORDERS));
       localStorage.setItem('melview_exec_directives', JSON.stringify(EXEC_DIRECTIVES));
+      localStorage.setItem('melview_nda_registry', JSON.stringify(NDA_REGISTRY));
       localStorage.setItem('melview_registry', JSON.stringify(PUBLIC_REGISTRY));
       localStorage.setItem('melview_master_personnel', JSON.stringify(PRIVATE_PERSONNEL));
       localStorage.setItem('melview_dept_rosters', JSON.stringify(DEPT_ROSTERS));
@@ -450,6 +484,7 @@
         </div>
         <div class="workstation-body">
           ${getFOIADepartmentInboxModule()}
+          ${getNDASigningModule()}
           ${getWorkstationSpecificModules(roleKey)}
           ${getCommonAgencyRosterModule(roleKey)}
           <div style="margin-top:2rem;">
@@ -473,7 +508,7 @@
             <span class="badge badge-danger">STATUTORY DEADLINE ENFORCEMENT</span>
           </div>
           <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">
-            Public records requests filed by citizens directed to <strong>${CURRENT_DEPT}</strong>. Mandatory compliance within 72 hours.
+            Public records requests filed by citizens directed to <strong>${CURRENT_DEPT}</strong>. Mandatory compliance within 72 hours under Article XV.
           </p>
           <div class="table-container">
             <table class="gov-table">
@@ -512,19 +547,75 @@
       `;
     }
 
-    // 2. SPECIALIZED WORKSTATION MODULES & FULL TEMPLATES
+    // 2. UNIVERSAL NON-DISCLOSURE AGREEMENT (NDA) GENERATOR
+    function getNDASigningModule() {
+      return `
+        <div class="card-panel" style="border-left-color:var(--gov-gold);">
+          <h3 style="color:var(--gov-gold); font-size:1.1rem; margin-bottom:0.5rem;">🔒 Official State Non-Disclosure Agreement (NDA) & Confidentiality Execution</h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Generate and seal legally binding 6-Clause Non-Disclosure Agreements with automatic statutory indemnification blocks.</p>
+          <form id="signNdaForm" style="margin-bottom:1rem;">
+            <div class="form-grid" style="grid-template-columns: 2fr 2fr 3fr auto; align-items:flex-end;">
+              <div class="form-group"><label>Signatory Full Name</label><input type="text" id="ndaParty" class="gov-input" required /></div>
+              <div class="form-group"><label>Governing State Agency</label><input type="text" id="ndaDept" class="gov-input" value="${CURRENT_DEPT}" required /></div>
+              <div class="form-group"><label>Confidential Scope</label><input type="text" id="ndaScope" class="gov-input" placeholder="e.g. Executive Cabinet, Discovery Evidence..." required /></div>
+              <button type="submit" class="btn btn-gold" style="height:38px;">Execute & Seal NDA</button>
+            </div>
+          </form>
+          <div class="table-container">
+            <table class="gov-table">
+              <thead><tr><th>NDA ID</th><th>Signatory</th><th>Agency</th><th>Scope</th><th>Date</th><th>Professional Exports</th><th>Manage</th></tr></thead>
+              <tbody>
+                ${NDA_REGISTRY.map((nda, idx) => `
+                  <tr>
+                    <td><strong>${nda.id}</strong></td><td>${nda.signatory}</td><td>${nda.dept}</td><td>${nda.scope}</td><td>${nda.date}</td>
+                    <td>
+                      <div style="display:flex; gap:0.35rem;">
+                        <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${nda.id}_NDA_${nda.signatory}', ndaFormattedTemplate('${nda.id}', '${nda.signatory}', '${nda.dept}', '${nda.scope}', '${nda.date}'))">💾 Word (.doc)</button>
+                        <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${nda.id} NDA - ${nda.signatory}', ndaFormattedTemplate('${nda.id}', '${nda.signatory}', '${nda.dept}', '${nda.scope}', '${nda.date}'))">📄 Google Doc</button>
+                      </div>
+                    </td>
+                    <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeNDA(${idx})">Revoke</button></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function ndaFormattedTemplate(id, signatory, dept, scope, date) {
+      const body = `1. DEFINITION OF CONFIDENTIAL INFORMATION:
+All oral, written, or recorded communications, evidence files, case dockets, executive deliberations,
+or tactical operations pertaining to "${scope}" disclosed by ${dept}.
+
+2. NON-DISCLOSURE OBLIGATIONS:
+The Signatory (${signatory}) covenants and agrees to hold all Confidential Information in strict trust,
+refraining from disseminating, disclosing, publishing, or releasing such records to any unauthorized
+third party or media entity without prior written order from a Judge of the Supreme Court.
+
+3. STATUTORY INDEMNIFICATION & PENAL SANCTIONS:
+Any willful breach or unauthorized dissemination of confidential state materials constitutes a Class B
+Felony under Title 8, Section 8-609 (Leak of Confidential Records), punishable by civil damages, immediate
+de-certification, and statutory custody.`;
+
+      const sig = `SIGNATORY PARTY: _________________________ (${signatory})\nCOUNTERSIGNED:   _________________________ (Authorized Official, ${dept})\nDATE EXECUTED:   ${date}`;
+      return formatOfficialLegalDoc("NON-DISCLOSURE & CONFIDENTIALITY AGREEMENT", "Binding Executive Instrument", id, "Article XV & Title 8 § 609", body, sig);
+    }
+
+    // 3. SPECIALIZED BRANCH WORKSTATION MODULES & ENGINES
     function getWorkstationSpecificModules(roleKey) {
       
       // JUDICIARY WORKSTATION (NO POLICE PATROL GRIDS!)
       if (roleKey === 'judiciary') {
         return `
-          <!-- FULL APPELLATE OPINION & JUDGMENT TEMPLATE -->
+          <!-- SUPREME COURT OPINION & WRITTEN JUDGMENT ENGINE -->
           <div class="card-panel" style="border-left-color:#3b82f6;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <h3 style="color:#38bdf8; font-size:1.15rem;">⚖️ Supreme Court Written Opinion & Appellate Judgment Template</h3>
               <span class="badge badge-navy">ARTICLE IX ADJUDICATION</span>
             </div>
-            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Construct formal judicial opinions with Syllabus, Legal Analysis, and Binding Orders for instant export.</p>
+            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;">Construct formal judicial opinions with Syllabus, Constitutional Analysis, and Decretal Orders.</p>
             <form id="judicialOpinionForm" style="margin-bottom:1.5rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr 1fr;">
                 <div class="form-group"><label>Docket Appeal ID</label><input type="text" id="opDocket" class="gov-input" placeholder="e.g. AP-2026-1092" required /></div>
@@ -532,23 +623,23 @@
                 <div class="form-group"><label>Authoring Justice</label><input type="text" id="opAuthor" class="gov-input" value="Chief Justice / Associate Justice" required /></div>
               </div>
               <div class="form-group" style="margin-bottom:0.75rem;">
-                <label>I. Syllabus & Statement of the Case</label>
-                <textarea id="opSyllabus" class="gov-input" placeholder="Summary of procedural history, lower court conviction, and issues presented..." required></textarea>
+                <label>I. Syllabus & Statement of Procedural History</label>
+                <textarea id="opSyllabus" class="gov-input" placeholder="Summary of lower court trial, citation history, and questions certified on appeal..." required></textarea>
               </div>
               <div class="form-group" style="margin-bottom:0.75rem;">
                 <label>II. Constitutional & Statutory Analysis</label>
-                <textarea id="opAnalysis" class="gov-input" placeholder="Application of constitutional rights (Art. I § 6 Search & Seizure) and Title 8 standards..." required></textarea>
+                <textarea id="opAnalysis" class="gov-input" placeholder="Application of constitutional protections (Article I § 6 Search & Seizure) and Title 8 penal statutes..." required></textarea>
               </div>
               <div class="form-group" style="margin-bottom:1rem;">
-                <label>III. Holding, Ruling & Decretal Order</label>
-                <input type="text" id="opHolding" class="gov-input" placeholder="IT IS HEREBY ORDERED that the judgment of the lower court is AFFIRMED / REVERSED..." required />
+                <label>III. Decretal Judgment & Court Order</label>
+                <input type="text" id="opHolding" class="gov-input" placeholder="IT IS HEREBY ORDERED that the judgment of the trial court is REVERSED / AFFIRMED..." required />
               </div>
               <button type="submit" class="btn btn-success">Issue & Publish Official Court Opinion</button>
             </form>
 
             <div class="table-container">
               <table class="gov-table">
-                <thead><tr><th>Docket ID</th><th>Case Name</th><th>Author</th><th>Holding Summary</th><th>Exports</th><th>Manage</th></tr></thead>
+                <thead><tr><th>Docket ID</th><th>Case Name</th><th>Author</th><th>Holding Summary</th><th>Professional Exports</th><th>Manage</th></tr></thead>
                 <tbody>
                   ${JUDICIAL_ORDERS.map((ord, idx) => `
                     <tr>
@@ -558,8 +649,8 @@
                       <td style="font-size:0.8rem;">${ord.grounds}</td>
                       <td>
                         <div style="display:flex; gap:0.35rem;">
-                          <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${ord.id}_SupremeCourt_Opinion', 'SUPREME COURT OF THE STATE OF MELVIEW\\n\\nOPINION OF THE COURT\\nDocket ID: ${ord.id}\\nMatter: ${ord.target}\\nAuthoring Judicial Officer: ${ord.judge}\\nDate of Decision: ${ord.date || '2026-08-27'}\\n\\nSYLLABUS & ANALYSIS:\\n${ord.grounds}\\n\\nJUDGMENT & DECRETAL ORDER:\\n${ord.command || 'IT IS SO ORDERED.'}\\n\\n[SEAL OF THE SUPREME COURT OF MELVIEW]')">💾 Word (.doc)</button>
-                          <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${ord.id} Supreme Court Opinion', 'SUPREME COURT OF THE STATE OF MELVIEW\\n\\nOPINION OF THE COURT\\nDocket ID: ${ord.id}\\nMatter: ${ord.target}\\nAuthoring Judicial Officer: ${ord.judge}\\n\\nSYLLABUS & ANALYSIS:\\n${ord.grounds}\\n\\nJUDGMENT & DECRETAL ORDER:\\n${ord.command || 'IT IS SO ORDERED.'}')">📄 Google Doc</button>
+                          <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${ord.id}_SupremeCourt_Opinion', opinionFormattedTemplate('${ord.id}', '${ord.target}', '${ord.judge}', '${ord.grounds}', '${ord.command}'))">💾 Word (.doc)</button>
+                          <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${ord.id} Supreme Court Opinion', opinionFormattedTemplate('${ord.id}', '${ord.target}', '${ord.judge}', '${ord.grounds}', '${ord.command}'))">📄 Google Doc</button>
                         </div>
                       </td>
                       <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeCourtOrder(${idx})">Vacate</button></td>
@@ -579,7 +670,7 @@
             <form id="courtWarrantForm" style="margin-bottom:1.5rem;">
               <div class="form-grid" style="grid-template-columns: 1fr 2fr 1fr 1fr;">
                 <div class="form-group"><label>Warrant ID</label><input type="text" id="wId" class="gov-input" placeholder="e.g. WR-2026-9050" required /></div>
-                <div class="form-group"><label>Target Person / Vehicle / Premises</label><input type="text" id="wTarget" class="gov-input" placeholder="e.g. Marcus Vance / Plate: 89X-MEL" required /></div>
+                <div class="form-group"><label>Target Person / Premises / Property</label><input type="text" id="wTarget" class="gov-input" placeholder="e.g. Marcus Vance / Plate: 89X-MEL" required /></div>
                 <div class="form-group"><label>Warrant Category</label><select id="wType" class="gov-select"><option value="Search Warrant (Art. I § 6)">Search Warrant (Art. I § 6)</option><option value="Arrest Warrant (Title 8 Felony)">Arrest Warrant (Title 8 Felony)</option><option value="Bench Capias Warrant">Bench Capias Warrant</option></select></div>
                 <div class="form-group"><label>Affiant Peace Officer</label><input type="text" id="wAffiant" class="gov-input" placeholder="e.g. Trooper Cole" required /></div>
               </div>
@@ -627,6 +718,27 @@
               </div>
               <button type="submit" class="btn btn-success">File & Enact Statutory Bill</button>
             </form>
+
+            <div class="table-container">
+              <table class="gov-table">
+                <thead><tr><th>Bill ID</th><th>Act Title</th><th>Sponsor</th><th>Classification</th><th>Exports</th><th>Manage</th></tr></thead>
+                <tbody>
+                  ${LEGISLATIVE_BILLS.map((b, idx) => `
+                    <tr>
+                      <td><strong>${b.id}</strong></td><td><strong>${b.title}</strong><br><span style="font-size:0.75rem; color:#94a3b8;">${b.summary}</span></td>
+                      <td>${b.sponsor}</td><td><span class="badge badge-navy">${b.type}</span></td>
+                      <td>
+                        <div style="display:flex; gap:0.35rem;">
+                          <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${b.id}_SlipLaw', billFormattedTemplate('${b.id}', '${b.title}', '${b.sponsor}', '${b.type}', '${b.summary}', '${b.fullText || ''}'))">💾 Word (.doc)</button>
+                          <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${b.id} - ${b.title}', billFormattedTemplate('${b.id}', '${b.title}', '${b.sponsor}', '${b.type}', '${b.summary}', '${b.fullText || ''}'))">📄 Google Doc</button>
+                        </div>
+                      </td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBill(${idx})">Withdraw</button></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <!-- GUBERNATORIAL EXECUTIVE ORDER ENGINE -->
@@ -645,6 +757,26 @@
               <div class="form-group" style="margin-bottom:1rem;"><label>Directives</label><textarea id="eoDirectives" class="gov-input" placeholder="1. Directing the State Police to...&#10;2. Requiring the Department of Transportation to..." required></textarea></div>
               <button type="submit" class="btn btn-gold">Promulgate Executive Order</button>
             </form>
+
+            <div class="table-container">
+              <table class="gov-table">
+                <thead><tr><th>Order ID</th><th>Title</th><th>Target Agencies</th><th>Authority</th><th>Exports</th><th>Manage</th></tr></thead>
+                <tbody>
+                  ${EXEC_DIRECTIVES.map((eo, idx) => `
+                    <tr>
+                      <td><strong>${eo.id}</strong></td><td><strong>${eo.title}</strong></td><td>${eo.target}</td><td>${eo.auth}</td>
+                      <td>
+                        <div style="display:flex; gap:0.35rem;">
+                          <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${eo.id}_ExecutiveOrder', eoFormattedTemplate('${eo.id}', '${eo.title}', '${eo.target}', '${eo.auth}', '${eo.directive}'))">💾 Word (.doc)</button>
+                          <button type="button" class="btn btn-gold" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="createGoogleDocInstance('${eo.id} - ${eo.title}', eoFormattedTemplate('${eo.id}', '${eo.title}', '${eo.target}', '${eo.auth}', '${eo.directive}'))">📄 Google Doc</button>
+                        </div>
+                      </td>
+                      <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeEO(${idx})">Rescind</button></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
           </div>
         `;
       }
@@ -811,7 +943,47 @@
       return '';
     }
 
-    // 3. COMMON ROSTER & IA MODULE (UNIVERSAL TO ALL AGENCIES)
+    // FORM TEMPLATE FORMATTERS FOR EXPORTS
+    function opinionFormattedTemplate(id, parties, author, grounds, holding) {
+      const body = `APPEAL DOCKET NO.: ${id}
+IN RE: ${parties}
+
+I. SYLLABUS & PROCEDURAL BACKGROUND:
+${grounds}
+
+II. DECRETAL HOLDING & MANDATE:
+${holding}`;
+      const sig = `PRESIDING JUDICIAL OFFICER: _________________________ (${author})\nCLERK OF THE COURT ATTEST:  _________________________ (Supreme Court Deputy Clerk)`;
+      return formatOfficialLegalDoc("OPINION OF THE SUPREME COURT", "Published Appellate Judgment", id, "Article IX & MCR-2026-01", body, sig);
+    }
+
+    function billFormattedTemplate(id, title, sponsor, type, summary, fullText) {
+      const body = `LEGISLATIVE ACT: ${title}
+PRIMARY SPONSOR: ${sponsor}
+CLASSIFICATION:  ${type}
+
+LEGISLATIVE FINDINGS:
+${summary}
+
+${fullText}`;
+      const sig = `PRESIDENT OF THE SENATE:   _________________________ (Presiding Officer)\nATTESTATION OF SECRETARY:  _________________________ (Clerk of the Assembly)\nGOVERNOR ENACTMENT SEAL:   _________________________ (Governor of Melview)`;
+      return formatOfficialLegalDoc("GENERAL ASSEMBLY OF MELVIEW", "Enacted Statutory Slip Law", id, "Article IV General Assembly Power", body, sig);
+    }
+
+    function eoFormattedTemplate(id, title, target, auth, directive) {
+      const body = `EXECUTIVE MANDATE: ${title}
+TARGET AGENCIES:   ${target}
+
+I. CONSTITUTIONAL PREAMBLE:
+${auth}
+
+II. BINDING EXECUTIVE DIRECTIVES:
+${directive}`;
+      const sig = `GUBERNATORIAL SEAL: _________________________ (Governor of the State of Melview)\nCOUNTERSIGNED:      _________________________ (Attorney General of Melview)`;
+      return formatOfficialLegalDoc("EXECUTIVE CHAMBER • STATE OF MELVIEW", "Gubernatorial Executive Order", id, auth, body, sig);
+    }
+
+    // 4. COMMON ROSTER & IA MODULE (UNIVERSAL TO ALL AGENCIES)
     function getCommonAgencyRosterModule(roleKey) {
       const rosterList = DEPT_ROSTERS[CURRENT_DEPT] || [];
       const iaList = DEPT_IA[CURRENT_DEPT] || [];
@@ -899,6 +1071,24 @@
           alert(`FOIA Request ${id} marked EXEMPT.`);
         }
       };
+
+      // NDA Execution
+      const ndaForm = document.getElementById('signNdaForm');
+      if (ndaForm) {
+        ndaForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const signatory = document.getElementById('ndaParty').value.trim();
+          const dept = document.getElementById('ndaDept').value.trim();
+          const scope = document.getElementById('ndaScope').value.trim();
+          const newId = `NDA-2026-${Math.floor(100 + Math.random() * 900)}`;
+          const date = new Date().toISOString().substring(0, 10);
+
+          NDA_REGISTRY.unshift({ id: newId, signatory, dept, scope, status: "Executed & Verified", date });
+          GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | NDA EXECUTED | Sealed ${newId} for ${signatory}`);
+          saveIntranet();
+          alert(`Official NDA ${newId} executed.`);
+        });
+      }
 
       // Judicial Opinion Form
       const jOpForm = document.getElementById('judicialOpinionForm');
@@ -1024,10 +1214,34 @@
     }
 
     // REMOVAL HANDLERS
+    window.removeNDA = function(idx) {
+      NDA_REGISTRY.splice(idx, 1);
+      saveIntranet();
+      alert("NDA record revoked.");
+    };
+
+    window.removeBill = function(idx) {
+      LEGISLATIVE_BILLS.splice(idx, 1);
+      saveIntranet();
+      alert("Bill withdrawn.");
+    };
+
+    window.removeEO = function(idx) {
+      EXEC_DIRECTIVES.splice(idx, 1);
+      saveIntranet();
+      alert("Executive Order rescinded.");
+    };
+
     window.removeCourtOrder = function(idx) {
       JUDICIAL_ORDERS.splice(idx, 1);
       saveIntranet();
-      alert("Order removed.");
+      alert("Court Order vacated.");
+    };
+
+    window.removeBOLO = function(idx) {
+      NCIC_BOLOS.splice(idx, 1);
+      saveIntranet();
+      alert("BOLO cleared from CAD.");
     };
 
     window.removeDeptShift = function(dept, idx) {
