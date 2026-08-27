@@ -57,7 +57,7 @@
     .brand-title h1 { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 700; text-transform: uppercase; line-height: 1.2; }
     .brand-title p { font-size: 0.8rem; color: #b0c4de; }
     .header-right { display: flex; align-items: center; gap: 1rem; }
-    .live-clock-pill { font-family: var(--font-mono); font-size: 0.8rem; background: #111c24; border: 1px solid var(--gov-blue-primary); padding: 0.4rem 0.85rem; border-radius: 3px; color: #a8d1ff; }
+    .live-clock-pill { font-family: var(--font-mono); font-size: 0.8rem; background: #111c24; border: 1px solid var(--gov-blue-primary); padding: 0.4rem 0.85rem; border-radius: 3px; color: #a8d1ff; cursor: pointer; }
     nav.gov-nav { background-color: var(--gov-navy-dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
     .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; }
     .nav-tab-btn {
@@ -136,7 +136,7 @@
       display: block;
     }
 
-    /* STATE CAPITOL PANORAMA HERO */
+    /* CAPITOL PANORAMA HERO */
     .capitol-hero-card {
       position: relative;
       background: linear-gradient(180deg, rgba(15, 25, 35, 0.75) 0%, rgba(11, 19, 25, 0.95) 100%),
@@ -159,6 +159,50 @@
       margin-bottom: 0.5rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+    }
+
+    /* HOVER TOOLTIP SYSTEM */
+    .gov-tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+      border-bottom: 1px dashed var(--gov-gold);
+    }
+    .gov-tooltip .tooltip-text {
+      visibility: hidden;
+      width: 250px;
+      background-color: var(--gov-navy);
+      color: #ffffff;
+      text-align: left;
+      border-radius: 4px;
+      padding: 10px 14px;
+      position: absolute;
+      z-index: 10000;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      border: 1.5px solid var(--gov-gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      pointer-events: none;
+      font-family: var(--font-sans);
+    }
+    .gov-tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border-width: 6px;
+      border-style: solid;
+      border-color: var(--gov-navy) transparent transparent transparent;
+    }
+    .gov-tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
     }
 
     footer.gov-footer {
@@ -192,7 +236,14 @@
         </div>
       </div>
       <div class="header-right">
-        <div class="live-clock-pill" id="liveClock">2026-08-27 15:00:00 UTC</div>
+        <div class="live-clock-pill gov-tooltip" id="liveClock">
+          2026-08-27 15:00:00 UTC
+          <span class="tooltip-text">
+            <strong>SYSTEM TELEMETRY: ONLINE</strong><br>
+            • CJIS/JDIS State Gateway Active<br>
+            • Time Source: Supreme Atomic Reference
+          </span>
+        </div>
         <div class="badge badge-navy">PUBLIC ACCESS PORTAL</div>
       </div>
     </div>
@@ -220,7 +271,12 @@
   <main class="main-wrapper">
     <div class="official-oversight-stamp">
       <span>OFFICIAL STATUTORY RECORD • STATE OF MELVIEW • GENERAL ASSEMBLY</span>
-      <span>INDEPENDENT ELECTORAL COMMISSION • EST. 2026</span>
+      <span class="gov-tooltip">
+        INDEPENDENT ELECTORAL COMMISSION • EST. 2026
+        <span class="tooltip-text">
+          <strong>Constitutional Authority:</strong> Article X & SB 100 Mandate governing voter verification and fair franchise.
+        </span>
+      </span>
     </div>
 
     <!-- 1. DASHBOARD WITH ELECTIONS HERO & CAPITOL PANORAMA -->
@@ -251,10 +307,26 @@
       </div>
 
       <div class="metric-grid">
-        <div class="metric-card"><div class="metric-label">Organic Supreme Law</div><div class="metric-number">Constitution</div></div>
-        <div class="metric-card"><div class="metric-label">Codified Penal Schedule</div><div class="metric-number">60 Offenses</div></div>
-        <div class="metric-card"><div class="metric-label">Statutory Custody Cap</div><div class="metric-number">30 Mins Max</div></div>
-        <div class="metric-card"><div class="metric-label">Active General Election</div><div class="metric-number" style="color:var(--gov-green);">Ballot Live</div></div>
+        <div class="metric-card gov-tooltip" style="display:block; border-bottom:none;">
+          <div class="metric-label">Organic Supreme Law</div>
+          <div class="metric-number">Constitution</div>
+          <span class="tooltip-text"><strong>Article II, Section 7:</strong> Supreme law binding all magistrates, peace officers, and executive agencies.</span>
+        </div>
+        <div class="metric-card gov-tooltip" style="display:block; border-bottom:none;">
+          <div class="metric-label">Codified Penal Schedule</div>
+          <div class="metric-number">60 Offenses</div>
+          <span class="tooltip-text"><strong>Title 8 Statutory Repository:</strong> 6 Divisions covering Persons, Property, Traffic, Weapons, and State Security.</span>
+        </div>
+        <div class="metric-card gov-tooltip" style="display:block; border-bottom:none;">
+          <div class="metric-label">Statutory Custody Cap</div>
+          <div class="metric-number">30 Mins Max</div>
+          <span class="tooltip-text"><strong>Title 8 § 103:</strong> Mandatory cap. Total stacked sentences cannot exceed 30 minutes per arrest event.</span>
+        </div>
+        <div class="metric-card gov-tooltip" style="display:block; border-bottom:none;">
+          <div class="metric-label">Active General Election</div>
+          <div class="metric-number" style="color:var(--gov-green);">Ballot Live</div>
+          <span class="tooltip-text"><strong>IEC Electronic Vault:</strong> Open for all verified 14-day character electors under SB 100 § 301.</span>
+        </div>
       </div>
 
       <div class="gov-card">
@@ -265,7 +337,7 @@
         <div style="background-color: var(--gov-blue-light); border-left: 4px solid var(--gov-blue-primary); padding: 1.25rem; font-size: 0.9rem;">
           <strong>Constitutional Supremacy & Rule of Law:</strong>
           <p style="margin-top: 0.35rem;">
-            Pursuant to Article II, Section 7, the Constitution is the supreme law of the State of Melview. All peace officers, magistrates, and executive officers are strictly bound by the statutory 30-minute maximum custodial limit under Title 8 (§ 8-103), warrant particularity under Title 7, and public transparency mandates under Article XV.
+            Pursuant to Article II, Section 7, the Constitution is the supreme law of the State of Melview. All peace officers, magistrates, and executive officers are strictly bound by the statutory 30-minute maximum custodial limit under <span class="gov-tooltip"><strong>Title 8 (§ 8-103)</strong><span class="tooltip-text">Mandatory 30-minute maximum custody limit across all stacked offenses combined.</span></span>, warrant particularity under Title 7, and public transparency mandates under Article XV.
           </p>
         </div>
       </div>
@@ -283,7 +355,7 @@
           <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:1.5rem;">
             <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--gov-navy); margin-bottom:0.5rem;">Cast Your Official Electronic Ballot</h3>
             <p style="font-size:0.8rem; color:var(--gov-gray-dark); margin-bottom:1rem;">
-              Ballots are anonymous, cryptographically counted, and checked against the 14-day character eligibility ledger (SB 100 § 301). Candidates are certified live by the IEC.
+              Ballots are anonymous, cryptographically counted, and checked against the <span class="gov-tooltip"><strong>14-day character eligibility ledger</strong><span class="tooltip-text"><strong>SB 100 § 301:</strong> Citizens must hold active verified character tenure prior to balloting.</span></span>.
             </p>
             <form id="publicVoteForm">
               <div class="form-group" style="margin-bottom:1rem;">
@@ -372,11 +444,36 @@
           <table class="gov-table">
             <thead><tr><th>Offense Classification Tier</th><th>Standard Bail Amount</th><th>Pre-Trial Release Eligibility</th><th>Mandatory Conditions</th></tr></thead>
             <tbody>
-              <tr><td><span class="badge badge-infraction">Infraction</span></td><td><strong>$0 (Citation Only)</strong></td><td>Release on Own Recognizance (ROR)</td><td>Written promise to comply / appear.</td></tr>
-              <tr><td><span class="badge badge-misdemeanor">Misdemeanor</span></td><td><strong>$500 – $1,500 Bond</strong></td><td>Eligible for Recognizance / Bond</td><td>Surrender of seized contraband; zero police contact.</td></tr>
-              <tr><td><span class="badge badge-felony">Class B Felony</span></td><td><strong>$2,500 – $5,000 Cash Bail</strong></td><td>Judicial Discretion / Bond Required</td><td>Temporary CCW permit suspension.</td></tr>
-              <tr><td><span class="badge badge-felony">Class A Felony</span></td><td><strong>$7,500 – $15,000 Cash Bail</strong></td><td>Secured Cash Bond Required</td><td>Full weapons forfeiture; judicial check-ins.</td></tr>
-              <tr><td><span class="badge badge-danger">Capital Felony</span></td><td><strong>NO BAIL (Remand to Custody)</strong></td><td>Ineligible for Pre-Trial Release</td><td>Pre-trial detention capped at 30 minutes (§ 8-103).</td></tr>
+              <tr>
+                <td><span class="badge badge-infraction gov-tooltip">Infraction<span class="tooltip-text">Non-custodial statutory fine. Citation issued on scene.</span></span></td>
+                <td><strong>$0 (Citation Only)</strong></td>
+                <td>Release on Own Recognizance (ROR)</td>
+                <td>Written promise to comply / appear.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-misdemeanor gov-tooltip">Misdemeanor<span class="tooltip-text">Low-level offenses. Custody capped under 10 minutes.</span></span></td>
+                <td><strong>$500 – $1,500 Bond</strong></td>
+                <td>Eligible for Recognizance / Bond</td>
+                <td>Surrender of seized contraband; zero police contact.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-felony gov-tooltip">Class B Felony<span class="tooltip-text">Serious felony offense. CCW automatically suspended.</span></span></td>
+                <td><strong>$2,500 – $5,000 Cash Bail</strong></td>
+                <td>Judicial Discretion / Bond Required</td>
+                <td>Temporary CCW permit suspension.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-felony gov-tooltip">Class A Felony<span class="tooltip-text">Major violent / government felony. Secured bond required.</span></span></td>
+                <td><strong>$7,500 – $15,000 Cash Bail</strong></td>
+                <td>Secured Cash Bond Required</td>
+                <td>Full weapons forfeiture; judicial check-ins.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-danger gov-tooltip">Capital Felony<span class="tooltip-text">Murder / Treason. Ineligible for release. Pre-trial detention strictly capped at 30 minutes (§ 8-103).</span></span></td>
+                <td><strong>NO BAIL (Remand to Custody)</strong></td>
+                <td>Ineligible for Pre-Trial Release</td>
+                <td>Pre-trial detention capped at 30 minutes (§ 8-103).</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -418,7 +515,10 @@
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Article XV Open Public Records / FOIA Portal</h2>
-          <span class="badge badge-navy">72-HOUR STATUTORY CLOCK</span>
+          <span class="badge badge-navy gov-tooltip">
+            72-HOUR STATUTORY CLOCK
+            <span class="tooltip-text"><strong>Article XV Mandate:</strong> Agencies must disclose records or formally articulate statutory exemptions within 72 hours of filing.</span>
+          </span>
         </div>
         <form id="foiaSubmitForm">
           <div class="form-grid">
@@ -469,7 +569,10 @@
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Custodial Sentencing & Statutory Bail Calculator</h2>
-          <span class="badge badge-navy">TITLE 8 § 103 COMPLIANT</span>
+          <span class="badge badge-navy gov-tooltip">
+            TITLE 8 § 103 COMPLIANT
+            <span class="tooltip-text">Enforcing the absolute 30-minute maximum custody limit across all stacked criminal charges.</span>
+          </span>
         </div>
         <div style="display:grid; grid-template-columns: 2fr 1fr; gap:1.5rem;">
           <div>
@@ -573,7 +676,7 @@
 
     function updateClock() {
       const clockEl = document.getElementById('liveClock');
-      if (clockEl) clockEl.textContent = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      if (clockEl) clockEl.innerHTML = `${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC <span class="tooltip-text"><strong>SYSTEM TELEMETRY: ONLINE</strong><br>• CJIS/JDIS Gateway Active<br>• Time Source: Supreme Reference</span>`;
     }
     setInterval(updateClock, 1000);
     updateClock();
