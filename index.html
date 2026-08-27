@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>State of Melview | Official Statutory Repository & Legal Portal</title>
+  <title>State of Melview | Official Statutory Repository & Public Portal</title>
   <style>
     :root {
       --gov-navy-dark: #0b1319;
@@ -14,14 +14,12 @@
       --gov-gold: #c09853;
       --gov-gold-light: #fdf8e2;
       --gov-red: #d54339;
-      --gov-red-dark: #a82018;
       --gov-green: #00a91c;
       --gov-gray-light: #f0f0f0;
       --gov-gray-mid: #dfe1e2;
       --gov-gray-dark: #565c65;
       --gov-text: #1b1b1b;
       --gov-white: #ffffff;
-      
       --font-serif: "Merriweather", "Georgia", "Times New Roman", serif;
       --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: "Roboto Mono", Consolas, Monaco, monospace;
@@ -36,37 +34,8 @@
       flex-direction: column;
       min-height: 100vh;
     }
-    #liveEASBanner {
-      display: none;
-      background-color: #7f1d1d;
-      color: #fef2f2;
-      border-bottom: 3px solid #ef4444;
-      padding: 0.75rem 1.5rem;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .eas-flex {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-    .usa-banner {
-      background-color: #f0f0f0;
-      border-bottom: 1px solid var(--gov-gray-mid);
-      padding: 0.35rem 1.5rem;
-      font-size: 0.75rem;
-      color: var(--gov-gray-dark);
-    }
-    .usa-banner-content {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+    .usa-banner { background-color: #f0f0f0; border-bottom: 1px solid var(--gov-gray-mid); padding: 0.35rem 1.5rem; font-size: 0.75rem; color: var(--gov-gray-dark); }
+    .usa-banner-content { display: flex; align-items: center; gap: 0.5rem; max-width: 1400px; margin: 0 auto; }
     .usa-flag-svg { width: 16px; height: 11px; }
     header.gov-header {
       background-color: var(--gov-navy);
@@ -84,57 +53,31 @@
       gap: 1.5rem;
     }
     .brand-block { display: flex; align-items: center; gap: 1.25rem; cursor: pointer; text-decoration: none; color: #fff; }
-    .state-seal {
-      width: 58px; height: 58px; border-radius: 50%;
-      background: radial-gradient(circle, #2a4359 0%, #111c24 100%);
-      border: 2px solid var(--gov-gold);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gov-gold); font-family: var(--font-serif);
-      font-weight: 700; font-size: 1.6rem;
-    }
-    .brand-title h1 {
-      font-family: var(--font-serif); font-size: 1.45rem;
-      font-weight: 700; text-transform: uppercase; line-height: 1.2;
-    }
+    .state-seal-img { width: 62px; height: 62px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gov-gold); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+    .brand-title h1 { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 700; text-transform: uppercase; line-height: 1.2; }
     .brand-title p { font-size: 0.8rem; color: #b0c4de; }
     .header-right { display: flex; align-items: center; gap: 1rem; }
-    .live-clock-pill {
-      font-family: var(--font-mono); font-size: 0.8rem;
-      background: #111c24; border: 1px solid var(--gov-blue-primary);
-      padding: 0.4rem 0.85rem; border-radius: 3px; color: #a8d1ff;
-    }
+    .live-clock-pill { font-family: var(--font-mono); font-size: 0.8rem; background: #111c24; border: 1px solid var(--gov-blue-primary); padding: 0.4rem 0.85rem; border-radius: 3px; color: #a8d1ff; }
     nav.gov-nav { background-color: var(--gov-navy-dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
     .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; }
     .nav-tab-btn {
       background: none; border: none; border-top: 3px solid transparent;
       color: #e1e7ec; padding: 0.85rem 0.9rem; font-size: 0.8rem;
       font-weight: 600; cursor: pointer; display: flex; align-items: center;
-      gap: 0.35rem; transition: all 0.2s ease; font-family: var(--font-sans);
-      text-decoration: none;
+      gap: 0.35rem; transition: all 0.2s ease; font-family: var(--font-sans); text-decoration: none;
     }
     .nav-tab-btn:hover { background-color: var(--gov-navy); color: #ffffff; }
-    .nav-tab-btn.active {
-      background-color: var(--gov-white); color: var(--gov-navy);
-      border-top: 3px solid var(--gov-blue-primary); font-weight: 700;
-    }
-    .nav-tab-btn.docs-tab-btn { background-color: #1e3a5f; color: #93c5fd; }
+    .nav-tab-btn.active { background-color: var(--gov-white); color: var(--gov-navy); border-top: 3px solid var(--gov-blue-primary); font-weight: 700; }
+    .nav-tab-btn.election-special-btn { background-color: #14532d; border-top: 3px solid #22c55e; color: #dcfce7; }
     .nav-tab-btn.secure-tab-btn { background-color: #241911; border-top: 3px solid var(--gov-gold); color: var(--gov-gold-light); }
-    .nav-tab-btn.secure-tab-btn:hover { background-color: #3b2615; color: #ffffff; }
-
     .main-wrapper { max-width: 1400px; margin: 1.5rem auto; padding: 0 1.5rem; flex: 1; width: 100%; }
     .official-oversight-stamp {
       background-color: var(--gov-gold-light); border-left: 4px solid var(--gov-gold);
       padding: 0.65rem 1.25rem; margin-bottom: 1.5rem; font-size: 0.8rem;
       font-weight: 600; color: #634a00; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
     }
-    .gov-card {
-      background: var(--gov-white); border: 1px solid var(--gov-gray-mid);
-      border-radius: 4px; padding: 2rem; margin-bottom: 1.5rem;
-    }
-    .gov-card-header {
-      border-bottom: 2px solid var(--gov-navy); padding-bottom: 0.85rem;
-      margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;
-    }
+    .gov-card { background: var(--gov-white); border: 1px solid var(--gov-gray-mid); border-radius: 4px; padding: 2rem; margin-bottom: 1.5rem; }
+    .gov-card-header { border-bottom: 2px solid var(--gov-navy); padding-bottom: 0.85rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
     .gov-card-title { font-family: var(--font-serif); font-size: 1.35rem; color: var(--gov-navy); font-weight: 700; }
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
@@ -142,7 +85,6 @@
     .metric-card { background: var(--gov-white); border: 1px solid var(--gov-gray-mid); border-top: 4px solid var(--gov-blue-primary); padding: 1.25rem; border-radius: 4px; }
     .metric-number { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--gov-navy); margin-top: 0.25rem; }
     .metric-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gov-gray-dark); font-weight: 700; }
-
     .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-bottom: 1.25rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
     .form-group label { font-size: 0.8rem; font-weight: 700; color: var(--gov-navy); text-transform: uppercase; }
@@ -150,53 +92,55 @@
       background-color: var(--gov-white); border: 1px solid var(--gov-gray-dark);
       color: var(--gov-text); padding: 0.65rem 0.85rem; border-radius: 3px; font-size: 0.9rem; font-family: var(--font-sans);
     }
-    .gov-input:focus, .gov-select:focus { outline: 2px solid var(--gov-blue-primary); }
-    textarea.gov-input { min-height: 100px; resize: vertical; }
-
     .table-container { overflow-x: auto; border: 1px solid var(--gov-gray-mid); border-radius: 3px; }
     table.gov-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; background: var(--gov-white); }
     table.gov-table th { background-color: #f0f4f8; color: var(--gov-navy); font-weight: 700; padding: 0.85rem 1rem; text-transform: uppercase; font-size: 0.75rem; border-bottom: 2px solid var(--gov-gray-mid); }
     table.gov-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--gov-gray-mid); vertical-align: middle; }
-    table.gov-table tr:hover { background-color: #f9fbfd; }
-
     .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
     .badge-navy { background: var(--gov-navy); color: #fff; }
     .badge-felony { background: #fbeae8; color: #b50909; border: 1px solid #f8cbc6; }
     .badge-misdemeanor { background: #fff1d2; color: #704700; border: 1px solid #fad980; }
     .badge-infraction { background: #ecf3ec; color: #005a10; border: 1px solid #b7dbb7; }
-    .badge-pending { background: #fdf8e2; color: #8a6d3b; border: 1px solid #faebcc; }
     .badge-success { background: #dff0d8; color: #3c763d; border: 1px solid #d6e9c6; }
     .badge-danger { background: #f2dede; color: #a94442; border: 1px solid #ebccd1; }
-
+    .badge-gold { background: #713f12; color: #fef08a; }
     .btn {
       background-color: var(--gov-blue-primary); color: #ffffff; border: none;
       padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 700; cursor: pointer;
-      border-radius: 3px; display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans);
-      text-decoration: none;
+      border-radius: 3px; display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans); text-decoration: none;
     }
     .btn:hover { background-color: var(--gov-blue-dark); }
     .btn-secondary { background-color: var(--gov-gray-dark); }
-    .btn-danger { background-color: var(--gov-red); }
-    .btn-success { background-color: var(--gov-green); }
-
+    .btn-gold { background-color: #ca8a04; color: #fff; }
+    
+    /* ELECTION AD HERO BANNER */
+    .election-hero-banner {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 2rem;
+      background: linear-gradient(135deg, #091c10 0%, #15222e 100%);
+      border: 2px solid #22c55e;
+      border-radius: 6px;
+      padding: 2rem;
+      color: #f8fafc;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+    .election-poster-preview {
+      width: 100%;
+      border-radius: 6px;
+      border: 3px solid var(--gov-gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      max-height: 420px;
+      object-fit: cover;
+    }
     footer.gov-footer {
       background-color: var(--gov-navy-dark); color: #aebbc5;
       border-top: 4px solid var(--gov-navy); padding: 2.5rem 1.5rem; font-size: 0.85rem; margin-top: auto;
     }
-    .footer-inner {
-      max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;
-    }
   </style>
 </head>
 <body>
-
-  <!-- Live SEOC Banner -->
-  <div id="liveEASBanner">
-    <div class="eas-flex">
-      <span>🚨 <strong>STATE EMERGENCY BROADCAST (SEOC):</strong> <span id="easBroadcastText">Route 1 Transit Corridor Closed Due to Tactical Incident.</span></span>
-      <button type="button" class="btn btn-secondary" style="background:#450a0a; font-size:0.75rem; padding:0.25rem 0.5rem;" onclick="dismissEASBanner()">Dismiss</button>
-    </div>
-  </div>
 
   <div class="usa-banner">
     <div class="usa-banner-content">
@@ -214,7 +158,7 @@
   <header class="gov-header">
     <div class="header-inner">
       <div class="brand-block" onclick="switchNav('dashboard')">
-        <div class="state-seal">M</div>
+        <img src="seal.png.jfif" alt="Great Seal of Melview" class="state-seal-img" onerror="this.src='seal.png'" />
         <div class="brand-title">
           <h1>State of Melview</h1>
           <p>Official Statutory Repository, Court Standards & Administration</p>
@@ -227,24 +171,20 @@
     </div>
   </header>
 
-  <!-- COMPLETE 16-TAB NAVIGATION BAR -->
   <nav class="gov-nav">
     <div class="nav-inner">
       <button type="button" class="nav-tab-btn active" onclick="switchNav('dashboard')" id="nav-dashboard">Executive Dashboard</button>
-      <a href="laws.html" class="nav-tab-btn docs-tab-btn">📜 Constitution & Slip Laws (Full Docs) ↗</a>
+      <button type="button" class="nav-tab-btn election-special-btn" onclick="switchNav('elections')" id="nav-elections">🗳️ General Election 2026</button>
+      <a href="laws.html" class="nav-tab-btn" style="background:#1e3a5f; color:#93c5fd;">📜 Constitution & Slip Laws ↗</a>
       <button type="button" class="nav-tab-btn" onclick="switchNav('court-orders')" id="nav-court-orders">⚖️ Judicial Orders & Warrants</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('penal-code')" id="nav-penal-code">Title 8 Penal Code</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('public-docket')" id="nav-public-docket">Supreme Court Docket</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('bail-schedule')" id="nav-bail-schedule">⚖️ Bail Risk Matrix</button>
-      <button type="button" class="nav-tab-btn" onclick="switchNav('legislative-tracker')" id="nav-legislative-tracker">📜 Legislative Bill Tracker</button>
-      <button type="button" class="nav-tab-btn" onclick="switchNav('fed-register')" id="nav-fed-register">📢 State Agency Register</button>
+      <button type="button" class="nav-tab-btn" onclick="switchNav('legislative-tracker')" id="nav-legislative-tracker">📜 Legislative Tracker</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('exec-orders')" id="nav-exec-orders">Executive Orders</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('foia-portal')" id="nav-foia-portal">FOIA / Open Records</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('public-registry')" id="nav-public-registry">Bar & CCW Registry</button>
-      <button type="button" class="nav-tab-btn" onclick="switchNav('private-records')" id="nav-private-records">📂 State Personnel Archive</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('custody-calc')" id="nav-custody-calc">Custody Calculator</button>
-      <button type="button" class="nav-tab-btn" onclick="switchNav('elections')" id="nav-elections">Elections Gateway</button>
-      <button type="button" class="nav-tab-btn" onclick="switchNav('judicial-sop')" id="nav-judicial-sop">Court Rules (MCR-2026-01)</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('bar-exam')" id="nav-bar-exam">Bar Examination</button>
       <a href="intranet.html" class="nav-tab-btn secure-tab-btn">🔐 Restricted Workstations ↗</a>
     </div>
@@ -253,17 +193,34 @@
   <main class="main-wrapper">
     <div class="official-oversight-stamp">
       <span>OFFICIAL STATUTORY RECORD • STATE OF MELVIEW • GENERAL ASSEMBLY</span>
-      <span>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</span>
+      <span>INDEPENDENT ELECTORAL COMMISSION • EST. 2026</span>
     </div>
 
-    <!-- 1. DASHBOARD -->
+    <!-- 1. DASHBOARD WITH ELECTIONS CAMPAIGN AD -->
     <section id="pane-dashboard" class="tab-pane active">
+      <div class="election-hero-banner">
+        <div>
+          <span class="badge badge-gold" style="margin-bottom:0.75rem;">OFFICIAL IEC PROCLAMATION</span>
+          <h2 style="font-family:var(--font-serif); font-size:1.8rem; line-height:1.2; margin-bottom:0.75rem; color:#fef08a;">
+            ELECTIONS SOON.<br>YOUR VOTE COUNTS!
+          </h2>
+          <p style="font-size:0.9rem; color:#cbd5e1; margin-bottom:1.25rem;">
+            The 2026 General Election for Governor and State Senate is officially declared. Verify character eligibility and review the certified ballot register.
+          </p>
+          <button type="button" class="btn btn-gold" onclick="switchNav('elections')">🗳️ Enter Election Gateway & Vote</button>
+        </div>
+        <div>
+          <img src="election-poster.png.jfif" alt="State of Melview Elections" class="election-poster-preview" onerror="this.src='election-poster.png'" />
+        </div>
+      </div>
+
       <div class="metric-grid">
         <div class="metric-card"><div class="metric-label">Organic Supreme Law</div><div class="metric-number">Constitution</div></div>
-        <div class="metric-card"><div class="metric-label">Enacted Slip Laws</div><div class="metric-number">SB 100–104</div></div>
         <div class="metric-card"><div class="metric-label">Codified Penal Schedule</div><div class="metric-number">60 Offenses</div></div>
         <div class="metric-card"><div class="metric-label">Statutory Custody Cap</div><div class="metric-number">30 Mins Max</div></div>
+        <div class="metric-card"><div class="metric-label">Active General Election</div><div class="metric-number" style="color:var(--gov-green);">Ballot Live</div></div>
       </div>
+
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Welcome to the Official State Legal Repository</h2>
@@ -281,28 +238,87 @@
       </div>
     </section>
 
-    <!-- 2. JUDICIAL ORDERS & WARRANTS -->
+    <!-- 2. ELECTIONS GATEWAY & ANONYMOUS BALLOT VAULT -->
+    <section id="pane-elections" class="tab-pane">
+      <div class="gov-card" style="border-top:4px solid #22c55e;">
+        <div class="gov-card-header">
+          <h2 class="gov-card-title">🗳️ 2026 General Election Official Ballot & Tally Vault</h2>
+          <span class="badge badge-success">IEC CERTIFIED ELECTION CYCLE</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem; margin-bottom:2rem;">
+          <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px; padding:1.5rem;">
+            <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--gov-navy); margin-bottom:0.5rem;">Cast Your Official Electronic Ballot</h3>
+            <p style="font-size:0.8rem; color:var(--gov-gray-dark); margin-bottom:1rem;">
+              Ballots are anonymous, cryptographically counted, and checked against the 14-day character eligibility ledger (SB 100 § 301).
+            </p>
+            <form id="publicVoteForm">
+              <div class="form-group" style="margin-bottom:1rem;">
+                <label>Voter Character Name</label>
+                <input type="text" id="voterName" class="gov-input" placeholder="Enter citizen character name..." required />
+              </div>
+              <div class="form-group" style="margin-bottom:1rem;">
+                <label>Office of the Governor</label>
+                <select id="voteGov" class="gov-select" required>
+                  <option value="">-- Select Gubernatorial Candidate --</option>
+                  <option value="Arthur Vance (Progressive Unity)">Arthur Vance (Progressive Unity)</option>
+                  <option value="Marcus Sterling (Constitutional Law & Order)">Marcus Sterling (Constitutional Law & Order)</option>
+                  <option value="Write-In / Abstain">Write-In / Abstain</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:1.25rem;">
+                <label>At-Large State Senate Seat</label>
+                <select id="voteSenate" class="gov-select" required>
+                  <option value="">-- Select Senate Candidate --</option>
+                  <option value="Rachel Sterling (Judicial Reform)">Rachel Sterling (Judicial Reform)</option>
+                  <option value="John Miller (Civil Liberties & Commerce)">John Miller (Civil Liberties & Commerce)</option>
+                  <option value="Thomas Cole (Public Safety Caucus)">Thomas Cole (Public Safety Caucus)</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Submit Official Ballot to Vault</button>
+            </form>
+          </div>
+
+          <div style="background:#0b1319; color:#f8fafc; border-radius:4px; padding:1.5rem; border:1px solid #334155;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:#fef08a;">Live Certified Election Tally</h3>
+              <span class="badge badge-navy">AUTO-COUNT</span>
+            </div>
+            <div style="font-size:0.85rem; margin-bottom:1.5rem;">
+              <div>Total Ballots Cast: <strong id="tallyTotalCount" style="color:#38bdf8; font-size:1.2rem;">0</strong></div>
+              <div style="font-size:0.75rem; color:#94a3b8;">Threshold for Majority: 50% + 1 Vote</div>
+            </div>
+            <div style="margin-bottom:1.25rem;">
+              <div style="font-size:0.8rem; font-weight:700; color:#fef08a; margin-bottom:0.25rem;">GUBERNATORIAL ELECTION:</div>
+              <div id="govTallyBars" style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.35rem;">
+                <div>Arthur Vance: <span id="tally_vance">0 votes (0%)</span></div>
+                <div>Marcus Sterling: <span id="tally_sterling">0 votes (0%)</span></div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:0.8rem; font-weight:700; color:#fef08a; margin-bottom:0.25rem;">SENATE AT-LARGE SEAT:</div>
+              <div id="senateTallyBars" style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.35rem;">
+                <div>Rachel Sterling: <span id="tally_rachel">0 votes (0%)</span></div>
+                <div>John Miller: <span id="tally_miller">0 votes (0%)</span></div>
+                <div>Thomas Cole: <span id="tally_cole">0 votes (0%)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CERTIFIED JUDICIAL ORDERS -->
     <section id="pane-court-orders" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">⚖️ Certified Judicial Orders, Search Warrants & Court Rulings</h2>
           <button type="button" class="btn btn-secondary" onclick="renderCourtOrders()">🔄 Refresh Orders</button>
         </div>
-        <p style="font-size:0.85rem; color:var(--gov-gray-dark); margin-bottom:1.25rem;">
-          Official public repository of sealed court orders, appellate judgments, and executed warrants pursuant to Article IX and MCR-2026-01. All items are available for direct Word (.doc) download.
-        </p>
         <div class="table-container">
           <table class="gov-table">
             <thead>
-              <tr>
-                <th>Order ID</th>
-                <th>Target / Subject</th>
-                <th>Instrument Category</th>
-                <th>Presiding Judicial Officer</th>
-                <th>Legal Grounds & Command</th>
-                <th>Status</th>
-                <th>Certified Export</th>
-              </tr>
+              <tr><th>Order ID</th><th>Target / Subject</th><th>Instrument Category</th><th>Presiding Judge</th><th>Legal Grounds & Command</th><th>Status</th><th>Export</th></tr>
             </thead>
             <tbody id="publicOrdersTableBody"></tbody>
           </table>
@@ -310,17 +326,17 @@
       </div>
     </section>
 
-    <!-- 3. TITLE 8 PENAL CODE (60 OFFENSES) -->
+    <!-- 4. TITLE 8 PENAL CODE -->
     <section id="pane-penal-code" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
-          <h2 class="gov-card-title">Title 8: State Penal Code Master Schedule (60 Codified Sections)</h2>
+          <h2 class="gov-card-title">Title 8: State Penal Code Master Schedule</h2>
           <span class="badge badge-navy">MAX CUSTODY: 30 MINS</span>
         </div>
         <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr; margin-bottom: 1rem;">
           <div class="form-group">
-            <label>Search Master Schedule</label>
-            <input type="text" id="penalSearch" class="gov-input" placeholder="Search code, offense, fine..." oninput="filterPenalTable()" />
+            <label>Search Schedule</label>
+            <input type="text" id="penalSearch" class="gov-input" placeholder="Search offense, fine, code..." oninput="filterPenalTable()" />
           </div>
           <div class="form-group">
             <label>Classification Filter</label>
@@ -337,43 +353,40 @@
             <label>Division Filter</label>
             <select id="penalDivisionFilter" class="gov-select" onchange="filterPenalTable()">
               <option value="ALL">All Divisions (1 through 6)</option>
-              <option value="1">Div 1: Offenses Against Persons</option>
-              <option value="2">Div 2: Offenses Against Property</option>
-              <option value="3">Div 3: Vehicular & Traffic Violations</option>
-              <option value="4">Div 4: Public Order & Administration</option>
-              <option value="5">Div 5: Weapons & Contraband</option>
-              <option value="6">Div 6: Official Government Crimes</option>
+              <option value="1">Div 1: Persons</option>
+              <option value="2">Div 2: Property</option>
+              <option value="3">Div 3: Traffic</option>
+              <option value="4">Div 4: Public Order</option>
+              <option value="5">Div 5: Weapons</option>
+              <option value="6">Div 6: Government Crimes</option>
             </select>
           </div>
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr><th>Statutory Code</th><th>Offense Name & Description</th><th>Classification</th><th>Standard Fine</th><th>Custody Threshold</th><th>Sanctions & Licensure Actions</th></tr>
-            </thead>
+            <thead><tr><th>Statutory Code</th><th>Offense Name</th><th>Classification</th><th>Standard Fine</th><th>Custody Threshold</th><th>Sanctions</th></tr></thead>
             <tbody id="penalTableBody"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 4. SUPREME COURT DOCKET -->
+    <!-- 5. SUPREME COURT DOCKET -->
     <section id="pane-public-docket" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Supreme & District Court Public Case Docket</h2>
-          <button type="button" class="btn btn-secondary" onclick="renderPublicDocket()">🔄 Refresh Docket</button>
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead><tr><th>Docket ID</th><th>Appellant / Subject</th><th>Matter Category</th><th>Timestamp</th><th>Status</th><th>Ruling & Notes</th><th>Download Case</th></tr></thead>
+            <thead><tr><th>Docket ID</th><th>Appellant</th><th>Matter Category</th><th>Timestamp</th><th>Status</th><th>Ruling & Notes</th><th>Download Case</th></tr></thead>
             <tbody id="publicDocketTableBody"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 5. BAIL RISK MATRIX -->
+    <!-- 6. BAIL RISK MATRIX -->
     <section id="pane-bail-schedule" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -384,44 +397,27 @@
           <table class="gov-table">
             <thead><tr><th>Offense Classification Tier</th><th>Standard Bail Amount</th><th>Pre-Trial Release Eligibility</th><th>Mandatory Conditions</th></tr></thead>
             <tbody>
-              <tr><td><span class="badge badge-infraction">Infraction Violations</span></td><td><strong>$0 (Citation Only)</strong></td><td>Release on Own Recognizance (ROR)</td><td>Written promise to comply / appear.</td></tr>
-              <tr><td><span class="badge badge-misdemeanor">Standard Misdemeanor</span></td><td><strong>$500 – $1,500 Bond</strong></td><td>Eligible for Recognizance / Bond</td><td>Surrender of seized contraband; zero police contact.</td></tr>
-              <tr><td><span class="badge badge-felony">Class B Felony Offense</span></td><td><strong>$2,500 – $5,000 Cash Bail</strong></td><td>Judicial Discretion / Bond Required</td><td>Temporary CCW permit suspension; travel restriction.</td></tr>
-              <tr><td><span class="badge badge-felony">Class A Felony Offense</span></td><td><strong>$7,500 – $15,000 Cash Bail</strong></td><td>Secured Cash Bond Required</td><td>Full weapons forfeiture; pre-trial judicial check-ins.</td></tr>
-              <tr><td><span class="badge badge-danger">Capital Felony (Violent / Treason)</span></td><td><strong>NO BAIL (Remand to Custody)</strong></td><td>Ineligible for Pre-Trial Release</td><td>Pre-trial detention capped at 30 minutes (§ 8-103).</td></tr>
+              <tr><td><span class="badge badge-infraction">Infraction</span></td><td><strong>$0 (Citation Only)</strong></td><td>Release on Own Recognizance (ROR)</td><td>Written promise to comply / appear.</td></tr>
+              <tr><td><span class="badge badge-misdemeanor">Misdemeanor</span></td><td><strong>$500 – $1,500 Bond</strong></td><td>Eligible for Recognizance / Bond</td><td>Surrender of seized contraband; zero police contact.</td></tr>
+              <tr><td><span class="badge badge-felony">Class B Felony</span></td><td><strong>$2,500 – $5,000 Cash Bail</strong></td><td>Judicial Discretion / Bond Required</td><td>Temporary CCW permit suspension.</td></tr>
+              <tr><td><span class="badge badge-felony">Class A Felony</span></td><td><strong>$7,500 – $15,000 Cash Bail</strong></td><td>Secured Cash Bond Required</td><td>Full weapons forfeiture; judicial check-ins.</td></tr>
+              <tr><td><span class="badge badge-danger">Capital Felony</span></td><td><strong>NO BAIL (Remand to Custody)</strong></td><td>Ineligible for Pre-Trial Release</td><td>Pre-trial detention capped at 30 minutes (§ 8-103).</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 6. LEGISLATIVE BILL TRACKER -->
+    <!-- 7. LEGISLATIVE TRACKER -->
     <section id="pane-legislative-tracker" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
-          <h2 class="gov-card-title">General Assembly Legislative Bill & Roll-Call Tracker</h2>
-          <span class="badge badge-navy">TITLE 4 PROCEDURE</span>
+          <h2 class="gov-card-title">General Assembly Legislative Bill Tracker</h2>
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead><tr><th>Bill ID</th><th>Title of Proposed Act</th><th>Primary Sponsor</th><th>Stage</th><th>Roll-Call Tally</th><th>Gubernatorial Action</th></tr></thead>
+            <thead><tr><th>Bill ID</th><th>Title of Proposed Act</th><th>Primary Sponsor</th><th>Stage</th><th>Roll-Call Tally</th><th>Status</th></tr></thead>
             <tbody id="billTrackerTableBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. STATE AGENCY REGISTER -->
-    <section id="pane-fed-register" class="tab-pane">
-      <div class="gov-card">
-        <div class="gov-card-header">
-          <h2 class="gov-card-title">State Administrative Register & Agency Directives</h2>
-          <span class="badge badge-navy">ARTICLE VI & XV NOTICES</span>
-        </div>
-        <div class="table-container">
-          <table class="gov-table">
-            <thead><tr><th>Notice ID</th><th>Issuing Agency</th><th>Subject Title</th><th>Date</th><th>Authority</th><th>Operational Scope</th></tr></thead>
-            <tbody id="agencyRegisterTableBody"></tbody>
           </table>
         </div>
       </div>
@@ -432,7 +428,6 @@
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Executive Orders & Gubernatorial Decrees (Title 6)</h2>
-          <span class="badge badge-navy">EXECUTIVE CHAMBER</span>
         </div>
         <div class="table-container">
           <table class="gov-table">
@@ -458,7 +453,7 @@
               <select id="foiaDept" class="gov-select">
                 <option value="Melview State Police">Melview State Police</option>
                 <option value="County Sheriff Office">County Sheriff Office</option>
-                <option value="Office of the Governor">Office of the Governor</option>
+                <option value="Executive / Senate">Executive / Senate</option>
                 <option value="Independent Electoral Commission">Independent Electoral Commission</option>
                 <option value="Department of Transportation">Department of Transportation</option>
                 <option value="Department of Justice">Department of Justice</option>
@@ -484,7 +479,6 @@
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">State Bar & Concealed Carry (CCW) Public Roster</h2>
-          <span class="badge badge-navy">ARTICLE VII LICENSURE</span>
         </div>
         <div class="table-container">
           <table class="gov-table">
@@ -495,23 +489,7 @@
       </div>
     </section>
 
-    <!-- 11. STATE PERSONNEL ARCHIVE -->
-    <section id="pane-private-records" class="tab-pane">
-      <div class="gov-card">
-        <div class="gov-card-header">
-          <h2 class="gov-card-title">📂 Official State Personnel & Master Employment Archive</h2>
-          <span class="badge badge-navy">ARTICLE XII & XIII</span>
-        </div>
-        <div class="table-container">
-          <table class="gov-table">
-            <thead><tr><th>File ID</th><th>Username</th><th>Department</th><th>Role / Rank</th><th>Clearance</th><th>Status</th></tr></thead>
-            <tbody id="privatePersonnelTableBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- 12. CUSTODY CALCULATOR -->
+    <!-- 11. CUSTODY CALCULATOR -->
     <section id="pane-custody-calc" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -537,40 +515,11 @@
       </div>
     </section>
 
-    <!-- 13. ELECTIONS GATEWAY -->
-    <section id="pane-elections" class="tab-pane">
-      <div class="gov-card">
-        <div class="gov-card-header">
-          <h2 class="gov-card-title">Independent Electoral Commission (IEC) Proclamation</h2>
-          <span class="badge badge-navy">TITLE 10 ELECTORAL CODE</span>
-        </div>
-        <div style="background-color:var(--gov-blue-light); border-left:4px solid var(--gov-blue-primary); padding:1.25rem;">
-          <h3 style="font-family:var(--font-serif); color:var(--gov-navy); font-size:1.15rem;">General Election Proclamation of 2026</h3>
-          <p style="font-size:0.9rem; margin-top:0.35rem;">Candidacy declarations open for Governor, Lt. Governor, and seven (7) At-Large Senate seats under Article X.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 14. COURT RULES SUMMARY -->
-    <section id="pane-judicial-sop" class="tab-pane">
-      <div class="gov-card">
-        <div class="gov-card-header">
-          <h2 class="gov-card-title">Document MCR-2026-01: Court Rules & Standards Manual</h2>
-        </div>
-        <div style="background:#fff; padding:1.5rem; font-family:var(--font-serif); line-height:1.8;">
-          <p><strong>DOCUMENT NO. MCR-2026-01</strong> • State Judicial Rules & Standards Manual<br>Drafted by jackbillyeye • Government Oversight</p>
-          <p style="margin-top:1rem;"><strong>§ 101. Courtroom Decorum.</strong> Address judicial officers as "Your Honor." Contempt citations (§ 8-409) shall result in immediate bailiff custody.</p>
-          <p><strong>§ 201. State Bar Admission.</strong> Uniform Bar Exam requires 80% passing threshold for attorney certification.</p>
-          <p><strong>§ 401. Pursuit Protocol.</strong> PIT maneuvers restricted to under 35 MPH unless deadly force is authorized.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 15. BAR EXAM -->
+    <!-- 12. BAR EXAM -->
     <section id="pane-bar-exam" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
-          <h2 class="gov-card-title">Melview Uniform Bar & Civics Examination Self-Test</h2>
+          <h2 class="gov-card-title">Melview Uniform Bar Examination Self-Test</h2>
           <span class="badge badge-navy">80% PASSING THRESHOLD</span>
         </div>
         <form id="barExamForm">
@@ -602,13 +551,12 @@
   </main>
 
   <footer class="gov-footer">
-    <div class="footer-inner">
-      <div><strong style="color:#ffffff;">STATE OF MELVIEW OFFICIAL PORTAL</strong><br>Published under the authority of Drafted by jackbillyeye • Government Oversight</div>
-      <div>Supreme Legal Repository • Penal Code & Government Administration</div>
+    <div style="max-width:1400px; margin:0 auto; text-align:center;">
+      STATE OF MELVIEW OFFICIAL PORTAL • INDEPENDENT ELECTORAL COMMISSION & STATUTORY REPOSITORY
     </div>
   </footer>
 
-  <!-- INTEGRATED LOCAL STATUTORY QUERY ASSISTANT (NO API KEY REQUIRED) -->
+  <!-- ZERO-API LOCAL STATUTORY ASSISTANT -->
   <div id="aiChatWidget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: var(--font-sans);">
     <button id="aiToggleBtn" onclick="toggleAIChat()" style="background: var(--gov-navy); color: #ffffff; border: 2px solid var(--gov-gold); border-radius: 50px; padding: 12px 20px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px;">
       ⚖️ State Legal Assistant
@@ -616,7 +564,7 @@
 
     <div id="aiChatWindow" style="display: none; width: 380px; height: 500px; background: #0b1319; border: 2px solid var(--gov-blue-primary); border-radius: 8px; flex-direction: column; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.6); margin-top: 10px;">
       <div style="background: var(--gov-navy); color: #ffffff; padding: 12px 16px; border-bottom: 2px solid var(--gov-gold); font-size: 0.85rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center;">
-        <span>State of Melview Legal Query Engine</span>
+        <span>State Legal Query Engine</span>
         <button onclick="toggleAIChat()" style="background: none; border: none; color: #94a3b8; font-size: 1.1rem; cursor: pointer;">✕</button>
       </div>
       <div style="padding: 6px 12px; background: #111c24; border-bottom: 1px solid #1e293b; display: flex; gap: 6px; overflow-x: auto; font-size: 0.75rem;">
@@ -669,8 +617,8 @@
         reply = "<strong>§ 8-208 Grand Theft Auto (GTA):</strong> Class B Felony. Fine: $1,000. Custody: 10 - 15 Mins. Sanctions: Vehicle recovery and 4 driver license points.";
       } else if (q.includes("murder") || q.includes("8-109")) {
         reply = "<strong>§ 8-109 First-Degree Premeditated Murder:</strong> Capital Felony. Fine: $5,000. Custody: 30 Mins (Maximum Statutory Cap). Sanctions: Permanent civic disqualification.";
-      } else if (q.includes("bar exam") || q.includes("passing")) {
-        reply = "<strong>State Bar Admission (MCR-2026-01 § 201):</strong> Passing the Melview Uniform Bar Examination requires an <strong>80% threshold</strong> for certification.";
+      } else if (q.includes("election") || q.includes("vote") || q.includes("ballot")) {
+        reply = "<strong>Electoral Process (Article X & SB 100):</strong> Voting is conducted via the official Electronic Ballot Vault. All electors must be verified 14 days prior to ballot open; alt-account exploitation carries a Capital Felony penalty under § 8-608.";
       }
 
       setTimeout(() => {
@@ -680,7 +628,7 @@
     }
 
     function downloadDoc(filename, content) {
-      const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body style="font-family:serif; line-height:1.6; padding:2rem;"><h2>STATE OF MELVIEW OFFICIAL JUDICIAL RECORD</h2><hr/><pre style="font-family:inherit; white-space:pre-wrap;">${content}</pre></body></html>`;
+      const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body style="font-family:serif; line-height:1.6; padding:2rem;"><h2>STATE OF MELVIEW OFFICIAL RECORD</h2><hr/><pre style="font-family:inherit; white-space:pre-wrap;">${content}</pre></body></html>`;
       const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
       const downloadLink = document.createElement('a');
       downloadLink.href = URL.createObjectURL(blob);
@@ -707,51 +655,31 @@
       if (targetBtn) targetBtn.classList.add('active');
     };
 
+    let ELECTION_BALLOTS = JSON.parse(localStorage.getItem('melview_election_ballots')) || [];
+
     let JUDICIAL_ORDERS = JSON.parse(localStorage.getItem('melview_court_orders')) || [
       { id: "WR-2026-904", target: "Marcus_Vance", type: "Search Warrant (Div 5 Contraband)", judge: "Chief Justice Sterling", grounds: "Probable cause sworn under MCR-2026-01 Title III regarding illegal weapons distribution.", command: "Commanding peace officers to search premises at North District Warehouse 4.", status: "Active Judicial Order", date: "2026-08-25" },
       { id: "ORD-2026-102", target: "Alexander_Kane", type: "Appellate Judgment & Order", judge: "Associate Justice Vance", grounds: "Review of traffic stop validity under Article I Section 6.", command: "Reversing lower citation and remitting assessed fines.", status: "Active Judicial Order", date: "2026-08-26" }
     ];
 
     let MASTER_DOCKET = JSON.parse(localStorage.getItem('melview_docket')) || [
-      { id: "AP-2026-1042", appellant: "John_Miller_RP", category: "Traffic Citation Contest", ref: "§ 8-303 (Reckless Driving)", time: "2026-08-25 14:20 UTC", status: "Accepted", justiceNotes: "Fine reduced to $150." },
-      { id: "AP-2026-1088", appellant: "Alexander_Kane", category: "Criminal Conviction Appeal", ref: "§ 8-208 (GTA)", time: "2026-08-25 18:45 UTC", status: "Denied", justiceNotes: "Stop supported by probable cause." }
+      { id: "AP-2026-1042", appellant: "John_Miller_RP", category: "Traffic Citation Contest", ref: "§ 8-303 (Reckless Driving)", time: "2026-08-25 14:20 UTC", status: "Accepted", justiceNotes: "Fine reduced to $150." }
     ];
 
     let BILL_TRACKER = JSON.parse(localStorage.getItem('melview_bill_tracker')) || [
-      { id: "SB 100", title: "State Electoral Act of 2026", sponsor: "Gov Oversight", stage: "Enacted Law", tally: "7-0 (Unanimous)", gov: "Signed & Promulgated" },
-      { id: "SB 101", title: "Legislative Organization & Ethics Act", sponsor: "Sen. Vance", stage: "Enacted Law", tally: "6-1 (Passed)", gov: "Signed & Promulgated" },
-      { id: "SB 102", title: "Judiciary Organization & Legal Services Act", sponsor: "Judicial Admin", stage: "Enacted Law", tally: "7-0 (Unanimous)", gov: "Signed & Promulgated" },
-      { id: "SB 103", title: "State Penal Code & Standards Act", sponsor: "Public Safety", stage: "Enacted Law", tally: "7-0 (Unanimous)", gov: "Signed & Promulgated" },
-      { id: "SB 104", title: "Executive Cabinet Governance Act", sponsor: "Exec Chamber", stage: "Enacted Law", tally: "5-2 (Passed)", gov: "Signed & Promulgated" }
-    ];
-
-    let AGENCY_REGISTER = JSON.parse(localStorage.getItem('melview_agency_register')) || [
-      { id: "ADM-2026-01", agency: "Department of Transportation", title: "Route 1 Transit Speed Enforcement", date: "2026-08-20", auth: "Title 6 Executive Code", scope: "Automated speed monitoring on Northway Corridor." },
-      { id: "ADM-2026-02", agency: "Independent Electoral Commission", title: "14-Day Voter Cutoff Proclamation", date: "2026-08-22", auth: "SB 100 § 301", scope: "Anti-alt verification window established." }
+      { id: "SB 100", title: "State Electoral Act of 2026", sponsor: "Gov Oversight", stage: "Enacted Law", tally: "7-0 (Unanimous)", gov: "Signed & Promulgated" }
     ];
 
     let PUBLIC_REGISTRY = JSON.parse(localStorage.getItem('melview_registry')) || [
-      { id: "CCW-2026-001", name: "State Resident Permit", cat: "Concealed Carry (CCW)", score: "State Verified", exp: "2026-12-31", status: "Active & Certified" },
-      { id: "CCW-2026-002", name: "John_Miller_RP", cat: "Concealed Carry (CCW)", score: "State Verified", exp: "2026-12-31", status: "Active & Certified" },
-      { id: "BAR-2026-101", name: "Rachel Sterling", cat: "State Bar License", score: "88% (Passed)", exp: "2027-01-01", status: "Active & Certified" }
-    ];
-
-    let PRIVATE_PERSONNEL = JSON.parse(localStorage.getItem('melview_master_personnel')) || [
-      { id: "EMP-2026-001", user: "judge1", dept: "Judiciary (Supreme Court)", role: "Chief Justice / Presiding Officer", clearance: "Level 5 Executive Authority", status: "Active" },
-      { id: "EMP-2026-002", user: "law3", dept: "Executive / Senate", role: "Governor / Legislative Oversight", clearance: "Level 5 Executive Authority", status: "Active" },
-      { id: "EMP-2026-003", user: "Colonel_Davis", dept: "Melview State Police", role: "State Police Commissioner", clearance: "Level 4 Constitutional Officer", status: "Active" },
-      { id: "EMP-2026-004", user: "Sheriff_Hopkins", dept: "County Sheriff Office", role: "Elected County Sheriff", clearance: "Level 4 Constitutional Officer", status: "Active" },
-      { id: "EMP-2026-005", user: "Attorney_General_Vance", dept: "Department of Justice", role: "Attorney General", clearance: "Level 5 Executive Authority", status: "Active" }
+      { id: "CCW-2026-001", name: "State Resident Permit", cat: "Concealed Carry (CCW)", score: "State Verified", exp: "2026-12-31", status: "Active & Certified" }
     ];
 
     let EXEC_ORDERS = JSON.parse(localStorage.getItem('melview_eos')) || [
-      { num: "EO-2026-001", title: "Interagency Security Taskforce", dept: "Melview State Police / Sheriff", date: "2026-08-20", status: "Active Enactment", dir: "Joint patrols on Route 1." },
-      { num: "EO-2026-002", title: "Transit Infrastructure Maintenance", dept: "Department of Transportation", date: "2026-08-22", status: "Active Enactment", dir: "Road maintenance speed controls." }
+      { num: "EO-2026-001", title: "Interagency Security Taskforce", dept: "Melview State Police / Sheriff", date: "2026-08-20", status: "Active Enactment", dir: "Joint patrols on Route 1." }
     ];
 
     let FOIA_REQUESTS = JSON.parse(localStorage.getItem('melview_foia')) || [
-      { id: "FOIA-2026-01", req: "Melview Daily Press", dept: "Melview State Police", date: "2026-08-25 10:00 UTC", deadline: "2026-08-28 10:00 UTC", status: "In Review (Within 72h)" },
-      { id: "FOIA-2026-02", req: "Citizen Defense League", dept: "Department of Justice", date: "2026-08-24 16:00 UTC", deadline: "2026-08-27 16:00 UTC", status: "Fulfilled / Published" }
+      { id: "FOIA-2026-01", req: "Melview Daily Press", dept: "Melview State Police", date: "2026-08-25 10:00 UTC", deadline: "2026-08-28 10:00 UTC", status: "In Review (Within 72h)" }
     ];
 
     function renderCourtOrders() {
@@ -767,9 +695,7 @@
           <td>${ord.judge}</td>
           <td style="font-size:0.8rem;">${ord.grounds}<br><em>${ord.command || ''}</em></td>
           <td><span class="badge badge-success">${ord.status}</span></td>
-          <td>
-            <button type="button" class="btn btn-secondary" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="downloadDoc('${ord.id}_CertifiedOrder', 'SUPREME COURT OF THE STATE OF MELVIEW\\n\\nOFFICIAL CERTIFIED COURT ORDER: ${ord.id}\\nInstrument: ${ord.type}\\nTarget / Subject: ${ord.target}\\nPresiding Judge: ${ord.judge}\\n\\nLEGAL GROUNDS & PROBABLE CAUSE:\\n${ord.grounds}\\n\\nJUDICIAL COMMAND:\\n${ord.command || 'Commanding compliance by all peace officers.'}')">💾 Download (.doc)</button>
-          </td>
+          <td><button type="button" class="btn btn-secondary" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="downloadDoc('${ord.id}_CertifiedOrder', 'SUPREME COURT OF THE STATE OF MELVIEW\\n\\nOFFICIAL CERTIFIED COURT ORDER: ${ord.id}\\nInstrument: ${ord.type}\\nTarget / Subject: ${ord.target}\\nPresiding Judge: ${ord.judge}\\n\\nLEGAL GROUNDS & PROBABLE CAUSE:\\n${ord.grounds}\\n\\nJUDICIAL COMMAND:\\n${ord.command || 'Commanding compliance by all peace officers.'}')">💾 Download (.doc)</button></td>
         `;
         tbody.appendChild(row);
       });
@@ -789,9 +715,7 @@
           <td style="font-family:var(--font-mono); font-size:0.75rem;">${item.time}</td>
           <td><span class="badge ${badgeClass}">${item.status.toUpperCase()}</span></td>
           <td style="font-size:0.8rem;">${item.justiceNotes || 'Under Review'}</td>
-          <td>
-            <button type="button" class="btn btn-secondary" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="downloadDoc('${item.id}_CaseRuling', 'STATE OF MELVIEW JUDICIAL DOCKET\\n\\nDocket ID: ${item.id}\\nAppellant: ${item.appellant}\\nCategory: ${item.category}\\nTimestamp: ${item.time}\\nStatus: ${item.status}\\n\\nJUDICIAL RULING & FINDINGS:\\n${item.justiceNotes || 'Pending final judgment.'}')">💾 Download (.doc)</button>
-          </td>
+          <td><button type="button" class="btn btn-secondary" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="downloadDoc('${item.id}_CaseRuling', 'STATE OF MELVIEW JUDICIAL DOCKET\\n\\nDocket ID: ${item.id}\\nAppellant: ${item.appellant}\\nCategory: ${item.category}\\nTimestamp: ${item.time}\\nStatus: ${item.status}\\n\\nJUDICIAL RULING & FINDINGS:\\n${item.justiceNotes || 'Pending final judgment.'}')">💾 Download (.doc)</button></td>
         `;
         tbody.appendChild(row);
       });
@@ -804,29 +728,6 @@
       BILL_TRACKER.forEach(b => {
         const row = document.createElement('tr');
         row.innerHTML = `<td><strong>${b.id}</strong></td><td>${b.title}</td><td>${b.sponsor}</td><td><span class="badge badge-navy">${b.stage}</span></td><td>${b.tally}</td><td><span class="badge badge-success">${b.gov}</span></td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    function renderAgencyRegisterTable() {
-      const tbody = document.getElementById('agencyRegisterTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      AGENCY_REGISTER.forEach(a => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${a.id}</strong></td><td>${a.agency}</td><td><strong>${a.title}</strong></td><td style="font-family:var(--font-mono);">${a.date}</td><td>${a.auth}</td><td style="font-size:0.8rem;">${a.scope}</td>`;
-        tbody.appendChild(row);
-      });
-    }
-
-    function renderPrivatePersonnelTable() {
-      const tbody = document.getElementById('privatePersonnelTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      PRIVATE_PERSONNEL.forEach(emp => {
-        let badgeClass = emp.status === 'Active' ? 'badge-success' : 'badge-danger';
-        const row = document.createElement('tr');
-        row.innerHTML = `<td><strong>${emp.id}</strong></td><td><strong>${emp.user}</strong></td><td>${emp.dept}</td><td>${emp.role}</td><td><span class="badge badge-navy">${emp.clearance}</span></td><td><span class="badge ${badgeClass}">${emp.status.toUpperCase()}</span></td>`;
         tbody.appendChild(row);
       });
     }
@@ -866,73 +767,49 @@
       });
     }
 
+    function updateElectionTally() {
+      const total = ELECTION_BALLOTS.length;
+      document.getElementById('tallyTotalCount').textContent = total;
+
+      let vance = 0; let sterling = 0;
+      let rachel = 0; let miller = 0; let cole = 0;
+
+      ELECTION_BALLOTS.forEach(b => {
+        if (b.gov.includes('Vance')) vance++;
+        if (b.gov.includes('Sterling')) sterling++;
+        if (b.senate.includes('Rachel')) rachel++;
+        if (b.senate.includes('Miller')) miller++;
+        if (b.senate.includes('Cole')) cole++;
+      });
+
+      const pVance = total ? Math.round((vance / total) * 100) : 0;
+      const pSterling = total ? Math.round((sterling / total) * 100) : 0;
+      const pRachel = total ? Math.round((rachel / total) * 100) : 0;
+      const pMiller = total ? Math.round((miller / total) * 100) : 0;
+      const pCole = total ? Math.round((cole / total) * 100) : 0;
+
+      document.getElementById('tally_vance').textContent = `${vance} votes (${pVance}%)`;
+      document.getElementById('tally_sterling').textContent = `${sterling} votes (${pSterling}%)`;
+      document.getElementById('tally_rachel').textContent = `${rachel} votes (${pRachel}%)`;
+      document.getElementById('tally_miller').textContent = `${miller} votes (${pMiller}%)`;
+      document.getElementById('tally_cole').textContent = `${cole} votes (${pCole}%)`;
+    }
+
     const PENAL_DATABASE = [
-      { code: "§ 8-101", name: "Verbal Harassment / Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Verbal warning; mute or temporary custody" },
-      { code: "§ 8-102", name: "Simple Assault / Non-Severe Battery", div: "1", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Civil restraining order; temporary weapon seizure" },
+      { code: "§ 8-101", name: "Verbal Harassment / Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Verbal warning; temporary custody" },
+      { code: "§ 8-102", name: "Simple Assault / Non-Severe Battery", div: "1", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Civil restraining order" },
       { code: "§ 8-103", name: "Aggravated Assault / Dangerous Weapon", div: "1", class: "Class B Felony", fine: 1000, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Weapon confiscation; CCW suspension" },
-      { code: "§ 8-104", name: "Assault / Battery on a Peace Officer", div: "1", class: "Class A Felony", fine: 2000, custody: "15 - 20 Mins", custodyNum: 20, sanction: "Firearm license revocation; felony indictment" },
+      { code: "§ 8-104", name: "Assault / Battery on a Peace Officer", div: "1", class: "Class A Felony", fine: 2000, custody: "15 - 20 Mins", custodyNum: 20, sanction: "Firearm license revocation; indictment" },
       { code: "§ 8-105", name: "Unlawful Imprisonment / Kidnapping", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 22 Mins", custodyNum: 22, sanction: "SWAT intervention; weapon seizure" },
-      { code: "§ 8-106", name: "Hostage Taking / Armed Extortion", div: "1", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Permanent firearm revocation; felony indictment" },
-      { code: "§ 8-107", name: "Vehicular Manslaughter", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Driver license revocation; vehicle impoundment" },
+      { code: "§ 8-106", name: "Hostage Taking / Armed Extortion", div: "1", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Permanent firearm revocation" },
+      { code: "§ 8-107", name: "Vehicular Manslaughter", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Driver license revocation" },
       { code: "§ 8-108", name: "Attempted Involuntary Manslaughter", div: "1", class: "Class A Felony", fine: 2500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Firearm confiscation; trial" },
-      { code: "§ 8-109", name: "First-Degree Premeditated Murder", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent civic disqualification; max custody" },
-      { code: "§ 8-110", name: "Mass Casualty Event / Armed Rampage", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent weapon blacklisting; max custody" },
-
-      { code: "§ 8-201", name: "Criminal Trespass on Private Land", div: "2", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Order to vacate premises immediately" },
-      { code: "§ 8-202", name: "Trespass into Restricted Government Area", div: "2", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Physical escort; search of person" },
-      { code: "§ 8-203", name: "Vandalism / Criminal Mischief", div: "2", class: "Misdemeanor", fine: 300, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Restitution order to property owner" },
-      { code: "§ 8-204", name: "Petty Larceny (< $500)", div: "2", class: "Misdemeanor", fine: 350, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Return of stolen assets / restitution" },
-      { code: "§ 8-205", name: "Grand Larceny (≥ $500)", div: "2", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Asset forfeiture; restitution to victim" },
-      { code: "§ 8-206", name: "Burglary / Breaking & Entering", div: "2", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Confiscation of lockpicks / tools" },
-      { code: "§ 8-207", name: "Armed Robbery (Store, Bank, Citizen)", div: "2", class: "Class A Felony", fine: 2500, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Firearm revocation; full asset seizure" },
+      { code: "§ 8-109", name: "First-Degree Premeditated Murder", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent civic disqualification" },
+      { code: "§ 8-110", name: "Mass Casualty Event / Armed Rampage", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent weapon blacklisting" },
       { code: "§ 8-208", name: "Grand Theft Auto (GTA)", div: "2", class: "Class B Felony", fine: 1000, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Vehicle recovery; 4 driver points" },
-      { code: "§ 8-209", name: "Arson / Unlawful Incendiary Ignition", div: "2", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Restitution; felony record" },
-      { code: "§ 8-210", name: "Extortion / Blackmail of Property", div: "2", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Restitution; judicial protection order" },
-
-      { code: "§ 8-301", name: "Minor Speeding (1 - 15 MPH Over)", div: "3", class: "Infraction", fine: 100, custody: "None", custodyNum: 0, sanction: "Traffic citation; 1 license point" },
-      { code: "§ 8-302", name: "Major Speeding (16 - 29 MPH Over)", div: "3", class: "Infraction", fine: 250, custody: "None", custodyNum: 0, sanction: "Traffic citation; 2 license points" },
-      { code: "§ 8-303", name: "Reckless / Careless Driving", div: "3", class: "Misdemeanor", fine: 500, custody: "5 Mins", custodyNum: 5, sanction: "Vehicle impoundment; 4 license points" },
-      { code: "§ 8-304", name: "Failure to Yield to Emergency Vehicle", div: "3", class: "Infraction", fine: 200, custody: "None", custodyNum: 0, sanction: "Traffic citation; driver warning" },
-      { code: "§ 8-305", name: "Failure to Stop at Red Signal / Sign", div: "3", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Traffic citation; 1 license point" },
-      { code: "§ 8-306", name: "Operating Unregistered/Stolen Vehicle", div: "3", class: "Misdemeanor", fine: 400, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Immediate vehicle towing & impound" },
-      { code: "§ 8-307", name: "Illegal Street Racing / Speed Exhibition", div: "3", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "30-day vehicle impound; suspension" },
-      { code: "§ 8-308", name: "Hit and Run (Property Damage)", div: "3", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Driver license suspension; restitution" },
-      { code: "§ 8-309", name: "Hit and Run (Bodily Injury / Death)", div: "3", class: "Class A Felony", fine: 2500, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Permanent driver revocation; indictment" },
-      { code: "§ 8-310", name: "Driving on Suspended License", div: "3", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Extended suspension; vehicle impound" },
-
-      { code: "§ 8-401", name: "Disorderly Conduct / Loitering", div: "4", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Order to disperse; citation" },
-      { code: "§ 8-402", name: "Failure to Disperse / Unlawful Assembly", div: "4", class: "Misdemeanor", fine: 350, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Physical detention; crowd dispersal" },
-      { code: "§ 8-403", name: "Failure to Comply with Peace Officer", div: "4", class: "Misdemeanor", fine: 300, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Physical detention; pat-down search" },
-      { code: "§ 8-404", name: "Fleeing / Eluding (Foot Pursuit)", div: "4", class: "Misdemeanor", fine: 600, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Search of person; tool confiscation" },
-      { code: "§ 8-405", name: "Fleeing / Eluding (Vehicular Pursuit)", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Mandatory vehicle impound; suspension" },
-      { code: "§ 8-406", name: "Resisting Arrest / Obstructing Police", div: "4", class: "Misdemeanor", fine: 500, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Physical restraint; weapon search" },
-      { code: "§ 8-407", name: "Resisting Arrest with Deadly Violence", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Weapon confiscation; felony record" },
-      { code: "§ 8-408", name: "False Reporting of Emergency / Fake 911", div: "4", class: "Misdemeanor", fine: 500, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Emergency service restitution fine" },
-      { code: "§ 8-409", name: "Contempt of Court / Disruption", div: "4", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Summary detention by Court Bailiff" },
-      { code: "§ 8-410", name: "Perjury / False Testimony Under Oath", div: "4", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "State Bar revocation; witness bar" },
-      { code: "§ 8-411", name: "Bribery of a Public Servant", div: "4", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Asset forfeiture; civic disqualification" },
-      { code: "§ 8-412", name: "Jailbreak / Assisting Escape", div: "4", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Lockdown order; high-security custody" },
-
-      { code: "§ 8-501", name: "Open Carry Without Valid Permit", div: "5", class: "Infraction", fine: 200, custody: "None", custodyNum: 0, sanction: "Temporary seizure until verification" },
-      { code: "§ 8-502", name: "Unlawful Concealed Carry (No CCW)", div: "5", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Firearm confiscation; CCW ban" },
-      { code: "§ 8-503", name: "Brandishing a Deadly Weapon", div: "5", class: "Misdemeanor", fine: 600, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Firearm seizure; CCW revocation" },
-      { code: "§ 8-504", name: "Unlawful Discharge in City Limits", div: "5", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Firearm confiscation; noise fine" },
-      { code: "§ 8-505", name: "Possession of Military-Grade Weapon", div: "5", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Permanent weapon destruction; felony" },
-      { code: "§ 8-506", name: "Possession of Controlled Contraband", div: "5", class: "Misdemeanor", fine: 400, custody: "5 Mins", custodyNum: 5, sanction: "Contraband seizure & destruction" },
-      { code: "§ 8-507", name: "Trafficking of Controlled Contraband", div: "5", class: "Class B Felony", fine: 1800, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Asset seizure; vehicle impoundment" },
-      { code: "§ 8-508", name: "Illegal Weapons Trafficking", div: "5", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Total inventory seizure; firearms ban" },
-      { code: "§ 8-509", name: "Possession of Explosive Devices", div: "5", class: "Class A Felony", fine: 4000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "EOD bomb squad seizure; indictment" },
-
-      { code: "§ 8-601", name: "Impersonation of Public Official / Officer", div: "6", class: "Class A Felony", fine: 2500, custody: "15 - 20 Mins", custodyNum: 20, sanction: "Immediate rank removal; blacklisting" },
-      { code: "§ 8-602", name: "Official Misconduct / Abuse of Power", div: "6", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Removal from office; disciplinary trial" },
-      { code: "§ 8-603", name: "Misuse of Admin Permissions", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent rank removal; Owner referral" },
-      { code: "§ 8-604", name: "Unauthorized Voter Log Access", div: "6", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Removal from post; civic ban" },
-      { code: "§ 8-605", name: "Deprivation of Rights Under Color of Law", div: "6", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Permanent law enforcement termination" },
-      { code: "§ 8-606", name: "Official Extortion / Shakedown", div: "6", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Asset forfeiture; termination & disbarment" },
-      { code: "§ 8-607", name: "Falsification of Official Audit Logs", div: "6", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Permanent civil service ban; indictment" },
-      { code: "§ 8-608", name: "Electoral Fraud / Alt Exploitation", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Voiding of election; permanent ban" },
-      { code: "§ 8-609", name: "Leak of Confidential Records", div: "6", class: "Class B Felony", fine: 2000, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Clearance revocation; termination" },
-      { code: "§ 8-610", name: "High Treason / Armed Insurrection", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Impeachment; total civic ban" }
+      { code: "§ 8-303", name: "Reckless / Careless Driving", div: "3", class: "Misdemeanor", fine: 500, custody: "5 Mins", custodyNum: 5, sanction: "Vehicle impoundment; 4 points" },
+      { code: "§ 8-405", name: "Fleeing / Eluding (Vehicular Pursuit)", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Mandatory vehicle impound" },
+      { code: "§ 8-608", name: "Electoral Fraud / Alt Exploitation", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Voiding of election; permanent ban" }
     ];
 
     function renderPenalTable(items = PENAL_DATABASE) {
@@ -976,18 +853,13 @@
       const select = document.getElementById('calcOffenseSelect');
       if (!select) return;
       const selectedOpts = Array.from(select.selectedOptions);
-      let totalFine = 0;
-      let totalCustody = 0;
-
+      let totalFine = 0; let totalCustody = 0;
       selectedOpts.forEach(opt => {
         const item = PENAL_DATABASE[opt.value];
-        totalFine += item.fine;
-        totalCustody += item.custodyNum;
+        totalFine += item.fine; totalCustody += item.custodyNum;
       });
-
       document.getElementById('calcTotalCount').textContent = selectedOpts.length;
       document.getElementById('calcTotalFine').textContent = `$${totalFine.toLocaleString()}`;
-
       const capNotice = document.getElementById('calcCapNotice');
       if (totalCustody > 30) {
         document.getElementById('calcTotalTime').textContent = "30 Mins (Capped)";
@@ -1010,6 +882,27 @@
     };
 
     function attachFormListeners() {
+      const voteForm = document.getElementById('publicVoteForm');
+      if (voteForm) {
+        voteForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const voter = document.getElementById('voterName').value.trim();
+          const gov = document.getElementById('voteGov').value;
+          const senate = document.getElementById('voteSenate').value;
+
+          if (ELECTION_BALLOTS.find(b => b.voter.toLowerCase() === voter.toLowerCase())) {
+            alert(`Error: A ballot has already been cast for '${voter}'. Duplicate voting is prohibited under § 8-608.`);
+            return;
+          }
+
+          ELECTION_BALLOTS.push({ voter, gov, senate, timestamp: new Date().toISOString() });
+          localStorage.setItem('melview_election_ballots', JSON.stringify(ELECTION_BALLOTS));
+          updateElectionTally();
+          alert(`Official ballot recorded into the Vault for ${voter}. Thank you for voting!`);
+          voteForm.reset();
+        });
+      }
+
       const foiaForm = document.getElementById('foiaSubmitForm');
       if (foiaForm) {
         foiaForm.addEventListener('submit', function(e) {
@@ -1063,25 +956,13 @@
       renderCourtOrders();
       renderPublicDocket();
       renderBillTrackerTable();
-      renderAgencyRegisterTable();
       renderExecOrdersTable();
       renderFOIATable();
       renderRegistryTable(PUBLIC_REGISTRY);
-      renderPrivatePersonnelTable();
       renderPenalTable(PENAL_DATABASE);
       initCalculator();
+      updateElectionTally();
     });
-
-    renderCourtOrders();
-    renderPublicDocket();
-    renderBillTrackerTable();
-    renderAgencyRegisterTable();
-    renderExecOrdersTable();
-    renderFOIATable();
-    renderRegistryTable(PUBLIC_REGISTRY);
-    renderPrivatePersonnelTable();
-    renderPenalTable(PENAL_DATABASE);
-    initCalculator();
   </script>
 </body>
 </html>
