@@ -23,12 +23,10 @@
       --gov-white: #ffffff;
       
       --font-serif: "Merriweather", "Georgia", "Times New Roman", serif;
-      --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --font-mono: "Roboto Mono", Consolas, Monaco, "Courier New", monospace;
+      --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "Roboto Mono", Consolas, Monaco, monospace;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background-color: var(--gov-gray-light);
       color: var(--gov-text);
@@ -38,8 +36,6 @@
       flex-direction: column;
       min-height: 100vh;
     }
-
-    /* Live Emergency Broadcast Banner */
     #liveEASBanner {
       display: none;
       background-color: #7f1d1d;
@@ -48,7 +44,6 @@
       padding: 0.75rem 1.5rem;
       font-weight: 700;
       font-size: 0.9rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
     .eas-flex {
       max-width: 1400px;
@@ -58,8 +53,6 @@
       align-items: center;
       gap: 1rem;
     }
-
-    /* Top Federal Trust Banner */
     .usa-banner {
       background-color: #f0f0f0;
       border-bottom: 1px solid var(--gov-gray-mid);
@@ -75,14 +68,11 @@
       margin: 0 auto;
     }
     .usa-flag-svg { width: 16px; height: 11px; }
-
-    /* Official Government Header */
     header.gov-header {
       background-color: var(--gov-navy);
       border-bottom: 4px solid var(--gov-gold);
       color: var(--gov-white);
       padding: 1.25rem 2rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
     .header-inner {
       max-width: 1400px;
@@ -93,308 +83,83 @@
       flex-wrap: wrap;
       gap: 1.5rem;
     }
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      cursor: pointer;
-    }
+    .brand-block { display: flex; align-items: center; gap: 1.25rem; cursor: pointer; }
     .state-seal {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
+      width: 58px; height: 58px; border-radius: 50%;
       background: radial-gradient(circle, #2a4359 0%, #111c24 100%);
       border: 2px solid var(--gov-gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gov-gold);
-      font-family: var(--font-serif);
-      font-weight: 700;
-      font-size: 1.6rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gov-gold); font-family: var(--font-serif);
+      font-weight: 700; font-size: 1.6rem;
     }
     .brand-title h1 {
-      font-family: var(--font-serif);
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: #ffffff;
-      line-height: 1.2;
+      font-family: var(--font-serif); font-size: 1.45rem;
+      font-weight: 700; text-transform: uppercase; line-height: 1.2;
     }
-    .brand-title p {
-      font-size: 0.8rem;
-      color: #b0c4de;
-      letter-spacing: 0.02em;
-    }
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+    .brand-title p { font-size: 0.8rem; color: #b0c4de; }
+    .header-right { display: flex; align-items: center; gap: 1rem; }
     .live-clock-pill {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      background: #111c24;
-      border: 1px solid var(--gov-blue-primary);
-      padding: 0.4rem 0.85rem;
-      border-radius: 3px;
-      color: #a8d1ff;
+      font-family: var(--font-mono); font-size: 0.8rem;
+      background: #111c24; border: 1px solid var(--gov-blue-primary);
+      padding: 0.4rem 0.85rem; border-radius: 3px; color: #a8d1ff;
     }
-
-    /* Navigation Bar */
-    nav.gov-nav {
-      background-color: var(--gov-navy-dark);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .nav-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-    }
+    nav.gov-nav { background-color: var(--gov-navy-dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; }
     .nav-tab-btn {
-      background: none;
-      border: none;
-      border-top: 3px solid transparent;
-      color: #e1e7ec;
-      padding: 0.85rem 0.95rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      transition: all 0.2s ease;
-      font-family: var(--font-sans);
+      background: none; border: none; border-top: 3px solid transparent;
+      color: #e1e7ec; padding: 0.85rem 0.95rem; font-size: 0.8rem;
+      font-weight: 600; cursor: pointer; display: flex; align-items: center;
+      gap: 0.35rem; transition: all 0.2s ease; font-family: var(--font-sans);
+      text-decoration: none;
     }
     .nav-tab-btn:hover { background-color: var(--gov-navy); color: #ffffff; }
     .nav-tab-btn.active {
-      background-color: var(--gov-white);
-      color: var(--gov-navy);
-      border-top: 3px solid var(--gov-blue-primary);
-      font-weight: 700;
+      background-color: var(--gov-white); color: var(--gov-navy);
+      border-top: 3px solid var(--gov-blue-primary); font-weight: 700;
     }
-    .nav-tab-btn.secure-tab-btn {
-      background-color: #241911;
-      border-top: 3px solid var(--gov-gold);
-      color: var(--gov-gold-light);
-    }
-    .nav-tab-btn.secure-tab-btn.active {
-      background-color: var(--gov-white);
-      color: #704700;
-      border-top: 3px solid var(--gov-gold);
-    }
+    .nav-tab-btn.docs-tab-btn { background-color: #1e3a5f; color: #93c5fd; }
+    .nav-tab-btn.secure-tab-btn { background-color: #241911; border-top: 3px solid var(--gov-gold); color: var(--gov-gold-light); }
+    .nav-tab-btn.secure-tab-btn.active { background-color: var(--gov-white); color: #704700; border-top: 3px solid var(--gov-gold); }
 
-    .main-wrapper {
-      max-width: 1400px;
-      margin: 1.5rem auto;
-      padding: 0 1.5rem;
-      flex: 1;
-      width: 100%;
-    }
-
+    .main-wrapper { max-width: 1400px; margin: 1.5rem auto; padding: 0 1.5rem; flex: 1; width: 100%; }
     .official-oversight-stamp {
-      background-color: var(--gov-gold-light);
-      border-left: 4px solid var(--gov-gold);
-      padding: 0.65rem 1.25rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #634a00;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
+      background-color: var(--gov-gold-light); border-left: 4px solid var(--gov-gold);
+      padding: 0.65rem 1.25rem; margin-bottom: 1.5rem; font-size: 0.8rem;
+      font-weight: 600; color: #634a00; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
     }
-
     .gov-card {
-      background: var(--gov-white);
-      border: 1px solid var(--gov-gray-mid);
-      border-radius: 4px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      background: var(--gov-white); border: 1px solid var(--gov-gray-mid);
+      border-radius: 4px; padding: 2rem; margin-bottom: 1.5rem;
     }
     .gov-card-header {
-      border-bottom: 2px solid var(--gov-navy);
-      padding-bottom: 0.85rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.75rem;
+      border-bottom: 2px solid var(--gov-navy); padding-bottom: 0.85rem;
+      margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;
     }
-    .gov-card-title {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      color: var(--gov-navy);
-      font-weight: 700;
-    }
-
+    .gov-card-title { font-family: var(--font-serif); font-size: 1.35rem; color: var(--gov-navy); font-weight: 700; }
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
+    .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .metric-card { background: var(--gov-white); border: 1px solid var(--gov-gray-mid); border-top: 4px solid var(--gov-blue-primary); padding: 1.25rem; border-radius: 4px; }
+    .metric-number { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--gov-navy); margin-top: 0.25rem; }
+    .metric-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gov-gray-dark); font-weight: 700; }
 
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .metric-card {
-      background: var(--gov-white);
-      border: 1px solid var(--gov-gray-mid);
-      border-top: 4px solid var(--gov-blue-primary);
-      padding: 1.25rem;
-      border-radius: 4px;
-    }
-    .metric-number {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--gov-navy);
-      margin-top: 0.25rem;
-    }
-    .metric-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--gov-gray-dark);
-      font-weight: 700;
-    }
-
-    .document-reader-box {
-      background-color: var(--gov-white);
-      border: 1px solid var(--gov-gray-mid);
-      padding: 3rem;
-      font-family: var(--font-serif);
-      color: #212121;
-      line-height: 1.85;
-      font-size: 1rem;
-      max-height: 750px;
-      overflow-y: auto;
-      border-radius: 4px;
-      box-shadow: inset 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .document-reader-box h2 {
-      font-family: var(--font-serif);
-      font-size: 1.45rem;
-      color: var(--gov-navy);
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 0.25rem;
-    }
-    .document-reader-box .doc-subtitle {
-      font-family: var(--font-sans);
-      font-size: 0.85rem;
-      text-align: center;
-      color: var(--gov-gray-dark);
-      margin-bottom: 2rem;
-    }
-    .document-reader-box h3 {
-      font-family: var(--font-sans);
-      font-size: 1.15rem;
-      color: var(--gov-blue-dark);
-      margin: 2rem 0 0.5rem 0;
-      border-bottom: 1px solid var(--gov-gray-mid);
-      padding-bottom: 0.35rem;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-    .document-reader-box p { margin-bottom: 1rem; text-align: justify; }
-    .document-reader-box ul, .document-reader-box ol { margin-left: 2rem; margin-bottom: 1rem; }
-    .document-reader-box li { margin-bottom: 0.5rem; }
-
-    .subnav-cluster {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-    }
-    .subnav-btn {
-      background: var(--gov-gray-light);
-      border: 1px solid var(--gov-gray-mid);
-      color: var(--gov-navy);
-      padding: 0.5rem 0.9rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    .subnav-btn.active {
-      background: var(--gov-blue-primary);
-      color: #ffffff;
-      border-color: var(--gov-blue-primary);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 1.25rem;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-    .form-group label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--gov-navy);
-      text-transform: uppercase;
-    }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; color: var(--gov-navy); text-transform: uppercase; }
     .gov-input, .gov-select {
-      background-color: var(--gov-white);
-      border: 1px solid var(--gov-gray-dark);
-      color: var(--gov-text);
-      padding: 0.65rem 0.85rem;
-      border-radius: 3px;
-      font-size: 0.9rem;
-      font-family: var(--font-sans);
+      background-color: var(--gov-white); border: 1px solid var(--gov-gray-dark);
+      color: var(--gov-text); padding: 0.65rem 0.85rem; border-radius: 3px; font-size: 0.9rem; font-family: var(--font-sans);
     }
     .gov-input:focus, .gov-select:focus { outline: 2px solid var(--gov-blue-primary); }
     textarea.gov-input { min-height: 100px; resize: vertical; }
 
-    .table-container {
-      overflow-x: auto;
-      border: 1px solid var(--gov-gray-mid);
-      border-radius: 3px;
-    }
-    table.gov-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      text-align: left;
-      background: var(--gov-white);
-    }
-    table.gov-table th {
-      background-color: #f0f4f8;
-      color: var(--gov-navy);
-      font-weight: 700;
-      padding: 0.85rem 1rem;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      border-bottom: 2px solid var(--gov-gray-mid);
-    }
-    table.gov-table td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--gov-gray-mid);
-      vertical-align: middle;
-    }
+    .table-container { overflow-x: auto; border: 1px solid var(--gov-gray-mid); border-radius: 3px; }
+    table.gov-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; background: var(--gov-white); }
+    table.gov-table th { background-color: #f0f4f8; color: var(--gov-navy); font-weight: 700; padding: 0.85rem 1rem; text-transform: uppercase; font-size: 0.75rem; border-bottom: 2px solid var(--gov-gray-mid); }
+    table.gov-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--gov-gray-mid); vertical-align: middle; }
     table.gov-table tr:hover { background-color: #f9fbfd; }
 
-    .badge {
-      display: inline-block;
-      padding: 0.25rem 0.5rem;
-      border-radius: 3px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
+    .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
     .badge-navy { background: var(--gov-navy); color: #fff; }
     .badge-felony { background: #fbeae8; color: #b50909; border: 1px solid #f8cbc6; }
     .badge-misdemeanor { background: #fff1d2; color: #704700; border: 1px solid #fad980; }
@@ -404,255 +169,79 @@
     .badge-danger { background: #f2dede; color: #a94442; border: 1px solid #ebccd1; }
 
     .btn {
-      background-color: var(--gov-blue-primary);
-      color: #ffffff;
-      border: none;
-      padding: 0.65rem 1.25rem;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      border-radius: 3px;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--font-sans);
+      background-color: var(--gov-blue-primary); color: #ffffff; border: none;
+      padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      border-radius: 3px; display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans);
     }
     .btn:hover { background-color: var(--gov-blue-dark); }
     .btn-secondary { background-color: var(--gov-gray-dark); }
-    .btn-secondary:hover { background-color: #3d4551; }
     .btn-danger { background-color: var(--gov-red); }
     .btn-success { background-color: var(--gov-green); }
 
-    /* ========================================================================= */
-    /* BESPOKE DIVERGENT RESTRICTED WORKSTATION THEMES                            */
-    /* ========================================================================= */
-    .workstation-container {
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      margin-bottom: 2rem;
-    }
-    .workstation-topbar {
-      padding: 1.25rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .workstation-body {
-      padding: 2rem;
-    }
+    /* Workstation Containers */
+    .workstation-container { border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15); margin-bottom: 2rem; }
+    .workstation-topbar { padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .workstation-body { padding: 2rem; }
 
-    /* 1. JUDICIARY CM/ECF THEME */
-    .theme-judiciary {
-      background-color: #f8fafc;
-      border: 2px solid #334155;
-    }
-    .theme-judiciary .workstation-topbar {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      border-bottom: 3px solid var(--gov-gold);
-      color: #f8fafc;
-    }
-    .theme-judiciary .card-panel {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-left: 4px solid #3b82f6;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
+    .theme-judiciary { background-color: #f8fafc; border: 2px solid #334155; }
+    .theme-judiciary .workstation-topbar { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-bottom: 3px solid var(--gov-gold); color: #f8fafc; }
+    .theme-judiciary .card-panel { background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #3b82f6; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
 
-    /* 2. EXECUTIVE WHITE HOUSE SUITE THEME */
-    .theme-executive {
-      background-color: #fcfbf9;
-      border: 2px solid #854d0e;
-    }
-    .theme-executive .workstation-topbar {
-      background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
-      border-bottom: 3px solid #eab308;
-      color: #fef08a;
-    }
-    .theme-executive .card-panel {
-      background: #ffffff;
-      border: 1px solid #e7e5e4;
-      border-left: 4px solid #ca8a04;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
+    .theme-executive { background-color: #fcfbf9; border: 2px solid #854d0e; }
+    .theme-executive .workstation-topbar { background: linear-gradient(135deg, #1c1917 0%, #292524 100%); border-bottom: 3px solid #eab308; color: #fef08a; }
+    .theme-executive .card-panel { background: #ffffff; border: 1px solid #e7e5e4; border-left: 4px solid #ca8a04; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
 
-    /* 3. STATE POLICE CAD / NCIC DISPATCH THEME */
-    .theme-msp {
-      background-color: #090d16;
-      color: #e2e8f0;
-      border: 2px solid #1e3a8a;
-    }
-    .theme-msp .workstation-topbar {
-      background: #1e3a8a;
-      border-bottom: 3px solid #38bdf8;
-      color: #ffffff;
-    }
-    .theme-msp .card-panel {
-      background: #111827;
-      border: 1px solid #1e293b;
-      border-left: 4px solid #38bdf8;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      color: #f8fafc;
-    }
+    .theme-msp { background-color: #090d16; color: #e2e8f0; border: 2px solid #1e3a8a; }
+    .theme-msp .workstation-topbar { background: #1e3a8a; border-bottom: 3px solid #38bdf8; color: #ffffff; }
+    .theme-msp .card-panel { background: #111827; border: 1px solid #1e293b; border-left: 4px solid #38bdf8; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; color: #f8fafc; }
     .theme-msp .gov-input, .theme-msp .gov-select { background: #030712; color: #f8fafc; border-color: #334155; }
     .theme-msp .gov-table { background: #111827; color: #f8fafc; }
     .theme-msp .gov-table th { background: #030712; color: #38bdf8; border-color: #1e293b; }
     .theme-msp .gov-table td { border-color: #1e293b; }
 
-    /* 4. SHERIFF JAIL & PATROL MANAGEMENT (JMS) THEME */
-    .theme-mcso {
-      background-color: #fbf9f5;
-      border: 2px solid #78350f;
-    }
-    .theme-mcso .workstation-topbar {
-      background: #451a03;
-      border-bottom: 3px solid #d97706;
-      color: #fef3c7;
-    }
-    .theme-mcso .card-panel {
-      background: #ffffff;
-      border: 1px solid #fed7aa;
-      border-left: 4px solid #b45309;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
+    .theme-mcso { background-color: #fbf9f5; border: 2px solid #78350f; }
+    .theme-mcso .workstation-topbar { background: #451a03; border-bottom: 3px solid #d97706; color: #fef3c7; }
+    .theme-mcso .card-panel { background: #ffffff; border: 1px solid #fed7aa; border-left: 4px solid #b45309; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
 
-    /* 5. FEC INDEPENDENT ELECTIONS AUDIT THEME */
-    .theme-iec {
-      background-color: #f0fdf4;
-      border: 2px solid #166534;
-    }
-    .theme-iec .workstation-topbar {
-      background: #14532d;
-      border-bottom: 3px solid #22c55e;
-      color: #dcfce7;
-    }
-    .theme-iec .card-panel {
-      background: #ffffff;
-      border: 1px solid #bbf7d0;
-      border-left: 4px solid #16a34a;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
+    .theme-iec { background-color: #f0fdf4; border: 2px solid #166534; }
+    .theme-iec .workstation-topbar { background: #14532d; border-bottom: 3px solid #22c55e; color: #dcfce7; }
+    .theme-iec .card-panel { background: #ffffff; border: 1px solid #bbf7d0; border-left: 4px solid #16a34a; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
 
-    /* 6. DOT INTELLIGENT TRANSIT & HIGHWAY THEME */
-    .theme-dot {
-      background-color: #fffbeb;
-      border: 2px solid #92400e;
-    }
-    .theme-dot .workstation-topbar {
-      background: #78350f;
-      border-bottom: 3px solid #f59e0b;
-      color: #fef3c7;
-    }
-    .theme-dot .card-panel {
-      background: #ffffff;
-      border: 1px solid #fde68a;
-      border-left: 4px solid #d97706;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
+    .theme-dot { background-color: #fffbeb; border: 2px solid #92400e; }
+    .theme-dot .workstation-topbar { background: #78350f; border-bottom: 3px solid #f59e0b; color: #fef3c7; }
+    .theme-dot .card-panel { background: #ffffff; border: 1px solid #fde68a; border-left: 4px solid #d97706; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
 
-    /* 7. DOJ PROSECUTION & LEGAL ADVISORY THEME */
-    .theme-doj {
-      background-color: #fdf2f8;
-      border: 2px solid #831843;
-    }
-    .theme-doj .workstation-topbar {
-      background: #500724;
-      border-bottom: 3px solid #db2777;
-      color: #fce7f3;
-    }
-    .theme-doj .card-panel {
-      background: #ffffff;
-      border: 1px solid #fbcfe8;
-      border-left: 4px solid #be185d;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
+    .theme-doj { background-color: #fdf2f8; border: 2px solid #831843; }
+    .theme-doj .workstation-topbar { background: #500724; border-bottom: 3px solid #db2777; color: #fce7f3; }
+    .theme-doj .card-panel { background: #ffffff; border: 1px solid #fbcfe8; border-left: 4px solid #be185d; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
 
-    /* 8. MASTER OPM STATE RECORDS ARCHIVE THEME */
-    .theme-records {
-      background-color: #f8fafc;
-      border: 2px solid #0f172a;
-    }
-    .theme-records .workstation-topbar {
-      background: #020617;
-      border-bottom: 3px solid #64748b;
-      color: #94a3b8;
-    }
-    .theme-records .card-panel {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-left: 4px solid #0f172a;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
+    .theme-records { background-color: #f8fafc; border: 2px solid #0f172a; }
+    .theme-records .workstation-topbar { background: #020617; border-bottom: 3px solid #64748b; color: #94a3b8; }
+    .theme-records .card-panel { background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0f172a; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
 
     .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6); z-index: 1000; display: none;
+      align-items: center; justify-content: center; padding: 1rem;
     }
     .modal-dialog {
-      background: #ffffff;
-      border: 2px solid var(--gov-red);
-      border-radius: 4px;
-      padding: 1.5rem;
-      max-width: 550px;
-      width: 100%;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      background: #ffffff; border: 2px solid var(--gov-red);
+      border-radius: 4px; padding: 1.5rem; max-width: 550px; width: 100%;
     }
-
+    .audit-terminal-viewer {
+      background: #2d3748; color: #e2e8f0; font-family: var(--font-mono);
+      font-size: 0.8rem; padding: 1rem; border-radius: 4px; max-height: 250px; overflow-y: auto;
+    }
+    .audit-entry { margin-bottom: 0.35rem; padding-bottom: 0.35rem; border-bottom: 1px dotted #4a5568; }
     footer.gov-footer {
-      background-color: var(--gov-navy-dark);
-      color: #aebbc5;
-      border-top: 4px solid var(--gov-navy);
-      padding: 2.5rem 1.5rem;
-      font-size: 0.85rem;
-      margin-top: auto;
-    }
-    .footer-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    @media print {
-      body { background: #fff !important; color: #000 !important; }
-      .usa-banner, #liveEASBanner, header.gov-header, nav.gov-nav, .subnav-cluster, button, footer.gov-footer, .official-oversight-stamp {
-        display: none !important;
-      }
-      .main-wrapper { padding: 0 !important; margin: 0 !important; width: 100% !important; }
-      .document-reader-box { border: none !important; max-height: none !important; padding: 0 !important; }
+      background-color: var(--gov-navy-dark); color: #aebbc5;
+      border-top: 4px solid var(--gov-navy); padding: 2.5rem 1.5rem; font-size: 0.85rem; margin-top: auto;
     }
   </style>
 </head>
 <body>
 
-  <!-- Emergency Alert System Banner -->
+  <!-- EAS Live Banner -->
   <div id="liveEASBanner">
     <div class="eas-flex">
       <span>🚨 <strong>STATE EMERGENCY BROADCAST (SEOC):</strong> <span id="easBroadcastText">Route 1 Transit Corridor Closed Due to Active Major Tactical Police Operation.</span></span>
@@ -692,8 +281,7 @@
   <nav class="gov-nav">
     <div class="nav-inner">
       <button type="button" class="nav-tab-btn active" onclick="switchNav('dashboard')" id="nav-dashboard">Executive Dashboard</button>
-      <button type="button" class="nav-tab-btn" onclick="switchNav('constitution')" id="nav-constitution">State Constitution</button>
-      <button type="button" class="nav-tab-btn" onclick="switchNav('statutes')" id="nav-statutes">Statutory Slip Laws</button>
+      <a href="laws.html" class="nav-tab-btn docs-tab-btn">📜 Constitution & Slip Laws (Full Docs) ↗</a>
       <button type="button" class="nav-tab-btn" onclick="switchNav('penal-code')" id="nav-penal-code">Title 8 Penal Code</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('public-docket')" id="nav-public-docket">Supreme Court Docket</button>
       <button type="button" class="nav-tab-btn" onclick="switchNav('bail-schedule')" id="nav-bail-schedule">⚖️ Bail Risk Matrix</button>
@@ -712,7 +300,6 @@
   </nav>
 
   <main class="main-wrapper">
-
     <div class="official-oversight-stamp">
       <span>OFFICIAL STATUTORY RECORD • STATE OF MELVIEW • GENERAL ASSEMBLY</span>
       <span>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</span>
@@ -721,24 +308,11 @@
     <!-- 1. DASHBOARD -->
     <section id="pane-dashboard" class="tab-pane active">
       <div class="metric-grid">
-        <div class="metric-card">
-          <div class="metric-label">Organic Supreme Law</div>
-          <div class="metric-number">Constitution</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Enacted Slip Laws</div>
-          <div class="metric-number">SB 100–104</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Codified Penal Schedule</div>
-          <div class="metric-number">60 Offenses</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Statutory Custody Cap</div>
-          <div class="metric-number">30 Mins Max</div>
-        </div>
+        <div class="metric-card"><div class="metric-label">Organic Supreme Law</div><div class="metric-number">Constitution</div></div>
+        <div class="metric-card"><div class="metric-label">Enacted Slip Laws</div><div class="metric-number">SB 100–104</div></div>
+        <div class="metric-card"><div class="metric-label">Codified Penal Schedule</div><div class="metric-number">60 Offenses</div></div>
+        <div class="metric-card"><div class="metric-label">Statutory Custody Cap</div><div class="metric-number">30 Mins Max</div></div>
       </div>
-
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Welcome to the Official State Legal Repository</h2>
@@ -750,187 +324,19 @@
         <div style="background-color: var(--gov-blue-light); border-left: 4px solid var(--gov-blue-primary); padding: 1.25rem; font-size: 0.9rem;">
           <strong>Constitutional Supremacy & Rule of Law:</strong>
           <p style="margin-top: 0.35rem;">
-            Pursuant to Article II, Section 7, this Constitution is the supreme law of the State of Melview. All peace officers, magistrates, and executive officers are strictly bound by the statutory 30-minute maximum custodial limit under Title 8 (§ 8-103), warrant particularity under Title 7, and public transparency mandates under Article XV.
+            Pursuant to Article II, Section 7, the Constitution is the supreme law of the State of Melview. All peace officers, magistrates, and executive officers are strictly bound by the statutory 30-minute maximum custodial limit under Title 8 (§ 8-103), warrant particularity under Title 7, and public transparency mandates under Article XV.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- 2. FULL 100% UNABRIDGED CONSTITUTION -->
-    <section id="pane-constitution" class="tab-pane">
-      <div class="gov-card">
-        <div class="gov-card-header">
-          <h2 class="gov-card-title">Constitution of the State of Melview (Full Verbatim Text)</h2>
-          <button type="button" class="btn btn-secondary" onclick="window.print()">🖨️ Print Constitution</button>
-        </div>
-
-        <div class="document-reader-box" id="constitutionFullText">
-          <h2>CONSTITUTION OF THE STATE OF MELVIEW</h2>
-          <div class="doc-subtitle">
-            A practical state constitution for an organized roleplay government, adapted from Melview constitutional principles, United States constitutional structure, and established RO-state governance models.<br>
-            <strong>DRAFT VERSION 1.0 • 25 AUGUST 2026</strong><br>
-            <em>For use within the State of Melview roleplay community. This instrument governs roleplay government and does not create real-world legal rights or obligations.</em>
-          </div>
-
-          <h3>PREAMBLE</h3>
-          <p>We, the people and members of the State of Melview, in order to establish an orderly, realistic, accountable, and playable State; to preserve liberty while maintaining public order; to divide governmental power so that no single role may exercise all authority; to provide fair elections and dependable institutions; to secure due process and equal treatment; to recognize the practical authority of the community owners, developers, and administrators over the Roblox group and game; and to promote professional roleplay, public service, and responsible leadership, do hereby establish this Constitution as the supreme governing instrument of the State of Melview roleplay government.</p>
-          <p>This Constitution is designed as a community governance document. It is inspired by real constitutional systems, but each provision is adapted to the scale, mechanics, staffing realities, and platform rules of a Roblox roleplay state.</p>
-          <p>All officers, departments, agencies, courts, and members acting in a governmental capacity shall respect this Constitution. Where an operational group rule or platform requirement conflicts with roleplay law, the platform requirement and reserved community-management authority control.</p>
-
-          <h3>ARTICLE 1 - DECLARATION OF RIGHTS AND LIBERTIES</h3>
-          <p><strong>Section 1. INHERENT DIGNITY AND EQUALITY:</strong> All residents are entitled to equal treatment under the law. No governmental officer may deny a roleplay service, hearing, employment opportunity, or public benefit on arbitrary or discriminatory grounds.</p>
-          <p><strong>Section 2. FREEDOM OF EXPRESSION:</strong> Residents may criticize officers, departments, laws, and policies in good faith, subject to rules against harassment, threats, spam, impersonation, or disruption of official operations.</p>
-          <p><strong>Section 3. PEACEFUL ASSEMBLY:</strong> Residents may organize demonstrations, meetings, political campaigns, and civic events, provided they comply with lawful time, place, safety, and game-session rules.</p>
-          <p><strong>Section 4. DUE PROCESS:</strong> No resident shall be deprived of a roleplay license, public position, or governmental privilege for alleged misconduct without notice of the allegation and a reasonable opportunity to respond, except for temporary emergency measures necessary for immediate safety.</p>
-          <p><strong>Section 5. PRESUMPTION OF INNOCENCE:</strong> A person accused of a roleplay offense is presumed innocent until the competent authority makes a finding under applicable law.</p>
-          <p><strong>Section 6. SEARCH AND SEIZURE:</strong> Government agents shall not conduct unreasonable searches of roleplay persons, vehicles, or property. Warrants or recognized exceptions shall be required when the applicable code demands them.</p>
-          <p><strong>Section 7. COUNSEL AND REPRESENTATION:</strong> A person facing a serious roleplay criminal charge may request representation by an attorney or eligible public defender when the legal system provides such a service.</p>
-          <p><strong>Section 8. PRIVACY AND COMMUNICATIONS:</strong> Government personnel shall not misuse private community information, leaked logs, or administrative data for roleplay advantage. Confidential records shall be handled under community-management rules.</p>
-          <p><strong>Section 9. RIGHT TO PETITION:</strong> Residents may file complaints, requests, petitions, legislative proposals, and appeals to competent officials without retaliation for making the complaint in good faith.</p>
-          <p><strong>Section 10. RIGHT TO VOTE:</strong> Qualified citizens have the right to participate in elections, referenda, and recalls administered under this Constitution, subject to eligibility rules and platform limitations.</p>
-          <p><strong>Section 11. PROTECTION FROM ARBITRARY PUNISHMENT:</strong> No officer shall impose a penalty solely because a resident is unpopular, disagrees with leadership, or declines an improper order. Government action must have a constitutional, statutory, departmental, or valid emergency basis.</p>
-          <p><strong>Section 12. RIGHT TO A FAIR HEARING:</strong> Courts and administrative bodies shall provide a neutral decision-maker, notice of the issue, an opportunity to present relevant information, and a written or recorded decision where practicable.</p>
-
-          <h3>ARTICLE 2 - SOVEREIGNTY, CITIZENSHIP, AND GOVERNMENT STRUCTURE</h3>
-          <p><strong>Section 1. STATE STATUS:</strong> Melview shall be known officially as the State of Melview. Government authority is exercised for the benefit of the roleplay community and its residents.</p>
-          <p><strong>Section 2. SOURCE OF GOVERNMENT:</strong> All governmental roleplay authority ultimately derives from the community members participating in the State, subject to the reserved authority of the community owners, developers, and administrators recognized in Article III.</p>
-          <p><strong>Section 3. THREE BRANCHES:</strong> The roleplay government shall be divided into legislative, executive, and judicial branches. No officer shall simultaneously exercise incompatible powers of two branches except where this Constitution expressly provides for temporary or ceremonial duties.</p>
-          <p><strong>Section 4. LEGISLATIVE BRANCH:</strong> Legislative power is vested in the General Assembly, which may be organized as the State Senate and, when community size permits, a House of Representatives established by law. Until a House is separately constituted, the Senate may exercise the legislative power as a unicameral chamber under this Constitution.</p>
-          <p><strong>Section 5. EXECUTIVE BRANCH:</strong> Executive power is vested in the Governor and, when acting under this Constitution, the Lieutenant Governor and executive departments established by law.</p>
-          <p><strong>Section 6. JUDICIAL BRANCH:</strong> Judicial power is vested in the Supreme Court of Melview and such lower courts as the General Assembly establishes by law. Courts shall have authority to interpret this Constitution and laws within roleplay jurisdiction.</p>
-          <p><strong>Section 7. SUPREMACY:</strong> This Constitution is supreme within the roleplay government. A statute, executive order, department rule, municipal ordinance, or official action inconsistent with this Constitution is void to the extent of the conflict, subject to the review and reserved authority provisions of Article III.</p>
-
-          <h3>ARTICLE 3 - COMMUNITY MANAGEMENT AND DEVELOPER AUTHORITY</h3>
-          <p><strong>Section 1. RESERVED COMMUNITY AUTHORITY:</strong> The owner, developer, community executive, or authorized management body of the State of Melview Roblox community shall constitute the Community Management Authority. The exact group rank titles may change, but the functional authority remains reserved.</p>
-          <p><strong>Section 2. PLATFORM AND DEVELOPMENT POWERS:</strong> Community Management retains exclusive authority over Roblox group ownership, group permissions, game ownership and configuration, asset publishing, development, moderation, server infrastructure, administrative security, anti-exploit measures, platform compliance, and other non-roleplay matters.</p>
-          <p><strong>Section 3. PROTECTION OF THE COMMUNITY:</strong> Community Management may suspend, modify, or terminate a governmental office, department, election, or roleplay system when reasonably necessary to protect the game, the community, the group, the platform account, or the integrity of development. Such action is not a criminal or political judgment and shall not be represented as one.</p>
-          <p><strong>Section 4. ROLEPLAY GOVERNMENT AUTONOMY:</strong> Except for reserved matters, Community Management should permit the Governor, Legislature, Judiciary, and departments to conduct ordinary roleplay governance without unnecessary interference. Management may provide oversight, appoint transitional administrators, or intervene when necessary to preserve community integrity.</p>
-          <p><strong>Section 5. LIMITS ON ROLEPLAY POWERS:</strong> No constitutional office may claim that a roleplay warrant, bill, court judgment, or executive order compels Roblox itself, the group owner, developers, moderators, or external platforms to take an action. Roleplay authority exists only within the community's recognized roleplay environment.</p>
-          <p><strong>Section 6. CENTRAL ADMINISTRATIVE REVIEW:</strong> Community Management may establish a management review panel or designate specific senior group roles to review disputes involving group governance, rank permissions, developer conduct, or conflicts between roleplay government and platform requirements. Its decisions on reserved matters are final.</p>
-
-          <h3>ARTICLE 4 - THE GENERAL ASSEMBLY</h3>
-          <p><strong>Section 1. COMPOSITION:</strong> The General Assembly shall ordinarily operate through the State Senate. The Senate should contain five to nine Senators, with the exact number established by election law or group policy based on active membership. A House of Representatives may be created when population and activity justify a second chamber.</p>
-          <p><strong>Section 2. PRESIDENT OF THE SENATE:</strong> The Lieutenant Governor shall preside over the Senate. The Senate shall elect a President pro tempore from among its members to preside when the Lieutenant Governor is absent or when the Constitution assigns that office additional duties.</p>
-          <p><strong>Section 3. QUALIFICATIONS:</strong> A Senator must be a member of the State community in good standing, meet any minimum group-membership period set by election law, demonstrate basic knowledge of the Constitution and legislative procedure, and not be serving a disqualifying disciplinary sanction. Law may establish additional reasonable qualifications.</p>
-          <p><strong>Section 4. POWERS:</strong> The General Assembly may enact statutes; establish departments and lower courts; appropriate roleplay resources; regulate public agencies; authorize licenses and permits; confirm nominees where constitutionally required; investigate public administration; ratify or reject specified executive appointments; and propose constitutional amendments.</p>
-          <p><strong>Section 5. BILLS:</strong> A bill shall be introduced by a member, referred to an appropriate committee when practical, debated, and voted upon. A majority of members present and voting is sufficient for ordinary legislation unless this Constitution or statute requires a higher threshold.</p>
-          <p><strong>Section 6. GOVERNOR'S VETO:</strong> Every bill passed by the General Assembly shall be presented to the Governor. The Governor may sign it, veto it with written objections, or take no action. If the Governor neither signs nor vetoes a bill within five calendar days of presentation, the bill becomes law. The Senate may override a veto by a two-thirds vote of its full membership.</p>
-          <p><strong>Section 7. INVESTIGATIONS:</strong> The Assembly may issue subpoenas, request departmental records, hold hearings, and compel testimony within roleplay jurisdiction, subject to privacy, safety, and Community Management restrictions. No investigation may be used to bypass a court order or to punish a citizen merely for protected criticism.</p>
-          <p><strong>Section 8. BUDGET:</strong> No public department may receive a formal roleplay budget from the state treasury except pursuant to legislation or a valid temporary appropriation.</p>
-          <p><strong>Section 9. ETHICS OF LEGISLATORS:</strong> Members of the Assembly shall disclose material conflicts of interest, shall not use legislative office to obtain private advantages unavailable to ordinary residents, and shall not use hidden administrative permissions to alter a vote or legislative record.</p>
-
-          <h3>ARTICLE 5 - THE GOVERNOR AND LIEUTENANT GOVERNOR</h3>
-          <p><strong>Section 1. GOVERNOR:</strong> The Governor is the chief executive officer of the State and head of the Executive Branch. The Governor shall represent the State, execute laws, issue lawful executive orders, appoint executive officers where authorized, propose legislative priorities, and serve as commander in chief of the State Guard subject to this Constitution and law.</p>
-          <p><strong>Section 2. ELECTION AND TERM:</strong> The Governor and Lieutenant Governor shall be elected jointly for a term of four months unless election law establishes a different term not exceeding six months. A person may not serve more than two consecutive full terms unless a constitutional waiver is approved under Article XVI.</p>
-          <p><strong>Section 3. QUALIFICATIONS:</strong> A candidate must be in good standing, have maintained active participation in the community for the period specified by election law, have no disqualifying unresolved disciplinary matter, and pass any constitutional or civics assessment adopted by the Electoral Commission.</p>
-          <p><strong>Section 4. EXECUTIVE ORDERS:</strong> The Governor may issue executive orders to direct executive departments, implement existing law, organize executive operations, and address administrative matters. An executive order may not create a criminal offense, appropriate permanent funds, suspend a constitutional right, or contradict a statute or this Constitution.</p>
-          <p><strong>Section 5. APPOINTMENTS:</strong> The Governor may appoint department heads, commissioners, and other officials where law provides. Senate confirmation shall be required for the Attorney General, Supreme Court justices, and any other offices expressly designated by law.</p>
-          <p><strong>Section 6. STATE OF THE STATE:</strong> At least once each term, the Governor shall deliver a state of the State address or written report identifying executive priorities, departmental performance, major legislation, and community-wide issues requiring attention.</p>
-          <p><strong>Section 7. LIEUTENANT GOVERNOR:</strong> The Lieutenant Governor shall assist the Governor; preside over the Senate; succeed to the Governor's powers and duties upon vacancy; and perform other duties established by law. The Lieutenant Governor shall not exercise executive authority independent of the Governor except as provided by this Constitution.</p>
-          <p><strong>Section 8. SUCCESSION:</strong> Upon death, resignation, removal, permanent incapacitation, or disqualification of the Governor, the Lieutenant Governor shall become Governor for the remainder of the term. If both offices are vacant, succession shall proceed to the Secretary of the State, Attorney General, President pro tempore, Chief Justice, and then a temporary Acting Governor chosen by the Senate from eligible senior officials.</p>
-
-          <h3>ARTICLES 6 THROUGH 17</h3>
-          <p><strong>ARTICLE 6. EXECUTIVE DEPARTMENTS:</strong> Establishes the Governor's Cabinet, the Secretary of the State, department heads, and rulemaking authorities.<br>
-          <strong>ARTICLE 7. DEPARTMENT OF JUSTICE & LEGAL SERVICE:</strong> Governs the Attorney General, statewide prosecution, public defense services, State Bar admission (80% score), and law enforcement standards.<br>
-          <strong>ARTICLE 8. PUBLIC SAFETY & STATE GUARD:</strong> Defines State Police statewide command, elected County Sheriff local authority, Emergency Services, and the State Guard.<br>
-          <strong>ARTICLE 9. THE JUDICIARY:</strong> Supreme Court and District Court jurisdiction, judicial review, sworn search/arrest warrants, and appeals.<br>
-          <strong>ARTICLE 10. ELECTIONS & IEC:</strong> Regulates the independent Electoral Commission, 14-day anti-alt voter checks, candidate rules, and recall procedures.<br>
-          <strong>ARTICLE 11. LOCAL GOVERNMENT:</strong> Municipal ordinances, home rule boundaries, and intergovernmental mutual-aid pacts.<br>
-          <strong>ARTICLE 12. CIVIL SERVICE & OATHS:</strong> Mandatory oaths of office, civil service promotion standards, and official appointment rosters.<br>
-          <strong>ARTICLE 13. IMPEACHMENT & ETHICS:</strong> 2/3 legislative impeachment trials, administrative discipline, and anti-corruption mandates.<br>
-          <strong>ARTICLE 14. EMERGENCY POWERS:</strong> 14-day Gubernatorial emergency limits and continuity of government.<br>
-          <strong>ARTICLE 15. PUBLIC TRANSPARENCY:</strong> Public records access, open meetings, and the mandatory 72-hour FOIA clock.<br>
-          <strong>ARTICLE 16. AMENDMENTS:</strong> 2/3 Senate proposal and public ratification referenda.<br>
-          <strong>ARTICLE 17. FINAL PROVISIONS:</strong> Supersession of prior community instruments and platform roleplay governance scope.</p>
-
-          <h3>APPENDIX A - OPERATIONAL ROLE ALIGNMENT</h3>
-          <div class="table-container" style="margin-top: 0.5rem; margin-bottom: 1rem;">
-            <table class="gov-table">
-              <thead>
-                <tr>
-                  <th>Role Function</th>
-                  <th>Constitutional Place</th>
-                  <th>Primary Authority</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Community Owner / Developer / Senior Management</strong></td>
-                  <td>Community Management Authority</td>
-                  <td>Article III: platform, group, game, development, security, and reserved administrative authority.</td>
-                </tr>
-                <tr>
-                  <td><strong>Governor</strong></td>
-                  <td>Chief Executive</td>
-                  <td>Article V: executive leadership, appointments, executive orders, emergency powers, commander in chief.</td>
-                </tr>
-                <tr>
-                  <td><strong>Lieutenant Governor / Senate Presiding Officer</strong></td>
-                  <td>Executive + Legislative liaison</td>
-                  <td>Article V and IV: succession, Senate presidency, legislative procedure.</td>
-                </tr>
-                <tr>
-                  <td><strong>Secretary of the State</strong></td>
-                  <td>Chief administrative secretary</td>
-                  <td>Article VI and XV: official records, certifications, publication, administrative coordination.</td>
-                </tr>
-                <tr>
-                  <td><strong>Attorney General / DOJ Leadership</strong></td>
-                  <td>Chief legal service</td>
-                  <td>Article VII: state legal representation, prosecution supervision, legal advice, attorney standards.</td>
-                </tr>
-                <tr>
-                  <td><strong>Senators / Legislators</strong></td>
-                  <td>Legislative branch</td>
-                  <td>Article IV: legislation, budgets, investigations, confirmations, impeachment, amendments.</td>
-                </tr>
-                <tr>
-                  <td><strong>Chief Justice / Associate Justices</strong></td>
-                  <td>Supreme Court</td>
-                  <td>Article IX: constitutional review, final appeals, impeachment trials.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3>ADOPTION AND CERTIFICATION</h3>
-          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.8;">
-            <p>Date of Ratification: 25 August 2026</p>
-            <p>Authority: <strong>jackbillyeye • Government Oversight</strong></p>
-            <p style="margin-top: 0.5rem;"><em>"I certify that the foregoing document is the official constitutional text adopted for the State of Melview roleplay community, subject to the reserved authority of Community Management and the amendment procedures contained herein."</em></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. STATUTORY SLIP LAWS -->
-    <section id="pane-statutes" class="tab-pane">
-      <div class="gov-card">
-        <div class="gov-card-header">
-          <h2 class="gov-card-title">Enacted Statutory Slip Laws of the General Assembly</h2>
-          <button type="button" class="btn btn-secondary" onclick="downloadActiveBillWord()">💾 Export Active Bill (.doc)</button>
-        </div>
-
-        <div class="subnav-cluster">
-          <button type="button" class="subnav-btn active" onclick="loadBill('sb100')" id="subnav-sb100">SB 100 • Electoral Act (T.10)</button>
-          <button type="button" class="subnav-btn" onclick="loadBill('sb101')" id="subnav-sb101">SB 101 • Senate Procedure (T.4/15)</button>
-          <button type="button" class="subnav-btn" onclick="loadBill('sb102')" id="subnav-sb102">SB 102 • Judiciary Org (T.7/9)</button>
-          <button type="button" class="subnav-btn" onclick="loadBill('sb103')" id="subnav-sb103">SB 103 • Penal Code & Standards (T.8)</button>
-          <button type="button" class="subnav-btn" onclick="loadBill('sb104')" id="subnav-sb104">SB 104 • Executive Cabinet (T.6)</button>
-        </div>
-
-        <div id="slipLawDisplay" class="document-reader-box"></div>
-      </div>
-    </section>
-
-    <!-- 4. TITLE 8 PENAL CODE -->
+    <!-- 2. TITLE 8 PENAL CODE (60 OFFENSES ACROSS 6 DIVISIONS) -->
     <section id="pane-penal-code" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Title 8: State Penal Code Master Schedule (60 Codified Sections)</h2>
           <span class="badge badge-navy">MAX CUSTODY: 30 MINS</span>
         </div>
-
         <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr; margin-bottom: 1rem;">
           <div class="form-group">
             <label>Search Master Schedule</label>
@@ -960,7 +366,6 @@
             </select>
           </div>
         </div>
-
         <div class="table-container">
           <table class="gov-table">
             <thead>
@@ -979,7 +384,7 @@
       </div>
     </section>
 
-    <!-- 5. SUPREME COURT CASE DOCKET -->
+    <!-- 3. PUBLIC DOCKET -->
     <section id="pane-public-docket" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -989,7 +394,6 @@
             <button type="button" class="btn" onclick="switchNav('submit-appeal')">📝 File Appeal</button>
           </div>
         </div>
-        
         <div style="margin-bottom: 1.5rem; border: 1px solid var(--gov-gray-mid); border-radius: 4px; overflow: hidden;">
           <div style="background: var(--gov-navy); color: #fff; padding: 0.6rem 1rem; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
             <span>📊 STATE OF MELVIEW MASTER JUDICIAL SPREADSHEET (LIVE FEED)</span>
@@ -997,19 +401,10 @@
           </div>
           <iframe id="liveGoogleSheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ/pubhtml?widget=true&amp;headers=false" style="width: 100%; height: 320px; border: none; background: #ffffff;"></iframe>
         </div>
-
-        <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Registered Case Docket Entries</h3>
         <div class="table-container">
           <table class="gov-table">
             <thead>
-              <tr>
-                <th>Docket ID</th>
-                <th>Party / Subject</th>
-                <th>Matter Category</th>
-                <th>Timestamp</th>
-                <th>Adjudication Status</th>
-                <th>Judicial Findings & Ruling</th>
-              </tr>
+              <tr><th>Docket ID</th><th>Party / Subject</th><th>Matter Category</th><th>Timestamp</th><th>Status</th><th>Judicial Findings & Ruling</th></tr>
             </thead>
             <tbody id="publicDocketTableBody"></tbody>
           </table>
@@ -1017,84 +412,41 @@
       </div>
     </section>
 
-    <!-- 6. STANDARDIZED BAIL RISK MATRIX -->
+    <!-- 4. BAIL MATRIX -->
     <section id="pane-bail-schedule" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Pre-Trial Services & Statutory Bail Risk Schedule</h2>
           <span class="badge badge-navy">TITLE 8 COMPLIANT</span>
         </div>
-        <p style="font-size: 0.85rem; color: var(--gov-gray-dark); margin-bottom: 1.25rem;">
-          Standardized judicial risk assessment rubric establishing uniform pre-trial release terms, cash bond schedules, and mandatory remand criteria pursuant to Article I, § 11.
-        </p>
         <div class="table-container">
           <table class="gov-table">
             <thead>
-              <tr>
-                <th>Offense Classification Tier</th>
-                <th>Standard Bail / Bond Amount</th>
-                <th>Pre-Trial Release Eligibility</th>
-                <th>Mandatory Release Conditions</th>
-              </tr>
+              <tr><th>Offense Classification Tier</th><th>Standard Bail Amount</th><th>Pre-Trial Release Eligibility</th><th>Mandatory Conditions</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><span class="badge badge-infraction">Infraction Violations</span></td>
-                <td><strong>$0 (Citation Only)</strong></td>
-                <td>Release on Own Recognizance (ROR)</td>
-                <td>Written promise to comply / appear.</td>
-              </tr>
-              <tr>
-                <td><span class="badge badge-misdemeanor">Standard Misdemeanor</span></td>
-                <td><strong>$500 – $1,500 Bond</strong></td>
-                <td>Eligible for Recognizance / Bond</td>
-                <td>Surrender of seized contraband; zero police contact.</td>
-              </tr>
-              <tr>
-                <td><span class="badge badge-felony">Class B Felony Offense</span></td>
-                <td><strong>$2,500 – $5,000 Cash Bail</strong></td>
-                <td>Judicial Discretion / Bond Required</td>
-                <td>Temporary CCW permit suspension; travel restriction.</td>
-              </tr>
-              <tr>
-                <td><span class="badge badge-felony">Class A Felony Offense</span></td>
-                <td><strong>$7,500 – $15,000 Cash Bail</strong></td>
-                <td>Secured Cash Bond Required</td>
-                <td>Full weapons forfeiture; pre-trial judicial check-ins.</td>
-              </tr>
-              <tr>
-                <td><span class="badge badge-danger">Capital Felony (Violent / Treason)</span></td>
-                <td><strong>NO BAIL (Remand to Custody)</strong></td>
-                <td>Ineligible for Pre-Trial Release</td>
-                <td>Pre-trial detention capped at 30 minutes (§ 8-103).</td>
-              </tr>
+              <tr><td><span class="badge badge-infraction">Infraction Violations</span></td><td><strong>$0 (Citation Only)</strong></td><td>Release on Own Recognizance (ROR)</td><td>Written promise to comply / appear.</td></tr>
+              <tr><td><span class="badge badge-misdemeanor">Standard Misdemeanor</span></td><td><strong>$500 – $1,500 Bond</strong></td><td>Eligible for Recognizance / Bond</td><td>Surrender of seized contraband; zero police contact.</td></tr>
+              <tr><td><span class="badge badge-felony">Class B Felony Offense</span></td><td><strong>$2,500 – $5,000 Cash Bail</strong></td><td>Judicial Discretion / Bond Required</td><td>Temporary CCW permit suspension; travel restriction.</td></tr>
+              <tr><td><span class="badge badge-felony">Class A Felony Offense</span></td><td><strong>$7,500 – $15,000 Cash Bail</strong></td><td>Secured Cash Bond Required</td><td>Full weapons forfeiture; pre-trial judicial check-ins.</td></tr>
+              <tr><td><span class="badge badge-danger">Capital Felony (Violent / Treason)</span></td><td><strong>NO BAIL (Remand to Custody)</strong></td><td>Ineligible for Pre-Trial Release</td><td>Pre-trial detention capped at 30 minutes (§ 8-103).</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 7. LEGISLATIVE BILL TRACKER -->
+    <!-- 5. LEGISLATIVE BILL TRACKER -->
     <section id="pane-legislative-tracker" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">General Assembly Legislative Bill & Roll-Call Tracker</h2>
           <span class="badge badge-navy">TITLE 4 PROCEDURE</span>
         </div>
-        <p style="font-size: 0.85rem; color: var(--gov-gray-dark); margin-bottom: 1.25rem;">
-          Official legislative docket tracking introduced bills, Senate committee reviews, floor roll-call votes, and Gubernatorial presentations under Article IV.
-        </p>
         <div class="table-container">
           <table class="gov-table">
             <thead>
-              <tr>
-                <th>Bill Identifier</th>
-                <th>Title of Proposed Act</th>
-                <th>Primary Sponsor</th>
-                <th>Legislative Stage</th>
-                <th>Roll-Call Tally</th>
-                <th>Gubernatorial Action</th>
-              </tr>
+              <tr><th>Bill ID</th><th>Title of Proposed Act</th><th>Primary Sponsor</th><th>Stage</th><th>Roll-Call Tally</th><th>Gubernatorial Action</th></tr>
             </thead>
             <tbody id="billTrackerTableBody"></tbody>
           </table>
@@ -1102,27 +454,17 @@
       </div>
     </section>
 
-    <!-- 8. STATE AGENCY REGISTER -->
+    <!-- 6. STATE AGENCY REGISTER -->
     <section id="pane-fed-register" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">State Administrative Register & Agency Directives</h2>
           <span class="badge badge-navy">ARTICLE VI & XV NOTICES</span>
         </div>
-        <p style="font-size: 0.85rem; color: var(--gov-gray-dark); margin-bottom: 1.25rem;">
-          Official repository of published state agency rulemaking, municipal notices, DOT road advisories, and administrative orders.
-        </p>
         <div class="table-container">
           <table class="gov-table">
             <thead>
-              <tr>
-                <th>Notice ID</th>
-                <th>Issuing Agency / Body</th>
-                <th>Matter / Subject Title</th>
-                <th>Publication Date</th>
-                <th>Legal Authority</th>
-                <th>Operational Directive Scope</th>
-              </tr>
+              <tr><th>Notice ID</th><th>Issuing Agency</th><th>Subject Title</th><th>Date</th><th>Authority</th><th>Operational Scope</th></tr>
             </thead>
             <tbody id="agencyRegisterTableBody"></tbody>
           </table>
@@ -1130,27 +472,17 @@
       </div>
     </section>
 
-    <!-- 9. EXECUTIVE ORDERS LEDGER -->
+    <!-- 7. EXECUTIVE ORDERS -->
     <section id="pane-exec-orders" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Executive Orders & Gubernatorial Decrees (Title 6)</h2>
           <span class="badge badge-navy">EXECUTIVE CHAMBER</span>
         </div>
-        <p style="font-size: 0.85rem; color: var(--gov-gray-dark); margin-bottom: 1.25rem;">
-          Official repository of signed Gubernatorial Executive Orders, agency directives, and clemency decrees enacted under Article V of the Constitution.
-        </p>
         <div class="table-container">
           <table class="gov-table">
             <thead>
-              <tr>
-                <th>Order Number</th>
-                <th>Title & Subject</th>
-                <th>Target Agency</th>
-                <th>Enactment Date</th>
-                <th>Status</th>
-                <th>Document Export</th>
-              </tr>
+              <tr><th>Order Number</th><th>Title & Subject</th><th>Target Agency</th><th>Date</th><th>Status</th><th>Export</th></tr>
             </thead>
             <tbody id="execOrdersTableBody"></tbody>
           </table>
@@ -1158,7 +490,7 @@
       </div>
     </section>
 
-    <!-- 10. FOIA / OPEN RECORDS PORTAL -->
+    <!-- 8. FOIA PORTAL -->
     <section id="pane-foia-portal" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -1167,12 +499,9 @@
         </div>
         <form id="foiaSubmitForm">
           <div class="form-grid">
+            <div class="form-group"><label>Requester Name</label><input type="text" id="foiaName" class="gov-input" required /></div>
             <div class="form-group">
-              <label>Requesting Party Full Name</label>
-              <input type="text" id="foiaName" class="gov-input" placeholder="e.g., Jane Press_Corp" required />
-            </div>
-            <div class="form-group">
-              <label>Target Department</label>
+              <label>Target Agency</label>
               <select id="foiaDept" class="gov-select">
                 <option value="Melview State Police">Melview State Police</option>
                 <option value="County Sheriff Office">County Sheriff Office</option>
@@ -1183,219 +512,119 @@
               </select>
             </div>
           </div>
-          <div class="form-group" style="margin-bottom: 1.25rem;">
-            <label>Specific Records / Information Requested</label>
-            <textarea id="foiaDetails" class="gov-input" placeholder="Specify dispatch logs, audit trails, departmental policies, or rosters requested..." required></textarea>
-          </div>
-          <button type="submit" class="btn">Submit Official FOIA Request (Start 72-Hr Clock)</button>
+          <div class="form-group" style="margin-bottom:1.25rem;"><label>Specific Records Requested</label><textarea id="foiaDetails" class="gov-input" required></textarea></div>
+          <button type="submit" class="btn">Submit FOIA Request (Start 72-Hr Clock)</button>
         </form>
-
-        <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--gov-navy); margin: 2rem 0 0.5rem 0;">Active Public Records Requests</h3>
+        <h3 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--gov-navy); margin:2rem 0 0.5rem 0;">Active Public Records Requests</h3>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr>
-                <th>FOIA Request ID</th>
-                <th>Requester</th>
-                <th>Agency</th>
-                <th>Filing Date</th>
-                <th>72-Hour Deadline</th>
-                <th>Compliance Status</th>
-              </tr>
-            </thead>
+            <thead><tr><th>FOIA ID</th><th>Requester</th><th>Agency</th><th>Filing Date</th><th>72h Deadline</th><th>Status</th></tr></thead>
             <tbody id="foiaTableBody"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 11. PUBLIC BAR & CCW REGISTRY -->
+    <!-- 9. PUBLIC REGISTRY -->
     <section id="pane-public-registry" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">State Bar & Concealed Carry (CCW) Public Roster</h2>
           <span class="badge badge-navy">ARTICLE VII LICENSURE</span>
         </div>
-        <p style="font-size: 0.85rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">
-          Official public directory of certified attorneys admitted to the State Bar and verified permit holders. Maintained by the Supreme Court of Melview.
-        </p>
         <div class="form-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 1rem;">
+          <div class="form-group"><label>Search Registry</label><input type="text" id="registrySearch" class="gov-input" oninput="filterRegistryTable()" /></div>
           <div class="form-group">
-            <label>Search Public Registry</label>
-            <input type="text" id="registrySearch" class="gov-input" placeholder="Search by name, license number, or status..." oninput="filterRegistryTable()" />
-          </div>
-          <div class="form-group">
-            <label>Filter Licensure Category</label>
+            <label>Filter Category</label>
             <select id="registryTypeFilter" class="gov-select" onchange="filterRegistryTable()">
-              <option value="ALL">All License Categories</option>
+              <option value="ALL">All Licenses</option>
               <option value="State Bar License">State Bar Attorney License</option>
-              <option value="Concealed Carry (CCW)">Concealed Carry Permit (CCW)</option>
+              <option value="Concealed Carry">Concealed Carry Permit (CCW)</option>
             </select>
           </div>
         </div>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr>
-                <th>License / Permit ID</th>
-                <th>Licensee Full Name</th>
-                <th>Category</th>
-                <th>Examination Score / Verification</th>
-                <th>Effective Date</th>
-                <th>Standing / Status</th>
-              </tr>
-            </thead>
+            <thead><tr><th>License ID</th><th>Licensee Name</th><th>Category</th><th>Verification</th><th>Expiry</th><th>Status</th></tr></thead>
             <tbody id="registryTableBody"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 12. MASTER PRIVATE PERSONNEL ARCHIVE -->
+    <!-- 10. MASTER PRIVATE PERSONNEL ARCHIVE -->
     <section id="pane-private-records" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">📂 Official State Personnel & Master Employment Archive</h2>
-          <span class="badge badge-navy">ARTICLE XII & ARTICLE XIII RECORDS</span>
+          <span class="badge badge-navy">ARTICLE XII & XIII</span>
         </div>
-        <p style="font-size: 0.85rem; color: var(--gov-gray-dark); margin-bottom: 1.25rem;">
-          Master centralized state register of all appointed officials, law enforcement personnel, and civil servants across all branches.
-        </p>
         <div class="table-container">
           <table class="gov-table">
-            <thead>
-              <tr>
-                <th>Employee File ID</th>
-                <th>Roblox Username</th>
-                <th>Department / Branch</th>
-                <th>Official Role / Rank</th>
-                <th>Security Clearance</th>
-                <th>Employment Status</th>
-              </tr>
-            </thead>
+            <thead><tr><th>File ID</th><th>Username</th><th>Department</th><th>Role / Rank</th><th>Clearance</th><th>Status</th></tr></thead>
             <tbody id="privatePersonnelTableBody"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 13. CUSTODY & BAIL CALCULATOR -->
+    <!-- 11. CUSTODY CALCULATOR -->
     <section id="pane-custody-calc" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Custodial Sentencing & Statutory Bail Calculator</h2>
           <span class="badge badge-navy">TITLE 8 § 103 COMPLIANT</span>
         </div>
-        <p style="font-size: 0.9rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">
-          Select multiple charges to aggregate standard fines and calculate total holding times under the 30-minute maximum custodial limit.
-        </p>
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+        <div style="display:grid; grid-template-columns: 2fr 1fr; gap:1.5rem;">
           <div>
-            <label style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Select Charged Offenses (Hold Ctrl/Cmd for multiple):</label>
-            <select id="calcOffenseSelect" class="gov-select" multiple style="width: 100%; height: 260px; margin-top: 0.5rem;" onchange="calculateCharges()"></select>
+            <label style="font-size:0.8rem; font-weight:700; text-transform:uppercase;">Select Charged Offenses (Ctrl/Cmd for multiple):</label>
+            <select id="calcOffenseSelect" class="gov-select" multiple style="width:100%; height:260px; margin-top:0.5rem;" onchange="calculateCharges()"></select>
           </div>
-          <div style="background-color: var(--gov-gray-light); border-left: 1px solid var(--gov-gray-mid); border-radius: 4px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div style="background-color:var(--gov-gray-light); border-left:1px solid var(--gov-gray-mid); border-radius:4px; padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between;">
             <div>
-              <h3 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--gov-navy); margin-bottom: 0.75rem; border-bottom: 1px solid var(--gov-gray-mid); padding-bottom: 0.5rem;">Calculation Output</h3>
-              <p style="font-size: 0.9rem;">Charges Selected: <strong id="calcTotalCount">0</strong></p>
-              <p style="font-size: 0.9rem; margin-top: 0.5rem;">Aggregate Fine: <strong id="calcTotalFine" style="color: var(--gov-green); font-size: 1.2rem;">$0</strong></p>
-              <p style="font-size: 0.9rem; margin-top: 0.5rem;">Calculated Sentence: <strong id="calcTotalTime" style="color: var(--gov-blue-dark); font-size: 1.2rem;">0 Mins</strong></p>
-              <div id="calcCapNotice" style="margin-top: 1rem; padding: 0.5rem; background: #fff1d2; border: 1px solid #fad980; font-size: 0.8rem; display: none;"></div>
+              <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--gov-navy); margin-bottom:0.75rem;">Calculation Output</h3>
+              <p style="font-size:0.9rem;">Charges Selected: <strong id="calcTotalCount">0</strong></p>
+              <p style="font-size:0.9rem; margin-top:0.5rem;">Aggregate Fine: <strong id="calcTotalFine" style="color:var(--gov-green); font-size:1.2rem;">$0</strong></p>
+              <p style="font-size:0.9rem; margin-top:0.5rem;">Calculated Sentence: <strong id="calcTotalTime" style="color:var(--gov-blue-dark); font-size:1.2rem;">0 Mins</strong></p>
+              <div id="calcCapNotice" style="margin-top:1rem; padding:0.5rem; background:#fff1d2; border:1px solid #fad980; font-size:0.8rem; display:none;"></div>
             </div>
-            <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="resetCalculator()">Reset Calculator</button>
+            <button type="button" class="btn btn-secondary" style="width:100%;" onclick="resetCalculator()">Reset Calculator</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 14. ELECTIONS GATEWAY -->
+    <!-- 12. ELECTIONS GATEWAY -->
     <section id="pane-elections" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Independent Electoral Commission (IEC) Proclamation</h2>
           <span class="badge badge-navy">TITLE 10 ELECTORAL CODE</span>
         </div>
-        <div style="background-color: var(--gov-blue-light); border-left: 4px solid var(--gov-blue-primary); padding: 1.25rem; margin-bottom: 1.5rem;">
-          <h3 style="font-family: var(--font-serif); color: var(--gov-navy); font-size: 1.15rem; margin-bottom: 0.35rem;">General Election Proclamation of 2026</h3>
-          <p style="font-size: 0.9rem;">
-            Pursuant to Article X of the Constitution and Senate Bill No. 100, notice is hereby given for the opening of candidacy declarations for the offices of Governor, Lieutenant Governor, and the seven (7) At-Large Senate seats.
-          </p>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-          <div style="border: 1px solid var(--gov-gray-mid); border-top: 4px solid var(--gov-navy); padding: 1.25rem; background: #ffffff;">
-            <h4 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Office of the Governor & Lt. Governor</h4>
-            <ul style="font-size: 0.85rem; margin-left: 1.25rem; line-height: 1.6;">
-              <li>Instant-Runoff Ranked-Choice Voting Protocol (§ 302a)</li>
-              <li>Four (4) Month Term (Maximum 2 Consecutive Terms)</li>
-              <li>14-day anti-alt voter checks • Unified Joint Ticket (§ 103)</li>
-            </ul>
-          </div>
-          <div style="border: 1px solid var(--gov-gray-mid); border-top: 4px solid var(--gov-blue-primary); padding: 1.25rem; background: #ffffff;">
-            <h4 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--gov-navy); margin-bottom: 0.5rem;">Senate of the State of Melview</h4>
-            <ul style="font-size: 0.85rem; margin-left: 1.25rem; line-height: 1.6;">
-              <li>Seven (7) At-Large Senate Seats (§ 302b)</li>
-              <li>Two (2) Month Legislative Session Term</li>
-              <li>Mandatory 24-hour election challenge window (§ 402a)</li>
-            </ul>
-          </div>
+        <div style="background-color:var(--gov-blue-light); border-left:4px solid var(--gov-blue-primary); padding:1.25rem; margin-bottom:1.5rem;">
+          <h3 style="font-family:var(--font-serif); color:var(--gov-navy); font-size:1.15rem;">General Election Proclamation of 2026</h3>
+          <p style="font-size:0.9rem; margin-top:0.35rem;">Pursuant to Article X of the Constitution and Senate Bill No. 100, candidacy declarations are open for Governor, Lt. Governor, and seven (7) At-Large Senate seats.</p>
         </div>
       </div>
     </section>
 
-    <!-- 15. COURT RULES (MCR-2026-01 UNABRIDGED) -->
+    <!-- 13. COURT RULES (MCR-2026-01) -->
     <section id="pane-judicial-sop" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
           <h2 class="gov-card-title">Document MCR-2026-01: Court Rules & Standards Manual</h2>
           <button type="button" class="btn btn-secondary" onclick="downloadAsWord('Document_MCR_2026_01_Judicial_SOP', document.getElementById('sopManualDoc').innerText)">💾 Export Word (.doc)</button>
         </div>
-
-        <div class="document-reader-box" id="sopManualDoc">
-          <h2>STATE OF MELVIEW JUDICIAL & EXECUTIVE INSTRUMENTS</h2>
-          <div class="doc-subtitle">
-            DOCUMENT NO. MCR-2026-01<br>
-            State Judicial Rules & Law Enforcement Standards Manual (Judicial Decorum, State Bar Admissions, Warrant Protocols & POST SOPs)<br>
-            <strong>DRAFTED BY JACKBILLYEYE • GOVERNMENT OVERSIGHT</strong>
-          </div>
-
-          <p><strong>ISSUING AUTHORITY:</strong> Office of Judicial Administration & Government Oversight<br>
-          <strong>CONSTITUTIONAL AUTHORITY:</strong> Article I, Sections 4-7; Article VII, Sections 4-6; Article IX, Sections 1-9<br>
-          <strong>DOCUMENT PURPOSE:</strong> Operational Governance, Standards & Standardized Field Documentation</p>
-
-          <p><em>OFFICIAL DIRECTIVE: promulgating the uniform rules of court decorum, trial procedure, State Bar admissions standards, search warrant review protocols, and law enforcement standard operating procedures for the State of Melview.</em></p>
-
-          <h3>TITLE I. RULES OF COURT, DECORUM, AND TRIAL PROCEEDINGS</h3>
-          <p><strong>§ 101. Courtroom Decorum and Conduct.</strong><br>
-          (a) All parties appearing before the Supreme Court or District Court of the State of Melview shall maintain professional roleplay decorum, addressing judicial officers as "Your Honor." <br>
-          (b) Disruptive conduct, spamming, weapon brandishing, or contemptuous speech within judicial facilities shall result in summary ejection, contempt citations (§ 8-409), and immediate detention by the Court Bailiff.</p>
-          
-          <p><strong>§ 102. Trial Procedure and Plea Bargaining.</strong><br>
-          (a) Criminal trials shall proceed in four distinct phases: (1) Arraignment & Plea; (2) Presentation of Evidence & Witnesses; (3) Closing Arguments; and (4) Verdict & Sentencing.<br>
-          (b) The prosecution and defense may negotiate plea agreements to resolve charges prior to trial, subject to formal review and entry by the presiding judge.</p>
-
-          <h3>TITLE II. STATE BAR EXAMINATION AND ATTORNEY LICENSING</h3>
-          <p><strong>§ 201. Admission to the State Bar.</strong><br>
-          (a) Pursuant to Article VII, Section 5 of the Constitution, no individual may represent another party in judicial proceedings without holding a valid License to Practice Law issued by the State Bar.<br>
-          (b) Candidates must achieve a passing score of at least 80% on the Melview Uniform Bar Examination, demonstrating proficiency in Constitutional Law, Criminal Procedure, and Court Rules.</p>
-
-          <h3>TITLE III. SEARCH & ARREST WARRANT STANDARDS</h3>
-          <p><strong>§ 301. Probable Cause Affidavits.</strong><br>
-          (a) Pursuant to Article I, Section 6 and Article IX, Section 7, peace officers must submit a written sworn affidavit establishing probable cause before a search or arrest warrant may issue.<br>
-          (b) General warrants are strictly prohibited. Every warrant must specify the exact location, person, or vehicle and the items subject to seizure.</p>
-
-          <h3>TITLE IV. LAW ENFORCEMENT FIELD SOP STANDARDS</h3>
-          <p><strong>§ 401. Pursuit and Detention Protocols.</strong><br>
-          (a) Vehicular pursuits require active emergency equipment (Code 3) and must be terminated if civilian traffic density creates an imminent life-threatening hazard.<br>
-          (b) Precision Immobilization Techniques (PIT) are authorized only under 35 MPH unless deadly force is justified.</p>
-
-          <div style="background-color: var(--gov-gray-light); border-left: 4px solid var(--gov-navy); padding: 1.25rem; margin-top: 2rem; font-family: var(--font-mono); font-size: 0.85rem;">
-            [OFFICIAL DIRECTIVE: Office of Judicial Administration & Government Oversight • State of Melview • Document MCR-2026-01]
-          </div>
+        <div id="sopManualDoc" style="background:#fff; padding:1.5rem; font-family:var(--font-serif); line-height:1.8;">
+          <p><strong>DOCUMENT NO. MCR-2026-01</strong> • State Judicial Rules & Standards Manual<br>Drafted by jackbillyeye • Government Oversight</p>
+          <p style="margin-top:1rem;"><strong>§ 101. Courtroom Decorum.</strong> All parties appearing before the courts of Melview shall maintain professional decorum, addressing judicial officers as "Your Honor." Contempt citations (§ 8-409) shall result in immediate bailiff detention.</p>
+          <p><strong>§ 201. State Bar Admission.</strong> Candidates must achieve a passing score of at least 80% on the Uniform Bar Examination.</p>
+          <p><strong>§ 401. Law Enforcement Pursuit Protocol.</strong> PIT maneuvers are restricted to under 35 MPH unless deadly force is justified.</p>
         </div>
       </div>
     </section>
 
-    <!-- 16. STATE BAR EXAM -->
+    <!-- 14. STATE BAR EXAM SELF TEST -->
     <section id="pane-bar-exam" class="tab-pane">
       <div class="gov-card">
         <div class="gov-card-header">
@@ -1403,83 +632,70 @@
           <span class="badge badge-navy">80% PASSING THRESHOLD</span>
         </div>
         <form id="barExamForm">
-          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-            <div style="background-color: #f8fafc; border-left: 4px solid var(--gov-blue-primary); padding: 1rem;">
-              <p style="font-weight: 700; margin-bottom: 0.5rem;">1. What is the maximum statutory custodial limit for any arrest event under Title 8?</p>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q1" value="a" required> 15 minutes</label>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q1" value="b"> 20 minutes</label>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q1" value="c"> 30 minutes</label>
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div style="background-color:#f8fafc; border-left:4px solid var(--gov-blue-primary); padding:1rem;">
+              <p style="font-weight:700; margin-bottom:0.5rem;">1. What is the maximum statutory custodial limit for any arrest event under Title 8?</p>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q1" value="a" required> 15 minutes</label>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q1" value="b"> 20 minutes</label>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q1" value="c"> 30 minutes</label>
             </div>
-            <div style="background-color: #f8fafc; border-left: 4px solid var(--gov-blue-primary); padding: 1rem;">
-              <p style="font-weight: 700; margin-bottom: 0.5rem;">2. Under MCR-2026-01, what is the speed restriction for a PIT maneuver during pursuit?</p>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q2" value="a" required> Under 25 MPH</label>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q2" value="b"> Under 35 MPH</label>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q2" value="c"> Under 50 MPH</label>
+            <div style="background-color:#f8fafc; border-left:4px solid var(--gov-blue-primary); padding:1rem;">
+              <p style="font-weight:700; margin-bottom:0.5rem;">2. Under MCR-2026-01, what is the speed restriction for a PIT maneuver during pursuit?</p>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q2" value="a" required> Under 25 MPH</label>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q2" value="b"> Under 35 MPH</label>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q2" value="c"> Under 50 MPH</label>
             </div>
-            <div style="background-color: #f8fafc; border-left: 4px solid var(--gov-blue-primary); padding: 1rem;">
-              <p style="font-weight: 700; margin-bottom: 0.5rem;">3. What is the mandatory agency compliance window for an Article XV FOIA request?</p>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q3" value="a" required> 24 hours</label>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q3" value="b"> 48 hours</label>
-              <label style="display: block; font-size: 0.85rem;"><input type="radio" name="q3" value="c"> 72 hours</label>
+            <div style="background-color:#f8fafc; border-left:4px solid var(--gov-blue-primary); padding:1rem;">
+              <p style="font-weight:700; margin-bottom:0.5rem;">3. What is the mandatory agency compliance window for an Article XV FOIA request?</p>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q3" value="a" required> 24 hours</label>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q3" value="b"> 48 hours</label>
+              <label style="display:block; font-size:0.85rem;"><input type="radio" name="q3" value="c"> 72 hours</label>
             </div>
           </div>
-          <button type="submit" class="btn" style="margin-top: 1.5rem;">Submit Examination for Scoring</button>
+          <button type="submit" class="btn" style="margin-top:1.5rem;">Submit Examination for Scoring</button>
         </form>
-        <div id="barExamResult" style="display: none; margin-top: 1.5rem; padding: 1rem; border-radius: 4px;"></div>
+        <div id="barExamResult" style="display:none; margin-top:1.5rem; padding:1rem; border-radius:4px;"></div>
       </div>
     </section>
 
-    <!-- 17. RESTRICTED INTRANET WORKSTATIONS -->
+    <!-- 15. RESTRICTED INTRANET WORKSTATIONS -->
     <section id="pane-secure-terminal" class="tab-pane">
-      
-      <!-- AUTHENTICATION GATE -->
-      <div id="secureAuthGate" class="gov-card" style="max-width: 500px; margin: 2rem auto; border-top: 4px solid var(--gov-gold);">
-        <div class="gov-card-header" style="justify-content: center; text-align: center;">
+      <div id="secureAuthGate" class="gov-card" style="max-width:500px; margin:2rem auto; border-top:4px solid var(--gov-gold);">
+        <div class="gov-card-header" style="justify-content:center; text-align:center;">
           <div>
-            <h2 class="gov-card-title" style="font-size: 1.25rem;">Restricted Government Sign-In</h2>
-            <p style="font-size: 0.75rem; color: var(--gov-gray-dark); text-transform: uppercase;">Official Identification Required</p>
+            <h2 class="gov-card-title" style="font-size:1.25rem;">Restricted Government Sign-In</h2>
+            <p style="font-size:0.75rem; color:var(--gov-gray-dark); text-transform:uppercase;">Official Identification Required</p>
           </div>
         </div>
-
         <form id="stateLoginForm">
-          <div class="form-group" style="margin-bottom: 1rem;">
+          <div class="form-group" style="margin-bottom:1rem;">
             <label>Government Username</label>
             <input type="text" id="loginUsername" class="gov-input" placeholder="e.g. judge1, law3, police1, sheriff1, records1..." required />
           </div>
-          <div class="form-group" style="margin-bottom: 1.5rem;">
+          <div class="form-group" style="margin-bottom:1.5rem;">
             <label>Security Password</label>
             <input type="password" id="loginPassword" class="gov-input" placeholder="••••••••" required />
           </div>
-          <button type="submit" class="btn" style="width: 100%; justify-content: center;">Sign In to Workstation</button>
+          <button type="submit" class="btn" style="width:100%; justify-content:center;">Sign In to Workstation</button>
         </form>
-        <div id="loginErrorMsg" style="display: none; color: var(--gov-red); font-size: 0.8rem; text-align: center; margin-top: 1rem; font-weight: 700;">
+        <div id="loginErrorMsg" style="display:none; color:var(--gov-red); font-size:0.8rem; text-align:center; margin-top:1rem; font-weight:700;">
           ❌ ACCESS DENIED: Invalid Security Credentials (§ 8-603).
         </div>
       </div>
 
-      <!-- WORKSTATION WRAPPER CONTAINER -->
-      <div id="dynamicWorkstationContainer" style="display: none;"></div>
-
+      <!-- Dynamic Workstation Rendering Area -->
+      <div id="dynamicWorkstationContainer" style="display:none;"></div>
     </section>
-
   </main>
 
-  <!-- MODAL FOR AUTHORIZED CASE REMOVAL -->
+  <!-- MODAL FOR AUTHORIZED CASE EXPUNGEMENT -->
   <div id="deletionModal" class="modal-overlay">
     <div class="modal-dialog">
-      <h3 style="font-family: var(--font-serif); color: var(--gov-red); margin-bottom: 0.5rem;">⚠️ Confirm Case Expungement</h3>
-      <p style="font-size: 0.85rem; color: var(--gov-gray-dark); margin-bottom: 1rem;" id="modalTargetText"></p>
-      
-      <div class="form-group" style="margin-bottom: 1rem;">
-        <label>Authorizing Judicial Username</label>
-        <input type="text" id="modalAuthUsername" class="gov-input" placeholder="Enter judge1..." required />
-      </div>
-      <div class="form-group" style="margin-bottom: 1.25rem;">
-        <label>Official Reason for Expungement</label>
-        <input type="text" id="modalAuthReason" class="gov-input" placeholder="e.g. Reversed on appeal / Vacated..." required />
-      </div>
-
-      <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+      <h3 style="font-family:var(--font-serif); color:var(--gov-red); margin-bottom:0.5rem;">⚠️ Confirm Case Expungement</h3>
+      <p style="font-size:0.85rem; color:var(--gov-gray-dark); margin-bottom:1rem;" id="modalTargetText"></p>
+      <div class="form-group" style="margin-bottom:1rem;"><label>Authorizing Judge Username</label><input type="text" id="modalAuthUsername" class="gov-input" required /></div>
+      <div class="form-group" style="margin-bottom:1.25rem;"><label>Official Reason</label><input type="text" id="modalAuthReason" class="gov-input" required /></div>
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
         <button type="button" class="btn btn-secondary" onclick="closeDeletionModal()">Cancel</button>
         <button type="button" class="btn btn-danger" onclick="executeConfirmedDeletion()">Authorize & Expunge</button>
       </div>
@@ -1488,18 +704,13 @@
 
   <!-- MODAL FOR MASTER PERSONNEL RECORD EDIT -->
   <div id="editPersonnelModal" class="modal-overlay">
-    <div class="modal-dialog" style="border-color: var(--gov-blue-primary);">
-      <h3 style="font-family: var(--font-serif); color: var(--gov-navy); margin-bottom: 0.5rem;">✏️ Edit State Personnel Record</h3>
-      <p style="font-size: 0.8rem; color: var(--gov-gray-dark); margin-bottom: 1rem;">Modify master database assignment, clearance levels, or standing.</p>
-      
+    <div class="modal-dialog" style="border-color:var(--gov-blue-primary);">
+      <h3 style="font-family:var(--font-serif); color:var(--gov-navy); margin-bottom:0.5rem;">✏️ Edit State Personnel Record</h3>
       <form id="editPersonnelForm">
         <input type="hidden" id="editEmpId" />
-        <div class="form-group" style="margin-bottom: 0.75rem;">
-          <label>Employee Username</label>
-          <input type="text" id="editEmpUser" class="gov-input" required />
-        </div>
-        <div class="form-group" style="margin-bottom: 0.75rem;">
-          <label>Assigned Department</label>
+        <div class="form-group" style="margin-bottom:0.75rem;"><label>Username</label><input type="text" id="editEmpUser" class="gov-input" required /></div>
+        <div class="form-group" style="margin-bottom:0.75rem;">
+          <label>Department</label>
           <select id="editEmpDept" class="gov-select">
             <option value="Judiciary (Supreme Court)">Judiciary (Supreme Court)</option>
             <option value="Executive / Senate">Executive / Senate</option>
@@ -1510,12 +721,9 @@
             <option value="Department of Justice">Department of Justice</option>
           </select>
         </div>
-        <div class="form-group" style="margin-bottom: 0.75rem;">
-          <label>Official Title / Rank</label>
-          <input type="text" id="editEmpRole" class="gov-input" required />
-        </div>
-        <div class="form-group" style="margin-bottom: 0.75rem;">
-          <label>Security Clearance Tier</label>
+        <div class="form-group" style="margin-bottom:0.75rem;"><label>Role / Title</label><input type="text" id="editEmpRole" class="gov-input" required /></div>
+        <div class="form-group" style="margin-bottom:0.75rem;">
+          <label>Clearance Tier</label>
           <select id="editEmpClearance" class="gov-select">
             <option value="Level 1 General Public Trust">Level 1 General Public Trust</option>
             <option value="Level 2 Department Staff">Level 2 Department Staff</option>
@@ -1524,18 +732,17 @@
             <option value="Level 5 Executive Authority">Level 5 Executive Authority</option>
           </select>
         </div>
-        <div class="form-group" style="margin-bottom: 1.25rem;">
-          <label>Active Employment Standing</label>
+        <div class="form-group" style="margin-bottom:1.25rem;">
+          <label>Standing</label>
           <select id="editEmpStatus" class="gov-select">
             <option value="Active">Active</option>
             <option value="Suspended">Suspended</option>
             <option value="Terminated">Terminated</option>
           </select>
         </div>
-
-        <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+        <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
           <button type="button" class="btn btn-secondary" onclick="closeEditPersonnelModal()">Cancel</button>
-          <button type="submit" class="btn btn-success">Save Database Record</button>
+          <button type="submit" class="btn btn-success">Save Record</button>
         </div>
       </form>
     </div>
@@ -1543,40 +750,29 @@
 
   <footer class="gov-footer">
     <div class="footer-inner">
-      <div>
-        <strong style="color: #ffffff;">STATE OF MELVIEW OFFICIAL PORTAL</strong><br>
-        Published under the authority of Drafted by jackbillyeye • Government Oversight
-      </div>
-      <div>
-        Supreme Legal Repository • Constitution & Codified Statutes
-      </div>
+      <div><strong style="color:#ffffff;">STATE OF MELVIEW OFFICIAL PORTAL</strong><br>Published under the authority of Drafted by jackbillyeye • Government Oversight</div>
+      <div>Supreme Legal Repository • Penal Code & Government Administration</div>
     </div>
   </footer>
 
   <script>
-    // =========================================================================
-    // GLOBAL REPOSITORY STATE & DATASETS
-    // =========================================================================
     const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbynIMouFbor3yW33M12O3bH8xPtm5zElOZgGiPBFKyaEDmvqhV8REdGxhUj9QN-fk0B/exec";
 
     function syncToGoogleSheet(payload) {
-      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL === "") return;
+      if (!GOOGLE_SHEET_WEBAPP_URL) return;
       try {
         fetch(GOOGLE_SHEET_WEBAPP_URL, {
-          method: "POST",
-          mode: "no-cors",
+          method: "POST", mode: "no-cors",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
-        }).then(() => console.log("Google Sheet sync completed.")).catch(err => console.error("Sync error:", err));
-      } catch(e) { console.error("Sheet sync dispatch error:", e); }
+        }).catch(err => console.error("Sync error:", err));
+      } catch(e) {}
     }
 
     function updateClock() {
       const now = new Date();
       const clockEl = document.getElementById('liveClock');
-      if (clockEl) {
-        clockEl.textContent = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-      }
+      if (clockEl) clockEl.textContent = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -1584,52 +780,15 @@
     window.switchNav = function(tabId) {
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
-
       const targetPane = document.getElementById('pane-' + tabId);
       const targetBtn = document.getElementById('nav-' + tabId);
-
       if (targetPane) targetPane.classList.add('active');
       if (targetBtn) targetBtn.classList.add('active');
-
-      if (tabId === 'statutes') {
-        loadBill(activeBillKey);
-      }
     };
 
     let MASTER_DOCKET = JSON.parse(localStorage.getItem('melview_docket')) || [
-      {
-        id: "AP-2026-1042",
-        type: "Appeal",
-        appellant: "John_Miller_RP",
-        category: "Traffic Citation Contest",
-        ref: "Citation § 8-303 (Reckless Driving)",
-        time: "2026-08-25 14:20 UTC",
-        grounds: "Excessive speed was due to mechanical failure on vehicle throttle.",
-        status: "Accepted",
-        justiceNotes: "Appeal accepted on procedural grounds; fine reduced to $150."
-      },
-      {
-        id: "AP-2026-1088",
-        type: "Appeal",
-        appellant: "Alexander_Kane",
-        category: "Criminal Conviction Appeal",
-        ref: "Booking under § 8-208 (GTA)",
-        time: "2026-08-25 18:45 UTC",
-        grounds: "Arresting officer lacked reasonable suspicion prior to vehicle stop.",
-        status: "Denied",
-        justiceNotes: "Dashcam records show vehicle matched active felony stolen bulletin."
-      },
-      {
-        id: "WR-2026-9014",
-        type: "Warrant",
-        appellant: "Marcus_Vance",
-        category: "Arrest Warrant (Div 1)",
-        ref: "Offense § 8-103 (Aggravated Battery)",
-        time: "2026-08-26 09:12 UTC",
-        grounds: "Affidavit established probable cause for violent assault with weapon.",
-        status: "Issued",
-        justiceNotes: "Active Judicial Order issued to Melview State Police."
-      }
+      { id: "AP-2026-1042", appellant: "John_Miller_RP", category: "Traffic Citation Contest", ref: "§ 8-303 (Reckless Driving)", time: "2026-08-25 14:20 UTC", status: "Accepted", justiceNotes: "Fine reduced to $150." },
+      { id: "AP-2026-1088", appellant: "Alexander_Kane", category: "Criminal Conviction Appeal", ref: "§ 8-208 (GTA)", time: "2026-08-25 18:45 UTC", status: "Denied", justiceNotes: "Stop supported by probable cause." }
     ];
 
     let BILL_TRACKER = JSON.parse(localStorage.getItem('melview_bill_tracker')) || [
@@ -1641,8 +800,8 @@
     ];
 
     let AGENCY_REGISTER = JSON.parse(localStorage.getItem('melview_agency_register')) || [
-      { id: "ADM-2026-01", agency: "Department of Transportation", title: "Highway Corridor 1 Speed Limit Enforcement", date: "2026-08-20", auth: "Title 6 Executive Code", scope: "Automated speed monitoring on Northway Transit Corridor." },
-      { id: "ADM-2026-02", agency: "Independent Electoral Commission", title: "Voter Registration 14-Day Cutoff Proclamation", date: "2026-08-22", auth: "SB 100 § 301", scope: "Mandatory voter eligibility verification window established." }
+      { id: "ADM-2026-01", agency: "Department of Transportation", title: "Route 1 Transit Speed Enforcement", date: "2026-08-20", auth: "Title 6 Executive Code", scope: "Automated speed monitoring on Northway Corridor." },
+      { id: "ADM-2026-02", agency: "Independent Electoral Commission", title: "14-Day Voter Cutoff Proclamation", date: "2026-08-22", auth: "SB 100 § 301", scope: "Anti-alt verification window established." }
     ];
 
     let PUBLIC_REGISTRY = JSON.parse(localStorage.getItem('melview_registry')) || [
@@ -1660,8 +819,8 @@
     ];
 
     let EXEC_ORDERS = JSON.parse(localStorage.getItem('melview_eos')) || [
-      { num: "EO-2026-001", title: "Establishment of State Interagency Security Taskforce", dept: "Melview State Police / Sheriff", date: "2026-08-20", status: "Active Enactment", dir: "Directing joint patrols on Route 1 and government port facilities." },
-      { num: "EO-2026-002", title: "Emergency Public Transit Infrastructure Maintenance", dept: "Department of Transportation", date: "2026-08-22", status: "Active Enactment", dir: "Authorizing temporary road maintenance closures and speed monitoring." }
+      { num: "EO-2026-001", title: "Interagency Security Taskforce", dept: "Melview State Police / Sheriff", date: "2026-08-20", status: "Active Enactment", dir: "Joint patrols on Route 1." },
+      { num: "EO-2026-002", title: "Transit Infrastructure Maintenance", dept: "Department of Transportation", date: "2026-08-22", status: "Active Enactment", dir: "Road maintenance speed controls." }
     ];
 
     let FOIA_REQUESTS = JSON.parse(localStorage.getItem('melview_foia')) || [
@@ -1681,35 +840,22 @@
       "Melview State Police": [{ user: "Trooper_Cole", callsign: "1-ADAM-12", sector: "Highway Corridor 1" }]
     };
 
-    let DEPT_SOPS = JSON.parse(localStorage.getItem('melview_dept_sops')) || {
-      "Melview State Police": [{ title: "SOP-01 Patrol Vehicle Equipment & Emergency Code 3 Protocol", dir: "All marked units must maintain functional first aid kits and tactical road flares." }]
-    };
-
     let DEPT_IA = JSON.parse(localStorage.getItem('melview_dept_ia')) || {
-      "Melview State Police": [{ user: "Cadet_Marks", sanction: "Written Reprimand", reason: "Failure to follow radio protocol during sector change." }]
-    };
-
-    let DEPT_ASSETS = JSON.parse(localStorage.getItem('melview_dept_assets')) || {
-      "Melview State Police": [{ tag: "MSP-CRUISER-04", cat: "Department Vehicle", ref: "Trooper_Cole" }]
-    };
-
-    let DEPT_CANDIDATES = JSON.parse(localStorage.getItem('melview_dept_candidates')) || {
-      "Melview State Police": [{ user: "Applicant_Rogers", status: "Academy Scheduled" }]
+      "Melview State Police": [{ user: "Cadet_Marks", sanction: "Written Reprimand", reason: "Radio protocol infraction." }]
     };
 
     let DEPT_MUTUAL_AID = JSON.parse(localStorage.getItem('melview_dept_aid')) || [
-      { from: "County Sheriff Office", target: "Melview State Police", scope: "Tactical air support requested for perimeter search.", status: "Active Broadcast" }
+      { from: "County Sheriff Office", target: "Melview State Police", scope: "Air support for sector containment.", status: "Active Call" }
     ];
 
     let JUDICIAL_LOGS = JSON.parse(localStorage.getItem('melview_judge_logs')) || [
-      "2026-08-25 14:25 UTC | JUDICIAL ACTION | ACCEPTED Appeal AP-2026-1042 (John_Miller_RP)",
-      "2026-08-25 18:50 UTC | JUDICIAL ACTION | DENIED Appeal AP-2026-1088 (Alexander_Kane)",
-      "2026-08-26 09:15 UTC | WARRANT ORDER | ISSUED Warrant WR-2026-9014 against Marcus_Vance"
+      "2026-08-25 14:25 UTC | JUDICIAL ACTION | ACCEPTED Appeal AP-2026-1042",
+      "2026-08-25 18:50 UTC | JUDICIAL ACTION | DENIED Appeal AP-2026-1088"
     ];
 
     let GOV_LOGS = JSON.parse(localStorage.getItem('melview_gov_logs')) || [
       "2026-08-25 10:00 UTC | EXECUTIVE ACTION | Promulgated Executive Order EO-2026-004",
-      "2026-08-25 12:30 UTC | SENATE ASSEMBLY | Registered Enactment Senate Bill SB 104"
+      "2026-08-25 12:30 UTC | SENATE ASSEMBLY | Enacted Senate Bill SB 104"
     ];
 
     window.saveState = function() {
@@ -1722,10 +868,7 @@
       localStorage.setItem('melview_foia', JSON.stringify(FOIA_REQUESTS));
       localStorage.setItem('melview_dept_rosters', JSON.stringify(DEPT_ROSTERS));
       localStorage.setItem('melview_dept_shifts', JSON.stringify(DEPT_SHIFTS));
-      localStorage.setItem('melview_dept_sops', JSON.stringify(DEPT_SOPS));
       localStorage.setItem('melview_dept_ia', JSON.stringify(DEPT_IA));
-      localStorage.setItem('melview_dept_assets', JSON.stringify(DEPT_ASSETS));
-      localStorage.setItem('melview_dept_candidates', JSON.stringify(DEPT_CANDIDATES));
       localStorage.setItem('melview_dept_aid', JSON.stringify(DEPT_MUTUAL_AID));
       localStorage.setItem('melview_judge_logs', JSON.stringify(JUDICIAL_LOGS));
       localStorage.setItem('melview_gov_logs', JSON.stringify(GOV_LOGS));
@@ -1737,26 +880,117 @@
       renderPrivatePersonnelTable();
       renderExecOrdersTable();
       renderFOIATable();
-      if (CURRENT_AUTH_ROLE) {
-        renderWorkstationView(CURRENT_AUTH_ROLE);
-      }
+      if (CURRENT_AUTH_ROLE) renderWorkstationView(CURRENT_AUTH_ROLE);
       renderLogs();
     };
 
+    window.renderBillTrackerTable = function() {
+      const tbody = document.getElementById('billTrackerTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      BILL_TRACKER.forEach(b => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${b.id}</strong></td><td>${b.title}</td><td>${b.sponsor}</td><td><span class="badge badge-navy">${b.stage}</span></td><td>${b.tally}</td><td><span class="badge badge-success">${b.gov}</span></td>`;
+        tbody.appendChild(row);
+      });
+    };
+
+    window.renderAgencyRegisterTable = function() {
+      const tbody = document.getElementById('agencyRegisterTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      AGENCY_REGISTER.forEach(a => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${a.id}</strong></td><td>${a.agency}</td><td><strong>${a.title}</strong></td><td style="font-family:var(--font-mono);">${a.date}</td><td>${a.auth}</td><td style="font-size:0.8rem;">${a.scope}</td>`;
+        tbody.appendChild(row);
+      });
+    };
+
+    window.renderPrivatePersonnelTable = function() {
+      const tbody = document.getElementById('privatePersonnelTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      PRIVATE_PERSONNEL.forEach(emp => {
+        let badgeClass = emp.status === 'Active' ? 'badge-success' : 'badge-danger';
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${emp.id}</strong></td><td><strong>${emp.user}</strong></td><td>${emp.dept}</td><td>${emp.role}</td><td><span class="badge badge-navy">${emp.clearance}</span></td><td><span class="badge ${badgeClass}">${emp.status.toUpperCase()}</span></td>`;
+        tbody.appendChild(row);
+      });
+    };
+
+    window.renderPublicDocket = function() {
+      const tbody = document.getElementById('publicDocketTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      MASTER_DOCKET.forEach(item => {
+        let badgeClass = item.status === 'Accepted' ? 'badge-success' : 'badge-danger';
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${item.id}</strong></td><td>${item.appellant}</td><td>${item.category}<br><span style="font-size:0.75rem; color:var(--gov-gray-dark);">${item.ref}</span></td><td style="font-family:var(--font-mono); font-size:0.75rem;">${item.time}</td><td><span class="badge ${badgeClass}">${item.status.toUpperCase()}</span></td><td style="font-size:0.8rem;">${item.justiceNotes || 'Under Review'}</td>`;
+        tbody.appendChild(row);
+      });
+    };
+
+    window.renderExecOrdersTable = function() {
+      const tbody = document.getElementById('execOrdersTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      EXEC_ORDERS.forEach(eo => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${eo.num}</strong></td><td><strong>${eo.title}</strong><br><span style="font-size:0.75rem;">${eo.dir}</span></td><td>${eo.dept}</td><td style="font-family:var(--font-mono);">${eo.date}</td><td><span class="badge badge-success">${eo.status}</span></td><td><button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="downloadAsWord('${eo.num}', '${eo.title}\\n\\n${eo.dir}')">💾 Word</button></td>`;
+        tbody.appendChild(row);
+      });
+    };
+
+    window.renderFOIATable = function() {
+      const tbody = document.getElementById('foiaTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      FOIA_REQUESTS.forEach(f => {
+        let badgeClass = f.status.includes('Fulfilled') ? 'badge-success' : 'badge-pending';
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${f.id}</strong></td><td>${f.req}</td><td>${f.dept}</td><td style="font-family:var(--font-mono); font-size:0.75rem;">${f.date}</td><td style="font-family:var(--font-mono); font-size:0.75rem; color:var(--gov-red); font-weight:700;">${f.deadline}</td><td><span class="badge ${badgeClass}">${f.status}</span></td>`;
+        tbody.appendChild(row);
+      });
+    };
+
+    window.renderRegistryTable = function(items) {
+      const tbody = document.getElementById('registryTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      items.forEach(item => {
+        let badgeClass = item.status === 'Active & Certified' ? 'badge-success' : 'badge-danger';
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${item.id}</strong></td><td>${item.name}</td><td>${item.cat}</td><td style="font-family:var(--font-mono);">${item.score}</td><td style="font-family:var(--font-mono); font-size:0.8rem;">${item.exp}</td><td><span class="badge ${badgeClass}">${item.status}</span></td>`;
+        tbody.appendChild(row);
+      });
+    };
+
+    window.filterRegistryTable = function() {
+      const q = (document.getElementById('registrySearch')?.value || '').toLowerCase();
+      const type = document.getElementById('registryTypeFilter')?.value || 'ALL';
+      const filtered = PUBLIC_REGISTRY.filter(item => {
+        const matchesQ = item.name.toLowerCase().includes(q) || item.id.toLowerCase().includes(q);
+        const matchesType = (type === 'ALL' || item.cat.includes(type));
+        return matchesQ && matchesType;
+      });
+      renderRegistryTable(filtered);
+    };
+
+    window.renderLogs = function() {
+      const jViewer = document.getElementById('judiciaryAuditLogs');
+      if (jViewer) jViewer.innerHTML = JUDICIAL_LOGS.map(l => `<div class="audit-entry">🏛️ ${l}</div>`).join('');
+      const gViewer = document.getElementById('govAuditLogs');
+      if (gViewer) gViewer.innerHTML = GOV_LOGS.map(l => `<div class="audit-entry">📜 ${l}</div>`).join('');
+    };
+
     // =========================================================================
-    // STATE POLICE & SHERIFF CCW PERMIT REVOCATION CONTROLS
+    // LAW ENFORCEMENT CCW REVOCATION SYSTEM
     // =========================================================================
     window.renderCCWRevocationTable = function() {
       const tbody = document.getElementById('deptCCWManageTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
-
       const ccwList = PUBLIC_REGISTRY.filter(r => r.cat.includes('Concealed Carry') || r.cat.includes('CCW'));
-      if (ccwList.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No active weapon or carry permits on file.</td></tr>`;
-        return;
-      }
-
       ccwList.forEach(item => {
         let badgeClass = item.status === 'Active & Certified' ? 'badge-success' : 'badge-danger';
         const row = document.createElement('tr');
@@ -1767,9 +1001,9 @@
           <td>${item.exp}</td>
           <td>
             ${item.status === 'Active & Certified' ? `
-              <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="revokeCCWPermit('${item.id}', '${item.name}')">🚫 Revoke / Seize Weapon</button>
+              <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="revokeCCWPermit('${item.id}', '${item.name}')">🚫 Revoke CCW</button>
             ` : `
-              <button type="button" class="btn btn-success" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="reinstateCCWPermit('${item.id}')">Reinstate Permit</button>
+              <button type="button" class="btn btn-success" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="reinstateCCWPermit('${item.id}')">Reinstate</button>
             `}
           </td>
         `;
@@ -1778,32 +1012,15 @@
     };
 
     window.revokeCCWPermit = function(permitId, licenseeName) {
-      const reason = prompt(`Enter formal legal grounds under Title 8, Division 5 for REVOKING CCW Permit for ${licenseeName}:`);
-      if (!reason) {
-        alert("Action cancelled: Legal cause must be articulated.");
-        return;
-      }
-
+      const reason = prompt(`Enter formal legal grounds for REVOKING CCW Permit for ${licenseeName} (Title 8 Div 5):`);
+      if (!reason) return;
       const item = PUBLIC_REGISTRY.find(r => r.id === permitId);
       if (item) {
         item.status = "Revoked / Seized";
         const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-        GOV_LOGS.unshift(`${now} | CCW REVOCATION | (${licenseeName} - ${permitId}) Revoked by ${CURRENT_DEPT_NAME} - Grounds: "${reason}"`);
+        GOV_LOGS.unshift(`${now} | CCW REVOKED | ${licenseeName} (${permitId}) Revoked by ${CURRENT_DEPT_NAME} - Reason: "${reason}"`);
         saveState();
-
-        syncToGoogleSheet({
-          timestamp: now,
-          action: "CCW_PERMIT_REVOKED",
-          id: permitId,
-          appellant: licenseeName,
-          category: "Weapons Enforcement",
-          ref: CURRENT_DEPT_NAME,
-          status: "REVOKED",
-          officer: CURRENT_AUTH_ROLE,
-          notes: `Grounds: ${reason}`
-        });
-
-        alert(`Concealed Carry Permit ${permitId} for ${licenseeName} marked REVOKED. Weapons seizure logged.`);
+        alert(`Concealed Carry Permit ${permitId} for ${licenseeName} marked REVOKED.`);
       }
     };
 
@@ -1817,33 +1034,18 @@
     };
 
     // =========================================================================
-    // EMERGENCY ALERT SYSTEM (EAS) CONTROLS
+    // EMERGENCY ALERT BROADCAST
     // =========================================================================
     window.broadcastEASAlert = function(e) {
       if (e) e.preventDefault();
       const text = document.getElementById('easAlertTextInput').value.trim();
       if (!text) return;
-
       document.getElementById('easBroadcastText').textContent = text;
       document.getElementById('liveEASBanner').style.display = 'block';
-
       const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-      GOV_LOGS.unshift(`${now} | SEOC EAS BROADCAST | Broadcast: "${text}"`);
+      GOV_LOGS.unshift(`${now} | SEOC EAS ALERT | "${text}"`);
       saveState();
-
-      syncToGoogleSheet({
-        timestamp: now,
-        action: "EAS_EMERGENCY_BROADCAST",
-        id: `EAS-${Math.floor(100 + Math.random() * 900)}`,
-        appellant: "Statewide SEOC Alert",
-        category: "Emergency Management",
-        ref: CURRENT_DEPT_NAME,
-        status: "ACTIVE_BROADCAST",
-        officer: CURRENT_AUTH_ROLE,
-        notes: text
-      });
-
-      alert("Statewide Emergency Broadcast dispatched to public portal.");
+      alert("Statewide Emergency Alert broadcast dispatched.");
     };
 
     window.dismissEASBanner = function() {
@@ -1851,7 +1053,7 @@
     };
 
     // =========================================================================
-    // MASTER PERSONNEL DATABASE CONTROLS (OPM SUITE)
+    // MASTER PERSONNEL ARCHIVE (OPM)
     // =========================================================================
     window.openEditPersonnelModal = function(idx) {
       const emp = PRIVATE_PERSONNEL[idx];
@@ -1881,81 +1083,50 @@
       if (idx !== -1) {
         PRIVATE_PERSONNEL[idx] = { id, user, dept, role, clearance, status };
         saveState();
-
-        syncToGoogleSheet({
-          timestamp: new Date().toISOString(),
-          action: "MASTER_PERSONNEL_UPDATED",
-          id: id,
-          appellant: user,
-          category: "Personnel Record",
-          ref: dept,
-          status: status,
-          officer: CURRENT_AUTH_ROLE,
-          notes: `Role: ${role} | Clearance: ${clearance}`
-        });
-
-        alert(`Personnel record for ${user} updated in database.`);
+        alert(`Personnel file ${id} (${user}) saved.`);
         closeEditPersonnelModal();
       }
     };
 
     window.deleteMasterPersonnelRecord = function(empId, userName) {
-      if (!confirm(`Permanently expunge ${userName} (${empId}) from the Master State Personnel Archive?`)) return;
+      if (!confirm(`Permanently delete ${userName} (${empId}) from master personnel database?`)) return;
       const idx = PRIVATE_PERSONNEL.findIndex(p => p.id === empId);
       if (idx !== -1) {
         PRIVATE_PERSONNEL.splice(idx, 1);
         const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-        GOV_LOGS.unshift(`${now} | ARCHIVE PURGE | Expunged ${userName} (${empId}) from master personnel database.`);
+        GOV_LOGS.unshift(`${now} | ARCHIVE PURGE | Deleted ${userName} (${empId}) from master archive.`);
         saveState();
-        alert(`Record ${empId} purged from state archive.`);
+        alert(`Record ${empId} purged.`);
       }
     };
 
     window.terminateEmployeePersonnel = function(deptName, idx) {
       const emp = DEPT_ROSTERS[deptName][idx];
-      const reason = prompt(`Enter formal legal grounds/violation for TERMINATING ${emp.user} from ${deptName} (Article XIII, § 5):`);
-      if (!reason) {
-        alert("Termination cancelled: Valid official grounds must be stated.");
-        return;
-      }
+      const reason = prompt(`Enter formal legal grounds for TERMINATING ${emp.user} from ${deptName} (Article XIII, § 5):`);
+      if (!reason) return;
 
       DEPT_ROSTERS[deptName].splice(idx, 1);
 
       if (!DEPT_IA[deptName]) DEPT_IA[deptName] = [];
-      DEPT_IA[deptName].push({
-        user: emp.user,
-        sanction: "Termination / Discharged",
-        reason: reason
-      });
+      DEPT_IA[deptName].push({ user: emp.user, sanction: "Termination / Discharged", reason: reason });
 
       const masterEmp = PRIVATE_PERSONNEL.find(p => p.user.toLowerCase() === emp.user.toLowerCase());
-      if (masterEmp) {
-        masterEmp.status = "Terminated";
-      }
+      if (masterEmp) masterEmp.status = "Terminated";
 
       const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-      const logMsg = `${now} | PERSONNEL TERMINATION | (${emp.user}) Terminated from ${deptName} - Reason: "${reason}"`;
-      GOV_LOGS.unshift(logMsg);
-
+      GOV_LOGS.unshift(`${now} | TERMINATION | ${emp.user} terminated from ${deptName} - Reason: "${reason}"`);
       saveState();
 
       syncToGoogleSheet({
-        timestamp: now,
-        action: "EMPLOYEE_TERMINATED",
-        id: `TERM-${Math.floor(100 + Math.random() * 900)}`,
-        appellant: emp.user,
-        category: "Personnel Termination",
-        ref: deptName,
-        status: "TERMINATED",
-        officer: CURRENT_AUTH_ROLE,
-        notes: `Reason: ${reason}`
+        timestamp: now, action: "EMPLOYEE_TERMINATED", id: `TERM-${Math.floor(100+Math.random()*900)}`,
+        appellant: emp.user, category: "Termination", ref: deptName, status: "TERMINATED", officer: CURRENT_AUTH_ROLE, notes: reason
       });
 
-      alert(`Official Termination executed for ${emp.user}. Recorded in Internal Affairs and Master Personnel Archives.`);
+      alert(`Official Termination executed for ${emp.user}.`);
     };
 
     // =========================================================================
-    // DIVERGENT RESTRICTED WORKSTATION BUILDER & RENDERER
+    // DIVERGENT RESTRICTED WORKSTATION BUILDER
     // =========================================================================
     let CURRENT_AUTH_ROLE = null;
     let CURRENT_DEPT_NAME = "";
@@ -1974,7 +1145,7 @@
               <h3 style="font-family:var(--font-serif); font-size:1.3rem;">Supreme Court Judicial Chamber</h3>
             </div>
             <div style="display:flex; gap:0.5rem;">
-              <button type="button" class="btn btn-secondary" style="font-size:0.75rem;" onclick="exportDocketToExcel()">📊 Export Master Docket (.csv)</button>
+              <button type="button" class="btn btn-secondary" style="font-size:0.75rem;" onclick="exportDocketToExcel()">📊 Export Docket (.csv)</button>
               <button type="button" class="btn btn-danger" style="font-size:0.75rem;" onclick="logoutTerminal()">Sign Out</button>
             </div>
           </div>
@@ -1983,13 +1154,12 @@
               <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#1e3a8a; margin-bottom:0.75rem;">Citizen Appeals Adjudication Queue</h4>
               <div id="judiciaryAppealsQueue"></div>
             </div>
-
             <div class="card-panel" style="border-left-color:var(--gov-gold);">
-              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#704700; margin-bottom:0.5rem;">State Bar Attorney Admissions & Disbarment</h4>
+              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#704700; margin-bottom:0.5rem;">State Bar Admissions & Disbarment</h4>
               <form id="admitBarForm" style="margin-bottom:1rem;">
                 <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr auto; align-items:flex-end;">
-                  <div class="form-group"><label style="font-size:0.75rem;">Candidate Name</label><input type="text" id="barName" class="gov-input" placeholder="e.g. Rachel Sterling" required /></div>
-                  <div class="form-group"><label style="font-size:0.75rem;">Bar Score (%)</label><input type="number" id="barScore" class="gov-input" min="0" max="100" placeholder="e.g. 88" required /></div>
+                  <div class="form-group"><label style="font-size:0.75rem;">Candidate Name</label><input type="text" id="barName" class="gov-input" required /></div>
+                  <div class="form-group"><label style="font-size:0.75rem;">Bar Score (%)</label><input type="number" id="barScore" class="gov-input" min="0" max="100" required /></div>
                   <div class="form-group"><label style="font-size:0.75rem;">Status</label><select id="barStatus" class="gov-select"><option value="Active & Certified">Active & Certified</option><option value="Suspended">Suspended</option><option value="Disbarred">Disbarred</option></select></div>
                   <button type="submit" class="btn btn-success" style="font-size:0.8rem; height:38px;">Admit Candidate</button>
                 </div>
@@ -2001,9 +1171,8 @@
                 </table>
               </div>
             </div>
-
             <div class="card-panel">
-              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#1e3a8a; margin-bottom:0.75rem;">Schedule Court Trial & Assign Defender</h4>
+              <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#1e3a8a; margin-bottom:0.75rem;">Schedule Court Trial</h4>
               <form id="scheduleTrialForm">
                 <div class="form-grid">
                   <div class="form-group"><label style="font-size:0.75rem;">Defendant</label><input type="text" id="trialDefendant" class="gov-input" required /></div>
@@ -2011,10 +1180,9 @@
                   <div class="form-group"><label style="font-size:0.75rem;">Defender</label><input type="text" id="trialDefender" class="gov-input" required /></div>
                   <div class="form-group"><label style="font-size:0.75rem;">Phase</label><select id="trialPhase" class="gov-select"><option value="Phase I: Arraignment & Plea">Phase I: Arraignment & Plea</option><option value="Phase II: Evidentiary Hearing">Phase II: Evidentiary Hearing</option><option value="Phase III: Oral Arguments">Phase III: Oral Arguments</option><option value="Phase IV: Verdict & Sentencing">Phase IV: Verdict & Sentencing</option></select></div>
                 </div>
-                <button type="submit" class="btn btn-success">Schedule Docket Entry</button>
+                <button type="submit" class="btn btn-success">Schedule Entry</button>
               </form>
             </div>
-
             <div class="card-panel" style="border-left-color:var(--gov-red);">
               <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--gov-red); margin-bottom:0.75rem;">Master Docket Removal & Expungement</h4>
               <div class="table-container">
@@ -2023,11 +1191,6 @@
                   <tbody id="judgeDocketManageTable"></tbody>
                 </table>
               </div>
-            </div>
-
-            <div style="margin-top:1.5rem;">
-              <h4 style="font-family:var(--font-serif); font-size:0.95rem; color:#2d3748; margin-bottom:0.5rem;">Judicial Audit Trail Log</h4>
-              <div class="audit-terminal-viewer" id="judiciaryAuditLogs"></div>
             </div>
           </div>
         `;
@@ -2042,26 +1205,19 @@
               <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--gov-gold-light);">Capitol Executive & Senate Suite</span>
               <h3 style="font-family:var(--font-serif); font-size:1.3rem;">Executive Chamber & Legislative Floor</h3>
             </div>
-            <div style="display:flex; gap:0.5rem;">
-              <button type="button" class="btn btn-secondary" style="font-size:0.75rem;" onclick="exportDocketToExcel()">📊 Export State Registry (.csv)</button>
-              <button type="button" class="btn btn-danger" style="font-size:0.75rem;" onclick="logoutTerminal()">Sign Out</button>
-            </div>
+            <button type="button" class="btn btn-danger" style="font-size:0.75rem;" onclick="logoutTerminal()">Sign Out</button>
           </div>
           <div class="workstation-body">
             <div class="card-panel" style="border-left-color:#ef4444;">
               <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:#b91c1c; margin-bottom:0.5rem;">🚨 State Emergency Alert System (SEOC Broadcast)</h4>
-              <p style="font-size:0.8rem; color:var(--gov-gray-dark); margin-bottom:0.75rem;">Broadcast binding statewide civil defense warnings, road closures, or lockdown notices.</p>
               <form id="easBroadcastForm">
-                <div class="form-group" style="margin-bottom:0.5rem;">
-                  <input type="text" id="easAlertTextInput" class="gov-input" placeholder="Enter emergency alert broadcast text..." required />
-                </div>
-                <button type="submit" class="btn btn-danger" style="width:100%;">Dispatch Live Portal Alert</button>
+                <div class="form-group" style="margin-bottom:0.5rem;"><input type="text" id="easAlertTextInput" class="gov-input" placeholder="Enter emergency alert text..." required /></div>
+                <button type="submit" class="btn btn-danger" style="width:100%;">Dispatch Emergency Alert</button>
               </form>
             </div>
-
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
               <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-navy); margin-bottom:0.75rem;">Senate Roll Call Vote Tally (7 Seats)</h4>
+                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-navy); margin-bottom:0.75rem;">Senate Roll Call Vote Tally</h4>
                 <form id="senateVoteForm">
                   <div class="form-group" style="margin-bottom:0.75rem;"><label style="font-size:0.75rem;">Bill Title</label><input type="text" id="svBill" class="gov-input" required /></div>
                   <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom:0.75rem;">
@@ -2069,48 +1225,21 @@
                     <div class="form-group"><label style="font-size:0.75rem;">Nays</label><input type="number" id="svNays" class="gov-input" min="0" max="7" value="2" required /></div>
                     <div class="form-group"><label style="font-size:0.75rem;">Abstain</label><input type="number" id="svAbstain" class="gov-input" min="0" max="7" value="0" required /></div>
                   </div>
-                  <button type="submit" class="btn" style="width:100%;">Record Floor Vote</button>
+                  <button type="submit" class="btn" style="width:100%;">Record Vote</button>
                 </form>
               </div>
-
               <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-navy); margin-bottom:0.75rem;">Executive Pardon & Clemency</h4>
+                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-navy); margin-bottom:0.75rem;">Executive Pardon Grant</h4>
                 <form id="execPardonForm">
                   <div class="form-group" style="margin-bottom:0.75rem;"><label style="font-size:0.75rem;">Recipient Citizen</label><input type="text" id="pardonCitizen" class="gov-input" required /></div>
-                  <div class="form-group" style="margin-bottom:0.75rem;"><label style="font-size:0.75rem;">Action Type</label><select id="pardonType" class="gov-select"><option value="Full Executive Pardon">Full Executive Pardon</option><option value="Sentence Commutation">Sentence Commutation</option><option value="Fine Remission">Fine Remission</option></select></div>
-                  <button type="submit" class="btn btn-success" style="width:100%;">Grant Clemency Order</button>
+                  <div class="form-group" style="margin-bottom:0.75rem;"><label style="font-size:0.75rem;">Action</label><select id="pardonType" class="gov-select"><option value="Full Executive Pardon">Full Executive Pardon</option><option value="Sentence Commutation">Sentence Commutation</option></select></div>
+                  <button type="submit" class="btn btn-success" style="width:100%;">Grant Clemency</button>
                 </form>
               </div>
-
-              <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-navy); margin-bottom:0.75rem;">Promulgate Executive Order</h4>
-                <form id="quickEOForm">
-                  <div class="form-group" style="margin-bottom:0.5rem;"><label style="font-size:0.75rem;">Order Number & Title</label><input type="text" id="qEONum" class="gov-input" required /></div>
-                  <div class="form-group" style="margin-bottom:0.5rem;"><label style="font-size:0.75rem;">Directives</label><textarea id="qEODirective" class="gov-input" style="min-height:70px;" required></textarea></div>
-                  <button type="submit" class="btn btn-success" style="width:100%;">Promulgate Order</button>
-                </form>
-              </div>
-
-              <div class="card-panel" style="border-left-color:var(--gov-red);">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-red); margin-bottom:0.75rem;">Executive Order Rescission</h4>
-                <div class="table-container">
-                  <table class="gov-table">
-                    <thead><tr><th>Order #</th><th>Title</th><th>Action</th></tr></thead>
-                    <tbody id="execOrdersManageTable"></tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <div style="margin-top:1.5rem;">
-              <h4 style="font-family:var(--font-serif); font-size:0.95rem; color:var(--gov-navy); margin-bottom:0.5rem;">Executive & General Assembly Official Log</h4>
-              <div class="audit-terminal-viewer" id="govAuditLogs"></div>
             </div>
           </div>
         `;
-        renderExecOrdersManageTable();
       } else {
-        // Dynamic Agency Intranet Views
         let themeClass = 'theme-records';
         if (role === 'dept_msp') themeClass = 'theme-msp';
         else if (role === 'dept_mcso') themeClass = 'theme-mcso';
@@ -2128,12 +1257,10 @@
             <button type="button" class="btn btn-danger" style="font-size:0.75rem;" onclick="logoutTerminal()">Sign Out</button>
           </div>
           <div class="workstation-body">
-            
             ${(role === 'dept_msp' || role === 'dept_mcso') ? `
-              <!-- Firearm & CCW Permit Revocation Control -->
               <div class="card-panel" style="border-left-color:var(--gov-red);">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-red); margin-bottom:0.5rem;">🔫 Concealed Carry (CCW) & Weapon Permit Revocation</h4>
-                <p style="font-size:0.8rem; margin-bottom:1rem;">Authorized peace officers may revoke citizen concealed carry permits following Title 8, Division 5 weapons infractions.</p>
+                <h4 style="font-family:var(--font-serif); font-size:1.05rem; color:var(--gov-red); margin-bottom:0.5rem;">🔫 Weapon & CCW Permit Revocation Portal</h4>
+                <p style="font-size:0.8rem; margin-bottom:1rem;">Revoke or suspend citizen carry permits following Title 8 Division 5 infractions.</p>
                 <div class="table-container">
                   <table class="gov-table">
                     <thead><tr><th>Permit ID</th><th>Licensee Name</th><th>Status</th><th>Expiry</th><th>Action</th></tr></thead>
@@ -2144,10 +1271,8 @@
             ` : ''}
 
             ${role === 'dept_records' ? `
-              <!-- Master Personnel Archive Suite (OPM) -->
               <div class="card-panel" style="margin-bottom:1.5rem;">
                 <h4 style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:0.5rem;">📂 Master Personnel Database Editor (OPM Suite)</h4>
-                <p style="font-size:0.8rem; margin-bottom:1rem;">Modify master database appointments, clearance levels, and active standing.</p>
                 <div class="table-container">
                   <table class="gov-table">
                     <thead><tr><th>File ID</th><th>Username</th><th>Department</th><th>Role</th><th>Clearance</th><th>Status</th><th>Actions</th></tr></thead>
@@ -2158,26 +1283,20 @@
             ` : ''}
 
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
-              
               <div class="card-panel">
                 <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Personnel Roster & Terminations</h4>
                 <form id="addPersonnelForm" style="margin-bottom:1rem;">
                   <div class="form-grid" style="grid-template-columns: 2fr 1fr auto; align-items:flex-end;">
                     <div class="form-group"><label style="font-size:0.75rem;">Username</label><input type="text" id="rosterUser" class="gov-input" required /></div>
                     <div class="form-group"><label style="font-size:0.75rem;">Rank</label><input type="text" id="rosterRank" class="gov-input" required /></div>
-                    <button type="submit" class="btn btn-success" style="font-size:0.8rem; height:38px;">Add Member</button>
+                    <button type="submit" class="btn btn-success" style="font-size:0.8rem; height:38px;">Add</button>
                   </div>
                 </form>
-                <div class="table-container">
-                  <table class="gov-table">
-                    <thead><tr><th>Username</th><th>Rank</th><th>Action</th></tr></thead>
-                    <tbody id="deptRosterTableBody"></tbody>
-                  </table>
-                </div>
+                <div class="table-container"><table class="gov-table"><thead><tr><th>Username</th><th>Rank</th><th>Action</th></tr></thead><tbody id="deptRosterTableBody"></tbody></table></div>
               </div>
 
               <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Shift & Patrol Assignment Board</h4>
+                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Shift & Patrol Board</h4>
                 <form id="addShiftForm" style="margin-bottom:1rem;">
                   <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr auto; align-items:flex-end;">
                     <div class="form-group"><label style="font-size:0.75rem;">Member</label><input type="text" id="shiftUser" class="gov-input" required /></div>
@@ -2186,16 +1305,11 @@
                     <button type="submit" class="btn btn-success" style="font-size:0.8rem; height:38px;">Assign</button>
                   </div>
                 </form>
-                <div class="table-container">
-                  <table class="gov-table">
-                    <thead><tr><th>Member</th><th>Callsign</th><th>Sector</th><th>Action</th></tr></thead>
-                    <tbody id="deptShiftTableBody"></tbody>
-                  </table>
-                </div>
+                <div class="table-container"><table class="gov-table"><thead><tr><th>Member</th><th>Callsign</th><th>Sector</th><th>Action</th></tr></thead><tbody id="deptShiftTableBody"></tbody></table></div>
               </div>
 
               <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Internal Affairs & Disciplinary Registry</h4>
+                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Internal Affairs Registry</h4>
                 <form id="addDisciplineForm" style="margin-bottom:1rem;">
                   <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:0.5rem;">
                     <div class="form-group"><label style="font-size:0.75rem;">Subject</label><input type="text" id="iaUser" class="gov-input" required /></div>
@@ -2204,35 +1318,23 @@
                   <div class="form-group" style="margin-bottom:0.5rem;"><label style="font-size:0.75rem;">Finding</label><input type="text" id="iaReason" class="gov-input" required /></div>
                   <button type="submit" class="btn btn-danger" style="width:100%;">Record Action</button>
                 </form>
-                <div class="table-container">
-                  <table class="gov-table">
-                    <thead><tr><th>Personnel</th><th>Sanction</th><th>Audit</th></tr></thead>
-                    <tbody id="deptIATableBody"></tbody>
-                  </table>
-                </div>
+                <div class="table-container"><table class="gov-table"><thead><tr><th>Personnel</th><th>Sanction</th><th>Audit</th></tr></thead><tbody id="deptIATableBody"></tbody></table></div>
               </div>
 
               <div class="card-panel">
-                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Inter-Agency Mutual Aid & Tactical Calls</h4>
+                <h4 style="font-family:var(--font-serif); font-size:1.05rem; margin-bottom:0.5rem;">Mutual Aid Calls</h4>
                 <form id="addMutualAidForm" style="margin-bottom:1rem;">
                   <div class="form-grid" style="grid-template-columns: 1fr 2fr; margin-bottom:0.5rem;">
-                    <div class="form-group"><label style="font-size:0.75rem;">Target Agency</label><select id="aidTargetDept" class="gov-select"><option value="Melview State Police">Melview State Police</option><option value="County Sheriff Office">County Sheriff Office</option><option value="Department of Transportation">Department of Transportation</option><option value="Department of Justice">Department of Justice</option></select></div>
+                    <div class="form-group"><label style="font-size:0.75rem;">Agency</label><select id="aidTargetDept" class="gov-select"><option value="Melview State Police">Melview State Police</option><option value="County Sheriff Office">County Sheriff Office</option><option value="Department of Transportation">Department of Transportation</option><option value="Department of Justice">Department of Justice</option></select></div>
                     <div class="form-group"><label style="font-size:0.75rem;">Scope</label><input type="text" id="aidScope" class="gov-input" required /></div>
                   </div>
-                  <button type="submit" class="btn btn-success" style="width:100%;">Dispatch Mutual Aid Call</button>
+                  <button type="submit" class="btn btn-success" style="width:100%;">Dispatch Mutual Aid</button>
                 </form>
-                <div class="table-container">
-                  <table class="gov-table">
-                    <thead><tr><th>Request</th><th>Target</th><th>Status</th><th>Action</th></tr></thead>
-                    <tbody id="deptAidTableBody"></tbody>
-                  </table>
-                </div>
+                <div class="table-container"><table class="gov-table"><thead><tr><th>Request</th><th>Target</th><th>Status</th><th>Action</th></tr></thead><tbody id="deptAidTableBody"></tbody></table></div>
               </div>
-
             </div>
           </div>
         `;
-
         renderDeptRoster(CURRENT_DEPT_NAME);
         renderDeptShifts(CURRENT_DEPT_NAME);
         renderDeptIA(CURRENT_DEPT_NAME);
@@ -2240,7 +1342,6 @@
         if (role === 'dept_msp' || role === 'dept_mcso') renderCCWRevocationTable();
         if (role === 'dept_records') renderMasterPersonnelManageTable();
       }
-
       attachFormListeners();
     };
 
@@ -2249,19 +1350,11 @@
       if (!tbody) return;
       tbody.innerHTML = '';
       const list = DEPT_ROSTERS[deptName] || [];
-      if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No personnel registered.</td></tr>`;
-      } else {
-        list.forEach((m, idx) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td><strong>${m.user}</strong></td>
-            <td>${m.rank}</td>
-            <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="terminateEmployeePersonnel('${deptName}', ${idx})">🚫 Terminate</button></td>
-          `;
-          tbody.appendChild(row);
-        });
-      }
+      list.forEach((m, idx) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${m.user}</strong></td><td>${m.rank}</td><td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="terminateEmployeePersonnel('${deptName}', ${idx})">🚫 Terminate</button></td>`;
+        tbody.appendChild(row);
+      });
     }
 
     function renderDeptShifts(deptName) {
@@ -2269,20 +1362,11 @@
       if (!tbody) return;
       tbody.innerHTML = '';
       const shifts = DEPT_SHIFTS[deptName] || [];
-      if (shifts.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No active patrol shifts.</td></tr>`;
-      } else {
-        shifts.forEach((s, sIdx) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td><strong>${s.user}</strong></td>
-            <td>${s.callsign}</td>
-            <td>${s.sector}</td>
-            <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptShift('${deptName}', ${sIdx})">End Shift</button></td>
-          `;
-          tbody.appendChild(row);
-        });
-      }
+      shifts.forEach((s, sIdx) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${s.user}</strong></td><td>${s.callsign}</td><td>${s.sector}</td><td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeDeptShift('${deptName}', ${sIdx})">End Shift</button></td>`;
+        tbody.appendChild(row);
+      });
     }
 
     function renderDeptIA(deptName) {
@@ -2290,70 +1374,41 @@
       if (!tbody) return;
       tbody.innerHTML = '';
       const iaList = DEPT_IA[deptName] || [];
-      if (iaList.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">Clean disciplinary record.</td></tr>`;
-      } else {
-        iaList.forEach(ia => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td><strong>${ia.user}</strong></td>
-            <td><span class="badge badge-danger">${ia.sanction}</span><br><span style="font-size:0.75rem;">${ia.reason}</span></td>
-            <td><span class="badge badge-navy">AUDITED</span></td>
-          `;
-          tbody.appendChild(row);
-        });
-      }
+      iaList.forEach(ia => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${ia.user}</strong></td><td><span class="badge badge-danger">${ia.sanction}</span><br><span style="font-size:0.75rem;">${ia.reason}</span></td><td><span class="badge badge-navy">AUDITED</span></td>`;
+        tbody.appendChild(row);
+      });
     }
 
     function renderDeptAid() {
       const tbody = document.getElementById('deptAidTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
-      if (DEPT_MUTUAL_AID.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No active mutual aid calls.</td></tr>`;
-      } else {
-        DEPT_MUTUAL_AID.forEach((aid, idx) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td><strong>${aid.from}</strong>: ${aid.scope}</td>
-            <td>${aid.target}</td>
-            <td><span class="badge badge-success">${aid.status}</span></td>
-            <td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeMutualAidCall(${idx})">Stand Down</button></td>
-          `;
-          tbody.appendChild(row);
-        });
-      }
+      DEPT_MUTUAL_AID.forEach((aid, idx) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${aid.from}</strong>: ${aid.scope}</td><td>${aid.target}</td><td><span class="badge badge-success">${aid.status}</span></td><td><button type="button" class="btn btn-danger" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="removeMutualAidCall(${idx})">Stand Down</button></td>`;
+        tbody.appendChild(row);
+      });
     }
 
     window.removeMutualAidCall = function(idx) {
       const call = DEPT_MUTUAL_AID[idx];
       DEPT_MUTUAL_AID.splice(idx, 1);
       const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-      GOV_LOGS.unshift(`${now} | MUTUAL AID CANCELLED | Call between ${call.from} and ${call.target} closed.`);
+      GOV_LOGS.unshift(`${now} | MUTUAL AID CANCELLED | Call closed between ${call.from} and ${call.target}.`);
       saveState();
-      alert("Mutual aid / tactical backup call stood down and closed.");
+      alert("Mutual aid / backup call stood down.");
     };
 
     window.renderMasterPersonnelManageTable = function() {
       const tbody = document.getElementById('masterPersonnelManageTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
-
       PRIVATE_PERSONNEL.forEach((emp, index) => {
         let badgeClass = emp.status === 'Active' ? 'badge-success' : 'badge-danger';
         const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><strong>${emp.id}</strong></td>
-          <td>${emp.user}</td>
-          <td>${emp.dept}</td>
-          <td>${emp.role}</td>
-          <td><span class="badge badge-navy">${emp.clearance}</span></td>
-          <td><span class="badge ${badgeClass}">${emp.status}</span></td>
-          <td>
-            <button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openEditPersonnelModal(${index})">✏️ Edit</button>
-            <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="deleteMasterPersonnelRecord('${emp.id}', '${emp.user}')">Expunge</button>
-          </td>
-        `;
+        row.innerHTML = `<td><strong>${emp.id}</strong></td><td>${emp.user}</td><td>${emp.dept}</td><td>${emp.role}</td><td><span class="badge badge-navy">${emp.clearance}</span></td><td><span class="badge ${badgeClass}">${emp.status}</span></td><td><button type="button" class="btn btn-secondary" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openEditPersonnelModal(${index})">✏️ Edit</button> <button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="deleteMasterPersonnelRecord('${emp.id}', '${emp.user}')">Expunge</button></td>`;
         tbody.appendChild(row);
       });
     };
@@ -2403,8 +1458,163 @@
     };
 
     // =========================================================================
-    // FORM LISTENERS & ATTACHMENT
+    // 60-OFFENSE MASTER PENAL DATABASE
     // =========================================================================
+    const PENAL_DATABASE = [
+      { code: "§ 8-101", name: "Verbal Harassment / Threatening", div: "1", class: "Misdemeanor", fine: 250, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Verbal warning; mute or temporary custody" },
+      { code: "§ 8-102", name: "Simple Assault / Non-Severe Battery", div: "1", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Civil restraining order; temporary weapon seizure" },
+      { code: "§ 8-103", name: "Aggravated Assault / Dangerous Weapon", div: "1", class: "Class B Felony", fine: 1000, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Weapon confiscation; CCW suspension" },
+      { code: "§ 8-104", name: "Assault / Battery on a Peace Officer", div: "1", class: "Class A Felony", fine: 2000, custody: "15 - 20 Mins", custodyNum: 20, sanction: "Firearm license revocation; felony indictment" },
+      { code: "§ 8-105", name: "Unlawful Imprisonment / Kidnapping", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 22 Mins", custodyNum: 22, sanction: "SWAT intervention; weapon seizure" },
+      { code: "§ 8-106", name: "Hostage Taking / Armed Extortion", div: "1", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Permanent firearm revocation; felony indictment" },
+      { code: "§ 8-107", name: "Vehicular Manslaughter", div: "1", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Driver license revocation; vehicle impoundment" },
+      { code: "§ 8-108", name: "Attempted Involuntary Manslaughter", div: "1", class: "Class A Felony", fine: 2500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Firearm confiscation; trial" },
+      { code: "§ 8-109", name: "First-Degree Premeditated Murder", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent civic disqualification; max custody" },
+      { code: "§ 8-110", name: "Mass Casualty Event / Armed Rampage", div: "1", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent weapon blacklisting; max custody" },
+
+      { code: "§ 8-201", name: "Criminal Trespass on Private Land", div: "2", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Order to vacate premises immediately" },
+      { code: "§ 8-202", name: "Trespass into Restricted Government Area", div: "2", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Physical escort; search of person" },
+      { code: "§ 8-203", name: "Vandalism / Criminal Mischief", div: "2", class: "Misdemeanor", fine: 300, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Restitution order to property owner" },
+      { code: "§ 8-204", name: "Petty Larceny (< $500)", div: "2", class: "Misdemeanor", fine: 350, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Return of stolen assets / restitution" },
+      { code: "§ 8-205", name: "Grand Larceny (≥ $500)", div: "2", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Asset forfeiture; restitution to victim" },
+      { code: "§ 8-206", name: "Burglary / Breaking & Entering", div: "2", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Confiscation of lockpicks / tools" },
+      { code: "§ 8-207", name: "Armed Robbery (Store, Bank, Citizen)", div: "2", class: "Class A Felony", fine: 2500, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Firearm revocation; full asset seizure" },
+      { code: "§ 8-208", name: "Grand Theft Auto (GTA)", div: "2", class: "Class B Felony", fine: 1000, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Vehicle recovery; 4 driver points" },
+      { code: "§ 8-209", name: "Arson / Unlawful Incendiary Ignition", div: "2", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Restitution; felony record" },
+      { code: "§ 8-210", name: "Extortion / Blackmail of Property", div: "2", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Restitution; judicial protection order" },
+
+      { code: "§ 8-301", name: "Minor Speeding (1 - 15 MPH Over)", div: "3", class: "Infraction", fine: 100, custody: "None", custodyNum: 0, sanction: "Traffic citation; 1 license point" },
+      { code: "§ 8-302", name: "Major Speeding (16 - 29 MPH Over)", div: "3", class: "Infraction", fine: 250, custody: "None", custodyNum: 0, sanction: "Traffic citation; 2 license points" },
+      { code: "§ 8-303", name: "Reckless / Careless Driving", div: "3", class: "Misdemeanor", fine: 500, custody: "5 Mins", custodyNum: 5, sanction: "Vehicle impoundment; 4 license points" },
+      { code: "§ 8-304", name: "Failure to Yield to Emergency Vehicle", div: "3", class: "Infraction", fine: 200, custody: "None", custodyNum: 0, sanction: "Traffic citation; driver warning" },
+      { code: "§ 8-305", name: "Failure to Stop at Red Signal / Sign", div: "3", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Traffic citation; 1 license point" },
+      { code: "§ 8-306", name: "Operating Unregistered/Stolen Vehicle", div: "3", class: "Misdemeanor", fine: 400, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Immediate vehicle towing & impound" },
+      { code: "§ 8-307", name: "Illegal Street Racing / Speed Exhibition", div: "3", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "30-day vehicle impound; suspension" },
+      { code: "§ 8-308", name: "Hit and Run (Property Damage)", div: "3", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Driver license suspension; restitution" },
+      { code: "§ 8-309", name: "Hit and Run (Bodily Injury / Death)", div: "3", class: "Class A Felony", fine: 2500, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Permanent driver revocation; indictment" },
+      { code: "§ 8-310", name: "Driving on Suspended License", div: "3", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Extended suspension; vehicle impound" },
+
+      { code: "§ 8-401", name: "Disorderly Conduct / Loitering", div: "4", class: "Infraction", fine: 150, custody: "None", custodyNum: 0, sanction: "Order to disperse; citation" },
+      { code: "§ 8-402", name: "Failure to Disperse / Unlawful Assembly", div: "4", class: "Misdemeanor", fine: 350, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Physical detention; crowd dispersal" },
+      { code: "§ 8-403", name: "Failure to Comply with Peace Officer", div: "4", class: "Misdemeanor", fine: 300, custody: "3 - 5 Mins", custodyNum: 5, sanction: "Physical detention; pat-down search" },
+      { code: "§ 8-404", name: "Fleeing / Eluding (Foot Pursuit)", div: "4", class: "Misdemeanor", fine: 600, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Search of person; tool confiscation" },
+      { code: "§ 8-405", name: "Fleeing / Eluding (Vehicular Pursuit)", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Mandatory vehicle impound; suspension" },
+      { code: "§ 8-406", name: "Resisting Arrest / Obstructing Police", div: "4", class: "Misdemeanor", fine: 500, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Physical restraint; weapon search" },
+      { code: "§ 8-407", name: "Resisting Arrest with Deadly Violence", div: "4", class: "Class B Felony", fine: 1500, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Weapon confiscation; felony record" },
+      { code: "§ 8-408", name: "False Reporting of Emergency / Fake 911", div: "4", class: "Misdemeanor", fine: 500, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Emergency service restitution fine" },
+      { code: "§ 8-409", name: "Contempt of Court / Disruption", div: "4", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Summary detention by Court Bailiff" },
+      { code: "§ 8-410", name: "Perjury / False Testimony Under Oath", div: "4", class: "Class B Felony", fine: 1200, custody: "10 - 15 Mins", custodyNum: 15, sanction: "State Bar revocation; witness bar" },
+      { code: "§ 8-411", name: "Bribery of a Public Servant", div: "4", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Asset forfeiture; civic disqualification" },
+      { code: "§ 8-412", name: "Jailbreak / Assisting Escape", div: "4", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Lockdown order; high-security custody" },
+
+      { code: "§ 8-501", name: "Open Carry Without Valid Permit", div: "5", class: "Infraction", fine: 200, custody: "None", custodyNum: 0, sanction: "Temporary seizure until verification" },
+      { code: "§ 8-502", name: "Unlawful Concealed Carry (No CCW)", div: "5", class: "Misdemeanor", fine: 500, custody: "5 - 7 Mins", custodyNum: 7, sanction: "Firearm confiscation; CCW ban" },
+      { code: "§ 8-503", name: "Brandishing a Deadly Weapon", div: "5", class: "Misdemeanor", fine: 600, custody: "5 - 8 Mins", custodyNum: 8, sanction: "Firearm seizure; CCW revocation" },
+      { code: "§ 8-504", name: "Unlawful Discharge in City Limits", div: "5", class: "Misdemeanor", fine: 750, custody: "7 - 10 Mins", custodyNum: 10, sanction: "Firearm confiscation; noise fine" },
+      { code: "§ 8-505", name: "Possession of Military-Grade Weapon", div: "5", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Permanent weapon destruction; felony" },
+      { code: "§ 8-506", name: "Possession of Controlled Contraband", div: "5", class: "Misdemeanor", fine: 400, custody: "5 Mins", custodyNum: 5, sanction: "Contraband seizure & destruction" },
+      { code: "§ 8-507", name: "Trafficking of Controlled Contraband", div: "5", class: "Class B Felony", fine: 1800, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Asset seizure; vehicle impoundment" },
+      { code: "§ 8-508", name: "Illegal Weapons Trafficking", div: "5", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Total inventory seizure; firearms ban" },
+      { code: "§ 8-509", name: "Possession of Explosive Devices", div: "5", class: "Class A Felony", fine: 4000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "EOD bomb squad seizure; indictment" },
+
+      { code: "§ 8-601", name: "Impersonation of Public Official / Officer", div: "6", class: "Class A Felony", fine: 2500, custody: "15 - 20 Mins", custodyNum: 20, sanction: "Immediate rank removal; blacklisting" },
+      { code: "§ 8-602", name: "Official Misconduct / Abuse of Power", div: "6", class: "Class B Felony", fine: 1500, custody: "10 - 15 Mins", custodyNum: 15, sanction: "Removal from office; disciplinary trial" },
+      { code: "§ 8-603", name: "Misuse of Admin Permissions", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Permanent rank removal; Owner referral" },
+      { code: "§ 8-604", name: "Unauthorized Voter Log Access", div: "6", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Removal from post; civic ban" },
+      { code: "§ 8-605", name: "Deprivation of Rights Under Color of Law", div: "6", class: "Class A Felony", fine: 3000, custody: "18 - 25 Mins", custodyNum: 25, sanction: "Permanent law enforcement termination" },
+      { code: "§ 8-606", name: "Official Extortion / Shakedown", div: "6", class: "Class A Felony", fine: 3000, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Asset forfeiture; termination & disbarment" },
+      { code: "§ 8-607", name: "Falsification of Official Audit Logs", div: "6", class: "Class A Felony", fine: 3500, custody: "20 - 25 Mins", custodyNum: 25, sanction: "Permanent civil service ban; indictment" },
+      { code: "§ 8-608", name: "Electoral Fraud / Alt Exploitation", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Voiding of election; permanent ban" },
+      { code: "§ 8-609", name: "Leak of Confidential Records", div: "6", class: "Class B Felony", fine: 2000, custody: "12 - 15 Mins", custodyNum: 15, sanction: "Clearance revocation; termination" },
+      { code: "§ 8-610", name: "High Treason / Armed Insurrection", div: "6", class: "Capital Felony", fine: 5000, custody: "30 Mins (Max)", custodyNum: 30, sanction: "Impeachment; total civic ban" }
+    ];
+
+    window.renderPenalTable = function(items) {
+      const tbody = document.getElementById('penalTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      items.forEach(item => {
+        let badgeClass = item.class === 'Capital Felony' ? 'badge-felony' : (item.class.includes('Felony') ? 'badge-misdemeanor' : 'badge-infraction');
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><strong>${item.code}</strong></td><td>${item.name}</td><td><span class="badge ${badgeClass}">${item.class}</span></td><td>$${item.fine.toLocaleString()}</td><td>${item.custody}</td><td style="color:var(--gov-gray-dark); font-size:0.8rem;">${item.sanction}</td>`;
+        tbody.appendChild(row);
+      });
+    };
+
+    window.filterPenalTable = function() {
+      const q = (document.getElementById('penalSearch')?.value || '').toLowerCase();
+      const c = document.getElementById('penalClassFilter')?.value || 'ALL';
+      const d = document.getElementById('penalDivisionFilter')?.value || 'ALL';
+      const filtered = PENAL_DATABASE.filter(item => {
+        const matchesQ = item.code.toLowerCase().includes(q) || item.name.toLowerCase().includes(q);
+        const matchesC = (c === 'ALL' || item.class === c);
+        const matchesD = (d === 'ALL' || item.div === d);
+        return matchesQ && matchesC && matchesD;
+      });
+      renderPenalTable(filtered);
+    };
+
+    window.initCalculator = function() {
+      const select = document.getElementById('calcOffenseSelect');
+      if (!select) return;
+      select.innerHTML = '';
+      PENAL_DATABASE.forEach((item, index) => {
+        const opt = document.createElement('option');
+        opt.value = index;
+        opt.textContent = `${item.code} - ${item.name} ($${item.fine} | ${item.custody})`;
+        select.appendChild(opt);
+      });
+    };
+
+    window.calculateCharges = function() {
+      const select = document.getElementById('calcOffenseSelect');
+      if (!select) return;
+      const selectedOpts = Array.from(select.selectedOptions);
+      let totalFine = 0;
+      let totalCustody = 0;
+
+      selectedOpts.forEach(opt => {
+        const item = PENAL_DATABASE[opt.value];
+        totalFine += item.fine;
+        totalCustody += item.custodyNum;
+      });
+
+      document.getElementById('calcTotalCount').textContent = selectedOpts.length;
+      document.getElementById('calcTotalFine').textContent = `$${totalFine.toLocaleString()}`;
+
+      const capNotice = document.getElementById('calcCapNotice');
+      if (totalCustody > 30) {
+        document.getElementById('calcTotalTime').textContent = "30 Mins (Capped)";
+        if (capNotice) {
+          capNotice.style.display = "block";
+          capNotice.innerHTML = "⚠️ <strong>Statutory Cap Applied:</strong> Custody strictly limited to 30 minutes max per § 8-103.";
+        }
+      } else {
+        document.getElementById('calcTotalTime').textContent = `${totalCustody} Mins`;
+        if (capNotice) capNotice.style.display = "none";
+      }
+    };
+
+    window.resetCalculator = function() {
+      const select = document.getElementById('calcOffenseSelect');
+      if (select) {
+        Array.from(select.options).forEach(opt => opt.selected = false);
+        calculateCharges();
+      }
+    };
+
+    window.downloadAsWord = function(filename, textContent) {
+      const htmlContent = `<html><head><meta charset='utf-8'><title>${filename}</title></head><body><h2>STATE OF MELVIEW OFFICIAL LEGAL REPOSITORY</h2><pre>${textContent}</pre></body></html>`;
+      const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = `${filename}.doc`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    };
+
+    // FORM LISTENERS ATTACHMENT
     function attachFormListeners() {
       const formBindings = [
         { id: 'foiaSubmitForm', handler: (e) => handleFOIASubmit(e) },
@@ -2412,7 +1622,6 @@
         { id: 'editPersonnelForm', handler: (e) => handleSaveMasterPersonnel(e) },
         { id: 'admitBarForm', handler: (e) => handleAdmitBarCandidate(e) },
         { id: 'scheduleTrialForm', handler: (e) => handleScheduleTrial(e) },
-        { id: 'judgeWarrantForm', handler: (e) => handleJudgeWarrantIssue(e) },
         { id: 'senateVoteForm', handler: (e) => handleSenateRollCall(e) },
         { id: 'execPardonForm', handler: (e) => handleExecutivePardon(e) },
         { id: 'quickEOForm', handler: (e) => handleQuickEO(e) },
@@ -2440,36 +1649,18 @@
       const name = document.getElementById('foiaName').value.trim();
       const dept = document.getElementById('foiaDept').value;
       const details = document.getElementById('foiaDetails').value.trim();
-
       const now = new Date();
       const deadline = new Date(now.getTime() + (72 * 60 * 60 * 1000));
       const newId = `FOIA-2026-${Math.floor(10 + Math.random() * 90)}`;
 
-      const newFOIA = {
-        id: newId,
-        req: name,
-        dept: dept,
+      FOIA_REQUESTS.unshift({
+        id: newId, req: name, dept: dept,
         date: now.toISOString().replace('T', ' ').substring(0, 16) + ' UTC',
         deadline: deadline.toISOString().replace('T', ' ').substring(0, 16) + ' UTC',
         status: "Active (72h Clock Initiated)"
-      };
-
-      FOIA_REQUESTS.unshift(newFOIA);
-      saveState();
-
-      syncToGoogleSheet({
-        timestamp: newFOIA.date,
-        action: "FOIA_REQUEST_FILED",
-        id: newId,
-        appellant: name,
-        category: "FOIA Open Records",
-        ref: dept,
-        status: "Active 72-Hour Timer",
-        officer: "Public Portal Filing",
-        notes: details
       });
-
-      alert(`Official FOIA Request ${newId} submitted under Article XV. 72-Hour statutory agency response clock initiated.`);
+      saveState();
+      alert(`FOIA Request ${newId} submitted. 72-Hour timer running.`);
       document.getElementById('foiaSubmitForm').reset();
     }
 
@@ -2480,25 +1671,9 @@
       const status = document.getElementById('barStatus').value;
       const newId = `BAR-2026-${Math.floor(100 + Math.random() * 900)}`;
 
-      const existingIdx = PUBLIC_REGISTRY.findIndex(i => i.name.toLowerCase() === name.toLowerCase() && i.cat === 'State Bar License');
-      if (existingIdx !== -1) {
-        PUBLIC_REGISTRY[existingIdx].score = `${score}% (${score >= 80 ? 'Passed' : 'Failed'})`;
-        PUBLIC_REGISTRY[existingIdx].status = status;
-      } else {
-        PUBLIC_REGISTRY.push({
-          id: newId,
-          name: name,
-          cat: "State Bar License",
-          score: `${score}% (${score >= 80 ? 'Passed' : 'Failed'})`,
-          exp: "2027-01-01",
-          status: status
-        });
-      }
-
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-      JUDICIAL_LOGS.unshift(`${now} | BAR ADMISSION | (${name}) Score: ${score}%, Status: ${status}`);
+      PUBLIC_REGISTRY.push({ id: newId, name: name, cat: "State Bar License", score: `${score}% (${score >= 80 ? 'Passed' : 'Failed'})`, exp: "2027-01-01", status: status });
       saveState();
-      alert(`Attorney ${name} recorded in the official State Bar Registry.`);
+      alert(`Attorney ${name} enrolled in State Bar.`);
       document.getElementById('admitBarForm').reset();
     }
 
@@ -2508,57 +1683,12 @@
       const charge = document.getElementById('trialCharge').value.trim();
       const defender = document.getElementById('trialDefender').value.trim();
       const phase = document.getElementById('trialPhase').value;
-
       const newId = `TR-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
 
-      const trialEntry = {
-        id: newId,
-        type: "Trial",
-        appellant: def,
-        category: phase,
-        ref: charge,
-        time: now,
-        grounds: `Assigned Counsel: ${defender}`,
-        status: "Scheduled",
-        justiceNotes: `Trial scheduled before Supreme / District Court.`
-      };
-
-      MASTER_DOCKET.unshift(trialEntry);
-      JUDICIAL_LOGS.unshift(`${now} | TRIAL SCHEDULING | ${newId} for ${def} (${phase})`);
+      MASTER_DOCKET.unshift({ id: newId, appellant: def, category: phase, ref: charge, time: new Date().toISOString().substring(0,16)+' UTC', status: "Scheduled", justiceNotes: `Defender: ${defender}` });
       saveState();
-      alert(`Trial docket ${newId} scheduled and posted.`);
+      alert(`Trial docket ${newId} scheduled.`);
       document.getElementById('scheduleTrialForm').reset();
-    }
-
-    function handleJudgeWarrantIssue(e) {
-      if (e) e.preventDefault();
-      const type = document.getElementById('jwType').value;
-      const target = document.getElementById('jwTarget').value;
-      const affiant = document.getElementById('jwAffiant').value;
-      const judge = document.getElementById('jwJudge').value;
-      const affidavit = document.getElementById('jwAffidavit').value;
-
-      const newId = `WR-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-
-      const newWarrant = {
-        id: newId,
-        type: "Warrant",
-        appellant: target,
-        category: type,
-        ref: `Affiant: ${affiant}`,
-        time: now,
-        grounds: affidavit,
-        status: "Issued",
-        justiceNotes: `Signed by ${judge}`
-      };
-
-      MASTER_DOCKET.unshift(newWarrant);
-      JUDICIAL_LOGS.unshift(`${now} | WARRANT ISSUED | ${type} ${newId} against ${target}`);
-      saveState();
-      alert(`Judicial Warrant ${newId} issued.`);
-      document.getElementById('judgeWarrantForm').reset();
     }
 
     function handleSenateRollCall(e) {
@@ -2566,11 +1696,8 @@
       const bill = document.getElementById('svBill').value.trim();
       const yeas = parseInt(document.getElementById('svYeas').value, 10);
       const nays = parseInt(document.getElementById('svNays').value, 10);
-      const abstain = parseInt(document.getElementById('svAbstain').value, 10);
       const passed = yeas >= 4;
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-
-      GOV_LOGS.unshift(`${now} | SENATE ROLL CALL | ${bill} - Result: ${passed ? 'PASSED' : 'FAILED'} (${yeas}-${nays})`);
+      GOV_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | SENATE VOTE | ${bill} - ${passed ? 'PASSED' : 'FAILED'} (${yeas}-${nays})`);
       saveState();
       alert(`Senate Roll Call on ${bill} recorded: ${passed ? 'PASSED' : 'FAILED'}.`);
       document.getElementById('senateVoteForm').reset();
@@ -2580,25 +1707,9 @@
       if (e) e.preventDefault();
       const citizen = document.getElementById('pardonCitizen').value.trim();
       const pType = document.getElementById('pardonType').value;
-      const newId = `EX-PARDON-${Math.floor(1000 + Math.random() * 9000)}`;
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-
-      const entry = {
-        id: newId,
-        type: "Executive Grant",
-        appellant: citizen,
-        category: pType,
-        ref: "Executive Chamber Order",
-        time: now,
-        grounds: "Clemency granted under Article V.",
-        status: "Pardoned",
-        justiceNotes: "Issued under executive seal."
-      };
-
-      MASTER_DOCKET.unshift(entry);
-      GOV_LOGS.unshift(`${now} | EXECUTIVE CLEMENCY | GRANTED ${pType} to ${citizen}`);
+      MASTER_DOCKET.unshift({ id: `EX-PARDON-${Math.floor(1000+Math.random()*9000)}`, appellant: citizen, category: pType, ref: "Gubernatorial Decree", time: new Date().toISOString().substring(0,16)+' UTC', status: "Accepted", justiceNotes: "Executive Clemency Granted." });
       saveState();
-      alert(`Official ${pType} issued to ${citizen}.`);
+      alert(`Pardon issued to ${citizen}.`);
       document.getElementById('execPardonForm').reset();
     }
 
@@ -2606,18 +1717,7 @@
       if (e) e.preventDefault();
       const num = document.getElementById('qEONum').value;
       const dir = document.getElementById('qEODirective').value;
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 10);
-
-      EXEC_ORDERS.unshift({
-        num: num,
-        title: num,
-        dept: "Executive Directives",
-        date: now,
-        status: "Active Enactment",
-        dir: dir
-      });
-
-      GOV_LOGS.unshift(`${now} | EXECUTIVE | Promulgated Order ${num}`);
+      EXEC_ORDERS.unshift({ num: num, title: num, dept: "Executive Chamber", date: new Date().toISOString().substring(0,10), status: "Active Enactment", dir: dir });
       saveState();
       alert(`Executive Order ${num} promulgated.`);
       document.getElementById('quickEOForm').reset();
@@ -2627,23 +1727,14 @@
       if (e) e.preventDefault();
       const user = document.getElementById('rosterUser').value.trim();
       const rank = document.getElementById('rosterRank').value.trim();
-
       if (!DEPT_ROSTERS[CURRENT_DEPT_NAME]) DEPT_ROSTERS[CURRENT_DEPT_NAME] = [];
       DEPT_ROSTERS[CURRENT_DEPT_NAME].push({ user: user, rank: rank });
 
       if (!PRIVATE_PERSONNEL.find(p => p.user.toLowerCase() === user.toLowerCase())) {
-        PRIVATE_PERSONNEL.push({
-          id: `EMP-2026-${Math.floor(100 + Math.random() * 900)}`,
-          user: user,
-          dept: CURRENT_DEPT_NAME,
-          role: rank,
-          clearance: "Level 2 Department Staff",
-          status: "Active"
-        });
+        PRIVATE_PERSONNEL.push({ id: `EMP-2026-${Math.floor(100 + Math.random() * 900)}`, user: user, dept: CURRENT_DEPT_NAME, role: rank, clearance: "Level 2 Department Staff", status: "Active" });
       }
-
       saveState();
-      alert(`Personnel ${user} added to ${CURRENT_DEPT_NAME} roster.`);
+      alert(`Personnel ${user} added.`);
       document.getElementById('addPersonnelForm').reset();
     }
 
@@ -2652,11 +1743,10 @@
       const user = document.getElementById('shiftUser').value.trim();
       const callsign = document.getElementById('shiftCallsign').value.trim();
       const sector = document.getElementById('shiftSector').value.trim();
-
       if (!DEPT_SHIFTS[CURRENT_DEPT_NAME]) DEPT_SHIFTS[CURRENT_DEPT_NAME] = [];
       DEPT_SHIFTS[CURRENT_DEPT_NAME].push({ user: user, callsign: callsign, sector: sector });
       saveState();
-      alert(`Shift logged for ${user} (${callsign}).`);
+      alert(`Shift assigned for ${user}.`);
       document.getElementById('addShiftForm').reset();
     }
 
@@ -2670,11 +1760,10 @@
       const user = document.getElementById('iaUser').value.trim();
       const sanction = document.getElementById('iaSanction').value;
       const reason = document.getElementById('iaReason').value.trim();
-
       if (!DEPT_IA[CURRENT_DEPT_NAME]) DEPT_IA[CURRENT_DEPT_NAME] = [];
       DEPT_IA[CURRENT_DEPT_NAME].push({ user: user, sanction: sanction, reason: reason });
       saveState();
-      alert(`Disciplinary action recorded for ${user} (${sanction}).`);
+      alert(`Disciplinary action logged for ${user}.`);
       document.getElementById('addDisciplineForm').reset();
     }
 
@@ -2682,13 +1771,7 @@
       if (e) e.preventDefault();
       const target = document.getElementById('aidTargetDept').value;
       const scope = document.getElementById('aidScope').value.trim();
-
-      DEPT_MUTUAL_AID.unshift({
-        from: CURRENT_DEPT_NAME,
-        target: target,
-        scope: scope,
-        status: "Active Assistance Call"
-      });
+      DEPT_MUTUAL_AID.unshift({ from: CURRENT_DEPT_NAME, target: target, scope: scope, status: "Active Call" });
       saveState();
       alert(`Mutual aid call dispatched to ${target}.`);
       document.getElementById('addMutualAidForm').reset();
@@ -2699,28 +1782,19 @@
       const form = document.getElementById('barExamForm');
       const answers = { q1: 'c', q2: 'b', q3: 'c' };
       let correct = 0;
-      let total = 3;
-
       for (let key in answers) {
         const selected = form.querySelector(`input[name="${key}"]:checked`);
         if (selected && selected.value === answers[key]) correct++;
       }
-
-      const scorePercent = Math.round((correct / total) * 100);
+      const scorePercent = Math.round((correct / 3) * 100);
       const resultBox = document.getElementById('barExamResult');
-      if (!resultBox) return;
       resultBox.style.display = "block";
-
       if (scorePercent >= 80) {
-        resultBox.style.background = "#ecf3ec";
-        resultBox.style.borderLeft = "4px solid var(--gov-green)";
-        resultBox.style.color = "#005a10";
-        resultBox.innerHTML = `<strong>EXAMINATION PASSED: ${scorePercent}% (${correct}/${total})</strong><br>You have met the mandatory 80% passing threshold under Article VII, Section 5 and MCR-2026-01. You are eligible for admission to the State Bar.`;
+        resultBox.style.background = "#ecf3ec"; resultBox.style.borderLeft = "4px solid var(--gov-green)"; resultBox.style.color = "#005a10";
+        resultBox.innerHTML = `<strong>EXAMINATION PASSED: ${scorePercent}% (${correct}/3)</strong><br>Eligible for admission to the State Bar.`;
       } else {
-        resultBox.style.background = "#fbeae8";
-        resultBox.style.borderLeft = "4px solid var(--gov-red)";
-        resultBox.style.color = "#b50909";
-        resultBox.innerHTML = `<strong>EXAMINATION FAILED: ${scorePercent}% (${correct}/${total})</strong><br>You did not meet the mandatory 80% threshold. Review constitutional and court standards before re-testing.`;
+        resultBox.style.background = "#fbeae8"; resultBox.style.borderLeft = "4px solid var(--gov-red)"; resultBox.style.color = "#b50909";
+        resultBox.innerHTML = `<strong>EXAMINATION FAILED: ${scorePercent}% (${correct}/3)</strong><br>Passing threshold is 80%.`;
       }
     }
 
@@ -2728,30 +1802,24 @@
       const container = document.getElementById('judiciaryAppealsQueue');
       if (!container) return;
       container.innerHTML = '';
-
-      const pendingItems = MASTER_DOCKET.filter(item => item.type === 'Appeal' && item.status === 'Pending Review');
+      const pendingItems = MASTER_DOCKET.filter(item => item.status === 'Pending Review');
       if (pendingItems.length === 0) {
-        container.innerHTML = `<div style="padding:1.25rem; text-align:center; color:var(--gov-gray-dark); background:#f8fafc; border:1px solid #cbd5e0;">No pending citizen appeals awaiting judicial review.</div>`;
+        container.innerHTML = `<div style="padding:1.25rem; text-align:center; color:var(--gov-gray-dark); background:#f8fafc; border:1px solid #cbd5e0;">No pending appeals awaiting judicial review.</div>`;
         return;
       }
-
       pendingItems.forEach(item => {
         const div = document.createElement('div');
         div.style.cssText = "border:1px solid #cbd5e0; background:#ffffff; padding:1.25rem; margin-bottom:1rem; border-left:4px solid #2b6cb0;";
         div.innerHTML = `
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <div><strong>${item.id}</strong> — <span style="font-weight:700;">${item.appellant}</span> [${item.category}]</div>
-            <span class="badge badge-pending">PENDING ADJUDICATION</span>
+            <div><strong>${item.id}</strong> — <span>${item.appellant}</span> [${item.category}]</div>
+            <span class="badge badge-pending">PENDING</span>
           </div>
-          <p style="font-size:0.85rem; margin-bottom:0.35rem;"><strong>Reference:</strong> ${item.ref}</p>
-          <p style="font-size:0.85rem; color:var(--gov-gray-dark); margin-bottom:0.75rem;"><strong>Grounds:</strong> "${item.grounds}"</p>
-          <div class="form-group" style="margin-bottom:0.75rem;">
-            <label style="font-size:0.75rem;">Judicial Finding</label>
-            <input type="text" id="notes_${item.id}" class="gov-input" placeholder="Enter findings..." />
-          </div>
+          <p style="font-size:0.85rem;"><strong>Reference:</strong> ${item.ref}</p>
+          <div class="form-group" style="margin:0.5rem 0;"><input type="text" id="notes_${item.id}" class="gov-input" placeholder="Enter findings..." /></div>
           <div style="display:flex; gap:0.5rem;">
-            <button type="button" class="btn btn-success" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Accepted')">Accept Appeal</button>
-            <button type="button" class="btn btn-danger" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Denied')">Deny Appeal</button>
+            <button type="button" class="btn btn-success" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Accepted')">Accept</button>
+            <button type="button" class="btn btn-danger" style="font-size:0.8rem;" onclick="adjudicateAppeal('${item.id}', 'Denied')">Deny</button>
           </div>
         `;
         container.appendChild(div);
@@ -2764,9 +1832,7 @@
       const target = MASTER_DOCKET.find(i => i.id === docketId);
       if (target) {
         target.status = decision;
-        target.justiceNotes = notes || (decision === 'Accepted' ? 'Granted by Order of the Supreme Court.' : 'Denied following review.');
-        const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-        JUDICIAL_LOGS.unshift(`${now} | JUDICIAL RULING | ${decision.toUpperCase()} Appeal ${docketId} (${target.appellant})`);
+        target.justiceNotes = notes || (decision === 'Accepted' ? 'Granted by Court Order.' : 'Denied following review.');
         saveState();
         alert(`Docket ${docketId} marked ${decision.toUpperCase()}.`);
       }
@@ -2777,18 +1843,9 @@
       if (!tbody) return;
       tbody.innerHTML = '';
       MASTER_DOCKET.forEach(item => {
-        let badgeClass = 'badge-pending';
-        if (item.status === 'Accepted' || item.status === 'Issued' || item.status === 'Pardoned' || item.status === 'Scheduled') badgeClass = 'badge-success';
-        else if (item.status === 'Denied') badgeClass = 'badge-felony';
-
+        let badgeClass = item.status === 'Accepted' ? 'badge-success' : 'badge-danger';
         const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><strong>${item.id}</strong></td>
-          <td>${item.appellant}</td>
-          <td>${item.category}</td>
-          <td><span class="badge ${badgeClass}">${item.status.toUpperCase()}</span></td>
-          <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openDeletionModal('${item.id}', '${item.appellant}')">Expunge Record</button></td>
-        `;
+        row.innerHTML = `<td><strong>${item.id}</strong></td><td>${item.appellant}</td><td>${item.category}</td><td><span class="badge ${badgeClass}">${item.status.toUpperCase()}</span></td><td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="openDeletionModal('${item.id}', '${item.appellant}')">Expunge</button></td>`;
         tbody.appendChild(row);
       });
     }
@@ -2796,8 +1853,7 @@
     let DELETION_TARGET_ID = null;
     window.openDeletionModal = function(docketId, appellantName) {
       DELETION_TARGET_ID = docketId;
-      const targetText = document.getElementById('modalTargetText');
-      if (targetText) targetText.innerHTML = `Expunge Docket <strong>${docketId}</strong> (${appellantName}) from the official register.`;
+      document.getElementById('modalTargetText').innerHTML = `Expunge Docket <strong>${docketId}</strong> (${appellantName}) from official register.`;
       document.getElementById('modalAuthUsername').value = '';
       document.getElementById('modalAuthReason').value = '';
       document.getElementById('deletionModal').style.display = 'flex';
@@ -2811,15 +1867,11 @@
     window.executeConfirmedDeletion = function() {
       const user = document.getElementById('modalAuthUsername').value.trim();
       const reason = document.getElementById('modalAuthReason').value.trim();
-      if (!user || !reason) {
-        alert("Verification error: You must provide username and legal grounds.");
-        return;
-      }
+      if (!user || !reason) return;
       const targetIdx = MASTER_DOCKET.findIndex(i => i.id === DELETION_TARGET_ID);
       if (targetIdx !== -1) {
-        const removedItem = MASTER_DOCKET.splice(targetIdx, 1)[0];
-        const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-        JUDICIAL_LOGS.unshift(`${now} | RECORD EXPUNGEMENT | (${user}) Expunged Docket ${removedItem.id} - Reason: "${reason}"`);
+        MASTER_DOCKET.splice(targetIdx, 1);
+        JUDICIAL_LOGS.unshift(`${new Date().toISOString().substring(0,16)} UTC | EXPUNGEMENT | (${user}) Expunged ${DELETION_TARGET_ID} - Reason: "${reason}"`);
         saveState();
         alert(`Docket ${DELETION_TARGET_ID} expunged.`);
         closeDeletionModal();
@@ -2831,62 +1883,25 @@
       if (!tbody) return;
       tbody.innerHTML = '';
       const barAttorneys = PUBLIC_REGISTRY.filter(i => i.cat === 'State Bar License');
-      if (barAttorneys.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1rem; color:var(--gov-gray-dark);">No registered attorneys found.</td></tr>`;
-        return;
-      }
       barAttorneys.forEach(item => {
-        let badgeClass = item.status === 'Active & Certified' ? 'badge-success' : (item.status === 'Suspended' ? 'badge-pending' : 'badge-danger');
+        let badgeClass = item.status === 'Active & Certified' ? 'badge-success' : 'badge-danger';
         const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><strong>${item.id}</strong></td>
-          <td>${item.name}</td>
-          <td>${item.score}</td>
-          <td><span class="badge ${badgeClass}">${item.status}</span></td>
-          <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBarMember('${item.id}', '${item.name}')">Revoke / Disbar</button></td>
-        `;
+        row.innerHTML = `<td><strong>${item.id}</strong></td><td>${item.name}</td><td>${item.score}</td><td><span class="badge ${badgeClass}">${item.status}</span></td><td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeBarMember('${item.id}', '${item.name}')">Revoke</button></td>`;
         tbody.appendChild(row);
       });
     }
 
     window.removeBarMember = function(id, name) {
-      if (!confirm(`Revoke license and disbar ${name} (${id})?`)) return;
+      if (!confirm(`Revoke license for ${name} (${id})?`)) return;
       const idx = PUBLIC_REGISTRY.findIndex(i => i.id === id);
       if (idx !== -1) {
         PUBLIC_REGISTRY.splice(idx, 1);
-        const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-        JUDICIAL_LOGS.unshift(`${now} | BAR DISBARMENT | Disbarred ${name} (${id}) from State Bar`);
         saveState();
         alert(`License ${id} revoked.`);
       }
     };
 
-    function renderExecOrdersManageTable() {
-      const tbody = document.getElementById('execOrdersManageTable');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      EXEC_ORDERS.forEach((eo, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><strong>${eo.num}</strong></td>
-          <td>${eo.title}</td>
-          <td><button type="button" class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.75rem;" onclick="removeExecOrder(${index})">Rescind</button></td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
-
-    window.removeExecOrder = function(index) {
-      const eo = EXEC_ORDERS[index];
-      if (!confirm(`Rescind and expunge ${eo.num} (${eo.title})?`)) return;
-      EXEC_ORDERS.splice(index, 1);
-      const now = new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC';
-      GOV_LOGS.unshift(`${now} | EXECUTIVE RESCISSION | Rescinded ${eo.num}`);
-      saveState();
-      alert(`Executive Order ${eo.num} rescinded.`);
-    };
-
-    // INITIALIZATION LIFECYCLE
+    // LIFECYCLE INITIALIZER
     document.addEventListener("DOMContentLoaded", function() {
       attachFormListeners();
       renderPublicDocket();
@@ -2898,7 +1913,6 @@
       renderPrivatePersonnelTable();
       renderPenalTable(PENAL_DATABASE);
       initCalculator();
-      loadBill('sb100');
       renderLogs();
     });
 
@@ -2911,7 +1925,6 @@
     renderPrivatePersonnelTable();
     renderPenalTable(PENAL_DATABASE);
     initCalculator();
-    loadBill('sb100');
     renderLogs();
   </script>
 </body>
