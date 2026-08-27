@@ -119,32 +119,26 @@
 
   <main class="main-wrapper">
 
-    <!-- LOGIN GATE -->
-    <div id="loginCard" class="gov-card" style="max-width:520px; margin:3rem auto; border-top:4px solid var(--gov-gold);">
-      <h2 style="font-family:var(--font-serif); font-size:1.35rem; margin-bottom:0.5rem; text-align:center;">Executive Access Gateway</h2>
-      <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem; text-align:center;">RESTRICTED TO STATE OVERSIGHT, GOVERNOR & ROOT OVERRIDE</p>
+    <!-- SECURE LOGIN GATE (CLEAN & NO DIRECTORY) -->
+    <div id="loginCard" class="gov-card" style="max-width:500px; margin:5rem auto; border-top:4px solid var(--gov-gold);">
+      <h2 style="font-family:var(--font-serif); font-size:1.4rem; margin-bottom:0.5rem; text-align:center;">Executive Access Gateway</h2>
+      <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.75rem; text-align:center; text-transform:uppercase; letter-spacing:0.04em;">
+        Restricted to Authorized Executive & Root Personnel
+      </p>
       
       <form id="leadershipLoginForm">
-        <div class="form-group" style="margin-bottom:1rem;">
-          <label>Executive / Root Username</label>
-          <input type="text" id="lUser" class="gov-input" placeholder="root, oversight1, gov1, cjustice1..." required autocomplete="off" />
-        </div>
         <div class="form-group" style="margin-bottom:1.25rem;">
+          <label>Executive Username</label>
+          <input type="text" id="lUser" class="gov-input" placeholder="Enter username..." required autocomplete="off" />
+        </div>
+        <div class="form-group" style="margin-bottom:1.75rem;">
           <label>Security Key / Password</label>
           <input type="password" id="lPass" class="gov-input" placeholder="••••••••" required />
         </div>
         <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; padding:0.75rem;">Unlock Administration Console</button>
       </form>
 
-      <div style="margin-top:1.5rem; padding:1rem; background:#0f172a; border:1px solid #334155; border-radius:4px; font-size:0.75rem;">
-        <div style="color:var(--gov-gold); font-weight:700; margin-bottom:0.35rem;">AUTHORIZED ACCESS DIRECTORY:</div>
-        <div>• <strong>root</strong> / <code>root2026</code> (SUPREME ROOT OVERRIDE)</div>
-        <div>• <strong>oversight1</strong> / <code>overlord9</code> (Community Owner)</div>
-        <div>• <strong>gov1</strong> / <code>lead2026</code> (Governor)</div>
-        <div>• <strong>cjustice1</strong> / <code>bench2026</code> (Chief Justice)</div>
-      </div>
-
-      <div id="loginErr" style="display:none; color:#f87171; font-size:0.85rem; text-align:center; margin-top:1rem; font-weight:700;">
+      <div id="loginErr" style="display:none; color:#f87171; font-size:0.85rem; text-align:center; margin-top:1.25rem; font-weight:700;">
         ❌ ACCESS DENIED: Invalid Executive Credentials.
       </div>
     </div>
@@ -179,7 +173,10 @@
 
       <!-- CREDENTIAL & ACCESS MANAGEMENT -->
       <div class="card-panel">
-        <h3 style="color:var(--gov-gold); font-size:1.15rem; margin-bottom:0.5rem;">🔐 Master Credential & User Management</h3>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; flex-wrap:wrap;">
+          <h3 style="color:var(--gov-gold); font-size:1.15rem;">🔐 Master Credential & User Management</h3>
+          <button type="button" class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.6rem;" onclick="togglePasswordVisibility()" id="togglePwdBtn">👁️ Show Passwords</button>
+        </div>
         <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1.5rem;">
           Change any user password, provision new departmental accounts (e.g., <code>judge2</code>, <code>police2</code>), or revoke access immediately.
         </p>
@@ -290,6 +287,7 @@
     ];
 
     let ACTIVE_LEADER = null;
+    let SHOW_PASSWORDS = false;
 
     function saveLeadershipState() {
       localStorage.setItem('melview_auth_credentials', JSON.stringify(INTRANET_USERS));
@@ -325,12 +323,19 @@
 
     window.logoutLeadership = function() {
       ACTIVE_LEADER = null;
+      SHOW_PASSWORDS = false;
       document.getElementById('loginCard').style.display = 'block';
       document.getElementById('adminPanel').style.display = 'none';
       document.getElementById('lUser').value = '';
       document.getElementById('lPass').value = '';
       document.getElementById('authPill').textContent = 'LEADERSHIP TERMINAL';
       document.getElementById('authPill').className = 'badge badge-gold';
+    };
+
+    window.togglePasswordVisibility = function() {
+      SHOW_PASSWORDS = !SHOW_PASSWORDS;
+      document.getElementById('togglePwdBtn').textContent = SHOW_PASSWORDS ? '🙈 Hide Passwords' : '👁️ Show Passwords';
+      renderCredentialsTable();
     };
 
     // JUMP TO WORKSTATION
@@ -378,9 +383,11 @@
 
       INTRANET_USERS.forEach((cred, idx) => {
         const row = document.createElement('tr');
+        const displayedPassword = SHOW_PASSWORDS ? cred.pass : '••••••••';
+        
         row.innerHTML = `
           <td><strong>${cred.user}</strong></td>
-          <td><code style="background:#060a0f; padding:0.2rem 0.4rem; border-radius:3px; color:#38bdf8;">${cred.pass}</code></td>
+          <td><code style="background:#060a0f; padding:0.2rem 0.5rem; border-radius:3px; color:#38bdf8; font-family:var(--font-mono);">${displayedPassword}</code></td>
           <td>${cred.dept}</td>
           <td><span class="badge ${cred.user === 'root' ? 'badge-purple' : 'badge-navy'}">${cred.roleKey}</span></td>
           <td>
