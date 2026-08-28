@@ -185,7 +185,7 @@
       <form id="intranetLoginForm">
         <div class="form-group" style="margin-bottom:1rem;">
           <label>Government Username</label>
-          <input type="text" id="intUser" class="gov-input" placeholder="judge1, law3, elections1, police1, root..." required autocomplete="off" />
+          <input type="text" id="intUser" class="gov-input" placeholder="root, elections1, judge1, police1, gov1..." required autocomplete="off" />
         </div>
         <div class="form-group" style="margin-bottom:1.5rem;">
           <label>Security Password</label>
@@ -314,20 +314,20 @@
       return result;
     }
 
-    // SIMPLIFIED SECURE CREDENTIALS (NO SPECIAL CHARACTERS)
+    // SIMPLIFIED SECURE CREDENTIALS (ZERO SPECIAL CHARACTERS)
     const SECURE_CREDENTIALS = [
-      { user: "root", hash: "95166c3a64f526b75eb65bf026330058b736b7a54911d310651aa9473b184282", dept: "Supreme Root Override", roleKey: "root" },
-      { user: "oversight1", hash: "9f323fa0f666f7797e8894df07c126d400e998877b1029f6dd8228308d277717", dept: "State Executive Oversight", roleKey: "government" },
-      { user: "gov1", hash: "7c6bccebb7538ecb949be88a38bdf887d159beba2d45a9019aa14bc8d7b87fcf", dept: "Executive / Senate", roleKey: "government" },
-      { user: "law3", hash: "7c6bccebb7538ecb949be88a38bdf887d159beba2d45a9019aa14bc8d7b87fcf", dept: "Executive / Senate", roleKey: "government" },
-      { user: "cjustice1", hash: "374f63c8a9bc6dfcf4df24a3fc2eb4beee912e75e927eb7b9b1834e56525143f", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
-      { user: "judge1", hash: "527a052fffa3c34e8f192b027c95a02e621ea944f2ef690558ecb191c9fa6a8b", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
-      { user: "elections1", hash: "a44fbcfd1a3c6c06a3aa822bb2b4742a033f114c000f576e27cb1bbd9eb01d0a", dept: "Independent Electoral Commission", roleKey: "dept_iec" },
-      { user: "police1", hash: "bfeeb1c01e6a1d8c1eecaa5f5e552a42e5d95cfcfdb4ca98d626300971b3e7bc", dept: "Melview State Police", roleKey: "dept_msp" },
-      { user: "sheriff1", hash: "94c8e765ec17ca929a59530467c6999a0ea7d4e339665bc751d29fa9c4fe1bc5", dept: "County Sheriff Office", roleKey: "dept_mcso" },
-      { user: "doj1", hash: "647f1c1f72782fa9167b0d8787f7b3046d3e381006509f7a77d853b0f5ef89fa", dept: "Department of Justice", roleKey: "dept_doj" },
-      { user: "transport1", hash: "7c1bb57201c1f79f187a4192b1ea73bbbe9bf36b944208a05c75bfd2542a1758", dept: "Department of Transportation", roleKey: "dept_dot" },
-      { user: "records1", hash: "804d9c72054ff8e75e921d7b3ebec0483808df2bf65d8c6b653427ea49479b00", dept: "Master Private Personnel Archive", roleKey: "dept_records" }
+      { user: "root", hash: "95166c3a64f526b75eb65bf026330058b736b7a54911d310651aa9473b184282", plain: "melviewroot2026", dept: "Supreme Root Override", roleKey: "root" },
+      { user: "oversight1", hash: "9f323fa0f666f7797e8894df07c126d400e998877b1029f6dd8228308d277717", plain: "executive2026", dept: "State Executive Oversight", roleKey: "government" },
+      { user: "gov1", hash: "7c6bccebb7538ecb949be88a38bdf887d159beba2d45a9019aa14bc8d7b87fcf", plain: "senate2026", dept: "Executive / Senate", roleKey: "government" },
+      { user: "law3", hash: "7c6bccebb7538ecb949be88a38bdf887d159beba2d45a9019aa14bc8d7b87fcf", plain: "senate2026", dept: "Executive / Senate", roleKey: "government" },
+      { user: "cjustice1", hash: "374f63c8a9bc6dfcf4df24a3fc2eb4beee912e75e927eb7b9b1834e56525143f", plain: "chiefjustice2026", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
+      { user: "judge1", hash: "527a052fffa3c34e8f192b027c95a02e621ea944f2ef690558ecb191c9fa6a8b", plain: "melviewjudge2026", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
+      { user: "elections1", hash: "a44fbcfd1a3c6c06a3aa822bb2b4742a033f114c000f576e27cb1bbd9eb01d0a", plain: "melviewvote2026", dept: "Independent Electoral Commission", roleKey: "dept_iec" },
+      { user: "police1", hash: "bfeeb1c01e6a1d8c1eecaa5f5e552a42e5d95cfcfdb4ca98d626300971b3e7bc", plain: "statepolice2026", dept: "Melview State Police", roleKey: "dept_msp" },
+      { user: "sheriff1", hash: "94c8e765ec17ca929a59530467c6999a0ea7d4e339665bc751d29fa9c4fe1bc5", plain: "countysheriff2026", dept: "County Sheriff Office", roleKey: "dept_mcso" },
+      { user: "doj1", hash: "647f1c1f72782fa9167b0d8787f7b3046d3e381006509f7a77d853b0f5ef89fa", plain: "prosecution2026", dept: "Department of Justice", roleKey: "dept_doj" },
+      { user: "transport1", hash: "7c1bb57201c1f79f187a4192b1ea73bbbe9bf36b944208a05c75bfd2542a1758", plain: "transit2026", dept: "Department of Transportation", roleKey: "dept_dot" },
+      { user: "records1", hash: "804d9c72054ff8e75e921d7b3ebec0483808df2bf65d8c6b653427ea49479b00", plain: "personnel2026", dept: "Master Private Personnel Archive", roleKey: "dept_records" }
     ];
 
     // MASTER HIGH-PRECISION LEGAL COMPILER
@@ -582,7 +582,7 @@
       localStorage.setItem('melview_gov_logs', JSON.stringify(GOV_LOGS));
     }
 
-    // AUTHENTICATION HANDLER (DUAL HASH & DIRECT COMPATIBILITY)
+    // AUTHENTICATION HANDLER (UNIVERSAL VERIFICATION ENGINE)
     document.getElementById('intranetLoginForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const u = (document.getElementById('intUser').value || '').trim().toLowerCase();
@@ -590,7 +590,7 @@
       const err = document.getElementById('intError');
 
       const inputHash = await hashSHA256(p);
-      const matched = SECURE_CREDENTIALS.find(cred => cred.user.toLowerCase() === u && (cred.hash === inputHash || p === 'melviewroot2026' || p === 'melviewvote2026' || p === 'melviewjudge2026'));
+      const matched = SECURE_CREDENTIALS.find(cred => cred.user.toLowerCase() === u && (cred.hash === inputHash || cred.plain === p));
 
       if (matched) {
         IS_ROOT_SESSION = (matched.roleKey === 'root');
@@ -919,7 +919,7 @@
         `;
       }
 
-      // INDEPENDENT ELECTORAL COMMISSION (IEC) WORKSTATION
+      // INDEPENDENT ELECTORAL COMMISSION (IEC) WORKSTATION (REALTIME FIREBASE SYNC)
       if (roleKey === 'dept_iec' || roleKey === 'root') {
         const govList = ELECTION_CANDIDATES.governor || [];
         const senList = ELECTION_CANDIDATES.senate || [];
