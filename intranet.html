@@ -252,6 +252,28 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    // SECURE SHA-256 HASH UTILITY
+    async function hashSHA256(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // PROTECTED CREDENTIAL REPOSITORY (ZERO PLAIN-TEXT PASSWORDS)
+    const SECURE_CREDENTIALS = [
+      { user: "root", hash: "4d9f64bf7cb57077a7df64be87233df86b45a666e855737d9768ba609f874288", dept: "Supreme Root Override", roleKey: "root" },
+      { user: "oversight1", hash: "1b9e075037d45f4788a6d7eeebcfd83501f2f8d227f6789e53b49e4925bc01cb", dept: "State Executive Oversight", roleKey: "government" },
+      { user: "gov1", hash: "ffbb29369b7fefaf413cfbfcb4e334a179374023c7137f8f9037df89965a3b7d", dept: "Executive / Senate", roleKey: "government" },
+      { user: "law3", hash: "ffbb29369b7fefaf413cfbfcb4e334a179374023c7137f8f9037df89965a3b7d", dept: "Executive / Senate", roleKey: "government" },
+      { user: "cjustice1", hash: "01f3ba2ef975d045c7adcbfa17431e7c995ef0dc647310f545ba257bc5826f43", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
+      { user: "judge1", hash: "4c0fa3d0026e7a2bfaeeef6cb2a4dc372f88cf05b07ea698ae5ea861a49f7b49", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
+      { user: "elections1", hash: "25b1be88914613c7ee83a0058e0a4f5fbc29618b763ec40c74383a886f6858e7", dept: "Independent Electoral Commission", roleKey: "dept_iec" },
+      { user: "police1", hash: "6d6cbb1be9c403fb2424fe37877990145cbeae68a91435f0f353164a66a19f37", dept: "Melview State Police", roleKey: "dept_msp" },
+      { user: "sheriff1", hash: "7c61f23821fc003189fa9463b78c946f04c7f0db43358dfcb68d9047b36f73db", dept: "County Sheriff Office", roleKey: "dept_mcso" },
+      { user: "doj1", hash: "67554f67c69a5317b62b1b369ec9fb6839397e1637c3563914a488e0cf3a2862", dept: "Department of Justice", roleKey: "dept_doj" },
+      { user: "transport1", hash: "d8e3425cb973167104f2f4587a8f152d00fbcdbb4948a3952f4476a6cf17f7b5", dept: "Department of Transportation", roleKey: "dept_dot" },
+      { user: "records1", hash: "b6d47b567d165ecba14bb606bb40ec05f0e340a6b5e022fdfc15e6129c5df001", dept: "Master Private Personnel Archive", roleKey: "dept_records" }
+    ];
+
     // MASTER HIGH-PRECISION LEGAL COMPILER
     function formatOfficialLegalDoc(headerTitle, instrumentType, id, authority, mainBody, signatureBlock) {
       const dateStr = new Date().toISOString().substring(0, 10);
@@ -399,21 +421,6 @@
     let CURRENT_DEPT = "";
     let IS_ROOT_SESSION = false;
 
-    const DEFAULT_CREDENTIALS = [
-      { user: "root", pass: "root2026", dept: "Supreme Root Override", roleKey: "root" },
-      { user: "oversight1", pass: "overlord9", dept: "State Executive Oversight", roleKey: "government" },
-      { user: "gov1", pass: "lead2026", dept: "Executive / Senate", roleKey: "government" },
-      { user: "cjustice1", pass: "bench2026", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
-      { user: "judge1", pass: "admin5", dept: "Judiciary (Supreme Court)", roleKey: "judiciary" },
-      { user: "law3", pass: "admin2", dept: "Executive / Senate", roleKey: "government" },
-      { user: "elections1", pass: "admin6", dept: "Independent Electoral Commission", roleKey: "dept_iec" },
-      { user: "police1", pass: "admin3", dept: "Melview State Police", roleKey: "dept_msp" },
-      { user: "sheriff1", pass: "admin4", dept: "County Sheriff Office", roleKey: "dept_mcso" },
-      { user: "transport1", pass: "admin7", dept: "Department of Transportation", roleKey: "dept_dot" },
-      { user: "doj1", pass: "admin8", dept: "Department of Justice", roleKey: "dept_doj" },
-      { user: "records1", pass: "admin9", dept: "Master Private Personnel Archive", roleKey: "dept_records" }
-    ];
-
     const DEPT_METADATA = {
       "judiciary": { name: "Judiciary of Melview", emblem: "⚖️", title: "Supreme & District Court Judicial Gateway", motto: "Fiat Justitia Ruat Caelum • Let Justice Be Done", badge: "ARTICLE IX ADJUDICATION" },
       "government": { name: "Executive Chamber & Senate", emblem: "🏛️", title: "State Executive Chamber & General Assembly", motto: "Salus Populi Suprema Lex Esto", badge: "TITLE 4 & 5 EXECUTIVE" },
@@ -450,7 +457,7 @@
     let ELECTION_CANDIDATES = { governor: [], senate: [] };
     let ELECTION_BALLOTS = [];
 
-    // REAL-TIME CLOUD LISTENER FOR INTRANET CANDIDATES
+    // REAL-TIME CLOUD LISTENER FOR INTRANET CANDIDATES (ARRAY SANITIZED)
     db.ref('elections/candidates').on('value', (snapshot) => {
       if (snapshot.exists()) {
         const val = snapshot.val();
@@ -519,19 +526,20 @@
       localStorage.setItem('melview_gov_logs', JSON.stringify(GOV_LOGS));
     }
 
-    document.getElementById('intranetLoginForm').addEventListener('submit', function(e) {
+    // AUTHENTICATION HANDLER USING ONE-WAY CRYPTOGRAPHIC MATCH
+    document.getElementById('intranetLoginForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const u = (document.getElementById('intUser').value || '').trim().toLowerCase();
       const p = (document.getElementById('intPass').value || '').trim();
       const err = document.getElementById('intError');
 
-      const userDb = JSON.parse(localStorage.getItem('melview_auth_credentials')) || DEFAULT_CREDENTIALS;
-      const matched = userDb.find(cred => cred.user.toLowerCase() === u && cred.pass === p);
+      const inputHash = await hashSHA256(p);
+      const matched = SECURE_CREDENTIALS.find(cred => cred.user.toLowerCase() === u && cred.hash === inputHash);
 
-      if (matched || (u === 'root' && p === 'root2026')) {
-        IS_ROOT_SESSION = (u === 'root');
-        CURRENT_ROLE = matched ? matched.roleKey : 'root';
-        CURRENT_DEPT = matched ? matched.dept : 'Supreme Root Override';
+      if (matched) {
+        IS_ROOT_SESSION = (matched.roleKey === 'root');
+        CURRENT_ROLE = matched.roleKey;
+        CURRENT_DEPT = matched.dept;
         err.style.display = 'none';
         document.getElementById('loginGateCard').style.display = 'none';
         document.getElementById('workstationView').style.display = 'block';
@@ -855,7 +863,7 @@
         `;
       }
 
-      // INDEPENDENT ELECTORAL COMMISSION (IEC) WORKSTATION
+      // INDEPENDENT ELECTORAL COMMISSION (IEC) WORKSTATION (REALTIME FIREBASE SYNC)
       if (roleKey === 'dept_iec' || roleKey === 'root') {
         const govList = ELECTION_CANDIDATES.governor || [];
         const senList = ELECTION_CANDIDATES.senate || [];
@@ -1102,7 +1110,7 @@
     }
 
     function attachWorkstationListeners(roleKey) {
-      // CLOUD CANDIDATE ADDITION (SANITIZED ARRAY FIX)
+      // CLOUD CANDIDATE ADDITION (SANITIZED ARRAY PATTERN)
       const candForm = document.getElementById('addCandidateForm');
       if (candForm) {
         candForm.addEventListener('submit', function(e) {
